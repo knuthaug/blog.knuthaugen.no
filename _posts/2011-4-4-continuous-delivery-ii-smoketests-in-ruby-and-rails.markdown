@@ -12,7 +12,7 @@ This part is about a implementing built-in smoke tests in a rails application. T
 
 I created a small class to hold the actual smoke tests (pardon my ruby, I'm learning):
 
-<pre class="brush: ruby">
+<pre>
 class Smoketest
   attr_accessor :description, :status, :message
 
@@ -36,7 +36,7 @@ end
 </pre>
 
 These are called from the SmoketestController. I chose to just put all (well all two) smoke tests in the controller, but they could easily be distributed and put wherever you want. The controller methods looks like this:
-<pre class="brush: ruby">
+<pre>
 require 'smoketest'
 
 class SmoketestController < ApplicationController
@@ -61,7 +61,7 @@ class SmoketestController < ApplicationController
       test2.status = Smoketest.OK
     }
 
-    @tests << test2
+    @tests &lt;&lt; test2
   end
 
 
@@ -78,7 +78,7 @@ class SmoketestController < ApplicationController
       end
     }
 
-    @tests << test
+    @tests &lt;&lt; test
   end
 
 end
@@ -93,7 +93,7 @@ The "test" one is just for making it more than one, and the mongoDB test tries t
 ##The Junit output
 I wanted the jenkins build job to track these smoke tests, which are being run as a build step after deployment. The easiest way to do this I figured was to make it spit out Junit XML format and let Jenkins chew on that. So a created an XML template like so:
 
-<pre class="brush: xml">
+<pre>
 %testsuite{:name => "smoketests", :failures => @tests.select { |x| x.status == "FAIL" }.count, :tests => @tests.count, :skipped => 0}
   - @tests.each do |test|
     %testcase{:name => test.description}
@@ -103,7 +103,7 @@ I wanted the jenkins build job to track these smoke tests, which are being run a
 
 And when fetching the url http://server/smoketest.xml you get the following output:
 
-<pre class="brush: xml">
+<pre>
 <testsuite failures="0" name="smoketests" skipped="0" tests="2">
 <testcase name="MongoDB test connection"></testcase>
 <testcase name="Test"></testcase>
@@ -114,12 +114,12 @@ And when fetching the url http://server/smoketest.xml you get the following outp
 
 The following small shell script is used to check the status:
 
-<pre class="brush: bash">
+<pre>
 #!/bin/bash
 
 if [ -z "$1" ]
 then
-    echo "usage: smoketest.sh <URL>"
+    echo "usage: smoketest.sh &lt;URL&gt;"
     exit 1
 fi
 
@@ -137,7 +137,7 @@ then
 fi
 
 #put the xml version of the page into a file
-curl --silent $1 > reports/smoke.xml
+curl --silent $1 &gt; reports/smoke.xml
 </pre>
 
 The shell scripts stores the file which is then read by Jenkins. Works like a charm!
