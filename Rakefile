@@ -280,7 +280,7 @@ end
 #custom
 
 Rake::Minify.new(:js) do
-  dir("_theme_packages/hooligan/assets/themes/hooligan") do # we specify only the source directory
+  dir("assets/themes/hooligan") do # we specify only the source directory
     group("_site/assets/js/all.js") do # the output file name is full path
       add("js/jquery.min.js", :minify => false)
       add("bootstrap/js/bootstrap.min.js", :minify => false)
@@ -294,14 +294,14 @@ end
 
 task :css do
   Rake::Minify.new(:css) do
-  dir("_theme_packages/hooligan/assets/themes/hooligan") do # we specify only the source directory
+  dir("assets/themes/hooligan") do # we specify only the source directory
     group("_site/assets/all.css") do # the output file name is full path
-      add("css/darkstrap.css", :minify => true)
-      add("css/pygments.css", :minify => true)
-      add("css/style.css", :minify => true)
       add("bootstrap/css/bootstrap.min.css", :minify => false)
       add("bootstrap/css/bootstrap-responsive.min.css", :minify => false)
+      add("css/style.css", :minify => false)
       add("css-social-buttons/css/zocial.stripped.css", :minify => false)
+      add("css/pygments.css", :minify => false)
+      add("css/darkstrap.css", :minify => false)
     end
   end
 end
