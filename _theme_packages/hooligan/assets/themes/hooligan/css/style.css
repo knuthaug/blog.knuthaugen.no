@@ -148,10 +148,12 @@ hr {
 .content div.row div.span4 h4:first {
   margin-top: 0;
 }
+
+
 /* line 134, ../_sass/_base.scss */
-.content p {
+.content p, content div {
   padding-bottom: 15px;
-  line-height: 25px;
+  line-height: 20px;
   margin: 0;
 }
 
@@ -402,4 +404,8 @@ div.sidebar section img.icon {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
+}
+
+[class*="span"] {
+  line-height: 150% !important;
 }
