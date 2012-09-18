@@ -3,6 +3,7 @@ layout: post
 title: Posting to Movable Type From Emacs
 mt_id: 21
 date: 2009-12-29 16:55:56 +01:00
+tags: [Emacs]
 ---
 
 I stumbled across

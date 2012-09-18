@@ -3,6 +3,7 @@ layout: post
 title: Comparing MongoDB java frameworks
 mt_id: 32
 date: 2010-07-28 11:13:34 +02:00
+tags: [NoSQL, MongoDB, Java]
 ---
  I while ago I gave a talk at a Oslo JavaBin meeting on NoSQL and in the research for that I wounded up writing some sample code for three different frameworks for using [MongoDB](http://www.mongodb.org/) from Java. The code is [available on GitHub](http://github.com/knuthaug/mongodb-samples/tree/java). The three are the 10Gen mongo driver (and not really a framework), [morphia](http://code.google.com/p/morphia/) and [mungbean](http://github.com/jannehietamaki/mungbean). 
 

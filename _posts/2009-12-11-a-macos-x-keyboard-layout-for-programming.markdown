@@ -3,6 +3,7 @@ layout: post
 title: A MacOS X Keyboard Layout for Programming
 mt_id: 20
 date: 2009-12-11 20:47:08 +01:00
+tags: [MacOS, Keyboard, Ukulele]
 ---
 I have previously created my [own keyboard layout ](http://blog.knuthaugen.no/2009/07/keyboard-layout-and-remapping-for-fun-and-profit.html) for windows and Linux in order to have a layout where the often-used keys in programming are more accessible than in the standard Norwegian layout. And when I recently got a (shiny) MacBook pro, I wanted to have the same keyboard layout for the Mac also. Consistency is key across machines, so the layout is the same as in the original progn keyboard layout (most braces and slashes available on home row or the row above). Downside is if decide to update it, I have to update three copies. Oh well...
 
@@ -10,7 +11,7 @@ In the windows and Linux I ended up mapping caps-lock to alt-gr and binding a lo
 <img alt="keyboard.png" src="http://blog.knuthaugen.no/media/screenshot.png" width="500" height="247" class="mt-image-center" style="text-align: center; display: block; margin: 10px auto 20px;" /><br/> Home row is the most important one, with often used characters, and the braces on homerow+1 on the right hand. Pointy brackets and pipe on the left hand. 
 
 ### Recipe ###
-Here's how I created the new keyboard layout for mac running 10.6 Snow Leopard (I think it'll work on Leopard (10.5) as well, but haven't tested it). Finding an existing layout in the .keylayout XML format was quite difficult but I found an [extended Norwegian layout](http://jardar.nvg.org/mac/tastatur/index.html) which had some often used keys already mapped nicely, like Â«Â» and some others. So I used that as a base.
+Here's how I created the new keyboard layout for mac running 10.6 Snow Leopard (I think it'll work on Leopard (10.5) as well, but haven't tested it). Finding an existing layout in the .keylayout XML format was quite difficult but I found an [extended Norwegian layout](http://jardar.nvg.org/mac/tastatur/index.html) which had some often used keys already mapped nicely, like « » and some others. So I used that as a base.
 
 1. [Download Ukulele from the web page](http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=ukelele) and install it.
 2. Either start from scratch defining keys in Ukelele or start modifying an existing keyboard layout.
