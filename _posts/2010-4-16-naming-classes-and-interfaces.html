@@ -3,6 +3,7 @@ layout: post
 title: Naming Classes and Interfaces
 mt_id: 29
 date: 2010-04-16 08:45:58 +02:00
+tags: [Java, C#, Naming]
 ---
 <p> The naming of interfaces and corresponding implementation classes in languages that use them (of which Java and C# is the most used I guess) is a subject of sometimes heated debate. A growing distaste of the "best practice" (at least on Microsofts part) of using a capital "I" on interfaces prompted this rundown and a round of pro et contra. My ultimate goal is readability of code but a slight predicament emerges when considering a team: if the majority of team members are used to one particular convention is that, in that particular context, more readable <em>for that team</em> than another approach, all other things being equal? Even though the name of the interface reads more like natural English? The jury's still out on this one. 
 </p>
@@ -17,7 +18,7 @@ The different patterns I've found:
 
 <h2> C# vs Java</h2>
 <p>In C# the extension of an abstract base class <em>and</em> the implementation of an interface uses the same syntax and which one it is isn't always easy to discern. A naming convention makes this a bit easier:</p>
-<pre class="brush: csharp">
+{% highlight c# %}
 public class DatabaseUserManager : UserManager {
 
 }
@@ -28,10 +29,10 @@ public class DatabaseUserManager : IUserManager {
 
 }
 
-</pre>
+{% endhighlight %}
 
 In java the syntax is different:
-<pre class="brush: java">
+{% highlight java %}
 
 public class LDAPUserManager implements UserManager {
 
@@ -43,7 +44,7 @@ public class LDAPUserManager extends UserManager {
 
 }
 
-</pre>
+{% endhighlight %}
 
 <p>
 The need for a prefix for readability is less needed in Java, compared to C#.
@@ -65,5 +66,5 @@ The need for a prefix for readability is less needed in Java, compared to C#.
 <p>So unless some team coding standard absolutely makes me (and that is, I'm afraid, likely) I will not in the future prefix my interfaces with I and not adorn my implementations with c, impl or any other stuff. Just meaningful, names from the domain. Easier to write and easier to read. </p>
 
 <p> Lastly, I posted this question on twitter and 
-<a href="http://twitter.com/borud">@borud</a> made the comment: Â«the only useful information conveyed by an I-prefix to interface types is information about the author of the code.Â» That's a suitable end note I think :-)
+<a href="http://twitter.com/borud">@borud</a> made the comment: «the only useful information conveyed by an I-prefix to interface types is information about the author of the code.» That's a suitable end note I think :-)
 </p> 

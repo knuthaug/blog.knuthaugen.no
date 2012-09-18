@@ -3,6 +3,7 @@ layout: post
 title: Analysis  of the NoSQL Landscape
 mt_id: 28
 date: 2010-03-17 08:01:47 +01:00
+tags: [NoSQL]
 ---
 
 This is an overview of the current state of the NoSQL landscape. It's getting large and somewhat unwieldy and there may be projects which have landed in the wrong category here. I have included object databases in the mix too. Seriously folks, some of you need to pick more google friendly project names. Here are the types and the players in each category. Background data is available in [this Google docs spreadsheet](https://spreadsheets.google.com/ccc?key=0AivRtF1K3Ma7dHFpWjllNVBnNlhyT0Y2WkpDMGdiU2c&hl=en).
@@ -31,7 +32,7 @@ This is an overview of the current state of the NoSQL landscape. It's getting la
 
 If we graph all the projects by type we get this view:
 
-<img alt="projects_by_type(2).png" src="http://blog.knuthaugen.no/images/projects_by_type%282%29.png" width="597" height="438" class="mt-image-center" style="text-align: center; display: block; margin: 0 auto 20px;" />
+<img alt="projects_by_type(2).png" src="../../../images/projects_by_type%282%29.png" width="597" height="438" class="mt-image-center" style="text-align: center; display: block; margin: 0 auto 20px;" />
 
 There are more key-value stores than the other types combined. Why is this? Are key-value stores that much easier to implement? I would at least guess that the first area where we see projects being abandoned and convergence of projects is this one. The important thing is the features users want, not the project themselves. There __must__ be a lot of overlap here and a lot of projects that are slightly different and almost identical. On the other hand a lot of knowledge of these kinds of system is spread around and there is a good chance of innovation. The combination of the best technical features and API features will hopefully bubble to top and stay on. 
 
@@ -39,7 +40,7 @@ There are more key-value stores than the other types combined. Why is this? Are 
 
 If we graph the projects in the list above by license chosen we get the following:
 
-<img alt="projects_by_license(2).png" src="http://blog.knuthaugen.no/images/projects_by_license%282%29.png" width="651" height="452" class="mt-image-center" style="text-align: center; display: block; margin: 0 auto 20px;" />
+<img alt="projects_by_license(2).png" src="../../../images/projects_by_license%282%29.png" width="651" height="452" class="mt-image-center" style="text-align: center; display: block; margin: 0 auto 20px;" />
 
 This shows a clear dominance for open source licenses over commercial ones. Some product have chosen a dual licensing model (neo4j and BerkelyDB). Quite a few are unknown which really means they are unable to communicate their license in a understandable manner or the project wasn't really found on the web at all (see point about google friendly names). 
 
@@ -47,7 +48,7 @@ This shows a clear dominance for open source licenses over commercial ones. Some
 
 Graphing the projects by implementation language we get the following:
 
-<img alt="projects_by_language(4).png" src="http://blog.knuthaugen.no/images/projects_by_language%284%29.png" width="594" height="445" class="mt-image-center" style="text-align: center; display: block; margin: 0 auto 20px;" />
+<img alt="projects_by_language(4).png" src="../../../images/projects_by_language%284%29.png" width="594" height="445" class="mt-image-center" style="text-align: center; display: block; margin: 0 auto 20px;" />
 
 Java takes the lead by with C and C++ following close behind. But is the prevalence of Java a result of the amount of Java knowledge spread around and the big Java usage in Open source, or is Java more suited than other languages to implement these kinds of systems? Interesting to note the number of Erlang implementations and also the fact that quite a few of the projects have implementations in more than one language. The ones with more than one implementation are mostly commercial ones. 
 

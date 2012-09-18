@@ -3,6 +3,7 @@ layout: post
 title: A Brief History of NoSQL
 mt_id: 27
 date: 2010-03-16 14:45:16 +01:00
+tags: [NoSQL]
 ---
 [NoSQL](http://en.wikipedia.org/wiki/NoSQL) is getting a lot of traction and hype these days but in reality it's not that new of a thing. I thought I'd trace the roots of NoSQL and see what I'd find. The name "NoSQL" was in fact first used by Carlo Strozzi in 1998 as the name of file-based [database he was developing](http://www.strozzi.it/cgi-bin/CSA/tw7/I/en_US/nosql/Home%20Page). Ironically it's relational database just one without a SQL interface. As such it is not actually a part of the whole NoSQL movement we see today. The term re-surfaced in 2009 when Eric Evans used it to name the current surge in non-relational databases. It seems like the name has stuck for better or for worse. Note that not all projects are included in this post. See the [post on analyzing the NoSQL landscape](http://blog.knuthaugen.no/2010/03/the-nosql-landscape.html) for a more complete listing.
 
