@@ -370,7 +370,7 @@ public class Person {
 
 Using it on the other hand, creates a very different looking code than the other two, thanks to the wrapper classes for mongodb connections, the generic collections and the query DSL:
 
-<pre>
+{% highlight java %}
 package no.kh.mongo.mungbean;
 
 import mungbean.DBCollection;
@@ -424,7 +424,8 @@ public class mungbeanPersistence {
   }
 
 }
-</pre>
+
+{% endhighlight %}
 
 The syntax is nice but perhaps a tad verbose for mye taste. I find the abstraction quite good, at least better than the other two. I also like the fact that there is almost no trace of the library in the domain classes and as such it is by far the best of the three. 
 

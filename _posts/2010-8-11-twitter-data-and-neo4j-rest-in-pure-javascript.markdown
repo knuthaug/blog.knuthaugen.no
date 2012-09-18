@@ -3,6 +3,7 @@ layout: post
 title: Twitter Data and Neo4j-rest in Pure Javascript
 mt_id: 33
 date: 2010-08-11 13:00:55 +02:00
+tags: [javascript, neo4j, rest, twitter]
 ---
 
 ## The Stage ##
@@ -16,7 +17,7 @@ Browser-side javascript can be hard to develop and debug. I chose JSpec as my te
 
 JSpec tests are cool. JSpec comes bundled in a ruby gem which you install and after that you get a command line runner for firing browsers, or rhino, and looking up syntax and doing other neat stuff to your test suite. It looks like a good project with steady releases and progress. Here's an example of how a test looks with the DSL in action:
 
-<pre class="brush: js, gutter: false">
+{% highlight JavaScript %}
 describe 'twitter'
 
   before
@@ -51,13 +52,13 @@ describe 'twitter'
       data.id.should.eql 123
    end
 end
-</pre>
+{% endhighlight %}
 
 ## Patterns ##
 
 Javascript gives you plenty of ammunition to shoot yourself in the foot, and I decided to follow a pattern from Douglas Crockfords book "Javascript, The Good Parts" and implement my objects with what we can call the "that" pattern. Instead of defining the object like this:
 
-<pre class="brush: js, gutter: false">
+{% highlight javascript %}
 var Node = function(spec){
 
   this.foo = function(){
@@ -71,11 +72,11 @@ var Node = function(spec){
 //and call it like this
 var myNode = new Node( {id: 1} );
 
-</pre>
+{% endhighlight %}
 
 we write it like this.
 
-<pre class="brush: js, gutter: false">
+{% highlight javascript %}
 var Node = function(spec){
 
    var that = spec;
@@ -93,7 +94,7 @@ var Node = function(spec){
 
 var myNode = Node( {id: 1} );
 
-</pre>
+{% endhighlight %}
 
 This encapsulates all variables and functions into a variable which is returned to the caller and if we were to implement private functions on the object, something javascript normally doesn't let you do, we define them on "this" instead of "that".  The spec argument to the constructor is just an easy way of passing in default values to the object being created, or giving it a prototype to inherit from. the "new" keyword normally does this for you and with this technique you have to do it yourself to get a prototype chain set up.
 
