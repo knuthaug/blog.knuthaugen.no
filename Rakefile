@@ -292,14 +292,22 @@ task :sass do
      system "sass -t compressed --update _theme_packages/hooligan/assets/themes/hooligan/_sass/style.scss"
 end
 
+
+task :copy do
+  cp 'assets/themes/hooligan/css-social-buttons/css/zocial-regular-webfont.eot', '_site/assets'
+  cp 'assets/themes/hooligan/css-social-buttons/css/zocial-regular-webfont.ttf', '_site/assets'
+  cp 'assets/themes/hooligan/css-social-buttons/css/zocial-regular-webfont.svg', '_site/assets'
+  cp 'assets/themes/hooligan/css-social-buttons/css/zocial-regular-webfont.woff', '_site/assets'
+end
+
 task :css do
   Rake::Minify.new(:css) do
   dir("assets/themes/hooligan") do # we specify only the source directory
     group("_site/assets/all.css") do # the output file name is full path
       add("bootstrap/css/bootstrap.min.css", :minify => false)
       add("bootstrap/css/bootstrap-responsive.min.css", :minify => false)
-      add("css/style.css", :minify => false)
       add("css-social-buttons/css/zocial.stripped.css", :minify => false)
+      add("css/style.css", :minify => false)
       add("css/pygments.css", :minify => false)
       add("css/darkstrap.css", :minify => false)
     end
