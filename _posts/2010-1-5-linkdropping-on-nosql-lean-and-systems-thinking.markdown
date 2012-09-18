@@ -3,6 +3,7 @@ layout: post
 title: Linkdropping on NoSQL, Lean and Systems Thinking
 mt_id: 22
 date: 2010-01-05 14:03:02 +01:00
+tags: [NoSQL, Lean, Kanban]
 ---
 I thought I would round up a collection of links that interested me the past few weeks on various topics. First off: NoSQL databases:
 
