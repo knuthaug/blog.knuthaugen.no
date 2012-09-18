@@ -3,6 +3,7 @@ layout: post
 title: Systems Thinking applied to software development
 mt_id: 23
 date: 2010-01-05 22:29:50 +01:00
+tags: [Systems Thinking]
 ---
  I have watched [some](http://www.vimeo.com/4670102) [talks](http://www.infoq.com/presentations/rethinking-lean-service) by John Seddon on Systems Thinking and where he feels Lean has failed. Seddon's focus is service organizations in public and private sector like health-care and customer support and sales for various products. But how would systems thinking apply to software development? Have we got it all wrong? I'm going to try and map some of the ideas of Systems Thinking over to existing software development methodologies and practices and see where we end up.
 

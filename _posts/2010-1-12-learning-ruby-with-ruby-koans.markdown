@@ -3,6 +3,7 @@ layout: post
 title: Learning Ruby With Ruby Koans
 mt_id: 24
 date: 2010-01-12 15:58:55 +01:00
+tags: [Ruby]
 ---
  I'm learning Ruby these days and after reading the excellent book [The Ruby Programming Language](http://www.amazon.co.uk/Ruby-Programming-Language-David-Flanagan/dp/0596516177) I found myself in need of actually writing and reading some code. I tried starting a pet project in Ruby but the, uhm, distractions of two young children made it difficult to get that off the ground and I also quickly realized that I needed some more training before I could get productive on that project. 
 
