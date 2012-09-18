@@ -3,6 +3,7 @@ layout: post
 title: Talking at Smidig2010
 mt_id: 35
 date: 2010-10-29 15:18:24 +02:00
+tags: [Agile]
 ---
  I'm super excited that I got one (so far, they normally only accept one per person) of my abstracts for the Norwegian Agile conference [Smidig 2010](http://smidig2010.no/) in Oslo 16. and 17. of November. This is my first proper conference talk even though I have been giving talks in other context to large audiences in the past. 
 
