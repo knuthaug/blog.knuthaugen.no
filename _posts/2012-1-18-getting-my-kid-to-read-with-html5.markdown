@@ -3,6 +3,7 @@ layout: post
 title: Getting My Son to Read With Technology
 mt_id: 46
 date: 2012-01-18 20:35:46 +01:00
+tags: [Reading, HTML5, Tablet]
 ---
 I have the exact same challenge as [Kenneth Kvalvik](http://www.webjournalist.no/2011/11/prosjekt-leselyst-del-1/) (article in Norwegian): A 6 year old boy who is starting to read but can't find anything he likes to read. He hates home work assignments (and who can blame him, they're boring). And as the son of the author of the article above, my son also loves Star Wars. He hasn't seen any of the films but plays star wars games quite diligently on his Nintendo DS and plays with Star Wars lego a lot.
 
@@ -12,7 +13,7 @@ The originator bought a star wars book and translated it and added images from t
 
 One tough question is: which order should I present the movies in? Original trilogy first or prequel first? I feel every fiber of my Star Wars fanboy body resisting, but I chose prequel trilogy first. Anything else would probably add to the confusion.
 
-## The Plan
+### The Plan
 My son also loves using the IPad, so I thought I'd take advantage of that and create an ebook app (or "app") for that platform. I also needed to be able to add more pages quickly (if it was a hit). So I landed on using plain HTML5 and just creating a web page and use the "add to home screen" feature and make it look like an app.
 
 I am using [swipe.js](http://swipejs.com/) which is very lightweight javascript library for just doing swipe gestures on the IPad. I checked out both Sencha Touch and JQTouch (which I have used before) but for this small project they were both overkill.
@@ -23,7 +24,7 @@ I went with using movie screen shots for some pages (and the parts where we need
 
 Another takeaway is how much you can cut away from those movies (especially the prequel trilogy that, well, isn't all that good) without losing the core of the history. The second movie with all that sticky love stuff between Anakin and PadmÃ¨ will be cut even more. 6yo boys are not that into romance.
 
-## Results
+### Results
 So how did this turn out? I created two chapters of the first book before starting a beta test on my first (and only (non-paying)) customer. He read everything in one sitting and immediately asked for more chapters. And that question was repeated every day over the following weeks where I hadn't had the time to write more chapters. Never had such a pushy user before!
 
 Technically I have some duplication in the code, specifically the chapter menu. The layout isn't all that great either, but I plan to fix that soon. The customer was so demanding that I was forced to take on some technical debt to get the product out into the market :-) I have also planned to add slideshow variant to make images clickable and go full screen. 

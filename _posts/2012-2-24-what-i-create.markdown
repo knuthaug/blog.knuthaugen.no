@@ -3,6 +3,7 @@ layout: post
 title: What I Create
 mt_id: 47
 date: 2012-02-24 22:43:13 +01:00
+tags: [Creativity]
 ---
 Along with a lot of other people I know and follow on Twitter one of my resolutions for this year (I'm normally not big on new years resolutions) was to consume less, twitter, blogs, articles and videos, and create more. I spend far too much time on twitter, following interesting links, and well, not so interesting but _entertaining_ links and soon enough I am laughing at a cat with glasses farting unicorns off somewhere in the darkest corners of the Interntet. Enough of that!
 
@@ -28,7 +29,7 @@ So in order to up my game a bit, I thought I'd blog about what I create and what
 
   I have become more active in suggesting new things to try at work, for improving our workflow and following through, building scripts etc. The smoke testing effort is one example of this, but also trying out some suggestions for process changes. Next step here is to encourage my co-workers to do the same also. That is the harder part in this.
 
-## Non-tech
+### Non-tech
 
 I count actually doing non-tech related stuff also a big part of this. Time is short when the agenda is hogged by kids, but there are two big things planned this spring. First is doing a little house refurnishing and actually building something from scratch, not just mounting Ikea furniture. The second is taking another step in performance on the mountain bike. More hours on the bike seat and working on improving the quality of the training as well. And we'll see how that plays out in the end of May when the first race is on. 
 
