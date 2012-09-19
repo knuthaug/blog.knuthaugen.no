@@ -23,7 +23,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: normal;
-  color: #999;
+  color: #f1f1f1;
   text-rendering: optimizelegibility;
   font-family: 'Advent Pro', sans-serif;
   /*font-family: 'Pontano Sans', sans-serif;*/
@@ -103,7 +103,10 @@ hr {
 /* line 85, ../_sass/_base.scss */
 .navbar div.navbar-inner a.brand {
   padding: 10px 20px;
+  color: #f1f1f1;
+  font-size: 200%;
 }
+
 /* line 90, ../_sass/_base.scss */
 .navbar div.navbar-inner ul.nav:first-child li a {
   padding: 12px 10px 8px;
