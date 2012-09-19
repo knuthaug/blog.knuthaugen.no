@@ -1,11 +1,9 @@
 ---
-layout: page
+layout: index
 title: 
 tagline: 
 ---
 {% include JB/setup %}
-
-
 
 <ul class="posts">
   {% for post in site.posts %}
