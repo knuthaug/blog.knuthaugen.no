@@ -1,0 +1,20 @@
+<div class="page-header-wrapper">
+{% if page.title %} 
+	<div class="page-header">
+  		<h1>{{ page.title }} {% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
+  	</div>
+{% endif %}
+</div>
+
+<div class="row">
+  <div class="span8">
+    {{ content }}
+  </div>
+  <div class="span4" style="margin-top: 20px;">
+    <h2>Meta</h2>
+
+    <p class="italic">
+Knut Haugen [Knu:t Hæugen], Norwegian software developer with a penchant for dynamic 
+languages, DevOps and anything to with developer testing. Agile methodology geek with bias on Lean and Kanban. Races mountain bikes and drinks beer.
+  </p>
+</div>
