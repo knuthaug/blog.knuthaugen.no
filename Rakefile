@@ -300,6 +300,10 @@ task :copy do
   cp 'assets/themes/hooligan/css-social-buttons/css/zocial-regular-webfont.woff', '_site/assets'
 end
 
+task :deploy => [:css :js :copy] do
+  exec("rsync -e ssh -av _site/ knuthaugen@scp.domeneshop.no:www/blog2/")
+end
+
 task :css do
   Rake::Minify.new(:css) do
   dir("assets/themes/hooligan") do # we specify only the source directory
