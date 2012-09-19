@@ -343,6 +343,18 @@ div.content div#page-index {
     border-radius: 0;
   }
 }
+
+ul.posts {
+  margin-top: 30px;
+  list-style: none;
+  list-style-type: none;
+  font-size: 120%;
+}
+
+ul.posts li {
+  line-height: 160%;;
+}
+
 /* Posts */
 /* line 3, ../_sass/_post.scss */
 article.post header {
