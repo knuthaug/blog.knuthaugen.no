@@ -3,6 +3,7 @@ layout: post
 title: Rewriting Fixtures in Migrations?
 mt_id: 39
 date: 2011-02-25 13:29:31 +01:00
+tags: [Ruby, Migrations]
 ---
 I had an idea in a twitter discussion with [@olecr](http://twitter.com/#!/olecr) about automating different aspects of the development process, coupled with and in-house discussion at work on maintaining database test data for integration tests, which can be a real pain. How about hooking into migrations to rewrite/update fixture data when migrating database schema?
 
