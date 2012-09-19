@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Foo
-tagline: Supporting tagline
+title: 
+tagline: 
 ---
 {% include JB/setup %}
 <ul class="posts">
