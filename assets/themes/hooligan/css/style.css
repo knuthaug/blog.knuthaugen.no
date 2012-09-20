@@ -118,6 +118,11 @@ hr {
   clear: both;
 }
 
+footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
 /* line 103, ../_sass/_base.scss */
 .container > footer p {
   text-align: center;
