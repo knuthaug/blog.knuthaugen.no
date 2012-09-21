@@ -1,8 +1,6 @@
 ---
 layout: post
-title: "JavaZone video mashup
-description: "Post on the JavaZone video mashup site I wrote for JavaBin, using Play Framework and MongoDB"
-category: 
+title: "JavaZone video mashup"
 published: false
 tags: [JavaZone, Java, Play]
 ---
