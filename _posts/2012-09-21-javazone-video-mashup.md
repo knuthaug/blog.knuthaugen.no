@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "JavaZone video mashup"
-published: false
+published: true
 tags: [JavaZone, Java, Play]
 ---
 {% include JB/setup %}
@@ -18,10 +18,15 @@ All in all, these things have been involved in the site:
 
 * Play Framework
 * MongoDB
-* Twitter Bootstrap for templating/design
-* Fontawesome for nice icons
-* SASS for better stylesheet authoring
-* Rake and git for vcs, packaging and deployment
-* Heroku and MongoHQ cloud providers for running test sites.
+* [Twitter Bootstrap]() for templating/design
+* [FontAwesome]() for nice icons
+* [SASS]() for better stylesheet authoring
+* [Rake]() and git for vcs, packaging and deployment
+* [Heroku]() and [MongoHQ]() cloud providers for running test sites.
+
+Here's a little screenshot for you:
+
+![Video site screenshot](/images/videosite-screenshot.png)
+
 
 I collaborated with bjartek TK on it for a while and as he is a scala/functional programming buff, we tried out a few different techniques. Some using Google Guava TK and some using Functional Java TK. This made the codebase a little messy in some parts and also the fact that the java syntax doesn't really support it well. Will try to clean up that soon. Anyway, if you try the site, I'd love some feedback on it. Juts bear in mind that I am no designer. Give a shout either on [twitter](http://twitter.com/knuthaug) or in the comments. 

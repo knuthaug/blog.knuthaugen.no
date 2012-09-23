@@ -1,10 +1,21 @@
-@import url(http://fonts.googleapis.com/css?family=Advent+Pro);
 @import url(http://fonts.googleapis.com/css?family=Oxygen);
 /* Partials */
 /* Theme Vars */
 /* Compass Vars */
 /* Override some defaults */
 /* line 13, ../_sass/_base.scss */
+
+@font-face {
+  font-family: 'LeagueGothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../../fonts/leaguegothic-regular-webfont.eot);
+  src: local('LeagueGothic'), 
+  url(../../../fonts/leaguegothic-regular-webfont.woff) format('woff'),
+  url(../../../fonts/leaguegothic-regular-webfont.svg) format("svg"),
+  url(../../../fonts/leaguegothic-regular-webfont.ttf) format("ttf");
+}
+
 html, body {
   background-color: #2a2a2a;
   background: url(../images/bgs/body.png) repeat;
@@ -15,17 +26,21 @@ body {
   color: #bbb;
   text-shadow: 1px 1px 1px #000;
   height: 100%;
-  font-family: 'Oxygen', sans-serif;
+  font-family: 'Oxygen', Arial, sans-serif;
   font-size: 14px;
 }
 
 /* line 26, ../_sass/_base.scss */
+h1 {
+  font-family: 'LeagueGothic', 'Arial Narrow', Impact sans-serif;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: normal;
   color: #f1f1f1;
   text-rendering: optimizelegibility;
-  font-family: 'Advent Pro', sans-serif;
+  /*font-family: 'Advent Pro', sans-serif;*/
   /*font-family: 'Pontano Sans', sans-serif;*/
 }
 
@@ -57,12 +72,12 @@ h1, h2 {
 
 /* line 53, ../_sass/_base.scss */
 h1 {
-  font-size: 40px;
+  font-size: 45px;
 }
 
 /* line 57, ../_sass/_base.scss */
 h2 {
-  font-size: 30px;
+  font-size: 35px;
 }
 
 /* line 61, ../_sass/_base.scss */
@@ -366,6 +381,10 @@ ul.posts li {
 
 ul.posts li p {
   font-size: 90%;
+}
+
+ul.posts ul li {
+  font-size: 100%;
 }
 
 .italic {
