@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "JavaZone video mashup"
-published: true
+published: false
 tags: [JavaZone, Java, Play]
 ---
 {% include JB/setup %}
@@ -26,6 +26,6 @@ All in all, these things have been involved in the site:
 
 Here's a little screenshot for you:
 
-![Video site screenshot](/images/videosite-screenshot.png)
+[![Video site screenshot](/images/videosite-screenshot.png)](http://video.javazone.no)
 
 I collaborated with [bjartek](https://twitter.com/bjartek) on it for a while and as he is a scala/functional programming buff, we tried out a few different techniques. Some using [Google Guava](http://code.google.com/p/guava-libraries/) and some using [Functional Java](http://functionaljava.org/). This made the codebase a little messy in some parts and also the fact that the java syntax doesn't really support it well. Will try to clean up that soon. Anyway, if you try the site, I'd love some feedback on it. Juts bear in mind that I am no designer. Give a shout either on [twitter](http://twitter.com/knuthaug) or in the comments (if and when they arrive). 
