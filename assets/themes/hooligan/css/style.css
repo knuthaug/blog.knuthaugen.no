@@ -26,7 +26,7 @@ body {
   color: #bbb;
   text-shadow: 1px 1px 1px #000;
   height: 100%;
-  font-family: 'Oxygen', Arial, sans-serif;
+  font-family: 'Helvetica neue', Helvetica, sans-serif;
   font-size: 14px;
 }
 
@@ -174,7 +174,7 @@ footer {
 /* line 134, ../_sass/_base.scss */
 .content p {
   padding-bottom: 15px;
-  line-height: 25px;
+  line-height: 20px;
   margin: 0;
 }
 
