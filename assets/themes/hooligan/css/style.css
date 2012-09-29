@@ -30,6 +30,17 @@ body {
   font-size: 14px;
 }
 
+.gist, .gist-data {
+  text-shadow: none !important;
+}
+
+.gist-highlight pre {
+  webkit-box-shadow: none !important;
+  moz-box-shadow: none !important;
+  moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
 /* line 26, ../_sass/_base.scss */
 h1 {
   font-family: 'LeagueGothic', 'Arial Narrow', Impact sans-serif;
