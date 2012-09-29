@@ -118,7 +118,8 @@ phantomjs ./bin/phantom.js &
 
 {% endhighlight %}
 
-Then we have the `phantom.js` script for capturing the browser, in phantom. 
+Then we have the `phantom.js` script for capturing the browser, in phantom. We also redirect any alerts
+to console.log() instead, since we won't see them. 
 
 {% highlight bash %}
 
