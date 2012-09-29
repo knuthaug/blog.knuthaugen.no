@@ -50,11 +50,42 @@ bin/
 test/
   test.js
 lib/
-  foo.js
+  math-tests.js
  
 {% endhighlight %}
 
-The `lib/foo.js` is a small object with a function, and `test/test.js` is a test case for that. Nothing fancy there. 
+The `lib/math.js` is a small object with a simple function, and `test/test.js` is a test case for that. Nothing fancy there, but I list them for completeness. These files should hold your production code and tests
+
+{% highlight javascript %}
+
+// lib/math.js
+
+myapp = {};
+
+myapp.Math = function() { };
+
+myapp.Math.prototype.raise = function(i) {
+  return i*i;
+};
+
+// test/math-tests.js
+buster.spec.expose(); // Make some functions global
+
+describe("A math module", function () {
+  this.foo = new myapp.Math();
+
+  it("raises 1 to its power", function () {
+    expect(this.foo.raise(1)).toEqual(1);
+  });
+         
+  it("it raises any number to its power", function () {
+    expect(this.foo.raise(2)).toEqual(4);
+    expect(this.foo.raise(3)).toEqual(9);
+  });
+           
+});
+
+{% endhighlight %}
 
 The contents of `buster.js` (buster config file):
 
