@@ -300,7 +300,7 @@ task :copy do
 end
 
 task :deploy => [:css, :js, :copy] do
-  exec("rsync -e ssh -av _site/ knuthaugen@scp.domeneshop.no:www/blog/")
+  exec("rsync -e ssh -a _site/ knuthaugen@scp.domeneshop.no:www/blog/")
 end
 
 task :css do
