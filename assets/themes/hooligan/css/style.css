@@ -36,7 +36,7 @@ body {
 
 pre code { 
   color: white !important;
-  font-size: 110%;
+  font-size: 105%;
 }
 
 .gist-highlight pre {
@@ -99,7 +99,7 @@ h2 {
 /* line 61, ../_sass/_base.scss */
 pre, code {
   color: #fff !important;
-  font-size: 104%;
+  font-size: 103%;
 }
 
 /* line 65, ../_sass/_base.scss */
