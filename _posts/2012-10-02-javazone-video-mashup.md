@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "JavaZone video mashup"
+title: "JavaZone Video Mashup"
 published: true
 tags: [JavaZone, Java, Play]
 ---
