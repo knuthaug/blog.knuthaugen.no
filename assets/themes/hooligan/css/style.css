@@ -34,6 +34,11 @@ body {
   text-shadow: none !important;
 }
 
+pre code { 
+  color: white !important;
+  font-size: 110%;
+}
+
 .gist-highlight pre {
   webkit-box-shadow: none !important;
   moz-box-shadow: none !important;
@@ -93,7 +98,8 @@ h2 {
 
 /* line 61, ../_sass/_base.scss */
 pre, code {
-  color: #ccc;
+  color: #fff !important;
+  font-size: 104%;
 }
 
 /* line 65, ../_sass/_base.scss */
