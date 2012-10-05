@@ -3,7 +3,7 @@ layout: post
 title: Certified Keyboard Driven Developer
 mt_id: 37
 date: 2010-12-22 14:55:47 +01:00
-tags: [Keyboard, Pgrogramming]
+tags: [Keyboard, Programming]
 ---
 In the latest episode of [The Agile Toolkit](http://agiletoolkit.libsyn.com/) podcast in an interview with [Dave Thomas](http://www.davethomas.net/index.html) about, well just about everything, they talk jokingly about the notion of a certification for keyboard shortcuts and I thought, wow, that is just a fantastic idea! This would be a really useful certification as opposed to the many completely or nearly completely useless certifications out there. None mentioned none forgotten.
 
