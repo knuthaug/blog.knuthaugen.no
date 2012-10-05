@@ -1,14 +1,16 @@
 ---
 layout: post
 title: "Helpful stack traces? Not so Much"
+published: true
 tags: [Node.js, JavaScript]
 ---
+{% include JB/setup %}
 
 I am dabbling around with Node.js TK at work these days and we are trying out Jake TK as a build script. Jake itself is not so bad and the syntax is pretty neat, with a very small DSL for writing build scripts in JavaScript. But, countless stories of not-so-helpful stack traces, and downright awfully bad ones, from node.js and node packages is just a quick google search away. And sure enough, I got one that wasn't particulary good. Granted, it can be node.js' fault, Jakes fault or both in companion, but helpful? Nope.
 
 {highlight bash %}
 
-{nikopol:$ jake --trace build-extension
+{nikopol: $ jake --trace build-extension
 jake aborted.
 Error: Process exited with error.
     at fail (/home/knuthaug/nvm/v0.8.2/lib/node_modules/jake/lib/api.js:221:18)
