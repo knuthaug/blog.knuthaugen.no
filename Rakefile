@@ -301,6 +301,7 @@ end
 
 task :deploy => [:css, :js, :copy] do
   exec("rsync -e ssh -a _site/ knuthaugen@scp.domeneshop.no:www/blog/")
+  exec("ssh knuthaugen@login.domeneshop.no cd www/blog && for name in `find . -mindepth 2 -name index.html -printf '%P\n'`; do base=`echo $name | cut -f1-3 -d'/'`; cp $name $base.html; done");
 end
 
 task :css do
