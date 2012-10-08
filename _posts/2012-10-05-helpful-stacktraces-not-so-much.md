@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Helpful stack traces? Not so Much"
-published: true
+published: false
 tags: [Node.js, JavaScript]
 ---
 {% include JB/setup %}
