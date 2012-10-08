@@ -22,7 +22,7 @@ For instance, I have been, and still am, when the context fits, a strong propone
 * Monitoring code quality (test coverage, coupling, cyclomatic complexity etc.)
 
 <p></p>
-I have then seen talks from e.g. Dan North TK about the work at DRW TK and Fred George TK about the work at Forward TK. For instance at Forward they use a micro service architecture, where a larger system is built of tens or hundreds of really small services or apps. Really, really small. So what happens to your feelings towards unit testing when the entire app is maybe 100-200 lines of code? And the maintainability of the code? Is it more efficient to replace (write a new one) that change it, if the change is more than a small fix? This is actually what they do at Forward: write little to no tests and replace apps rather than change them (for bigger values of "change"). 
+I have then seen talks from e.g. [Dan North](https://twitter.com/tastapod) about the work at [DRW](http://drw.com) and [Fred George](https://twitter.com/fgeorge52) about the work at [Forward](http://forwardtechnology.co.uk/videos/3244732). For instance at Forward they use a micro service architecture, where a larger system is built of tens or hundreds of really small services or apps. Really, really small. So what happens to your feelings towards unit testing when the entire app is maybe 100-200 lines of code? And the maintainability of the code? Is it more efficient to replace (write a new one) that change it, if the change is more than a small fix? This is actually what they do at Forward: write little to no tests and replace apps rather than change them (for bigger values of "change"). Continuous integration? Don't need it. Refactoring? Nope. Sprints? Nix. User stories? Nope.
 
 Dan North has talked about how his attitude towards classic agile methods when he started at DRW. Copy/paste was an accepted method of starting a new module/class/app when you didn't know how big it was going to grow and how fast (which is often the case). But when the duplication and copy/paste got past a certain level, or the app seemed like it was going to grow and need to be maintained, it was cleaned up. But not before. And if the app is so small that it can be replaced in a day or so, why worry about clean code and duplication. Just write a new one. And there is a limit to how much mess you can create in 150 lines of code. And deploying it is super fast.
 
@@ -30,7 +30,7 @@ These are really interesting thoughts and shows that some practises, that seem v
 
 References:
 
-* TK (Dan North on DRW method
-* TK Fred George on programmer Anarchy
+* [Dan North on DRW method]()
+* [Fred George on Programmer Anarchy](http://forwardtechnology.co.uk/videos/32447325)
 
 
