@@ -11,7 +11,8 @@ I am dabbling around with Node.js TK at work these days and we are trying out Ja
 <style type="text/css">pre code { font-size: 90% !important; }</style>
 
 {% highlight bash %}
-{nikopol: $ jake --trace build-extension
+
+nikopol: $ jake --trace build-extension
 jake aborted.
 Error: Process exited with error.
     at fail (~/nvm/v0.8.2/lib/node_modules/jake/lib/api.js:221:18)
