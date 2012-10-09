@@ -6,7 +6,7 @@ tags: [Node.js, JavaScript]
 ---
 {% include JB/setup %}
 
-I am dabbling around with Node.js TK at work these days and we are trying out Jake TK as a build script. Jake itself is not so bad and the syntax is pretty neat, with a very small DSL for writing build scripts in JavaScript. But, countless stories of not-so-helpful stack traces, and downright awfully bad ones, from node.js and node packages is just a quick google search away. And sure enough, I got one that was not particulary good. Granted, it can be node.js fault, Jakes fault or both in companion, but helpful? Nope.
+I am dabbling around with [Node.js](http://nodejs.org) at work these days and we are trying out [Jake](https://github.com/mde/jake) as a build script. Jake itself is not so bad and the syntax is pretty neat, with a very small DSL for writing build scripts in JavaScript. But, countless stories of not-so-helpful stack traces, and downright awfully bad ones, from node.js and node packages is just a quick google search away. And sure enough, I got one that was not particulary good. Granted, it can be node.js fault, Jakes fault or both in companion, but helpful? Nope.
 
 <style type="text/css">pre code { font-size: 90% !important; }</style>
 
