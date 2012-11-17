@@ -391,6 +391,10 @@ ul.posts {
   list-style-type: none;
 }
 
+ul.posts ul {
+  margin-bottom: 15px !important;
+}
+
 ul.posts li {
   line-height: 160%;;
   font-size: 120%;
