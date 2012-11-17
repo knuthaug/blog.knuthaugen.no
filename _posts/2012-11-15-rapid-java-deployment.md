@@ -51,7 +51,7 @@ The main job here was to create a script that was to be run on the app servers t
 
 There are several benefits to this. One is that it is easy to script, another that it is very flexible and you can choose to run it via puppet, manually or via a script.
 
-So we then made some big changes. All apps got snapshot builds (by maven) deployed to nexus, alongside release builds. Snapshots are pushed from jenkins CI or manually. But we also added the option of building an app from source if you need to e.g. push a branch to a server for someone to test. 
+So we then made some big changes. All apps got snapshot builds (by maven) deployed to nexus, alongside release builds. Snapshots are pushed from jenkins CI or manually. But we also added the option of building an app from source if you need to e.g. push a branch to a server for someone to test. The old deployment routine only pushed war files for the webapp project to the server, while now we build a zip file bundling the war file and the dependencies needed for jetty startup too. This will make future jetty upgrades much easier too.
 
 The deploy scripts looks like this on the command line:
 
@@ -74,25 +74,22 @@ update-dev dev0 appname:1.45
 update-dev dev0 appname:branch-foo:21451a
 # to clone repo for appname, and build revision 21451a of branch 
 # branch-name. This is then copied to git repo, and deployment 
-# script fetches it from there. if revision is ommitted, you get HEAD.
-
-#or 
-
-update-dev dev0 appname:branch
-# for HEAD revision in the branch
+# script fetches it from there. if revision is omitted, you get HEAD.
 
 {% endhighlight %}
 
 The main points here are:
 
- * Only update the apps you specify
- * Optionally update server config, via puppet
- * Ban urls in Varnish, don't restart.
+ * Only update the apps you specify via the script running on the server.
+ * Optionally update server config, via puppet.
+ * Ban URLs in Varnish, don't restart.
 
-In addition to this, the script asks puppet which server is the current one for the environment, instead of hardcoding this in the script. This means less maintanenance burden when servers change. A central point is also to only restart apps you specify (instead of all apps) and flushing/banning Cache-Control groups in Varnish instead of restarting. 
+In addition to this, the script asks puppet which server is the current one for the environment, instead of hard coding this in the script. This means less maintenance burden when servers change. A central point is also to only restart apps you specify (instead of all apps) and flushing/banning Cache-Control groups in Varnish instead of restarting. 
 
-Updating one app to latest snapshot or release and banning app urls in Varnish is now down to 10-12 seconds not counting savings in cache fill time for the first request. 
+Updating one app to latest snapshot or release and banning app URLs in Varnish is now down to 10-12 seconds not counting savings in cache fill time for the first request. 
 
 ### Further Work
 
-Next up is using the same deployment strategy for all environments, but with a custom rollback feature for production and a wait strategy between servers. Also, a wrapper script to be called from Jenkins for deploying to stage, run smoketests, await result and deploy to prod if all is well.
+Next up is using the same deployment strategy for all environments, but with a custom rollback feature for production and a wait strategy between servers. We thinking about extenting this to not wait a certain amount of time, but rather monitor Varnish and move on once the backend is reported as up. Also, a wrapper script to be called from Jenkins for deploying to stage, run smoke tests, await result and deploy to prod if all is well is planned. 
+
+All in all, shaving of ~10 minutes of deploy time (this amounts to hours of wait/ineffective time on a busy day) is pretty significant. 
