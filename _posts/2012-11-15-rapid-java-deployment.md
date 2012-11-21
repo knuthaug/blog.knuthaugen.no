@@ -21,19 +21,21 @@ The old script for deploying one app to, say, snapshot1, was a shell script that
  * Run puppet-sync on the relevant servers, reading binary data from subversion.
  * Restart varnish caches for the environment in question. 
 
-Time spent: around 10 minutes, not counting the varnish warm-up on the first request. 
+Time spent: around 10 minutes, not counting the varnish warm-up on the first request. Also you _had_ to wait for CruiseControl to build the app before it could be pushed. There could be a queue.
 
 And most of the time, you were only deploying one or maybe two apps, but everything was done nevertheless. This was needed every time you wanted to deploy an app for someone else to see, a product owner for instance. The reason this had become so slow, was, as is the case in many organizations, that it is written for a simpler time, but then at one point, it stopped evolving. The number of apps to support grows, the puppet-syncing from subversion gets slower, the varnish refresh takes longer etc. It all adds up. And puppet isn't very fast, and syncing large binary files is something it is particularly bad at. 
 
-CruiseControl was also slow at building several apps, and one often got some coffee time there too. 
+CruiseControl was also slow at building several apps at once, and you often got some coffee time there too. 
 
-What was worse, was that when deploying to stage, test and prod, there was no shared script. There were a few lying around, but nothing solid. And you had to do parts of it manually. Run shell commands for tagging, finding the right servers (they change) and puppet-syncing. And for instance for production, you can't do all 6 servers at once. You take one or two, and wait for the varnish ping to find them, let it warm up, and do the next - all manually and watching as servers came up and down. Manual procedures are a pain, and many developers were vary of this. Lots of help seeking and asking of questions. And mind you, this procedure is not done by sysadmins, but by the developers. This is a good thing, but the threshold for doing it, and doing it well had to be lowered.
+What was worse, was that when deploying to stage, test and prod, there was no shared script. There were a few lying around, but nothing solid. And you had to do parts of it manually. Run shell commands for tagging, finding the right servers (they change) and puppet-syncing. And for instance for production, you can't do all 6 servers at once. You take one or two, and wait for the varnish ping to find them, let it warm up, and do the next - all manually and watching as servers came up and down. Manual procedures are a pain, and many developers were vary of this. Lots of help seeking and asking of questions. And mind you, this procedure is not done by sysadmins, but by the developers. This is a good thing, but the threshold for doing it, and doing it well, had to be lowered. Our goal is that all developer should be able to push to production, safely and with confidence. 
 
 The rest of the blog post is about what we did to improve this. 
 
+### The New Way
+
 Goals were:
 
- * Faster CI
+ * Faster CI pushing artifacts to repo manager.
  * Scripted one-click for all environments
  * Not do more than was required, i.e. only deploy and restart the apps specified.
  * Ditch puppet for syncing large binaries, use it for server config only.
@@ -41,8 +43,6 @@ Goals were:
 
 As a backdrop, we migrated to Jenkins with four build nodes for speeding up build times when there is a lot going on. Simultaneously, we migrated from subversion to git, and started using Java7 and maven3 (yes, I know, we're slow on the uptake). 
  
-## The New Way
-
 The main job here was to create a script that was to be run on the app servers themselves which would do:
 
  * Get a app name and a version on the command line
@@ -51,7 +51,7 @@ The main job here was to create a script that was to be run on the app servers t
 
 There are several benefits to this. One is that it is easy to script, another that it is very flexible and you can choose to run it via puppet, manually or via a script.
 
-So we then made some big changes. All apps got snapshot builds (by maven) deployed to nexus, alongside release builds. Snapshots are pushed from jenkins CI or manually. But we also added the option of building an app from source if you need to e.g. push a branch to a server for someone to test. The old deployment routine only pushed war files for the webapp project to the server, while now we build a zip file bundling the war file and the dependencies needed for jetty startup too. This will make future jetty upgrades much easier too.
+So we then made some big changes. All apps got snapshot builds (by maven) deployed to nexus, alongside release builds. Snapshots are pushed from jenkins CI, or manually. But we also added the option of building an app from source if you need to e.g. push a branch to a server for someone to test. The old deployment routine only pushed war files for the webapp project to the server, while now we build a zip file bundling the war file and the dependencies needed for jetty startup too. This will make future jetty upgrades much easier too.
 
 The deploy scripts looks like this on the command line:
 
@@ -86,10 +86,10 @@ The main points here are:
 
 In addition to this, the script asks puppet which server is the current one for the environment, instead of hard coding this in the script. This means less maintenance burden when servers change. A central point is also to only restart apps you specify (instead of all apps) and flushing/banning Cache-Control groups in Varnish instead of restarting. 
 
-Updating one app to latest snapshot or release and banning app URLs in Varnish is now down to 10-12 seconds not counting savings in cache fill time for the first request. 
+Updating one app to latest snapshot or release and banning app URLs in Varnish is now down to 10-12 seconds not counting savings in cache fill time for the first request. Several of these seconds are spent querying puppet for metadata. This will be a bit faster in production. 
 
 ### Further Work
 
-Next up is using the same deployment strategy for all environments, but with a custom rollback feature for production and a wait strategy between servers. We thinking about extenting this to not wait a certain amount of time, but rather monitor Varnish and move on once the backend is reported as up. Also, a wrapper script to be called from Jenkins for deploying to stage, run smoke tests, await result and deploy to prod if all is well is planned. 
+Next up is using the same deployment strategy for all environments, but with a custom rollback feature for production and a wait strategy between servers. We thinking about extending this to not wait a certain amount of time, but rather monitor Varnish and move on once the backend is reported as up, and answering requests. Also, a wrapper script to be called from Jenkins for deploying to stage, run smoke tests, await result and deploy to prod if all is well is planned. 
 
-All in all, shaving of ~10 minutes of deploy time (this amounts to hours of wait/ineffective time on a busy day) is pretty significant. 
+All in all, shaving of ~10 minutes of deploy time (this amounts to hours of wait/ineffective time on a busy day) is pretty significant. But the main win is less manual procedures in production, more power to the developers and faster delivery.
