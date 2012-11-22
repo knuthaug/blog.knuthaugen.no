@@ -86,6 +86,23 @@ The main points here are:
 
 In addition to this, the script asks puppet which server is the current one for the environment, instead of hard coding this in the script. This means less maintenance burden when servers change. A central point is also to only restart apps you specify (instead of all apps) and flushing/banning Cache-Control groups in Varnish instead of restarting. 
 
+The work is distributed between the two scripts thusly:
+
+ * Script run on dev machine checks for valid version
+ * Does custom build if needed
+ * Finds servers
+ * Other misc. stuff like command line parsing
+ * Calls the right script on the right server
+
+Script on server will then
+
+ * Fetch version
+ * Unzip app bundle, move stuff into place
+ * tell puppet which version is now current for the environment in question
+ * Optionally restart
+
+And then dev script again takes over and flushes caches. 
+
 Updating one app to latest snapshot or release and banning app URLs in Varnish is now down to 10-12 seconds not counting savings in cache fill time for the first request. Several of these seconds are spent querying puppet for metadata. This will be a bit faster in production. 
 
 ### Further Work
