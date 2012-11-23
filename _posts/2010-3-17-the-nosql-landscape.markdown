@@ -8,7 +8,7 @@ tags: [NoSQL]
 
 This is an overview of the current state of the NoSQL landscape. It's getting large and somewhat unwieldy and there may be projects which have landed in the wrong category here. I have included object databases in the mix too. Seriously folks, some of you need to pick more google friendly project names. Here are the types and the players in each category. Background data is available in [this Google docs spreadsheet](https://spreadsheets.google.com/ccc?key=0AivRtF1K3Ma7dHFpWjllNVBnNlhyT0Y2WkpDMGdiU2c&hl=en).
 
-## Key-value stores
+## Key/value stores
 * __key/value in-memory:__ [memcached](http://memcached.org/), [Repcached](http://repcached.lab.klab.org/), [Oracle Coherence](http://www.oracle.com/technology/products/coherence/index.html), [Infinispan](http://www.jboss.org/infinispan), [Websphere eXtreme scale](http://www-01.ibm.com/software/webservers/appserv/extremescale/), [JBoss cache](http://www.jboss.org/jbosscache), [Velocity](http://blogs.msdn.com/velocity/default.aspx), [Terracotta Ehcache](http://www.terracotta.org/)
 
 * __Regular key/value stores:__ [Keyspace](http://scalien.com/keyspace/), [Amazon SimpleDB](http://aws.amazon.com/simpledb/), [Flare](http://labs.gree.jp/Top/OpenSource/Flare-en.html), [Schema-free](http://code.google.com/p/schemafree/),  [RAMCloud](http://fiz.stanford.edu:8081/display/ramcloud/Home), [Twisted Storage (TSnoSQL)](http://twistedstorage.sourceforge.net/), [Redis](http://code.google.com/p/redis/), [Tokyo Cabinet](http://1978th.net/tokyocabinet/), [Lightcloud](http://opensource.plurk.com/LightCloud/), [NMDB](http://blitiri.com.ar/p/nmdb/), [Lux IO](http://luxio.sourceforge.net/), [Memcachedb](http://memcachedb.org/), [Actord](http://code.google.com/p/actord/), [BerkeleyDB](http://www.oracle.com/technology/products/berkeley-db/index.html), [Scalaris](http://code.google.com/p/scalaris/), [GT.M](http://fisglobal.com/Products/TechnologyPlatforms/GTM/index.htm), [Mnesia](http://www.erlang.org/doc/apps/mnesia/index.html), [HamsterDB](http://hamsterdb.com/), [Chordless](http://sourceforge.net/projects/chordless/)
@@ -34,7 +34,7 @@ If we graph all the projects by type we get this view:
 
 <img alt="projects_by_type(2).png" src="../../../images/projects_by_type%282%29.png" width="597" height="438" class="mt-image-center" style="text-align: center; display: block; margin: 0 auto 20px;" />
 
-There are more key-value stores than the other types combined. Why is this? Are key-value stores that much easier to implement? I would at least guess that the first area where we see projects being abandoned and convergence of projects is this one. The important thing is the features users want, not the project themselves. There __must__ be a lot of overlap here and a lot of projects that are slightly different and almost identical. On the other hand a lot of knowledge of these kinds of system is spread around and there is a good chance of innovation. The combination of the best technical features and API features will hopefully bubble to top and stay on. 
+There are more key/value stores than the other types combined. Why is this? Are key/value stores that much easier to implement? I would at least guess that the first area where we see projects being abandoned and convergence of projects is this one. The important thing is the features users want, not the project themselves. There __must__ be a lot of overlap here and a lot of projects that are slightly different and almost identical. On the other hand a lot of knowledge of these kinds of system is spread around and there is a good chance of innovation. The combination of the best technical features and API features will hopefully bubble to top and stay on. 
 
 ## License Breakdown
 
@@ -55,7 +55,7 @@ Java takes the lead by with C and C++ following close behind. But is the prevale
 Some ending questions:  
 * Have we reach the maximum of projects that are sustainable now or will the ecosystem continue to grow even more? 
 * Will more of them go commerical? Or will more choose the model with support as the income, like 10Gen has with MongoDB?
-* How does one choose the right one to use for a given project? This is an increasingly hard problem, at least for key-value stores.
+* How does one choose the right one to use for a given project? This is an increasingly hard problem, at least for key/value stores.
 
 ### References:
 
