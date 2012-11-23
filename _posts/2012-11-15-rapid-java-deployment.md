@@ -6,8 +6,7 @@ tags: [Java, Continuous Delivery, Jenkins, Puppet, Jetty]
 ---
 {% include JB/setup %}
 
-At my job, Norway's now largest online (and paper) newspaper company, I have been doing some
-work to cut down on deployment and delivery times for our java applications, as well as simplifying the procedures involved. Continuous Delivery is a hot buzzword nowadays, along with DevOps and I think we are quite good at the latter, but we needed improvement on the former. Besides, continuous delivery is about continuous improvements to the pipeline too. 
+At my job, Norway's now second largest online (and paper) newspaper company, I have been doing some work to cut down on deployment and delivery times for our java applications, as well as simplifying the procedures involved. Continuous Delivery is a hot buzzword nowadays, along with DevOps and I think we are quite good at the latter, but we needed improvement on the former. Besides, continuous delivery is about continuous improvements to the pipeline too. And we had some stales processes and tools in place.  
 
 
 ## Background and setup
