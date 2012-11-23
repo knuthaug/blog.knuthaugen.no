@@ -9,9 +9,13 @@ tags: [Java, Continuous Delivery, Jenkins, Puppet, Jetty]
 At my job, Norway's now largest online (and paper) newspaper company, I have been doing some
 work to cut down on deployment and delivery times for our java applications, as well as simplifying the procedures involved. Continuous Delivery is a hot buzzword nowadays, along with DevOps and I think we are quite good at the latter, but we needed improvement on the former. Besides, continuous delivery is about continuous improvements to the pipeline too. 
 
+
 ## Background and setup
 
 We have 4 different environments to which we deploy our software, snapshot, stage, test and production, and snapshot has 4 versions so each team can use one for their stuff, without being overwritten by other teams. Local developer setups exists also, but are not covered here. These are proper, rather beefy servers with quite a lot of apps running, plus two varnish instances.
+
+We use puppet to ensure how the servers are set up, and to distribute changes to config and setup. Puppet is mainly the concern of the ops team. 
+
 
 The old script for deploying one app to, say, snapshot1, was a shell script that did the following:
 
@@ -23,11 +27,11 @@ The old script for deploying one app to, say, snapshot1, was a shell script that
 
 Time spent: around 10 minutes, not counting the varnish warm-up on the first request. Also you _had_ to wait for CruiseControl to build the app before it could be pushed. There could be a queue.
 
-And most of the time, you were only deploying one or maybe two apps, but everything was done nevertheless. This was needed every time you wanted to deploy an app for someone else to see, a product owner for instance. The reason this had become so slow, was, as is the case in many organizations, that it is written for a simpler time, but then at one point, it stopped evolving. The number of apps to support grows, the puppet-syncing from subversion gets slower, the varnish refresh takes longer etc. It all adds up. And puppet isn't very fast, and syncing large binary files is something it is particularly bad at. 
+And most of the time, you were only deploying one or maybe two apps, but everything was done nevertheless. This was needed every time you wanted to deploy an app for someone else to see, a product owner for instance. The reason this had become so slow, was, as is the case in many organizations, that it is written for a simpler time, but then at one point, it stopped evolving along with the organisation and the app ecosystem. This is a grave mistake.. The number of apps to support grows, the puppet-syncing from subversion gets slower, the varnish refresh takes longer etc. It all adds up. And puppet isn't very fast, and syncing large binary files is something it is particularly bad at. 
 
 CruiseControl was also slow at building several apps at once, and you often got some coffee time there too. 
 
-What was worse, was that when deploying to stage, test and prod, there was no shared script. There were a few lying around, but nothing solid. And you had to do parts of it manually. Run shell commands for tagging, finding the right servers (they change) and puppet-syncing. And for instance for production, you can't do all 6 servers at once. You take one or two, and wait for the varnish ping to find them, let it warm up, and do the next - all manually and watching as servers came up and down. Manual procedures are a pain, and many developers were vary of this. Lots of help seeking and asking of questions. And mind you, this procedure is not done by sysadmins, but by the developers. This is a good thing, but the threshold for doing it, and doing it well, had to be lowered. Our goal is that all developer should be able to push to production, safely and with confidence. 
+What was worse, was that when deploying to stage, test and prod, there was no shared script. There were a few lying around, but nothing solid. And you had to do parts of it manually. Run shell commands for tagging, finding the right servers (they change) and puppet-syncing. And for instance for production, you can't do all 6 servers at once. You take one or two, and wait for the varnish ping to find them, let it warm up, and do the next - all manually and watching as servers came up and down. Manual procedures are a pain, and many developers were vary of this. Lots of help seeking and asking of questions. And mind you, this procedure is not done by sysadmins, but by the developers. This is a good thing, but the threshold for doing it, and doing it well, had to be lowered. Our goal is that all developers should be able to push to production, safely, fast and with confidence.
 
 The rest of the blog post is about what we did to improve this. 
 
