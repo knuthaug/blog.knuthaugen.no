@@ -74,7 +74,7 @@ update-dev dev0 appname:1.45
 update-dev dev0 appname:branch-foo:21451a
 # to clone repo for appname, and build revision 21451a of branch 
 # branch-name. This is then copied to git repo, and deployment 
-# script fetches it from there. if revision is omitted, you get HEAD.
+# script fetches it from there. if revision is omitted, you get HEAD (no pun intended).
 
 {% endhighlight %}
 
@@ -98,15 +98,14 @@ Script on server will then
 
  * Fetch version
  * Unzip app bundle, move stuff into place
- * tell puppet which version is now current for the environment in question
+ * Tell puppet which version is now current for the environment in question
  * Optionally restart
 
 And then dev script again takes over and flushes caches. 
 
 Updating one app to latest snapshot or release and banning app URLs in Varnish is now down to 10-12 seconds not counting savings in cache fill time for the first request. Several of these seconds are spent querying puppet for metadata. This will be a bit faster in production. 
-
 ### Further Work
 
-Next up is using the same deployment strategy for all environments, but with a custom rollback feature for production and a wait strategy between servers. We thinking about extending this to not wait a certain amount of time, but rather monitor Varnish and move on once the backend is reported as up, and answering requests. Also, a wrapper script to be called from Jenkins for deploying to stage, run smoke tests, await result and deploy to prod if all is well is planned. 
+Next up is using the same deployment strategy for all environments, but with a custom rollback feature for production and a wait strategy between servers. We thinking about extending this to not wait a certain amount of time, but rather monitor Varnish and move on once the backend is reported as up, and answering requests. Also, a wrapper script to be called from Jenkins for deploying to stage, run smoke tests, await result and deploy to prod if all is well is planned. And of course, no varnish flushing in production. 
 
-All in all, shaving of ~10 minutes of deploy time (this amounts to hours of wait/ineffective time on a busy day) is pretty significant. But the main win is less manual procedures in production, more power to the developers and faster delivery.
+All in all, shaving of ~10 minutes of deploy time (this amounts to hours of wait/ineffective time on a busy day) is pretty significant. But the main win is less manual procedures in production, more power to the developers and faster delivery, when we need to. 
