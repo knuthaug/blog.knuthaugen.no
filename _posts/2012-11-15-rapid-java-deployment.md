@@ -31,7 +31,7 @@ What was worse, was that when deploying to stage, test and prod, there was no sh
 
 The rest of the blog post is about what we did to improve this. 
 
-### The New Way
+## The New Way
 
 Goals were:
 
@@ -104,7 +104,8 @@ Script on server will then
 And then dev script again takes over and flushes caches. 
 
 Updating one app to latest snapshot or release and banning app URLs in Varnish is now down to 10-12 seconds not counting savings in cache fill time for the first request. Several of these seconds are spent querying puppet for metadata. This will be a bit faster in production. 
-### Further Work
+
+## Further Work
 
 Next up is using the same deployment strategy for all environments, but with a custom rollback feature for production and a wait strategy between servers. We thinking about extending this to not wait a certain amount of time, but rather monitor Varnish and move on once the backend is reported as up, and answering requests. Also, a wrapper script to be called from Jenkins for deploying to stage, run smoke tests, await result and deploy to prod if all is well is planned. And of course, no varnish flushing in production. 
 
