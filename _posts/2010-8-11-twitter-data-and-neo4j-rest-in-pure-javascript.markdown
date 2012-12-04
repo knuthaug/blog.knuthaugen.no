@@ -105,7 +105,7 @@ I ended up with and object encapsulating the graph, one for the node, one wrappi
 ## Gephi ##
 Gephi is an open source tool for visualizing a graph using Open GL for fast and fancy rendering capabilities. A version released a short time ago ([get it here](http://gephi.org/2010/gsoc-2010-mid-term-adding-support-for-neo4j-in-gephi/)) has support for connecting directly to a (sadly, not running) instance of Neo4J and import the whole graph. 
 
-For this little pet project the main focus for using Gephi was to test it out and see how it works, but the potential is huge for graphs with more data in them. Gephi can do all sorts of graph manipulation and analysis and showing the graph according to values stored in the nodes etc. In the twitter graph I stored the number of followers in each of my followers as a number and Gephi could easily be configured to draw the node size relative to that, color edges based on data and moÃºch more. And all in nice openGL smooth graphics performance. 
+For this little pet project the main focus for using Gephi was to test it out and see how it works, but the potential is huge for graphs with more data in them. Gephi can do all sorts of graph manipulation and analysis and showing the graph according to values stored in the nodes etc. In the twitter graph I stored the number of followers in each of my followers as a number and Gephi could easily be configured to draw the node size relative to that, color edges based on data and much more. And all in nice openGL smooth graphics performance. 
 
 
 All in all a great little adventure. And you should learn proper javascript :-) 
