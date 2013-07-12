@@ -17,7 +17,7 @@ Browser-side javascript can be hard to develop and debug. I chose JSpec as my te
 
 JSpec tests are cool. JSpec comes bundled in a ruby gem which you install and after that you get a command line runner for firing browsers, or rhino, and looking up syntax and doing other neat stuff to your test suite. It looks like a good project with steady releases and progress. Here's an example of how a test looks with the DSL in action:
 
-{% highlight JavaScript %}
+{% highlight javascript %}
 describe 'twitter'
 
   before
