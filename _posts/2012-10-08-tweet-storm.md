@@ -13,7 +13,7 @@ A while back I experienced the full force of Twitter, in a nutshell. I am not a 
 This lead to a retweet from first Ted Neward and then Scott Hanselman. And then things really took off. In the next 24 hours I got something like 50-60 retweets, just from being retweeted by some celebrities. Granted it's not _that_ many, but so much more than I have ever gotten before. That's simply how Twitter work. Funny thing is that only one (1) spoke out in disagreement of the statement. 
 
 ### Context is King
-The statement in itself is a post modern stance on applying practises in software development. Some, but not that many, argue that some practises are good regardless of the context you are applying them in. I disagree. In the past I have felt this too, but every single time someone or something has some time later disproved that, and I now try to thing about the context before doing anything regarding process or practises. Universal truths are few and far between, especially in software development.
+The statement in itself is a post modern stance on applying practises in software development. Some, but not that many, argue that some practises are good regardless of the context you are applying them in. I disagree. In the past I have felt this too, but every single time someone or something has some time later disproved that, and I now try to think about the context before doing anything regarding process or practises. Universal truths are few and far between, especially in software development.
 
 For instance, I have been, and still am, when the context fits, a strong proponent of some practises:
 
