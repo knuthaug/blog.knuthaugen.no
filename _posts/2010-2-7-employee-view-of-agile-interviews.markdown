@@ -21,7 +21,7 @@ If I where to look for a new job I would milk the interview for all it's worth a
 - Are they interested in finding out about the real me?
 - If at all possible: pair program with the people I'm going to be working with
 
-I would perhaps even go as far as asking them *why* they're are hiring they way they are, regardless of how, and use the answer to decipher their way of thinking about people and the craft of software development. I mean: would you choose to work for a company which isn't really interested in finding out the _real you_ but rather just hire the rÃ©sumÃ© you? 
+I would perhaps even go as far as asking them *why* they're are hiring they way they are, regardless of how, and use the answer to decipher their way of thinking about people and the craft of software development. I mean: would you choose to work for a company which isn't really interested in finding out the _real you_ but rather just hire you? 
 
 Some other questions I would consider asking to find out more about the company:
 
@@ -33,6 +33,6 @@ Some other questions I would consider asking to find out more about the company:
 
 ### The Time it Takes
 
-Doing interviews in this fashion takes time and I have heard stories (at Hashrocket I think) of week long pair programming sessions with the entire team and one "no" from one team member is all it takes to turn down the candidate. This probably works better in the US with their system of two weeks notice, but not so well in Norway with (normally) three months mutual notice. But for sure: one hour of questions doesn't tell you enough. Practice trumps talking, talking trumps rÃ©sumÃ©s - to paraphrase the kanban saying. 
+Doing interviews in this fashion takes time and I have heard stories (at Hashrocket I think) of week long pair programming sessions with the entire team and one "no" from one team member is all it takes to turn down the candidate. This probably works better in the US with their system of two weeks notice, but not so well in Norway with (normally) three months mutual notice. But for sure: one hour of questions doesn't tell you enough. Practice trumps talking, talking trumps reading - to paraphrase the kanban saying. 
 
  

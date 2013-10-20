@@ -11,7 +11,7 @@ In the windows and Linux I ended up mapping caps-lock to alt-gr and binding a lo
 <img alt="keyboard.png" src="../../../images/screenshot.png" width="500" height="247" class="mt-image-center" style="text-align: center; display: block; margin: 10px auto 20px;" /><br/> Home row is the most important one, with often used characters, and the braces on homerow+1 on the right hand. Pointy brackets and pipe on the left hand. 
 
 ### Recipe ###
-Here's how I created the new keyboard layout for mac running 10.6 Snow Leopard (I think it'll work on Leopard (10.5) as well, but haven't tested it). Finding an existing layout in the .keylayout XML format was quite difficult but I found an [extended Norwegian layout](http://jardar.nvg.org/mac/tastatur/index.html) which had some often used keys already mapped nicely, like « » and some others. So I used that as a base.
+Here's how I created the new keyboard layout for mac running 10.6 Snow Leopard (I think it'll work on Leopard (10.5) as well, but haven't tested it). Finding an existing layout in the .keylayout XML format was quite difficult but I found an [extended Norwegian layout](http://jardar.nvg.org/mac/tastatur/index.html) which had some often used keys already mapped nicely, like norwegian quation marksand some others. So I used that as a base.
 
 1. [Download Ukulele from the web page](http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=ukelele) and install it.
 2. Either start from scratch defining keys in Ukelele or start modifying an existing keyboard layout.

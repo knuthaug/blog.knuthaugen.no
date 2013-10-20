@@ -6,9 +6,9 @@ tags: [Context, Agile]
 ---
 {% include JB/setup %}
 
-A while back I experienced the full force of Twitter, in a nutshell. I am not a very active twitter user, but I follow som celebrity developers and once in a while I throw out a tweet in reply to one. This normally just leads to (at best) a few tweets back and forth and nothing more. But not this time. I responded to a discussion between [Ted Neward](https://twitter.com/tedneward/) and [Scott Hanselman](https://twitter.com/shanselman) , both with a sizable number of followers. They were talking about some presentation from Microsoft on best practises. I spoke my mind on it:
+A while back I experienced the full force of Twitter, in a nutshell. I am not a very active twitter user, but I follow som celebrity developers and once in a while I throw out a tweet in reply to one. This normally just leads to (at best) a few tweets back and forth and nothing more. But not this time. I responded to a discussion between [Ted Neward](https://twitter.com/tedneward/) and [Scott Hanselman](https://twitter.com/shanselman), both with a sizable number of followers. They were talking about some presentation from Microsoft on best practises. I spoke my mind on it:
 
-<p style="width: 75%; margin-left: auto; margin-right: auto;font-size: 150%; font-weight: normal; font-family: times, 'times new roman', serif; font-style: italic; line-height: 130%;">«There are no best practices, there are only practices and their suitability depends on the context.»</p>
+<p style="width: 75%; margin-left: auto; margin-right: auto;font-size: 150%; font-weight: normal; font-family: times, 'times new roman', serif; font-style: italic; line-height: 130%;">"There are no best practices, there are only practices and their suitability depends on the context."</p>
  
 This lead to a retweet from first Ted Neward and then Scott Hanselman. And then things really took off. In the next 24 hours I got something like 50-60 retweets, just from being retweeted by some celebrities. Granted it's not _that_ many, but so much more than I have ever gotten before. That's simply how Twitter work. Funny thing is that only one (1) spoke out in disagreement of the statement. 
 

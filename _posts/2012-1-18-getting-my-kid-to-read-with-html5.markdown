@@ -22,7 +22,7 @@ The layout of the app is a simple directory structure, one folder for a book, wi
 
 I went with using movie screen shots for some pages (and the parts where we need some censorship of gory details (not much gore in Star Wars but for a six year old it can be a bit scary)). I also added some small movie clips to some of the pages to keep his interest up and give him a little break in the reading. I researched som HTML5 video players, but found that they all, as per usual, sucked in their own unique way, and went with the safari default video player on the IPad. Which works wonderfully for my use.
 
-Another takeaway is how much you can cut away from those movies (especially the prequel trilogy that, well, isn't all that good) without losing the core of the history. The second movie with all that sticky love stuff between Anakin and PadmÃ¨ will be cut even more. 6yo boys are not that into romance.
+Another takeaway is how much you can cut away from those movies (especially the prequel trilogy that, well, isn't all that good) without losing the core of the history. The second movie with all that sticky love stuff between Anakin and Padme will be cut even more. 6yo boys are not that into romance.
 
 ### Results
 So how did this turn out? I created two chapters of the first book before starting a beta test on my first (and only (non-paying)) customer. He read everything in one sitting and immediately asked for more chapters. And that question was repeated every day over the following weeks where I hadn't had the time to write more chapters. Never had such a pushy user before!
