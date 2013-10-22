@@ -6,7 +6,7 @@ tags: [DevOps, Metrics, Java, Node.js, Ruby]
 ---
 {% include JB/setup %}
 
-Recently we started a newinitiative at work, and as per usual in our company, things just start to trickle into production when somebody (usually I) get an idea. This time, it was metrics. I read some articles from Etsy and not to forget Coda Hale from Yammer (at the time, at least) (see [http://pivotallabs.com/139-metrics-metrics-everywhere/](http://pivotallabs.com/139-metrics-metrics-everywhere/))
+Recently we started a new initiative at work, and as per usual in our company, things just start to trickle into production when somebody (usually I) get an idea. This time, it was metrics. I read some articles from Etsy and not to forget Coda Hale from Yammer (at the time, at least) (see [http://pivotallabs.com/139-metrics-metrics-everywhere/](http://pivotallabs.com/139-metrics-metrics-everywhere/))
 
 The itch started with wanting to know more about what our apps are doing, what effekt our deployment has (at least when arrow start to point in the wrong direction) and generally just know more. Our stack is roughly divided in three non-equal parts: java, ruby and node.js and I wanted something that could handle metrics from all 3 easily.
 
