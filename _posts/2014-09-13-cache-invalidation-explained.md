@@ -20,13 +20,15 @@ Every piece of data, except app <-> database communication, runs over HTTP and t
 
 ## Cache headers
 
-RFC 7234(LINK) (the revised HTTP/1.1 spec mentions the normal cache headers, which can be useful to know about, event though they are not part of the cache invalidation scheme I will be discussing. 
+RFC 7234(LINK) (the revised HTTP/1.1 spec) mentions the normal cache headers, which can be useful to know about, event though they are not part of the cache invalidation scheme I will be discussing. 
 
 * Age
 * Expires
 * Cache-Channel
 
-## Extensions to cache-channel. A draft by Mark Nottingham(LINK)[1] back in 2007 introduced the concept of Cache channels which are specified as an extension to the cache-channel header (See RFC 7234). Extensions are a part of the HTTP/1.1 spec (revised) and nothing new, but the channel and group extensions were introduced in this draft but seem to have been shelved after that. I can't find a mention in any RFC after this. But Varnish can implement this through VCL and this is what we do. And this is very useful for cache invalidation. 
+## Extensions to cache-channel
+
+A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234)[1] back in 2007 introduced the concept of Cache channels which are specified as an extension to the cache-channel header (See RFC 7234). Extensions are a part of the HTTP/1.1 spec (revised) and nothing new, but the channel and group extensions were introduced in this draft but seem to have been shelved after that. I can't find a mention in any RFC after this. But Varnish can implement this through VCL and this is what we do. And this is very useful for cache invalidation. 
 
 ## Varnish Concepts
 
@@ -41,14 +43,14 @@ RFC 7234(LINK) (the revised HTTP/1.1 spec mentions the normal cache headers, whi
 
 We have enforced very strict rules in all our apps regarding cache headers and run them through filtering removing headers we do not want. This is important! Rogue expires headers can wreak havoc on a caching solution such as this. The short version is this:
 
-* We do not use expires. Ever. 
-* Cache-control is used, along with Age. Extension Channel-maxage communicates the TTL for _this_ object to varnish. When Varnish receives a request, the age of the object is compared to the channel-maxage, and this determines wether a cached copy is returned, of a new one is fetched. 
+* We do not use _expires_. Ever. 
+* _Cache-control_ is used, along with _Age_. Extension _channel-maxage_ communicates the TTL for _this_ object to varnish. When Varnish receives a request, the age of the object is compared to the channel-maxage, and this determines wether a cached copy is returned, of a new one is fetched. 
 Extension max-age is used to set a reasonable default for browsers (Varnish does not use this) to facilitate debugging. 
-* Cache-control groups are added for all necessary keywords for invalidating the cache for a multitude of scenarios, see example. 
+* _Cache-control groups_ are added for all necessary keywords for invalidating the cache for a multitude of scenarios, see example. 
 
 ### Example
 
-The app foo generates complete web pages, meant for the end user browser. The data comes from severals systems. One is the data backend, connected to the CMS for the relevant publication. One other is for ad information and a third for static menu and footer data. These are HTTP requests done in the backend when serving up the page. All these responses have cache-control groups on them, relevant for the app serving them. These are then aggregated up the chain and gets added to the final responseto varnish. Varnish removes them on the way out to the browser, replacing them with "must-revalidate" so the browser always asks Varnish for a fresh copy. But these groups are stored with the object in Varnish and can be used to invalidate the object, on demand. Allow me to illustrate:
+The app _foo_ generates complete web pages, meant for the end user browser. The data comes from severals systems. One is the data backend, connected to the CMS for the relevant publication. One other is for ad information and a third for static menu and footer data. These are HTTP requests done in the backend when serving up the page. All these responses have cache-control groups on them, relevant for the app serving them. These are then aggregated up the chain and gets added to the final responseto varnish. Varnish removes them on the way out to the browser, replacing them with "must-revalidate" so the browser always asks Varnish for a fresh copy. But these groups are stored with the object in Varnish and can be used to invalidate the object, on demand. Allow me to illustrate:
 
 {% highlight bash %}
 {% endhighlight %}
