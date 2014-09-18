@@ -10,7 +10,7 @@ tags: [cache varnish amedia headers HTTP]
 
 After seeing a talk on JavaZone 2014 which touched on cache handling in a very unfulfilling way, I thought I'd take a stab at one of these supposedly hard problems. And no, it will not be off-by-one errors. 
 
-There are many ways to do cache invalidation, and all I am going to be talking about is how we do it at Amedia, one of Norways largest online media houses. We use [Varnish](http://www.varnish-cache.org/)[3] for all out caching needs and the implementation is kind of tightly coupled to that. But the _principles should be useful across other technologies. 
+There are many ways to do cache invalidation, and I am going to be talking about is how we do it at Amedia, one of Norways largest online media houses. We use [Varnish](http://www.varnish-cache.org/)[3] for all out caching needs and the implementation is kind of tightly coupled to that. But the _principles should be useful across other technologies. 
 
 ## Setup
 
@@ -20,7 +20,7 @@ Every piece of data, except app <-> database communication, runs over HTTP and t
 
 ## Cache headers
 
-[RFC 7234](http://tools.ietf.org/html/rfc7234)[2] (the revised HTTP/1.1 spec) mentions the normal cache headers, which can be useful to know about, event though they are not part of the cache invalidation scheme I will be discussing. 
+[RFC 7234](http://tools.ietf.org/html/rfc7234)[2] (the revised HTTP/1.1 spec, cache portion) mentions the normal cache headers, which can be useful to know about, even though all of them are not part of the cache invalidation scheme I will be discussing. 
 
 * Age
 * Expires
@@ -28,7 +28,7 @@ Every piece of data, except app <-> database communication, runs over HTTP and t
 
 ## Extensions to cache-channel
 
-A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234)[1] back in 2007 introduced the concept of Cache channels which are specified as an extension to the cache-channel header (See RFC 7234). Extensions are a part of the HTTP/1.1 spec (revised) and nothing new, but the channel and group extensions were introduced in this draft but seem to have been shelved after that. I can't find a mention in any RFC after this. But Varnish can implement this through VCL and this is what we do. And this is very useful for cache invalidation. 
+A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234)[1] back in 2007 introduced the concept of _Cache channels_ which are specified as an extension to the cache-channel header (See RFC 7234). Extensions are a part of the HTTP/1.1 spec (revised) and nothing new, but the channel and group extensions were introduced in this draft but seem to have been shelved after that. I can't find a mention in any RFC after this. But Varnish can implement this easily through VCL and this is what we do. And it is very useful for cache invalidation. 
 
 ## Varnish Concepts
 
@@ -43,9 +43,9 @@ A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234)[1] back in 2007
 
 We have enforced very strict rules in all our apps regarding cache headers and run them through filtering removing headers we do not want. This is important! Rogue expires headers can wreak havoc on a caching solution such as this. The short version is this:
 
-* We do not use _expires_. Ever. Expires is time in human readable form, while ages are in seconds. Hard to debug to say the least.
+* We do not use _expires_. Ever. Expires is time in human readable form, while ages are in seconds. The combination can be hard to debug to say the least.
 * _Cache-control_ is used, along with _Age_. Extension _channel-maxage_ communicates the TTL for _this_ object to varnish. When Varnish receives a request, the age of the object is compared to the channel-maxage, and this determines wether a cached copy is returned, of a new one is fetched. 
-Extension max-age is used to set a reasonable default for browsers (Varnish does not use this) to facilitate debugging. 
+Max-age is used to set a reasonable default for browsers (Varnish does not use this) to facilitate debugging. 
 * _Cache-control groups_ are added for all necessary keywords for invalidating the cache for a multitude of scenarios, see example. 
 
 ### Example
@@ -57,9 +57,9 @@ The app _foo_ generates complete web pages, meant for the end user browser. The 
 
 We see the channel-maxage for this object is set to 24 hours, and that is how long it will live in the cache if no purging occurs before that. 
 
-Here we see the groups for the article data, containing the groups for the publication, the app, the article id and referenced article ids. These will be purged automatically if a journalist edits the article. If we, for some reason want to purge every article, section and front page for that publication, we purge "group=/pub78" and we're done. Or we purge individual articles, which of course is the common case. 
+Here we see the groups for the article data, containing the groups for the publication, the app, the article id and referenced article ids. These will be purged automatically if a journalist edits the article. If we, for some reason want to purge every article, section and front page for that publication, we purge "group=/pub78" and we're done. Or we purge individual articles or sections, which of course is the common case, for CMS data.
 
-As this applies to all apps, we could just as easily purge all objects using ad data, or menudata. Or in fact almost everything in our caches in on go. Remember: with great power comes great responsibility. 
+As this applies to all apps, we could just as easily purge all objects using ad data, or using menu data. Or in fact almost everything in our caches in on go. Remember: with great power comes great responsibility. 
 
 Here's the VCL code to allow PURGE requests to softban(LINK) objects from the cache. 
 
