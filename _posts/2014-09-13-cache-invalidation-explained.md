@@ -35,7 +35,8 @@ A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234)[1] back in 2007
 * Ban
 * Softban
 * Purge
-* Grace
+* Grace mode
+* Saint mdoe
 
 ## Headers
 
