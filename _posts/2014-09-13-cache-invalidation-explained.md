@@ -24,6 +24,8 @@ Every piece of data, except app <-> database communication, runs over HTTP and t
 
 * Age
 * Expires
+* Max-age
+* Channel-maxage
 * Cache-Channel
 
 ## Extensions to cache-channel
@@ -51,18 +53,20 @@ Max-age is used to set a reasonable default for browsers (Varnish does not use t
 
 ### Example
 
-The app _foo_ generates complete web pages, meant for the end user browser. The data comes from severals systems. One is the data backend, connected to the CMS for the relevant publication. One other is for ad information and a third for static menu and footer data. These are HTTP requests done in the backend when serving up the page. All these responses have cache-control groups on them, relevant for the app serving them. These are then aggregated up the chain and gets added to the final responseto varnish. Varnish removes them on the way out to the browser, replacing them with "must-revalidate" so the browser always asks Varnish for a fresh copy. But these groups are stored with the object in Varnish and can be used to invalidate the object, on demand. Allow me to illustrate:
+The app _foo_ generates complete web pages, meant for the end user browser. The data comes from severals systems. One is the data backend, connected to the CMS for the relevant publication. One other is for ad information and a third for static menu and footer data, a fourth is the template app stitching all this together. These are HTTP requests done in the backend when serving up the page. All these responses have cache-control groups on them, relevant for the app serving them. These are then aggregated up the chain and gets added to the final response to varnish. Varnish removes them on the way out to the browser, replacing them with "must-revalidate" so the browser always asks Varnish for a fresh copy. But these groups are stored with the object in Varnish and can be used to invalidate the object, on demand. Allow me to illustrate:
 
 {% highlight bash %}
 {% endhighlight %}
 
 We see the channel-maxage for this object is set to 24 hours, and that is how long it will live in the cache if no purging occurs before that. 
 
-Here we see the groups for the article data, containing the groups for the publication, the app, the article id and referenced article ids. These will be purged automatically if a journalist edits the article. If we, for some reason want to purge every article, section and front page for that publication, we purge "group=/pub78" and we're done. Or we purge individual articles or sections, which of course is the common case, for CMS data.
+Here we see the _groups_ for the article data, containing the groups for the publication, the app, the article id and referenced article ids. These will be purged automatically if a journalist edits the article. If we, for some reason want to purge every article, section and front page for that publication, we purge "group=/pub78" and we're done. Or we purge individual articles or sections, which of course is the common case, for CMS data.
+
+One thing to be mindful of with this model is that if the _Cache-Control_ exceeds 2048 chars in length, you will run into all sorts of funky error statuses (like 413) from the server apps involved. These can be confusing and hard to debug. So we have code in place to cut groups from the headers, if the header is too long. 
 
 As this applies to all apps, we could just as easily purge all objects using ad data, or using menu data. Or in fact almost everything in our caches in on go. Remember: with great power comes great responsibility. 
 
-Here's the VCL code to allow PURGE requests to softban(LINK) objects from the cache. 
+Here's the Varnish VCL code to allow PURGE requests to softban(LINK) objects from the cache. 
 
 {% highlight c %}
 sub vcl_recv {
@@ -77,10 +81,18 @@ sub vcl_recv {
 
 {% endhighlight %}
 
+This is in essence the varnish-cc daemon doing curl on the varnish servers with the HTTP method set to PURGE with the url of the group we want to purge in the path. 
+
+Thoe whole chain from backend system registering that someone is editing an object, to the varnish cache being invalidated look like this:
+
+ </img>
+The app itself will send a message to atomizer saying that a certain cache-control group should be invalidated. Atomizer (open sourced BTW) persists this in a MongoDB database. The atom feed that Atomizer produces is a 30 second rolling window of cache invalidation events, which atomizer-cc (a perl script, of all things) reads and sends PURGE requests to varnish instances. One varnish cc for each varnish instance is required in this setup. 
+
 References:
 
 * [http://tools.ietf.org/html/rfc7234](http://tools.ietf.org/html/rfc7234)
 * [http://tools.ietf.org/html/draft-nottingham-http-cache-channels-01](http://tools.ietf.org/html/draft-nottingham-http-cache-channels-01)
 * [http://www.varnish-cache.org/](http://www.varnish-cache.org/)
 
+http://www.smashingmagazine.com/2014/04/23/cache-invalidation-strategies-with-varnish-cache/
 
