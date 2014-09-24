@@ -22,25 +22,11 @@ Every piece of data, except app <-> database communication, runs over HTTP and t
 
 [RFC 7234](http://tools.ietf.org/html/rfc7234)[2] (the revised HTTP/1.1 spec, cache portion) mentions the normal cache headers, which can be useful to know about, even though all of them are not part of the cache invalidation scheme I will be discussing. 
 
-* Age
-  
-  Age is often set by a cache to describe how old an object is. Apps can also set it, if needed.
-
-* Expires
-  
-   Expires sets a human readable timestamp that specifies at which time in the future (hopefully) this object is to be considered no longer fresh and fetched again. In practise it is not needed in our setup as _Age_ together with max-age and channel-maxage specifies what we need. 
-
-* Max-age
-  
-  How long, in seconds, should this object be cached by a browser/enduser.
-
-* Channel-maxage
-   
-  How long should a cache cache this object, in seconds. 
-
-* Cache-Channel
-  
-  The collecting header where you can specify multiple caching values in one header. 
+* _Age_ is often set by a cache to describe how old an object is. Apps can also set it, if needed.
+* _Expires_ sets a human readable timestamp that specifies at which time in the future (hopefully) this object is to be considered no longer fresh and fetched again. In practise it is not needed in our setup as _Age_ together with _max-age_ and _channel-maxage_ specifies what we need. 
+* _Max-age_ is how long, in seconds, should this object be cached by a browser/end user.
+* _Channel-maxage_ is how long should a cache cache this object, in seconds. 
+* _Cache-Channel_ is the collecting header where you can specify multiple caching values in one header. 
 
 See RFC 7234 for the whole truth. When one app uses several other apps under the hood, the lowest channel-maxage and max-age header from all the backends is used for the response. So a compound response is never older than the youngest "member" object. Likewise, the age header of the oldest object is used as the age header for a compound response. 
 
