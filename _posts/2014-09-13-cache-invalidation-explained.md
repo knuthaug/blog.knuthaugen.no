@@ -43,11 +43,13 @@ A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234)[1] back in 2007
 
 ## Varnish Concepts
 
-* Ban
-* Softban
-* Purge
-* Grace mode
-* Saint mdoe
+Some key varnish concepts you should be familiar with: 
+
+* _Purge_: A purge removed an object (and its variants) from object memory immediately.
+* _Ban_: A ban will add the object to a list and that list will filter objects in the cache. On the ban list means not served, and thus fetched again from the backend. The ban list is also used by the ban lurker process walking the object space and evicting objects.
+* _Softban_: A soft ban will ban the object but put in a state of _grace_. This means it will only be evicted if it can be fetched again. If not, the old one will be served. 
+* _Grace mode_: Enables grace time for objects softbanned. Grace time is of course configurable.
+* _Saint mode_: This mode lets you configure varnish to not ask a backend for an object for a period of time, in case of errors or other unwanted replies. If all backends fails and saint kicks in, the existing object will be served according to grace config. 
 
 ## Headers
 
