@@ -10,13 +10,13 @@ tags: [cache varnish amedia headers HTTP]
 
 After seeing a talk on JavaZone 2014 which touched on cache handling in a very unfulfilling way, I thought I'd take a stab at one of these supposedly hard problems. And no, it will not be off-by-one errors. 
 
-There are many ways to do cache invalidation, and I am going to be talking about is how we do it at Amedia, one of Norways largest online media houses. We use [Varnish](http://www.varnish-cache.org/)[3] for all out caching needs and the implementation is kind of tightly coupled to that. But the _principles should be useful across other technologies. 
+There are many ways to do cache invalidation, and I am going to be talking about how we do it at Amedia, one of Norways largest online media houses. We use [Varnish](http://www.varnish-cache.org/)[3] for all our caching needs and the implementation is kind of tightly coupled to that. But the _principles_ should be useful across other technologies. The central point is providing enough information in your cache objects, to be able to flush what you need when you need it.
 
 ## Setup
 
-The server setup which acts as a background for all this, is a fairly complex one. Amedia runs the digital parts of 79 small and large newspapers in Norway. This means 151 app servers (excluding the CMS servers, which are 246 instances alone) of which 39 are running Varnish instances with differing configurations. Note these are physical or virtual machines running multiple apps, spread across 10 different environments and 2 data centers. This system has roughly 6.5M page views daily (that is the pages, not all the individual resources like css/js, images and so on), and the sustained throughput of the front varnishes during the day is about 45 Mbps of traffic (each) and combined bandwith usage is around 800Mb/s in the daytime.. 
+The server setup which acts as a background for all this, is a fairly complex one. Amedia runs the digital parts of 79 small and large newspapers in Norway. This means 151 app servers (excluding the CMS servers, which are 246 instances alone) of which 39 are running Varnish instances with differing configurations. Note these are physical or virtual machines running multiple apps, spread across 10 different environments and 3 data centers. This system has roughly 6.5M page views daily and the sustained throughput of the front varnishes during the day is about 45 Mbps of traffic (each) and combined bandwith usage is around 800Mb/s in the daytime.. 
 
-Every piece of data, except app <-> database communication, runs over HTTP and through the Varnish caches. There is caching in every step of the architecture and thus arise the need to finely tune the cache times, the cache headers and the tools to invalidate on a course or fine grained level. 
+Every piece of data, except app <-> database communication, runs over HTTP and through the Varnish caches. There is caching in every step of the architecture and in the wake of that follows the need to finely tune the cache times, the cache headers and the tools to invalidate on a course or fine grained level. 
 
 ## Cache headers
 
@@ -85,14 +85,14 @@ This is in essence the varnish-cc daemon doing curl on the varnish servers with 
 
 Thoe whole chain from backend system registering that someone is editing an object, to the varnish cache being invalidated look like this:
 
- </img>
-The app itself will send a message to atomizer saying that a certain cache-control group should be invalidated. Atomizer (open sourced BTW) persists this in a MongoDB database. The atom feed that Atomizer produces is a 30 second rolling window of cache invalidation events, which atomizer-cc (a perl script, of all things) reads and sends PURGE requests to varnish instances. One varnish cc for each varnish instance is required in this setup. 
+<img src="../../../images/arch_exp.001_s.jpg" width="800" height="384" alt="Cache invalidation architecture"/>
+
+The app itself will send a HTTP message to atomizer saying that a certain cache-control group should be invalidated. Atomizer (open sourced BTW) persists this in a MongoDB database. The atom feed that Atomizer produces is a 30 second rolling window of cache invalidation events, which atomizer-cc (a perl script, of all things) reads and sends PURGE requests to varnish instances. One varnish cc for each varnish instance is required in this setup. Varnish CC also holds some state internally to make sure that we don't purge objects that just have been purged, via timestamps but it is quite simple (if you can call anything written in Perl simple, that is).
 
 References:
 
 * [http://tools.ietf.org/html/rfc7234](http://tools.ietf.org/html/rfc7234)
 * [http://tools.ietf.org/html/draft-nottingham-http-cache-channels-01](http://tools.ietf.org/html/draft-nottingham-http-cache-channels-01)
 * [http://www.varnish-cache.org/](http://www.varnish-cache.org/)
-
-http://www.smashingmagazine.com/2014/04/23/cache-invalidation-strategies-with-varnish-cache/
+* [http://www.smashingmagazine.com/2014/04/23/cache-invalidation-strategies-with-varnish-cache/](http://www.smashingmagazine.com/2014/04/23/cache-invalidation-strategies-with-varnish-cache/)
 
