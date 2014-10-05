@@ -14,9 +14,9 @@ There are many ways to do cache invalidation, and I am going to be talking about
 
 ## Setup
 
-The server setup which acts as a background for all this, is a fairly complex one. Amedia runs the digital parts of 79 small and large newspapers in Norway. This means 151 app servers (excluding the CMS servers, which are 246 instances alone) of which 39 are running Varnish instances with differing configurations. Note these are physical or virtual machines running multiple apps, spread across 10 different environments and 3 data centers. This system has roughly 6.5M page views daily and the sustained throughput of the front varnishes during the day is about 45 Mbps of traffic (each) and combined bandwith usage is around 800Mb/s in the daytime.. 
+The server setup which acts as a background for all this, is a fairly complex one. Amedia runs the digital parts of 79 small and large newspapers in Norway. This means 151 app servers (excluding the CMS servers, which are 246 instances alone) of which 39 are running Varnish instances with differing configurations. These are physical or virtual machines running multiple apps, spread across 10 different environments and 3 data centers. This system has roughly 6.5M page views daily (in prod) and the sustained throughput of the front varnishes during the day is about 45 Mbps of traffic (each) and combined bandwith usage is around 800Mb/s in the daytime. 
 
-Every piece of data, except app <-> database communication, runs over HTTP and through the Varnish caches. There is caching in every step of the architecture and in the wake of that follows the need to finely tune the cache times, the cache headers and the tools to invalidate on a course or fine grained level. 
+Every piece of data, except app <-> database communication, runs over HTTP and through Varnish caches. There is caching in every step of the architecture and it follows that we need to finely tune the cache times, the cache headers and the tools to invalidate on a course or fine grained level. 
 
 ## Cache headers
 
@@ -25,17 +25,27 @@ Every piece of data, except app <-> database communication, runs over HTTP and t
 * _Age_ is often set by a cache to describe how old an object is. Apps can also set it, if needed.
 * _Expires_ sets a human readable timestamp that specifies at which time in the future (hopefully) this object is to be considered no longer fresh and fetched again. In practise it is not needed in our setup as _Age_ together with _max-age_ and _channel-maxage_ specifies what we need. 
 * _Max-age_ is how long, in seconds, should this object be cached by a browser/end user.
-* _Channel-maxage_ is how long should a cache cache this object, in seconds. 
-* _Cache-Channel_ is the collecting header where you can specify multiple caching values in one header. 
+* _Channel-maxage_ is how long should a cache caches this object, in seconds. 
+* _Cache-Channel_ is the collecting header where you can specify multiple caching values in one header, and groups as we shall see. 
 
-See RFC 7234 for the whole truth. When one app uses several other apps under the hood, the lowest channel-maxage and max-age header from all the backends is used for the response. So a compound response is never older than the youngest "member" object. Likewise, the age header of the oldest object is used as the age header for a compound response. 
+See RFC 7234 for the whole truth on these headers. When one app uses several other apps under the hood, the lowest channel-maxage and max-age header from all the backends is used for the response. So a compound response is never older than the youngest "member" object. 
 
-An example:
+An example of cache headers for the end result, when we have called several resources further back. This is a mobile front page request:
 
 {% highlight bash %}
 
+HTTP/1.1 200 OK
+Date: Sun, 05 Oct 2014 16:18:54 GMT
+Cache-Control: must-revalidate, channel-maxage=216, group="/pub41", group="/relax-isdans", group="/ece_frontpage", group="/sec71", group="/dashboard", group="/sec25292", group="/art7620213", group="/art7619956", group="/art7620986", group="/art7498595", group="/art7620735", group="/art7619069", group="/art7619936", group="/art7620157", group="/art7619542", group="/art7618923", group="/art7617985", group="/art7617623", group="/art7617283", group="/art7617256", group="/art7617019", group="/art7613958", group="/art7612903", group="/art7615510", group="/art7615883", group="/art7615813", group="/art5520206", group="/art7622276", group="/art7622263", group="/art7622226", group="/art7622224", group="/art7622201", group="/art7622165", group="/art7622067", group="/art7621945", group="/art7621937", group="/art7621892", group="/art7621926", group="/art7621706", group="/art7621476", group="/art7618522", group="/art7621204", group="/art5520202", group="/art7621332", group="/art7621874", group="/art7620605", group="/art7619046", group="/art7620962", group="/art7620562", group="/art7620557", group="/art7620036", group="/art7620014", group="/art7436640", group="/art7621809", group="/art7619526", group="/art7622215", group="/art7622347", group="/art7367496", group="/art7621708", group="/art6456542", group="/art7621547", group="/art7621542", group="/art7619791", group="/art7617979", group="/art7621393", group="/art7619986", group="/art7620883", group="/art7622414", group="/art7621772", group="/art7619994", group="/art7619234", group="/art5520191", group="/art7617945", group="/art7618720", group="/art7621635", group="/art7617936", group="/art7618688", group="/art7620739", group="/art7620879", group="/art7620237", group="/art7620872"
+X-Cache-Status: [ normal ;  ]
+X-Trace-App: [ pollux ; terapi.api.kunder.linpro.no ; Sun, 05 Oct 2014 16:18:54 GMT ]  [ acpcomposer ; terapi.api.kunder.linpro.no ; Sun, 05 Oct 2014 12:10:14 GMT ]  [ acpece4 ; terapi.api.kunder.linpro.no ; Sun, 05 Oct 2014 12:10:14 GMT ]  [ relax ; isdans.api.kunder.linpro.no ; Sun Oct 05 14:10:12 CEST 2014 ]
+Surrogate-Control: ESI/1.0
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
 
 {% endhighlight %}
+
+As the example shows there is quite a few groups mentioned here, for instance one for each article id displayed on the front page. So, what are these groups anyway?
 
 ## Extensions to cache-channel
 
