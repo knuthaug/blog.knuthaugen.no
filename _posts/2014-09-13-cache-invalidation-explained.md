@@ -46,7 +46,9 @@ Some key varnish concepts you should be familiar with:
 
 ## Headers
 
-## Implementation
+Under this regime http headers becomes all important and not something you just throw around for good measure. The make or break the performance of the whole stack, and need to be kept a watchful eye on. 
+
+### Implementation
 
 We have enforced very strict rules in all our apps regarding cache headers and run them through filtering or a library removing headers we do not want. This is important! Rogue expires headers can wreak havoc on a caching solution such as this. The short version is this:
 
@@ -96,13 +98,13 @@ sub vcl_recv {
 
 {% endhighlight %}
 
-The implmentation and use of this feature is in essence the varnish-cc daemon doing curl on the varnish servers with the HTTP method set to PURGE with the url of the group we want to purge in the path. 
+The implementation and use of this feature is in essence the varnish-cc daemon doing curl on the varnish servers with the HTTP method set to PURGE with the url of the group we want to purge in the path. 
 
 Thoe whole chain from backend system registering that someone is editing an object, to the varnish cache being invalidated look like this:
 
 <img src="../../../images/arch_exp.001_s.jpg" width="800" height="384" alt="Cache invalidation architecture"/>
 
-The app itself will send a HTTP message to atomizer [[6]](#6) saying that a certain cache-control group should be invalidated. Atomizer (open sourced under the Apache license) persists this in a MongoDB database. The atom feed that Atomizer produces is a 30 second rolling window of cache invalidation events, which atomizer-cc (a perl script, of all things) reads and sends PURGE requests to varnish instances. One varnish cc for each varnish instance is required in this setup. Varnish CC also holds some state internally to make sure that we don't purge objects that just have been purged, via timestamps but it is quite simple (if you can call anything written in Perl simple, that is).
+The app itself will send a HTTP message to Atomizer [[6]](#6) saying that a certain cache-control group should be invalidated. Atomizer (open sourced under the Apache license) persists this in a MongoDB database. The atom feed that Atomizer produces is a 30 second rolling window of cache invalidation events, which atomizer-cc (a perl script, of all things) reads and sends PURGE requests to varnish instances. One varnish cc for each varnish instance is required in this setup. Varnish CC also holds some state internally to make sure that we don't purge objects that just have been purged, via timestamps but it is quite simple (if you can call anything written in Perl simple, that is).
 
 References:
 
