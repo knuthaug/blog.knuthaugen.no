@@ -106,6 +106,10 @@ Thoe whole chain from backend system registering that someone is editing an obje
 
 The app itself will send a HTTP message to Atomizer [[6]](#6) saying that a certain cache-control group should be invalidated. Atomizer (open sourced under the Apache license) persists this in a MongoDB database. The atom feed that Atomizer produces is a 30 second rolling window of cache invalidation events, which atomizer-cc (a perl script, of all things) reads and sends PURGE requests to varnish instances. One varnish cc for each varnish instance is required in this setup. Varnish CC also holds some state internally to make sure that we don't purge objects that just have been purged, via timestamps but it is quite simple (if you can call anything written in Perl simple, that is).
 
+### Some stats
+
+On a norml day, there are about 1500 journalists writing and updating articles, and classified ads being created feeding this system with cache invalidation requests. Normally during the day we see about 50-150 invalidation requests per minute, with an average around 60 or so. 
+
 References:
 
 1. <a name="1"></a>[http://tools.ietf.org/html/rfc7234](http://tools.ietf.org/html/rfc7234)
