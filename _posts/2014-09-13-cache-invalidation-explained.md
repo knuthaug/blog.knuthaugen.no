@@ -63,6 +63,24 @@ Varnish does not out of the box use channel-maxage so this is our implementation
 
 {% highlight c %}
 
+# handle channel-maxage in cache-channels, override ttl 
+sub vcl_fetch {
+    if (beresp.http.cache-control ~ "channel-maxage=[0-9]") {
+
+      set beresp.http.x-channel-maxage = regsub(beresp.http.cache-control, ".*channel-maxage=([0-9]+).*", "\1");
+
+      set beresp.ttl = std.duration(beresp.http.x-channel-maxage + "s", 3666s);
+
+      # subtract age if it exists
+      set req.http.x-beresp.ttl = beresp.ttl;
+      set beresp.ttl = beresp.ttl - std.duration(beresp.http.age + "s" , 0s);
+
+      # debug
+      std.log("CC:beresp.ttl before: " + req.http.x-beresp.ttl + " beresp.http.age: " + beresp.http.age + " beresp.ttl after: " + beresp.ttl);
+      std.log("CC:channel-maxage found in " + beresp.http.cache-control + ", duration: " + std.duration(beresp.http.x-channel-maxage + "s", 3666s) + "Age: " + beresp.http.age + ", beresp.ttl: " + beresp.ttl );
+
+    }
+}
 
 {% endhighligh %}
 
