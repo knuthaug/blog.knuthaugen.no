@@ -27,14 +27,14 @@ Also, the main use of cache invalidation is journalist writing and updating arti
 * _Age_ is often set by a cache to describe how old an object is. Apps can also set it, if needed.
 * _Expires_ sets a human readable timestamp that specifies at which time in the future (hopefully) this object is to be considered no longer fresh and fetched again. In practise it is not needed in our setup as _Age_ together with _max-age_ and _channel-maxage_ specifies what we need. 
 * _Max-age_ is how long, in seconds, should this object be cached by a browser/end user.
-* _Channel-maxage_ is how long should a cache caches this object, in seconds. 
-* _Cache-Channel_ is the collecting header where you can specify multiple caching values in one header, and groups as we shall see. 
+* _Channel-maxage_ is how long should a cache caches this object, in seconds (not in the RFC). 
+* _Cache-Control_ is the collecting header where you can specify multiple caching values in one header, and groups as we shall see. 
 
 See RFC 7234 for the whole truth on these headers. When one app uses several other apps under the hood, the lowest channel-maxage and max-age header from all the backends is used for the response. So a compound response is never older than the youngest "member" object. 
 
 ## Extensions to cache-channel
 
-A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234) [[2]](#2) back in 2007 introduced the concept of _Cache channels_ which are specified as an extension to the cache-channel header (See RFC 7234). Extensions are a part of the HTTP/1.1 spec (revised) and nothing new, but the channel and group extensions were introduced in this draft but seem to have been shelved after that. I can't find a mention in any RFC after this. But Varnish can implement this easily through VCL and this is what we do. And it is very useful for cache invalidation. 
+A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234) [[2]](#2) back in 2007 introduced the concept of _Cache channels_ which are specified as an extension to the cache-channel header (See RFC 7234). Extensions are a part of the HTTP/1.1 spec (revised) and nothing new, but the channel, channel-maxage and group extensions were introduced in this draft but seem to have been shelved after that. I can't find a mention in any RFC after this. But Varnish can implement this easily through VCL and this is what we do. And it is very useful for cache invalidation. 
 
 ## Varnish Concepts
 
@@ -58,6 +58,13 @@ We have enforced very strict rules in all our apps regarding cache headers and r
 * _Cache-control_ is used, exclusively. _Channel-maxage_ communicates the TTL for _this_ object to varnish. When Varnish receives a request, the age of the object is compared to the channel-maxage, and this determines wether a cached copy is returned, of a new one is fetched. 
 Max-age is used to set a reasonable default for browsers (Varnish does not use this) to facilitate debugging. 
 * _Cache-control groups_ are added for all necessary keywords for invalidating the cache for a multitude of scenarios, see example below. 
+
+Varnish does not out of the box use channel-maxage so this is our implementation in VCL. If channel-maxage is specified, that overrides age/expires that may or may not be present in the object. 
+
+{% highlight c %}
+
+
+{% endhighligh %}
 
 ### Example
 
