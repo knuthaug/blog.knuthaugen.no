@@ -20,8 +20,8 @@ Then we found [reggie](https://github.com/mbrevoort/node-reggie) as a lighweight
 
 ## Three's a charm
 
-After reading about the setup at [Finn](http://www.finn.no/) but short on details I set out to stitch something together. By this I had testet using [npm_lazy](https://github.com/mixu/npm_lazy) as a caching proxy for registry.npmjs.org, to avoid downtime and latency, and that worked well. To work around the (major) deficiency in npm, with only support for one repo, I used [Kappa](https://github.com/krakenjs/kappa) as the repo software. Kappe pointed to two backends, a npm repo couchapp running in a recent couchdb as the first (for writing and holding our internal packages) and npm_lazy as the second, acting as a caching proxy between us and registry.npmjs.org. 
+After reading about the setup at [Finn](http://www.finn.no/) but short on details I set out to stitch something together. By this I had testet using [npm_lazy](https://github.com/mixu/npm_lazy) as a caching proxy for registry.npmjs.org, to avoid downtime and latency, and that worked well. To work around the (major) deficiency in npm, with only support for one repo, I used [Kappa](https://github.com/krakenjs/kappa) as the repo software. Kappe pointed to two backends, a npm repo couchapp running in a recent couchdb as the first (for writing and holding our internal packages) and npm_lazy as the second, acting as a caching proxy between us and registry.npmjs.org. A bonus is that we now use the exact same syntax as global packages and use npm for publishing. 
 
-And since this baby came into production, I can't recall a single error or minute of downtime for it. 
+And since this baby came into production, I can't recall a single error or minute of downtime for it.  
 
 That makes me a happy camper. 
