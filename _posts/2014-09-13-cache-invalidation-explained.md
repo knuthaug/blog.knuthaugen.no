@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cache invalidation: explained"
-published: true
+published: false
 tags: [cache varnish amedia headers HTTP]
 ---
 {% include JB/setup %}
