@@ -6,9 +6,9 @@ tags: [npm devops node.js]
 ---
 {% include JB/setup %}
 
-Since we started using a node.js stack in Amedia we have gone through several generations of private npm repo. And since we finally have found a model that acutally works I thought I'd share it. 
+Since we started using a node.js stack in Amedia we have gone through several generations of private npm repos. And since we finally have found a model that acutally works I thought I'd share it. 
 
-Our main reason for having a private npm repo is to be able to deploy and work without being dependant on the global repo. We follow this model for all our app stacks (using nexus for java, private gem server for ruby). All repo managers go down, and you can bet they will go down when it least fits you. Been there done that. And the long haul latency can be a pain too. 
+Our main reason for having a private npm repo is to be able to deploy and work without being dependant on the global repo. We follow this model for all our app stacks (using nexus for java, private gem server for ruby). We also have internal node modules shared between applications which we won't publish to global repo because of, ehm, reasons. All repo managers go down, and you can bet they will go down when it least fits you. Been there done that. And the long haul network latency can be a pain too. 
 
 ## First version: replicating couchdb repo
 
@@ -22,6 +22,6 @@ Then we found [reggie](https://github.com/mbrevoort/node-reggie) as a lighweight
 
 After reading about the setup at [Finn](http://www.finn.no/) but short on details I set out to stitch something together. By this I had testet using [npm_lazy](https://github.com/mixu/npm_lazy) as a caching proxy for registry.npmjs.org, to avoid downtime and latency, and that worked well. To work around the (major) deficiency in npm, with only support for one repo, I used [Kappa](https://github.com/krakenjs/kappa) as the repo software. Kappe pointed to two backends, a npm repo couchapp running in a recent couchdb as the first (for writing and holding our internal packages) and npm_lazy as the second, acting as a caching proxy between us and registry.npmjs.org. 
 
-And since this baby came into production, I can't recall a single error or minute of downtime in the solution. 
+And since this baby came into production, I can't recall a single error or minute of downtime for it. 
 
 That makes me a happy camper. 
