@@ -82,7 +82,7 @@ sub vcl_fetch {
     }
 }
 
-{% endhighligh %}
+{% endhighlight %}
 
 ### Example
 
