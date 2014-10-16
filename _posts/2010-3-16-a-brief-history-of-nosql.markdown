@@ -37,6 +37,7 @@ Several successors to DBM spring into life.
 * [Mnesia](http://en.wikipedia.org/wiki/Mnesia) is developed by Ericsson as a soft real-time database to be used in telecom. It is relational in nature but does not use SQL as query language but rather Erlang itself.  
 * [InterSystems Cache](http://www.intersystems.com/) launched in 1997  and is a hybrid so-called post-relational database. It has object interfaces, SQL, PICK/MultiValue and direct manipulation of data structures. It is a M[umps] implementation. See Scott Jones comment below for more on the history of InterSystems
 * [Metakit](http://en.wikipedia.org/wiki/Metakit) is started in 1997 and is probably the first document oriented database. Supports smaller datasets than the ones in vogue nowadays.
+
 ## 2000-2005
 
 This is were the NoSQL train really picks up some momentum and a lot is starting to happen. 
