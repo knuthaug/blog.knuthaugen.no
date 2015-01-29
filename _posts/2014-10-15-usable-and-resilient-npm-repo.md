@@ -2,7 +2,7 @@
 layout: post
 title: "A Usable and Robust Private Npm Repo"
 published: true
-tags: [npm, devops, node.js]
+tags: [npm, DevOps, Node.js]
 ---
 {% include JB/setup %}
 
