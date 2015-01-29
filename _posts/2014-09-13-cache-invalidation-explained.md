@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cache invalidation: explained"
-published: false
+published: true
 tags: [cache varnish amedia headers HTTP]
 ---
 {% include JB/setup %}
@@ -10,13 +10,13 @@ tags: [cache varnish amedia headers HTTP]
 
 After seeing a talk on JavaZone 2014 which touched on cache handling in a very unfulfilling way, I thought I'd take a stab at one of these supposedly hard problems. And no, it will not be off-by-one errors. 
 
-There are many ways to do cache invalidation, and I am going to be talking about how we do it at Amedia, one of Norways largest online media houses. We use [Varnish](http://www.varnish-cache.org/) [[3]](#3) for all our caching needs and the implementation is kind of tightly coupled to that. But the _principles_ should be useful across other technologies. The central point is providing enough information in your cache objects, to be able to flush what you need when you need it.
+There are many ways to do cache invalidation, and I am going to be talking about how we do it at Amedia, one of Norways largest online media houses. We use [Varnish](http://www.varnish-cache.org/) [[3]](#3) for all our caching needs and the implementation is kind of tightly coupled to that. But the _principles_ should be useful across other technologies. The central point is providing enough information in your cache objects, to be able to flush what you need, when you need it.
 
 ## Setup
 
-The server setup which acts as a background for all this, is a fairly complex one. Amedia runs the digital parts of 79 small and large newspapers in Norway. This means 151 app servers (excluding the CMS servers, which are 246 instances alone) of which 39 are running Varnish instances with differing configurations. These are physical or virtual machines running multiple apps, spread across 10 different environments and 3 data centers. This system has roughly 6.5M page views daily (in prod) and the sustained throughput of the front varnishes during the day is about 45 Mbps of traffic (each) and combined bandwith usage is around 800Mb/s in the daytime. 
+The server setup which acts as a background for all this, is a fairly complex one. Amedia runs the digital parts of 79 (give or take) small and large newspapers in Norway. This means 151 app servers (excluding the CMS servers, which are 246 instances alone) of which 39 are running Varnish instances with differing configurations. These are physical or virtual machines running multiple apps, spread across 10 different environments and 3 data centers. This system has roughly 6.5M page views daily (in prod) and the sustained throughput of the front varnishes during the day is about 45 Mbps of traffic (each) and combined bandwith usage is around 800Mb/s in the daytime. 
 
-Every piece of data, except app <-> database communication, runs over HTTP and through Varnish caches. There is caching in every step of the architecture and it follows that we need to finely tune the cache times, the cache headers and the tools to invalidate on a course or fine grained level. 
+Every piece of data, except app <-> database communication, runs over HTTP and through Varnish caches. There is caching in every step of the architecture and it follows that we need to finely tune the cache times, the cache headers and the tools to invalidate on a coarse or fine grained level. 
 
 Also, the main use of cache invalidation is journalist writing and updating articles (and other content created by internal users in a similar way) and we, devopsers and developers flushing cache more or less manually by deploying apps, fixing bugs and generally sorting through all the weirdness we can experience in our stack.  
 
@@ -48,7 +48,7 @@ Some key varnish concepts you should be familiar with:
 
 ## Headers
 
-Under this regime HTTP headers becomes all important and not something you just throw around for good measure. The make or break the performance of the whole stack, and need to be kept a watchful eye on. The first thing to be checked when a new app approaches production, is that the cache headers make sense and follow protocol. 
+Under this regime HTTP headers becomes all important and not something you just throw around for good measure. They make or break the performance of the whole stack, and need to be kept a watchful eye on. The first thing to be checked when a new app approaches production, is that the cache headers make sense and follow protocol. 
 
 ### Implementation
 
@@ -105,7 +105,7 @@ We see the channel-maxage for this object is calculated by Varnish to be 216 sec
 
 Here we see the _groups_ for the article data, containing the groups for the publication, the app, the article id and referenced article ids. These will ensure that this page is purged automatically if a journalist edits one of these articles. If we, for some reason want to purge every article, section and front page for that publication, we purge "group=/pub41" and we're done. Or we purge individual articles or sections, which of course is the common case, for CMS data.
 
-One thing to be mindful of with this model is that if the _Cache-Control_ header exceeds 2048 chars in length, you will run into all sorts of funky error statuses (like 413) from the (jetty) server apps involved, and possibly Varnish too. These can be confusing and hard to debug. So we have code in place to cut groups from the headers, if the header grows too long. Different server stacks can different, more or less arbitrary limits set here.
+One thing to be mindful of with this model is that if the _Cache-Control_ header exceeds 2048 chars in length, you will run into all sorts of funky error statuses (like 413) from the (jetty) server apps involved, and possibly Varnish too. These can be confusing and hard to debug. So we have code in place to cut groups from the header, if the header grows too long. Different server stacks can use different, more or less arbitrary limits here.
 
 As this applies to all apps, we could just as easily purge all objects using ad data, or using menu data. Or in fact almost everything in our caches in one go. Remember: with great power comes great responsibility. 
 
