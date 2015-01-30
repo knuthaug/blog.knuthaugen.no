@@ -135,7 +135,7 @@ The app itself will send a HTTP message to Atomizer [[6]](#6) saying that a cert
 
 ### Some stats
 
-On a norml day, there are about 1500 journalists writing and updating articles, and classified ads being created feeding this system with cache invalidation requests. Normally during the day we see about 50-150 invalidation requests per minute, with an average around 60 or so. 
+On a normal day, there are about 1500 journalists writing and updating articles, and classified ads being created feeding this system with cache invalidation requests. Normally during the day we see about 50-150 invalidation requests per minute, with an average around 60 or so. 
 
 References:
 
