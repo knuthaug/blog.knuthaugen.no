@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Thoughts on Automation"
-published: true
+published: false
 tags: [devops,code,automation]
 ---
 {% include JB/setup %}
