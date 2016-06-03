@@ -25,3 +25,8 @@ Write bash (or any other scripting language to abstract away the forest of optio
 
 Namespaces, Clusters and stuff
 -------------------------------
+
+Kubernetes docs says to vary about multi location clusters so we opted for one cluster per data center three in total. This gives a bit of overhead when it comes to deployment (we can't deploy in one big batch, but need three deploys to update all pods) but at the same time we can take a whole data center offline and upgrade the cluster without affecting the other two, which is nice. 
+
+Another thing we discovered was that kubernetes by default make configuration and variables available to all containers in a namespace and everyone could see everything when all apps were deployed in the default namespace. So we namespace all apps into a separate namespace named after the app. As longs as all commands are namespaced (hence wrapper scripts) there is not much hassle. For snapshot and test environments, we use one cluster and not three to keep things simpler. 
+
