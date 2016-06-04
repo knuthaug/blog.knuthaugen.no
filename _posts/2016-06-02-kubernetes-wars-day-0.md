@@ -26,7 +26,18 @@ Write bash (or any other scripting language to abstract away the forest of optio
 Namespaces, Clusters and stuff
 -------------------------------
 
-Kubernetes docs says to vary about multi location clusters so we opted for one cluster per data center three in total. This gives a bit of overhead when it comes to deployment (we can't deploy in one big batch, but need three deploys to update all pods) but at the same time we can take a whole data center offline and upgrade the cluster without affecting the other two, which is nice. 
+Kubernetes docs says to be vary about multi location clusters so we opted for one cluster per data center, three in total. This gives a bit of overhead when it comes to deployment (we can't deploy in one big batch, but need three deploys to update all pods) but at the same time we can take a whole data center offline and upgrade the cluster without affecting the other two, which is nice. 
 
-Another thing we discovered was that kubernetes by default make configuration and variables available to all containers in a namespace and everyone could see everything when all apps were deployed in the default namespace. So we namespace all apps into a separate namespace named after the app. As longs as all commands are namespaced (hence wrapper scripts) there is not much hassle. For snapshot and test environments, we use one cluster and not three to keep things simpler. 
+Another thing we discovered was that kubernetes by default make configuration and variables available to all containers in a namespace and everyone could see everything when all apps were deployed in the default namespace. So we namespace all our apps into a separate namespace named after the app. As longs as all commands are namespaced (hence wrapper scripts) there is not much hassle. For snapshot and test environments, we use one cluster and not three to keep things simpler. 
+
+Scripts, scripts and more scripts
+------------------------------------
+
+We'll cover all the scripts in later blog posts, but let's start. I asked myself the question: what information about a running app do I need to get out of kubernetes most often? In our older stacks, we have hade a ping command which pinged the in-app ping endpoints and gave us a lot of information: where the app is running, what version it is running and which port. Could I get this from kubernetes?
+
+The result was actually two scripts. 
+
+**k8sstatus APP ENV** gives you this:
+
+
 
