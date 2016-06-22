@@ -6,6 +6,12 @@ tags: [kubernetes,devops,ops,skydns,docker]
 ---
 {% include JB/setup %}
 
+#### Other post in the series
+
+*  [Kubernetes Wars Day 0](../kubernetes-wars-day-0.html)
+*  [Kubernetes Wars Day 3](../kubernetes-wars-day-3.html)
+
+
 _Operation k8s log, day 7 0800 Zulu_
 
 Along came the day for deploying the first high traffic node app to Kubernetes. And with, our pain started to creep in. I had deployed around 10 apps earlier, and everything worked out smoothly. These were small helper apps doing background requests and not seeing a lot of traffic. 

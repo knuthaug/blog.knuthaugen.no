@@ -6,6 +6,11 @@ tags: [kubernetes,devops,ops,skydns,docker]
 ---
 {% include JB/setup %}
 
+#### Other post in the series
+
+*  [Kubernetes Wars Day 3](../kubernetes-wars-day-3.html)
+*  [Kubernetes Wars Day 7](../kubernetes-wars-day-7.html)
+
 _Operation k8s log, day 0 1100 Zulu_
 
 So, we are sent out on a mission to deploy Kubernetes in our data centers, Google wrote it, management want it and the ops guys are gagging for it. And we have no choice but to follow orders and start using the damn thing. 
