@@ -10,7 +10,7 @@ tags: [kubernetes,devops,ops,skydns,docker]
 
 *  [Kubernetes Wars Day 0](/2016/06/kubernetes-wars-day-0.html)
 *  [Kubernetes Wars Day 7](/2016/06/kubernetes-wars-day-7.html)
-*  [Kubernetes Wars Day 34](/2016/12/kubernetes-wars-day-34.html)
+*  [Kubernetes Wars Day 34](/2016/12/the-kubernetes-wars-day-34.html)
 
 
 _Operation k8s log, day 3 1300 Zulu_
