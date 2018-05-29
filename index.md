@@ -11,7 +11,7 @@ tagline:
       {{ post.content }}
       <h2>Other recent posts</h2>
       {% else %}
-      <li><span>{{ post.date | date: "%Y-%m-%d" }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
+      <li><span>{{ post.date | date: "%Y-%m-%d" }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}.html">{{ post.title }}</a></li>
 {% endif %}
   {% endfor %}
 </ul>
