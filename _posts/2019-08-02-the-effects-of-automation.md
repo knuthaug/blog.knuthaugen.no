@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Effects of Habits"
+title: "The Effects of Automation"
 published: true
 tags: [devops,automation,habits,deployments,CD]
 ---
