@@ -25,12 +25,15 @@ This was the case when I switched employers and got the opportunity to start ane
 So, automating deploys to production: how to achieve it? First try to determine if this is at all wanted in your context. Web development can more or less always achieve this, but there are a lot of other types of software where the work involved may not match the perceived benefit. This is an important question. But let's say you want to go that way, here are some tips:
 
 * Take small steps
-* Make error discoverable (build status to dashboard, slack etc)
+* Make build and deploy errors discoverable (build status to dashboard, slack etc)
 * Make errors clear and understandable
 * make the log clear to read (see previous point)
 * Use version control for your build pipelines and infrastructure
+* add tests to important parts first
+* add health checks
+* add smoketests
 
-Start with auto-deploy to test environment, build out unit tests, integration tests and other tests. Gain confidence in the application. Measure how often builds and deploys to that env fails, if possible display it on a graph that everybody can see. Start deploying automatically to staging environment og pre-production depending on what you have. Gain more confidence - rince and repeat. Gain confidence also in the build and deployment infrastructure itself. If it fails you, improve it. 
+Start with auto-deploy to test environment, build out unit tests, integration tests and other tests as needed. Gain confidence in the application and deploymentes. Measure how often builds and deploys to that env fails, if possible display it on a graph that everybody can see. Start deploying automatically to staging environment og pre-production depending on what you have. Gain more confidence - rince and repeat. Gain confidence also in the build and deployment infrastructure itself. If it fails you, improve it. 
 
 This confidence builds slowly. Let it accrue over time, don't force it. Especially let team members not interested or unexperienced in the tao of deploys take part, improve and use it. This is important, since when deploys are automatic, nobody (and everybody) will have to take action when something goes wrong. 
 
