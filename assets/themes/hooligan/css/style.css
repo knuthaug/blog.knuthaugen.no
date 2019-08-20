@@ -191,12 +191,16 @@ footer {
 /* line 134, ../_sass/_base.scss */
 .content p {
   padding-bottom: 15px;
-  line-height: 20px;
+  line-height: 1.5rem;
   margin: 0;
 }
 
 .content {
-  font-size: 110%;
+  font-size: 120%;
+}
+
+li {
+  line-height: 1.7rem;
 }
 
 /* Page header tweaks */

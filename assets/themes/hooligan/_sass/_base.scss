@@ -20,7 +20,7 @@ body {
   text-shadow:1px 1px 1px #000;
   height:100%; 
   font-family: 'Oxygen', sans-serif; 
-  font-size: 14px;
+  font-size: 15px;
 }
    
 h1,h2,h3,h4,h5,h6 {
@@ -44,6 +44,10 @@ a {
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	font-weight:normal;
 	color:#999999;
+}
+
+li {
+  line-heigh: 1.7rem;
 }
 
 h1, h2 {
@@ -133,7 +137,7 @@ hr {
 	}
 	p {
 		padding-bottom:15px;
-		line-height:25px;
+		line-height:1.5rem;
 		margin:0;
 	}
 }
@@ -204,7 +208,7 @@ a.btn, a.btn.disabled {
 		}
 	}
 	li {
-		line-height:28px;
+		line-height:1.5rem;
 	}
 	a {
 		&.active {
