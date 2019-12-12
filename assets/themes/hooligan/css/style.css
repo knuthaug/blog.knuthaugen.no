@@ -39,6 +39,38 @@ pre code {
   font-size: 105%;
 }
 
+table {
+  width: 90%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+thead th {
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+thead {
+}
+
+tbody td {
+  text-align: left;
+  padding: 5px;
+  border-right: 1px solid #999999;
+}
+
+tbody td:last-child {
+  border-right: 0px solid #999999;
+}
+
+tbody tr {
+  border-top: 1px solid #999999;
+}
+
+tbody tr:last-child {
+  border-bottom: 1px solid #999999;
+}
+
 .gist-highlight pre {
   webkit-box-shadow: none !important;
   moz-box-shadow: none !important;
