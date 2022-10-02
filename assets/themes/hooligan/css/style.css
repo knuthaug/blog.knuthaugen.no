@@ -36,7 +36,12 @@ body {
 
 pre code { 
   color: white !important;
-  font-size: 105%;
+  font-size: 100%;
+}
+
+figure.highlight {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 table {

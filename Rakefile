@@ -14,6 +14,13 @@ CONFIG = {
   'theme_package_version' => "0.1.0"
 }
 
+module TempFixForRakeLastComment
+  def last_comment
+    last_description
+  end 
+end
+Rake::Application.send :include, TempFixForRakeLastComment
+
 # Path configuration helper
 module JB
   class Path
@@ -97,7 +104,7 @@ end # task :page
 
 desc "Launch preview environment"
 task :preview do
-  system "jekyll --auto --server"
+  system "jekyll serve --watch"
 end # task :preview
 
 # Public: Alias - Maintains backwards compatability for theme switching.
