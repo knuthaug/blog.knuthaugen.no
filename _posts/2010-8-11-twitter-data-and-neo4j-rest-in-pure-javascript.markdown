@@ -2,8 +2,8 @@
 layout: post
 title: Twitter Data and Neo4j-rest in Pure Javascript
 mt_id: 33
-date: 2010-08-11 13:00:55 +02:00
-tags: [JavaScript, Neo4J, REST, Twitter]
+date: 2010-08-11
+tags: [Javascript, Neo4J, REST, Twitter]
 ---
 
 ## The Stage ##

@@ -2,7 +2,7 @@
 layout: post
 title: "Headless Tests with Buster.js and Phantom.js"
 published: true
-tags: [JavaScript, Testing, Jenkins]
+tags: [Javascript, Testing, Jenkins]
 ---
 {% include JB/setup %}
 
