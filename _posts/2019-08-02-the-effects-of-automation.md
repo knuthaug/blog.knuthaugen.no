@@ -2,7 +2,7 @@
 layout: post
 title: "The Effects of Automation"
 published: true
-tags: [devops,automation,habits,deployments,CD]
+tags: [DevOps,Automation,CD]
 ---
 {% include JB/setup %}
 

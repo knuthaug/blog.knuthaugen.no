@@ -2,7 +2,7 @@
 layout: post
 title: "The Kubernetes Wars: Day 3"
 published: true
-tags: [kubernetes,devops,ops,skydns,docker]
+tags: [Kubernetes,Devops,Ops,Skydns,Docker]
 ---
 {% include JB/setup %}
 
