@@ -34,9 +34,9 @@ body {
   text-shadow: none !important;
 }
 
-pre code { 
+pre, code { 
   color: white !important;
-  font-size: 100%;
+  font-size: 95%;
 }
 
 figure.highlight {
@@ -136,7 +136,7 @@ h2 {
 /* line 61, ../_sass/_base.scss */
 pre, code {
   color: #fff !important;
-  font-size: 103%;
+  font-size: 100%;
 }
 
 /* line 65, ../_sass/_base.scss */
@@ -233,7 +233,7 @@ footer {
 }
 
 .content {
-  font-size: 120%;
+  font-size: 115%;
 }
 
 li {
