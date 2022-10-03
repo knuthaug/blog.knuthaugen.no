@@ -107,6 +107,11 @@ task :preview do
   system "jekyll serve --watch"
 end # task :preview
 
+desc "Build site"
+task :build do
+  system "jekyll build"
+end # task :build
+
 # Public: Alias - Maintains backwards compatability for theme switching.
 task :switch_theme => "theme:switch"
 
