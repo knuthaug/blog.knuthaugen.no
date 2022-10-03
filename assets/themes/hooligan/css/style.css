@@ -262,6 +262,7 @@ li {
   -ms-border-bottom-right-radius: 5px;
   -o-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  width: 80%;
 }
 /* line 155, ../_sass/_base.scss */
 .page-header h1 {
