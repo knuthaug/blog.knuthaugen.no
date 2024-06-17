@@ -2,7 +2,7 @@
 layout: post
 title: "The Clash of the Classnames"
 published: true
-tags: [typescript,custom elements,web components,html,web]
+tags: [Typescript,Custom elements,Web components,HTML,Web]
 ---
 {% include JB/setup %}
 
