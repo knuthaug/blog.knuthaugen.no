@@ -5,7 +5,7 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     colorator (1.1.0)
     concurrent-ruby (1.1.10)
-    date (3.2.2)
+    date (3.3.4)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
@@ -57,7 +57,8 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rexml (3.2.5)
+    rexml (3.3.0)
+      strscan
     rouge (3.30.0)
     safe_yaml (1.0.5)
     sass (3.7.4)
@@ -65,7 +66,8 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    time (0.2.0)
+    strscan (3.1.0)
+    time (0.2.2)
       date
     yaml (0.2.0)
 
@@ -81,11 +83,12 @@ DEPENDENCIES
   kramdown-parser-gfm (~> 1.1)
   rake
   rake-minify
-  time
+  rexml (>= 3.2.7)
+  time (= 0.2.2)
   yaml
 
 RUBY VERSION
-   ruby 2.6.8p205
+   ruby 2.6.10p210
 
 BUNDLED WITH
    1.17.2
