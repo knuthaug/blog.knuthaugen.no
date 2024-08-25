@@ -55,7 +55,7 @@ So we then made some big changes. All apps got snapshot builds (by maven) deploy
 
 The deploy scripts looks like this on the command line:
 
-{% highlight bash %}
+```bash
 
 update-dev -s dev0 appname
 
@@ -83,7 +83,7 @@ update-dev dev0 appname:branch-foo:21451a
 
 # script fetches it from there. if revision is omitted, you get HEAD (no pun intended).
 
-{% endhighlight %}
+```
 
 The main points here are:
 
@@ -117,3 +117,7 @@ Updating one app to latest snapshot or release and banning app URLs in Varnish i
 Next up is using the same deployment strategy for all environments, but with a custom rollback feature for production and a wait strategy between servers. We thinking about extending this to not wait a certain amount of time, but rather monitor Varnish and move on once the backend is reported as up, and answering requests. Also, a wrapper script to be called from Jenkins for deploying to stage, run smoke tests, await result and deploy to prod if all is well is planned. And of course, no varnish flushing in production.
 
 All in all, shaving of ~10 minutes of deploy time (this amounts to hours of wait/ineffective time on a busy day) is pretty significant. But the main win is less manual procedures in production, more power to the developers and faster delivery, when we need to.
+
+```
+
+```

@@ -167,6 +167,7 @@ PLATFORMS
 DEPENDENCIES
   base64
   jekyll
+  rouge
 
 BUNDLED WITH
    2.5.17

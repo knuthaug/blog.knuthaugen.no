@@ -1,21 +1,20 @@
---- 
+---
 layout: post
 title: "Continuous Delivery II: Smoketests in Ruby and Rails"
 mt_id: 40
 date: 2011-04-04 19:33:03 +02:00
 tags: [Ruby, Continuous Delivery, Jenkins]
 ---
- This is part II in a blog mini series on building a build pipeline with Jenkins. The other parts, [part I](http://blog.knuthaugen.no/2011/04/continuous-delivery-the-ruby-way.html) and part III could be worth a read too.
- 
-This part is about a implementing built-in smoke tests in a rails application. This Is by no means new, but I added a little something at the end which I thought was quite nifty. 
+
+This is part II in a blog mini series on building a build pipeline with Jenkins. The other parts, [part I](http://blog.knuthaugen.no/2011/04/continuous-delivery-the-ruby-way.html) and part III could be worth a read too.
+
+This part is about a implementing built-in smoke tests in a rails application. This Is by no means new, but I added a little something at the end which I thought was quite nifty.
 
 ### Class definition
 
 I created a small class to hold the actual smoke tests (pardon my ruby, I'm learning):
 
-
-
-{% highlight ruby %}
+````ruby
 
 class Smoketest
   attr_accessor :description, :status, :message
@@ -37,12 +36,12 @@ class Smoketest
   end
 
 end
-{% endhighlight %}
+```
 
 These are called from the SmoketestController. I chose to just put all (well all two) smoke tests in the controller, but they could easily be distributed and put wherever you want. The controller methods looks like this:
 
-{% highlight ruby %}
-require 'smoketest'
+```ruby
+```ruby
 
 class SmoketestController < ApplicationController
 
@@ -88,7 +87,7 @@ class SmoketestController < ApplicationController
 
 end
 
-{% endhighlight %}
+```
 
 The "test" one is just for making it more than one, and the mongoDB test tries to do a query and gives it and ok status if that works,  and a fail with stack trace if somethings amiss. In a bigger application with more external systems, the number of smoke tests would go up. Running this, gives this nice web page for visual inspection:
 
@@ -99,32 +98,32 @@ The "test" one is just for making it more than one, and the mongoDB test tries t
 ### The Junit output
 I wanted the jenkins build job to track these smoke tests, which are being run as a build step after deployment. The easiest way to do this I figured was to make it spit out Junit XML format and let Jenkins chew on that. So a created an XML template like so:
 
-{% highlight ruby %}
-
+```ruby
+```ruby
 %testsuite{:name => "smoketests", :failures => @tests.select { |x| x.status == "FAIL" }.count, :tests => @tests.count, :skipped => 0}
   - @tests.each do |test|
     %testcase{:name => test.description}
       - if test.status != "OK"
         %failure{:message => test.message}
 
-{% endhighlight %}
+```
 
 
 And when fetching the url http://server/smoketest.xml you get the following output:
 
-{% highlight xml %}
-
+```xml
+```xml
 <testsuite failures="0" name="smoketests" skipped="0" tests="2">
 <testcase name="MongoDB test connection"></testcase>
 <testcase name="Test"></testcase>
 </testsuite>
-{% endhighlight %}
+```
 
 (It handles failures too).
 
 The following small shell script is used to check the status:
 
-{% highlight bash %}
+```bash
 
 #!/bin/bash
 
@@ -149,11 +148,12 @@ fi
 
 #put the xml version of the page into a file
 curl --silent $1 &gt; reports/smoke.xml
-{% endhighlight %}
+```
 
 The shell scripts stores the file which is then read by Jenkins. Works like a charm!
 
 <img src="/images/jenkins-smoke.png" width="600" height="256" alt="jenkins-smoke.png" class="mt-image-none" style="" />
 
 Stay tuned for the third article on build pipelines where I explore some future possibilities when using a build pipeline.
- 
+
+````

@@ -4,34 +4,33 @@ title: "The Kubernetes Wars: Day 3"
 published: true
 tags: [Kubernetes,Devops,Ops,Skydns,Docker]
 ---
+
 {% include JB/setup %}
 
 #### Other post in the series
 
-*  [Kubernetes Wars Day 0](/2016/06/kubernetes-wars-day-0.html)
-*  [Kubernetes Wars Day 7](/2016/06/kubernetes-wars-day-7.html)
-*  [Kubernetes Wars Day 34](/2016/12/the-kubernetes-wars-day-34.html)
-
+- [Kubernetes Wars Day 0](/2016/06/kubernetes-wars-day-0.html)
+- [Kubernetes Wars Day 7](/2016/06/kubernetes-wars-day-7.html)
+- [Kubernetes Wars Day 34](/2016/12/the-kubernetes-wars-day-34.html)
 
 _Operation k8s log, day 3 1300 Zulu_
 
-Day three and we have treated the wounded and regrouped after our initial encounter with the enemy. 
+Day three and we have treated the wounded and regrouped after our initial encounter with the enemy.
 There are yaks everywhere, get your razors ready, boys!
 
-Config
---------
+## Config
 
-How to deal with configuration? Kubernetes likes app config in environment variables, not config files. This is easy in our node apps using convict, pretty easy in our ruby apps and ranging from relatively easy to bloody hard in our java apps. But how to get config into the replication controllers? We opted for using configmaps (a kubernetes object) to store the config, reference the variables from the rc files and maintain it in git controlled files. So when we want to change to app config, update the config files and run a script which updates the configmap and reloads all the pods for the app. Incidentally, the way we do that, is to delete them, and let kubernetes recreate them. Don't do this if you run one cluster ;-) We _should_ make the apps read the config automatically, but since none our apps do that, we needed a solution that works now. 
+How to deal with configuration? Kubernetes likes app config in environment variables, not config files. This is easy in our node apps using convict, pretty easy in our ruby apps and ranging from relatively easy to bloody hard in our java apps. But how to get config into the replication controllers? We opted for using configmaps (a kubernetes object) to store the config, reference the variables from the rc files and maintain it in git controlled files. So when we want to change to app config, update the config files and run a script which updates the configmap and reloads all the pods for the app. Incidentally, the way we do that, is to delete them, and let kubernetes recreate them. Don't do this if you run one cluster ;-) We _should_ make the apps read the config automatically, but since none our apps do that, we needed a solution that works now.
 
-This also means we can have separate config for different environments while the file definition of the RC remains the same. We started out with only the configuration variables external to the RC file, but soon realized we needed to externalize the version of the image, the replica number and the limits too. 
+This also means we can have separate config for different environments while the file definition of the RC remains the same. We started out with only the configuration variables external to the RC file, but soon realized we needed to externalize the version of the image, the replica number and the limits too.
 
-This has worked really well so far. 
+This has worked really well so far.
 
-The deploy script which either creates everything on the first deploy (from yaml files) or performs a rolling upgrade from one version to another. The deploy script also need to handle the configmap and substituting the values from external files. 
+The deploy script which either creates everything on the first deploy (from yaml files) or performs a rolling upgrade from one version to another. The deploy script also need to handle the configmap and substituting the values from external files.
 
 <style> code.language-bash { font-size: 70% }</style>
 
-{% highlight bash %}
+````bash
 #!/bin/bash
 
 . /usr/local/amedia-tools/dev/dev_functions.sh
@@ -70,16 +69,16 @@ function deploy_from_file() {
         warnlog "RC for ${app} already exist, will not try to re-create from yaml files again"
         exit 1
     fi
-    
+
     if [ -d $yaml_dir/$app ]; then
-        ${kubectl} ${kube_opt} create namespace ${namespace} --cluster=${dc} 
-        ${kubectl} ${kube_opt} create --namespace=${namespace} --cluster=${dc} -f ${configmap_file}        
+        ${kubectl} ${kube_opt} create namespace ${namespace} --cluster=${dc}
+        ${kubectl} ${kube_opt} create --namespace=${namespace} --cluster=${dc} -f ${configmap_file}
         ${kubectl} ${kube_opt} create --cluster=${dc} --namespace=${namespace} -f $yaml_dir/$app/$app-svc.yaml
 
         #before we create the rc, expand variables from resources file
         #make a tmp file for the newly generated rc file
-        rcfile=$(expand_placeholders_from_resources ${app}-rc.yaml ${yaml_dir}/${app} ${env}) 
-        
+        rcfile=$(expand_placeholders_from_resources ${app}-rc.yaml ${yaml_dir}/${app} ${env})
+
         ${kubectl} ${kube_opt} create --cluster=${dc} --namespace=${namespace} -f ${rcfile}
 
         #if test or snapshot, scale down to 1 replica
@@ -111,8 +110,8 @@ function rolling_update() {
             echo $out
             exit 1
         fi
-        
-        ${kubectl} ${kube_opt} rolling-update $app --namespace=${namespace} --update-period=1s --poll-interval=2s --timeout=2m --cluster=${dc} --image=dr.api.no/amedia/$app:$version 
+
+        ${kubectl} ${kube_opt} rolling-update $app --namespace=${namespace} --update-period=1s --poll-interval=2s --timeout=2m --cluster=${dc} --image=dr.api.no/amedia/$app:$version
 
         #if successful, patch resource file with new image version
         if [ $? == 0 ]; then
@@ -138,7 +137,7 @@ fi
 cd - > /dev/null 2>&1
 
 #generate configmap
-configmap_file=$(generate_configmap_file ${yaml_dir} ${namespace} ${app} ${env}) 
+configmap_file=$(generate_configmap_file ${yaml_dir} ${namespace} ${app} ${env})
 
 if [ ! -z "$version" ]; then
     if [[ $env == prod* ]]; then
@@ -164,12 +163,12 @@ else
 fi
 
 report_deploy $env $app $version
-{% endhighlight %}
+```
 
-And then the script for _just_ updating the config of an app, without deploying anything. 
+And then the script for _just_ updating the config of an app, without deploying anything.
 
-{% highlight bash %}
-#!/bin/bash
+```bash
+```bash
 
 . /usr/local/amedia-tools/dev/dev_functions.sh
 yaml_dir="/usr/local/k8s-files"
@@ -214,7 +213,7 @@ function create_config_from_etcd() {
         errlog "Something bad happened and we could not create configmap. Aborting restart"
         exit 1
     fi
-    
+
     #do a replace on the rc, to accomodate for new variables in the yaml
     # first, patch the rc file to the latest (running version)
     image=$(${kubectl} ${kube_opt} get --namespace=${namespace} --cluster=${dc} rc ${app} -o yaml | grep "image:" | tr -d "\t " | cut -f2-3 -d:)
@@ -223,16 +222,16 @@ function create_config_from_etcd() {
     patch_file ${yaml_dir}/${app}/${env}.resources ${app} "image" ${image}
 
     #make a tmp file for the newly generated rc file
-    rcfile=$(expand_placeholders_from_resources ${app}-rc.yaml ${yaml_dir}/${app} ${env}) 
+    rcfile=$(expand_placeholders_from_resources ${app}-rc.yaml ${yaml_dir}/${app} ${env})
 
     ${kubectl} ${kube_opt} replace --namespace=${namespace} --cluster=${dc} -f ${rcfile}
     rm ${rcfile}
-    
+
     #if test or snapshot, scale down to 1 replica
     if [ ${env} != "production" ]; then
         ${kubectl} ${kube_opt} scale --cluster=${dc} --namespace=${namespace} --replicas=1 rc ${app}
     fi
-    
+
     # delete existing pods, to recreate and read new config
     had_num=$( ${kubectl} ${kube_opt} get pods --cluster=${dc} --namespace=${namespace} -o yaml | grep -i podip | cut -f2 -d: | wc -l)
     infolog "stopping running pod instance(s) in cluster=${dc} (${had_num} instance(s) found running)"
@@ -261,14 +260,14 @@ function create_config_from_etcd() {
     if [ $status -eq 0 ]; then
         errlog "Error: Pods seem unable to restart. Please check their status in ${dc} manually. We need ${had_num} running per server center. Found ${num} running instances"
         exit 1
-    else 
+    else
         echo "Yay! Back up."
     fi
 }
 
 #we need the yaml
 cd ${yaml_dir}
-git pull 
+git pull
 
 if [ $? != 0 ]; then
     errlog "Could not pull the k8s-files repo. Please check permissions on jump.api.no:/usr/local/k8s-files"
@@ -277,7 +276,7 @@ fi
 
 cd - > /dev/null 2>&1
 
-configmap_file=$(generate_configmap_file ${yaml_dir} ${namespace} ${app} ${env}) 
+configmap_file=$(generate_configmap_file ${yaml_dir} ${namespace} ${app} ${env})
 
 if [[ $env == prod* ]]; then
     create_config_from_etcd osl2 ${env}
@@ -291,17 +290,18 @@ fi
 
 rm ${configmap_file}
 
-{% endhighlight %}
+```
 
 (Yeah, it could do with some refactoring)
 
 Container Metrics
 --------------------
 
-The question that popped up was: when do we know the cluster is running out of resources, and preferably _before_ the deploy fails with events saying you're shit out of memory or cpu? Container metrics to the rescue. 
+The question that popped up was: when do we know the cluster is running out of resources, and preferably _before_ the deploy fails with events saying you're shit out of memory or cpu? Container metrics to the rescue.
 
-We have a existing metric system backed in graphite which has worked well for us. We have used the host name as the metric path to give us the oppurtunity to isolate metrics per host. When kubernetes manages the containers, the host on which it runs becomes ever changing. to solve this, we landed on using [heapster](https://github.com/kubernetes/heapster) for gathering container metrics, and then storing them in [influxdb](https://influxdata.com/). The influx query language gives easy ways to abstract away over changing host names. I am seeing use of influxdb for app metrics in the future too, for the same reason. 
+We have a existing metric system backed in graphite which has worked well for us. We have used the host name as the metric path to give us the oppurtunity to isolate metrics per host. When kubernetes manages the containers, the host on which it runs becomes ever changing. to solve this, we landed on using [heapster](https://github.com/kubernetes/heapster) for gathering container metrics, and then storing them in [influxdb](https://influxdata.com/). The influx query language gives easy ways to abstract away over changing host names. I am seeing use of influxdb for app metrics in the future too, for the same reason.
 
-Next time on the kubernetes wars: the curious case of the slow node apps. 
+Next time on the kubernetes wars: the curious case of the slow node apps.
 
 _End log Operation k8s, day 3_
+````

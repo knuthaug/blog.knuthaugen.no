@@ -43,7 +43,7 @@ The result was actually two scripts.
 
 <style> code.language-bash { font-size: 65% }</style>
 
-{% highlight bash %}
+````bash
 osl2:
 NAME DESIRED CURRENT AGE CONTAINER(S) IMAGE(S) SELECTOR
 manifesto 1 1 44d manifesto dr.api.no/amedia/manifesto:0.0.3 name=manifesto
@@ -68,9 +68,9 @@ manifesto-8q4f7 1/1 Running 0 16d docker008-ksd1
 
 ---
 
-{% endhighlight %}
+```
 
-{% highlight bash %}
+```bash
 !/bin/bash
 
 kubectl="/usr/local/bin/kubectl"
@@ -122,22 +122,22 @@ else
     ${kubectl} ${kube_opt} get rc --cluster=snapshot --namespace=${namespace} ${app} -o wide
 list_pods ${app} snapshot ${namespace}
 fi
-{% endhighlight %}
+```
 
 Which tells us first the status of the Replication Controller for the app (and the version) and then iterates through all pods for this RC and shows where these are running and status for them. What this doesn't tell us, is the actual reply from the ping endpoint in the app, and not which IP it is running on (not always needed in kubernetes, but nice to test against when debugging. Thus k8sping was born.
 
-{% highlight bash %}
+```bash
 k8sping manifesto prod
 http://10.30.6.7:9644/manifesto/apiadmin/ping OK 0.0.3 master-undefined
 http://10.31.9.9:9644/manifesto/apiadmin/ping OK 0.0.3 master-undefined
 http://10.29.8.13:9644/manifesto/apiadmin/ping OK 0.0.3 master-undefined
-{% endhighlight %}
+```
 
 And whammo, port and ip for the individual pods, and the return value from the ping endpoint.
 
 Source:
 
-{% highlight bash %}
+```bash
 #!/bin/bash
 
 kubectl="/usr/local/bin/kubectl"
@@ -181,10 +181,11 @@ else
     namespace="${app}-${env}"
 ping_app snapshot ${app}
 fi
-{% endhighlight %}
+```
 
 Kubectl command output is a joy to parse. Everything (well, almost everything) makes sense.
 
 That's enough for one day, this is Gordon, signing off :-)
 
 _End log Operation k8s, day 0_
+````

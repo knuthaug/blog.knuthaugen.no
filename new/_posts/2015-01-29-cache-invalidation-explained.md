@@ -60,7 +60,7 @@ We have enforced very strict rules in all our apps regarding cache headers and r
 
 Varnish does not out of the box use channel-maxage so this is our implementation in VCL. If channel-maxage is specified, that overrides age/expires that may or may not be present in the object.
 
-{% highlight c %}
+````c
 
 # handle channel-maxage in cache-channels, override ttl
 
@@ -83,13 +83,13 @@ if (beresp.http.cache-control ~ "channel-maxage=[0-9]") {
 
 }
 
-{% endhighlight %}
+```
 
 ### Example
 
 The app _pollux_ generates complete web pages meant for the end user browser. The data comes from severals systems. One is the data backend, connected to the CMS for the relevant publication. One other is for ad information and a third is a component app, producing parts of the page (served through ESI) again calling other systems further down. These are HTTP requests done in the backend when serving up the page. All these responses have cache-control groups on them, relevant for the app serving them. These are then aggregated up the chain and gets added to the final response to Varnish. Varnish removes them on the way out to the browser, replacing them with "must-revalidate" so the browser always asks Varnish for a fresh copy. But these groups are stored with the object in Varnish and can be used to invalidate the object, on demand if the object should need to be before it expires. Allow me to illustrate:
 
-{% highlight bash %}
+```bash
 
 HTTP/1.1 200 OK
 Date: Sun, 05 Oct 2014 16:18:54 GMT
@@ -100,7 +100,7 @@ Surrogate-Control: ESI/1.0
 Content-Type: text/html; charset=UTF-8
 Transfer-Encoding: chunked
 
-{% endhighlight %}
+```
 
 We see the channel-maxage for this object is calculated by Varnish to be 216 seconds, and that is how long it will live in the cache if no purging occurs before that. We also include the _must-revalidate_ keyword for responses meant for browsers, so they will ask varnish on each request. Response headers meant for other apps do not include this.
 
@@ -112,7 +112,7 @@ As this applies to all apps, we could just as easily purge all objects using ad 
 
 Here's the Varnish VCL code to allow PURGE requests to softban[[5]](#5) objects from the cache.
 
-{% highlight c %}
+```c
 
 sub vcl_recv {
 if (req.request == "PURGE") {
@@ -124,7 +124,7 @@ error 200 "Purged.";
 }
 }
 
-{% endhighlight %}
+```
 
 The implementation and use of this feature is in essence the varnish-cc daemon doing curl on the varnish servers with the HTTP method set to PURGE with the name of the group we want to purge in the path.
 
@@ -146,3 +146,4 @@ References:
 4. <a name="4"></a>[http://www.smashingmagazine.com/2014/04/23/cache-invalidation-strategies-with-varnish-cache/](http://www.smashingmagazine.com/2014/04/23/cache-invalidation-strategies-with-varnish-cache/)
 5. <a name="5"></a>[https://www.varnish-cache.org/docs/3.0/tutorial/purging.html](https://www.varnish-cache.org/docs/3.0/tutorial/purging.html)
 6. <a name="6"></a>[https://github.com/amedia/atomizer](https://github.com/amedia/atomizer)
+````

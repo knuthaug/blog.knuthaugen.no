@@ -28,7 +28,7 @@ The deploy script which either creates everything on the first deploy (from yaml
 
 <style> code.language-bash { font-size: 70% }</style>
 
-{% highlight bash %}
+````bash
 #!/bin/bash
 
 . /usr/local/amedia-tools/dev/dev_functions.sh
@@ -163,11 +163,11 @@ fi
 fi
 
 report_deploy $env $app $version
-{% endhighlight %}
+```
 
 And then the script for _just_ updating the config of an app, without deploying anything.
 
-{% highlight bash %}
+```bash
 #!/bin/bash
 
 . /usr/local/amedia-tools/dev/dev_functions.sh
@@ -290,7 +290,7 @@ fi
 
 rm ${configmap_file}
 
-{% endhighlight %}
+```
 
 (Yeah, it could do with some refactoring)
 
@@ -303,3 +303,4 @@ We have a existing metric system backed in graphite which has worked well for us
 Next time on the kubernetes wars: the curious case of the slow node apps.
 
 _End log Operation k8s, day 3_
+````

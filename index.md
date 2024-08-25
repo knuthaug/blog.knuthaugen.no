@@ -3,7 +3,9 @@ layout: index
 title:
 tagline:
 ---
+
 {% include JB/setup %}
+
 <ul class="posts">
   {% for post in site.posts limit:10 %}
     {% if forloop.first %}
@@ -15,5 +17,3 @@ tagline:
 {% endif %}
   {% endfor %}
 </ul>
-
-

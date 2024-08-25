@@ -3,8 +3,6 @@ layout: default
 title: All About the code
 ---
 
-# All about the code
-
 <ul class="posts">
   {% for post in site.posts limit:10 %}
     {% if forloop.first %}

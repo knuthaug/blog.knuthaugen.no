@@ -19,19 +19,19 @@ But, running JavaScript tests in a browser is fairly easy, both with Buster and 
 
 Install Phantom.js by downloading it and unpacking the tar-file. If you're on a mac you can do:
 
-{% highlight bash %}
+````bash
 
 brew update && brew install phantomjs
 
-{% endhighlight %}
+```
 
 Buster.js is a node module and can be installed by running the following command in a recent node version:
 
-{% highlight bash %}
+```bash
 
 npm install -g buster
 
-{% endhighlight %}
+```
 
 or checking out [http://busterjs.org/docs/getting-started/](http://busterjs.org/docs/getting-started/) if you need more handholding. Depending on your platform you may need to adjust your path variable or symlink the buster executables into your $PATH
 
@@ -39,7 +39,7 @@ or checking out [http://busterjs.org/docs/getting-started/](http://busterjs.org/
 
 So to run some buster tests in phantom I have made a small project with some tests
 
-{% highlight bash %}
+```bash
 
 buster.js
 bin/
@@ -51,11 +51,11 @@ math-test.js
 lib/
 math.js
 
-{% endhighlight %}
+```
 
 The `lib/math.js` file is a small object with a simple function, and `test/math-test.js` is a test case for that. Nothing fancy there, but I list them for completeness. These files should hold your production code and tests.
 
-{% highlight javascript %}
+```javascript
 
 // lib/math.js
 
@@ -84,11 +84,11 @@ expect(this.foo.square(3)).toEqual(9);
 
 });
 
-{% endhighlight %}
+```
 
 The contents of `buster.js` (buster config file):
 
-{% highlight javascript %}
+```javascript
 
 var config = module.exports;
 
@@ -103,12 +103,12 @@ tests: [
 ]
 }
 
-{% endhighlight %}
+```
 
 `server.sh` is a script for starting the buster server and the phantom.js instance, and run the
 phantom.js script on startup:
 
-{% highlight bash %}
+```bash
 
 #!/bin/bash
 
@@ -116,12 +116,12 @@ buster-server & # fork to a subshell
 sleep 2 # takes a while for buster server to start
 phantomjs ./bin/phantom.js &
 
-{% endhighlight %}
+```
 
 Then we have the `phantom.js` script for capturing the browser, in phantom. We also redirect any alerts
 to console.log() instead, since we won't see them.
 
-{% highlight bash %}
+```bash
 
 var system = require('system'),
 captureUrl = 'http://localhost:1111/capture';
@@ -155,11 +155,11 @@ phantom.exit(1);
 }
 });
 
-{% endhighlight %}
+```
 
 The last script, `kill-server.sh` is for running after the tests and shut everything down again.
 
-{% highlight bash %}
+```bash
 
 #!/bin/bash
 
@@ -185,16 +185,16 @@ else
     echo "$1 not killed. Found pid was=$server_pid"
 fi
 
-{% endhighlight %}
+```
 
 Running all these together, after another, we start up a buster server on localhost:1111, start phantomjs and use that to capture the buster server, run the tests, and the kill the server and phantom afterwards.
 
-{% highlight bash %}
+```bash
 
 {nikopol:buster: ->./bin/server.sh
 buster-server running on http://localhost:1111
 {nikopol:buster: ->buster-test
-PhantomJS 1.6.1, OS X: ..  
+PhantomJS 1.6.1, OS X: ..
 1 test case, 2 tests, 3 assertions, 0 failures, 0 errors, 0 timeouts
 Finished in 0.006s
 {nikopol:buster: ->./bin/kill-server buster-server && ./bin/kill-server phantom
@@ -202,7 +202,7 @@ buster-server killed
 phantom killed
 {nikopol:buster: ->
 
-{% endhighlight %}
+```
 
 If you're running the tests locally, you can leave the server and phantom running. But we want to run them in the CI server, so we clean up after tests are run.
 
@@ -210,12 +210,13 @@ If you're running the tests locally, you can leave the server and phantom runnin
 
 We run the build of this project in Jenkins and want to display the test results there, along with csslint, jslint and other quality checks. Buster.js has a nifty command line switch for outputting junit compatible xml, which Jenkins reads out of the box. For instance this command, instead of plain buster-test in Jenkins, with config for the violations plugin pointing to the file, will graph the test results nicely.
 
-{% highlight bash %}
+```bash
 
 buster-test --reporter xml > reports/test-report.xml
 
-{% endhighlight %}
+```
 
 The scripts can also of course be configured to run through npm, if you want.
 
 That's it, happy phantom.js and buster.js hacking!
+````
