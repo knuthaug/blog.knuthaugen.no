@@ -49,12 +49,6 @@ nav ul {
 }
 
 main {
-  display: grid;
-  grid-template-columns: minmax(var(--page-margin), 1fr) minmax(200px, 3fr) minmax(
-      var(--page-margin),
-      1fr
-    );
-
   line-height: 1.4;
   font-size: 1.3em;
   font-family: "Source serif", serif;
@@ -62,6 +56,28 @@ main {
   h2 {
     font-family: "Roboto", sans-serif;
   }
+}
+
+main div:first-child {
+  display: grid;
+  grid-template-columns: minmax(var(--page-margin), 1fr) min(80ch, 100%) minmax(
+      var(--page-margin),
+      1fr
+    );
+}
+
+main div:first-child > * {
+  grid-column: 2;
+}
+
+main div:first-child .full-bleed {
+  grid-column: 1 / -1;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
+}
+
+.full-bleed div {
+  border-radius: 4px;
 }
 
 @media (max-width: 600px) {
@@ -82,5 +98,4 @@ pre {
   background-color: hsl(213, 76%, 73%);
   border-radius: 4px;
   padding: 10px;
-  width: 100%;
 }

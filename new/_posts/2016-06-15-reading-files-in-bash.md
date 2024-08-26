@@ -32,7 +32,7 @@ IFS=${prev_ifs}
 
 This code works fine without any IFS twiddling, though:
 
-{%highlight bash%}
+```bash
 
 while read -r line; do
 echo ${line}
@@ -41,4 +41,5 @@ done < "$file"
 ```
 
 There are manny more ways to read files in bash of course. The lesson is of course that I should have tested this better when I first wrote it :-)
+
 ````
