@@ -1,6 +1,7 @@
 :root {
   --page-margin: 24px;
   --primary-color: hsl(213, 62%, 41%);
+  --link-transition: all 0.2s ease-in-out;
 }
 
 * {
@@ -55,16 +56,19 @@ html,
 body {
   height: 100%;
   position: relative;
+  margin-left: 0;
+  margin-right: 0;
 }
 
-body {
+main {
+  border-top: 2px solid #d0e7fa;
   background: linear-gradient(
-    90deg,
-    rgb(175, 175, 175) 0%,
-    rgba(254, 254, 254, 1) 50%,
-    rgb(175, 175, 175) 0%,
-    100%
+    180deg,
+    rgb(215, 234, 247) 0%,
+    rgba(254, 254, 254, 1) 40%,
+    rgba(254, 254, 254, 1) 100%
   );
+  background-attachment: fixed;
 }
 
 .main-container {
@@ -99,27 +103,47 @@ body {
   }
 }
 
+main ol {
+  list-style-type: lower-roman;
+}
+
+main ul {
+  list-style-type: none;
+  li:before {
+    padding-right: 0.5rem;
+    top: 1px;
+
+    content: "\2B62 ";
+    color: #999;
+  }
+}
+
 footer {
   display: grid;
   grid-template-columns: 1fr minmax(200px, 1fr) 1fr;
-  margin-left: var(--page-margin);
-  margin-right: var(--page-margin);
   font-size: 0.9rem;
   font-family: "Source serif", serif;
   font-style: italic;
   letter-spacing: 0.05rem;
   color: #666;
   justify-content: center;
-  border-top: 1px solid #ccc;
 
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 100px;
 
+  background: linear-gradient(
+    0deg,
+    rgb(215, 234, 247) 0%,
+    rgba(254, 254, 254, 1) 60%,
+    rgba(254, 254, 254, 1) 100%
+  );
+
   & > div {
     padding-top: 10px;
     grid-column: 2;
+    justify-self: center;
   }
 }
 
@@ -140,6 +164,7 @@ nav ul {
     font-weight: 600;
     letter-spacing: 0.05rem;
     a {
+      transition: var(--link-transition);
       color: #444;
       text-decoration: none;
     }
@@ -173,8 +198,8 @@ main {
   a {
     text-decoration: none;
     color: hsl(213, 78%, 25%);
-    font-weight: 400;
-    transition: all 0.1s ease-in-out;
+    font-weight: 450;
+    transition: var(--link-transition);
   }
 
   a:hover {
@@ -238,7 +263,8 @@ p {
   margin-bottom: 0.7em;
 }
 
-p code {
+p code,
+li code {
   background-color: hsl(0, 0%, 90%);
   border-radius: 4px;
   padding: 1px 3px 1px 3px;

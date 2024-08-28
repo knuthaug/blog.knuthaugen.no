@@ -10,6 +10,7 @@ title: All About the code
      <article>
      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
       {{ post.excerpt }}
+       &raquo; <a href="{{ post.url }}"> Read the article</a>
       </article>
       <section>
       <h3>Other recent posts</h3>
