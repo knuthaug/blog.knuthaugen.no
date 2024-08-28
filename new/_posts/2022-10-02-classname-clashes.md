@@ -42,7 +42,7 @@ Turns out the fix in `ReactiveElement` `static get observedAttributes()` now inc
 ```javascript
 
 static get observedAttributes() {
-  if (this.\_observedAttributes === undefined) {
+  if (this.observedAttributes === undefined) {
     ...
   }
 }

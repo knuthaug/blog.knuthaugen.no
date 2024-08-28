@@ -30,7 +30,4 @@ SyntaxHighlighter.brushes.Lisp = function () {
 SyntaxHighlighter.brushes.Lisp.prototype = new SyntaxHighlighter.Highlighter();
 SyntaxHighlighter.brushes.Lisp.aliases = ["lisp"];
 ```
-
-```
-
-```
+{: class="full-bleed"}

@@ -27,6 +27,6 @@ All in all, these things have been involved in the site:
 
 Here's a little screenshot for you:
 
-[![Video site screenshot](/images/videosite-screenshot.png)](http://video.javazone.no)
+[![Video site screenshot](/assets/images/videosite-screenshot.png)](http://video.javazone.no)
 
 I collaborated with [bjartek](https://twitter.com/bjartek) on it for a while and as he is a scala/functional programming buff, we tried out a few different techniques. Some using [Google Guava](http://code.google.com/p/guava-libraries/) and some using [Functional Java](http://functionaljava.org/). This made the codebase a little messy in some parts. The java syntax doesn't really support it well, either. Will try to clean up that soon. Anyway, if you try the site, I'd love some feedback on it. Just bear in mind that I am no designer :-)

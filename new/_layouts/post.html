@@ -7,9 +7,15 @@
     <link rel="stylesheet" href="/assets/css/styles.css" />
   </head>
   <body>
-    {% include header.html %}
-    <main>
-      <div>{{ content }}</div>
-    </main>
+    <div class="main-container">
+      {% include header.html %}
+      <main>
+        <article class="hero display-grid">
+          <h2>{{ page.title }}</h2>
+          {{ content }}
+        </article>
+      </main>
+      {% include footer.html %}
+    </div>
   </body>
 </html>
