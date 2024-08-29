@@ -45,8 +45,8 @@
 }
 
 @font-face {
-  font-family: "Handjet";
-  src: url("/assets/fonts/handjet.woff2") format("woff2");
+  font-family: "Stacker";
+  src: url("/assets/fonts/stacker.ttf") format("truetype");
   font-weight: 200 900;
   font-style: normal;
   font-display: fallback;
@@ -62,13 +62,19 @@ body {
 
 main {
   border-top: 2px solid #d0e7fa;
+}
+
+.niceties {
   background: linear-gradient(
     180deg,
     rgb(215, 234, 247) 0%,
     rgba(254, 254, 254, 1) 40%,
     rgba(254, 254, 254, 1) 100%
   );
-  background-attachment: fixed;
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  z-index: -1;
 }
 
 .main-container {
@@ -86,8 +92,8 @@ main {
   gap: var(--page-margin);
 
   h1 {
-    font-family: "handjet";
-    font-size: clamp(1.2rem, 4vw + 1rem, 4rem);
+    font-family: "Stacker", sans-serif;
+    font-size: clamp(1.2rem, 3vw + 1rem, 3rem);
     letter-spacing: 0.1em;
     font-weight: 700;
     margin-top: 0;
@@ -103,18 +109,35 @@ main {
   }
 }
 
+table {
+  th {
+    border-bottom: 1px solid #d0e7fa;
+    border-right: 1px solid #d0e7fa;
+  }
+
+  th:last-child {
+    border-right: none;
+  }
+  td {
+    border-bottom: 1px solid #d0e7fa;
+    border-right: 1px solid #d0e7fa;
+    padding: 4px;
+  }
+
+  td:last-child {
+    border-right: none;
+  }
+}
+
 main ol {
   list-style-type: lower-roman;
 }
 
 main ul {
-  list-style-type: none;
-  li:before {
-    padding-right: 0.5rem;
-    top: 1px;
-
-    content: "\2B62 ";
-    color: #999;
+  list-style-type: "\2B62";
+  li {
+    padding-left: 5px;
+    padding-bottom: 8px;
   }
 }
 
@@ -238,7 +261,7 @@ main h2 a {
   transition: all 0.1s ease-in-out;
 }
 
-main .hero:first-child {
+main .hero:nth-child(2) {
   grid-template-columns:
     minmax(var(--page-margin), 1fr)
     min(70ch, 90%) minmax(var(--page-margin), 1fr);
@@ -248,7 +271,7 @@ main .hero > * {
   grid-column: 2;
 }
 
-main .hero:first-child .full-bleed {
+main .hero:nth-child(2) .full-bleed {
   margin-left: calc(var(--page-margin) * -2);
   margin-right: calc(var(--page-margin) * -2);
 }
@@ -261,6 +284,10 @@ main .hero:first-child .full-bleed {
 p {
   margin-top: 0.7em;
   margin-bottom: 0.7em;
+}
+
+div.highlight {
+  border: 2px solid #545454;
 }
 
 p code,

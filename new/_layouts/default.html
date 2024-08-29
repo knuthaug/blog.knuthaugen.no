@@ -9,7 +9,10 @@
   <body>
     <div class="main-container">
       {% include header.html %}
-      <main>{{ content }}</main>
+      <main>
+        <section class="niceties"></section>
+        {{ content }}
+      </main>
       {% include footer.html %}
     </div>
   </body>

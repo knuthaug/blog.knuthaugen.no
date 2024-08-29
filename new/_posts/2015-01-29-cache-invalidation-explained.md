@@ -11,7 +11,7 @@ After seeing a talk on JavaZone 2014 which touched on cache handling in a very u
 
 There are many ways to do cache invalidation, and I am going to be talking about how we do it at Amedia, one of Norways largest online media houses. We use [Varnish](http://www.varnish-cache.org/) [[3]](#3) for all our caching needs and the implementation is kind of tightly coupled to that. But the _principles_ should be useful across other technologies. The central point is providing enough information in your cache objects, to be able to flush what you need, when you need it.
 
-## Setup
+### Setup
 
 The server setup which acts as a background for all this, is a fairly complex one. Amedia runs the digital parts of 79 (give or take) small and large newspapers in Norway. This means 151 app servers (excluding the CMS servers, which are 246 instances alone) of which 39 are running Varnish instances with differing configurations. These are physical or virtual machines running multiple apps, spread across 10 different environments and 3 data centers. This system has roughly 6.5M page views daily (in prod) and the sustained throughput of the front varnishes during the day is about 45 Mbps of traffic (each) and combined bandwith usage is around 800Mb/s in the daytime.
 
@@ -19,7 +19,7 @@ Every piece of data, except app <-> database communication, runs over HTTP and t
 
 Also, the main use of cache invalidation is journalist writing and updating articles (and other content created by internal users in a similar way) and we, devopsers and developers flushing cache more or less manually by deploying apps, fixing bugs and generally sorting through all the weirdness we can experience in our stack.
 
-## Cache headers in general
+### Cache headers in general
 
 [RFC 7234](http://tools.ietf.org/html/rfc7234) [[1]](#1) (the revised HTTP/1.1 spec, cache portion) mentions the normal cache headers, which can be useful to know about, even though all of them are not part of the cache invalidation scheme I will be discussing.
 
@@ -31,11 +31,11 @@ Also, the main use of cache invalidation is journalist writing and updating arti
 
 See RFC 7234 for the whole truth on these headers. When one app uses several other apps under the hood, the lowest channel-maxage and max-age header from all the backends is used for the response. So a compound response is never older than the youngest "member" object.
 
-## Extensions to cache-channel
+### Extensions to cache-channel
 
 A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234) [[2]](#2) back in 2007 introduced the concept of _Cache channels_ which are specified as an extension to the cache-channel header (See RFC 7234). Extensions are a part of the HTTP/1.1 spec (revised) and nothing new, but the channel, channel-maxage and group extensions were introduced in this draft but seem to have been shelved after that. I can't find a mention in any RFC after this. But Varnish can implement this easily through VCL and this is what we do. And it is very useful for cache invalidation.
 
-## Varnish Concepts
+### Varnish Concepts
 
 Some key varnish concepts you should be familiar with:
 
@@ -45,7 +45,7 @@ Some key varnish concepts you should be familiar with:
 - _Grace mode_: Enables grace time for objects softbanned. Grace time is of course configurable.
 - _Saint mode_: This mode lets you configure Varnish to not ask a backend for an object for a period of time, in case of errors or other unwanted replies. If all backends fails and saint kicks in, the existing object will be served according to grace config.
 
-## Headers
+### Headers
 
 Under this regime HTTP headers becomes all important and not something you just throw around for good measure. They make or break the performance of the whole stack, and need to be kept a watchful eye on. The first thing to be checked when a new app approaches production, is that the cache headers make sense and follow protocol.
 
@@ -60,14 +60,15 @@ We have enforced very strict rules in all our apps regarding cache headers and r
 
 Varnish does not out of the box use channel-maxage so this is our implementation in VCL. If channel-maxage is specified, that overrides age/expires that may or may not be present in the object.
 
-````c
+```c
 
 # handle channel-maxage in cache-channels, override ttl
 
 sub vcl_fetch {
 if (beresp.http.cache-control ~ "channel-maxage=[0-9]") {
 
-      set beresp.http.x-channel-maxage = regsub(beresp.http.cache-control, ".*channel-maxage=([0-9]+).*", "\1");
+      set beresp.http.x-channel-maxage = regsub(beresp.http.cache-control, 
+      ".*channel-maxage=([0-9]+).*", "\1");
 
       set beresp.ttl = std.duration(beresp.http.x-channel-maxage + "s", 3666s);
 
@@ -76,14 +77,18 @@ if (beresp.http.cache-control ~ "channel-maxage=[0-9]") {
       set beresp.ttl = beresp.ttl - std.duration(beresp.http.age + "s" , 0s);
 
       # debug
-      std.log("CC:beresp.ttl before: " + req.http.x-beresp.ttl + " beresp.http.age: " + beresp.http.age + " beresp.ttl after: " + beresp.ttl);
-      std.log("CC:channel-maxage found in " + beresp.http.cache-control + ", duration: " + std.duration(beresp.http.x-channel-maxage + "s", 3666s) + "Age: " + beresp.http.age + ", beresp.ttl: " + beresp.ttl );
+      std.log("CC:beresp.ttl before: " + req.http.x-beresp.ttl + 
+      " beresp.http.age: " + beresp.http.age + " beresp.ttl after: " + beresp.ttl);
+      std.log("CC:channel-maxage found in " + beresp.http.cache-control + 
+      ", duration: " + std.duration(beresp.http.x-channel-maxage + "s", 3666s) + 
+      "Age: " + beresp.http.age + ", beresp.ttl: " + beresp.ttl );
 
     }
 
 }
 
 ```
+{: class="full-bleed"}
 
 ### Example
 
@@ -93,7 +98,34 @@ The app _pollux_ generates complete web pages meant for the end user browser. Th
 
 HTTP/1.1 200 OK
 Date: Sun, 05 Oct 2014 16:18:54 GMT
-Cache-Control: must-revalidate, channel-maxage=216, group="/pub41", group="/relax-isdans", group="/ece_frontpage", group="/sec71", group="/dashboard", group="/sec25292", group="/art7620213", group="/art7619956", group="/art7620986", group="/art7498595", group="/art7620735", group="/art7619069", group="/art7619936", group="/art7620157", group="/art7619542", group="/art7618923", group="/art7617985", group="/art7617623", group="/art7617283", group="/art7617256", group="/art7617019", group="/art7613958", group="/art7612903", group="/art7615510", group="/art7615883", group="/art7615813", group="/art5520206", group="/art7622276", group="/art7622263", group="/art7622226", group="/art7622224", group="/art7622201", group="/art7622165", group="/art7622067", group="/art7621945", group="/art7621937", group="/art7621892", group="/art7621926", group="/art7621706", group="/art7621476", group="/art7618522", group="/art7621204", group="/art5520202", group="/art7621332", group="/art7621874", group="/art7620605", group="/art7619046", group="/art7620962", group="/art7620562", group="/art7620557", group="/art7620036", group="/art7620014", group="/art7436640", group="/art7621809", group="/art7619526", group="/art7622215", group="/art7622347", group="/art7367496", group="/art7621708", group="/art6456542", group="/art7621547", group="/art7621542", group="/art7619791", group="/art7617979", group="/art7621393", group="/art7619986", group="/art7620883", group="/art7622414", group="/art7621772", group="/art7619994", group="/art7619234", group="/art5520191", group="/art7617945", group="/art7618720", group="/art7621635", group="/art7617936", group="/art7618688", group="/art7620739", group="/art7620879", group="/art7620237", group="/art7620872"
+Cache-Control: must-revalidate, channel-maxage=216, group="/pub41", 
+group="/relax-isdans", group="/ece_frontpage", group="/sec71", 
+group="/dashboard", group="/sec25292", group="/art7620213", 
+group="/art7619956", group="/art7620986", group="/art7498595", 
+group="/art7620735", group="/art7619069", group="/art7619936", 
+group="/art7620157", group="/art7619542", group="/art7618923", 
+group="/art7617985", group="/art7617623", group="/art7617283", 
+group="/art7617256", group="/art7617019", group="/art7613958", 
+group="/art7612903", group="/art7615510", group="/art7615883", 
+group="/art7615813", group="/art5520206", group="/art7622276", 
+group="/art7622263", group="/art7622226", group="/art7622224", 
+group="/art7622201", group="/art7622165", group="/art7622067", 
+group="/art7621945", group="/art7621937", group="/art7621892", 
+group="/art7621926", group="/art7621706", group="/art7621476", 
+group="/art7618522", group="/art7621204", group="/art5520202", 
+group="/art7621332", group="/art7621874", group="/art7620605", 
+group="/art7619046", group="/art7620962", group="/art7620562", 
+group="/art7620557", group="/art7620036", group="/art7620014", 
+group="/art7436640", group="/art7621809", group="/art7619526", 
+group="/art7622215", group="/art7622347", group="/art7367496", 
+group="/art7621708", group="/art6456542", group="/art7621547", 
+group="/art7621542", group="/art7619791", group="/art7617979", 
+group="/art7621393", group="/art7619986", group="/art7620883", 
+group="/art7622414", group="/art7621772", group="/art7619994", 
+group="/art7619234", group="/art5520191", group="/art7617945", 
+group="/art7618720", group="/art7621635", group="/art7617936", 
+group="/art7618688", group="/art7620739", group="/art7620879", 
+group="/art7620237", group="/art7620872"
 X-Cache-Status: [ normal ; ]
 X-Trace-App: [ pollux ; $host ; Sun, 05 Oct 2014 16:18:54 GMT ] [ acpcomposer ; $host ; Sun, 05 Oct 2014 12:10:14 GMT ] [ acpece4 ; $host ; Sun, 05 Oct 2014 12:10:14 GMT ] [ relax ; $host ; Sun Oct 05 14:10:12 CEST 2014 ]
 Surrogate-Control: ESI/1.0
@@ -101,6 +133,7 @@ Content-Type: text/html; charset=UTF-8
 Transfer-Encoding: chunked
 
 ```
+{: class="full-bleed"}
 
 We see the channel-maxage for this object is calculated by Varnish to be 216 seconds, and that is how long it will live in the cache if no purging occurs before that. We also include the _must-revalidate_ keyword for responses meant for browsers, so they will ask varnish on each request. Response headers meant for other apps do not include this.
 
@@ -115,22 +148,23 @@ Here's the Varnish VCL code to allow PURGE requests to softban[[5]](#5) objects 
 ```c
 
 sub vcl_recv {
-if (req.request == "PURGE") {
-if (!client.ip ~ purge) {
-error 405 "Not allowed.";
-}
-softban("obj.http.Cache-Control ~ group=" + {"""} + req.url + {"""});
-error 200 "Purged.";
-}
+  if (req.request == "PURGE") {
+    if (!client.ip ~ purge) {
+      error 405 "Not allowed.";
+    }
+    softban("obj.http.Cache-Control ~ group=" + {"""} + req.url + {"""});
+    error 200 "Purged.";
+  }
 }
 
 ```
+{: class="full-bleed"}
 
 The implementation and use of this feature is in essence the varnish-cc daemon doing curl on the varnish servers with the HTTP method set to PURGE with the name of the group we want to purge in the path.
 
 The whole chain from backend system registering that someone is editing an object, to the varnish cache being invalidated look like this:
 
-<img src="../../../images/arch_exp.001_s.jpg" width="800" height="384" alt="Cache invalidation architecture"/>
+<img src="/assets/images/arch_exp.001_s.jpg" width="800" height="384" alt="Cache invalidation architecture"/>
 
 The app itself will send a HTTP message to Atomizer [[6]](#6) saying that a certain cache-control group should be invalidated. Atomizer (open sourced by us, under the Apache license) persists this in a MongoDB database. The atom feed that Atomizer produces is a 30 second rolling window of cache invalidation events, which atomizer-cc (a perl script, of all things) reads and sends PURGE requests to varnish instances. One varnish cc for each varnish instance is required in this setup. Varnish CC also holds some state internally to make sure that we don't purge objects that just have been purged, via timestamps but it is quite simple (if you can call anything written in Perl simple, that is).
 

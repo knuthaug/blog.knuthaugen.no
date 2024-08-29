@@ -18,9 +18,9 @@ Developers used to relational databases have been using ORMs for a long time to 
 
 ### MongoDB Java Driver
 
-10Gen java driver basically gives you to options when storing data in MongoDB: Either subclass **BasicDBObject** which is the general database object, or implement the **DBObject** interface. Both approaches gives you the interface of **Map** from the standard java library and lets you put and get keys and values. The drawback is that there are a lot of methods in this interface and it will soon become tedious to implement them all for different domain objects. This it the **DBObject** interface methods:
+10Gen java driver basically gives you to options when storing data in MongoDB: Either subclass `BasicDBObject` which is the general database object, or implement the `DBObject` interface. Both approaches gives you the interface of `Map` from the standard java library and lets you put and get keys and values. The drawback is that there are a lot of methods in this interface and it will soon become tedious to implement them all for different domain objects. This it the `DBObject` interface methods:
 
-````java
+```java
     public Object put(String s, Object o) { }
 
     public void putAll(DBObject dbObject) { }
@@ -44,10 +44,11 @@ Developers used to relational databases have been using ORMs for a long time to 
     public boolean isPartialObject() {}
 
 ```
+{: class="full-bleed"}
 
-So I'd prefer to subclass **BasicDBObject** instead or wrap it.
+So I'd prefer to subclass `BasicDBObject` instead or wrap it.
 
-```javang it look like? Assume the very minimal domain objects **Person** and **Address**
+What will it look like? Assume the very minimal domain objects `Person` and `Address`
 
 ```java
 package no.kh.mongo.direct;
@@ -66,7 +67,8 @@ public class Person extends BasicDBObject {
 }
 
 ```
-```java
+{: class="full-bleed}
+
 
 ```java
 package no.kh.mongo.direct;
@@ -90,8 +92,9 @@ public class Address extends BasicDBObject {
 
 }
 ```
+{: class="full-bleed}
 
-```javadone like this in the form of functional/integration tests, since they touch the database but written in Junit:
+done like this in the form of functional/integration tests, since they touch the database but written in Junit:
 
 ```java
 package no.kh.mongo.direct;
@@ -165,11 +168,12 @@ public class PersonPersistance {
 
 }
 ```
+{: class="full-bleed}
 
-Notice the call to **setObjectClass()** on the collection object to get "type-safe" operations even though you still have to cast the return value from **findOne()** to get you precious object back. Other than that it is pretty straight forward. Call **insert()** on the collection to insert an object, **findOne()** or any other query method to retrieve it. But to the bottom line is this driver really begs for some more abstraction when you're beyond toy samples. The positive effect is more direct access to the data which is often the way it's done in dynamic languages. But does that suit Java? I'm not sure but tend to think no. And how about those nulls? Well, if one object doesn't store a value in a field, the field is null when returned from the database, as you can see from the test **personWithDocumentNotMatchingObject**.
+Notice the call to `setObjectClass()` on the collection object to get "type-safe" operations even though you still have to cast the return value from `findOne()` to get you precious object back. Other than that it is pretty straight forward. Call `insert()` on the collection to insert an object, `findOne()` or any other query method to retrieve it. But to the bottom line is this driver really begs for some more abstraction when you're beyond toy samples. The positive effect is more direct access to the data which is often the way it's done in dynamic languages. But does that suit Java? I'm not sure but tend to think no. And how about those nulls? Well, if one object doesn't store a value in a field, the field is null when returned from the database, as you can see from the test `personWithDocumentNotMatchingObject`.
 
-### Morphia ###
-```javaing to the blurb) a light-weight type-safe mapper for MongoDB providing DAO<T, V> and Datastore abstractions. It takes the annotation approach. Here's our **Person** and **Address** classes for Morphia:
+### Morphia 
+Morphia is (according ing to the blurb) a light-weight type-safe mapper for MongoDB providing DAO<T, V> and Datastore abstractions. It takes the annotation approach. Here's our `Person` and `Address` classes for Morphia:
 
 ```java
 package no.kh.mongo.morphia;
@@ -218,7 +222,8 @@ public class Person {
 
 }
 ```
-```java
+{: class="full-bleed"}
+
 
 ```java
 package no.kh.mongo.morphia;
@@ -244,8 +249,9 @@ public class Address {
 
 }
 ```
+{: class="full-bleed"}
 
-```javaotated as an *embedded* object. This is the same approach taken by the ruby Mongo_Mapper with its MongoMapper::Document and MongoMapper::EmbeddedDocument classes.
+Annotated as an *embedded* object. This is the same approach taken by the ruby Mongo_Mapper with its MongoMapper::Document and MongoMapper::EmbeddedDocument classes.
 
 ```java
 package no.kh.mongo.morphia;
@@ -311,11 +317,12 @@ public class PersistanceThroughMorphia {
 
 }
 ```
+{: class="full-bleed"}
 
-It seems like something out of the department of redundancy department that you annotate the document and the embedded document and then have to specify the relationship between them in a method call. My first reaction was that that would have been cleaner if the relationship could be specified in the annotation too. The calls to **morph.toDBObject()** and **morph.fromDBObject()** breaks up an otherwise elegant solution. It also introduces some more code and it basically wraps up a cast. That could have been a lot cleaner.
+It seems like something out of the department of redundancy department that you annotate the document and the embedded document and then have to specify the relationship between them in a method call. My first reaction was that that would have been cleaner if the relationship could be specified in the annotation too. The calls to `morph.toDBObject()` and `morph.fromDBObject()` breaks up an otherwise elegant solution. It also introduces some more code and it basically wraps up a cast. That could have been a lot cleaner.
 
-### Mungbean ###
-```java contestant and represents a third way of doing the mapping. It wraps up *everything* you need for accessing MongoDB with generic collection classes and introduces a DSL for querys and the like. There's also a clojure version if that is more like your poison. The domain classes with mungbean:
+### Mungbean 
+Mungbean is our latest contestant and represents a third way of doing the mapping. It wraps up *everything* you need for accessing MongoDB with generic collection classes and introduces a DSL for querys and the like. There's also a clojure version if that is more like your poison. The domain classes with mungbean:
 
 ```java
 package no.kh.mongo.mungbean;
@@ -343,8 +350,9 @@ public class Address {
 
 }
 ```
+{: class="full-bleed"}
 
-```java, no imports and no annotations. (Almost the) Same with Person except for the import and field of type **ObjectID** which handles the object ids generated by mongo on insert:
+Nothing special here, no imports and no annotations. (Almost the) Same with Person except for the import and field of type `ObjectID` which handles the object ids generated by mongo on insert:
 
 ```java
 package no.kh.mongo.mungbean;
@@ -371,7 +379,7 @@ public class Person {
 }
 ```
 
-```javar hand, creates a very different looking code than the other two, thanks to the wrapper classes for mongodb connections, the generic collections and the query DSL:
+Using it on the other hand, creates a very different looking code than the other two, thanks to the wrapper classes for mongodb connections, the generic collections and the query DSL:
 
 ```java
 package no.kh.mongo.mungbean;
@@ -429,6 +437,7 @@ public class mungbeanPersistence {
 }
 
 ```
+{: class="full-bleed"}
 
 The syntax is nice but perhaps a tad verbose for mye taste. I find the abstraction quite good, at least better than the other two. I also like the fact that there is almost no trace of the library in the domain classes and as such it is by far the best of the three.
 
@@ -437,4 +446,4 @@ The syntax is nice but perhaps a tad verbose for mye taste. I find the abstracti
 It's Mungbean, by a nose! Mainly because of the cleaner domain objects and the DSL. There is more code involved but I found it to be more elegant than the other approaches. I want to note that both morphia and mungbean are not immensely mature and *done* by any definition of the word and that has to come into consideration when using them. And it may be that a wordy statically typed language like Java has a bit of friction with a very dynamic database backend like MongoDB. I don't know, but I'll be looking into ruby drivers in the future and we'll see.
 
 I haven't looked into the different code generation frameworks for mongo, namely [Sculptor](http://java.dzone.com/articles/using-mongodb-sculptor) and [GuicyData](http://github.com/mattinsler/com.lowereast.guiceymongo/) which take a different approach to accessing MongoDB. That's for another time and another post.
-````
+

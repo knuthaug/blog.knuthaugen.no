@@ -11,7 +11,7 @@ I had a small function to read property files and splitting each line in a key a
 
 ```bash
 for line in $(< ${file}); do
-echo ${line}
+  echo ${line}
 done
 ```
 {: class="full-bleed"}
@@ -23,7 +23,7 @@ prev_ifs=${IFS}
 IFS=''
 
 for line in $(< ${file}); do
-echo ${line}
+  echo ${line}
 done
 
 IFS=${prev_ifs}
@@ -37,7 +37,7 @@ This code works fine without any IFS twiddling, though:
 ```bash
 
 while read -r line; do
-echo ${line}
+  echo ${line}
 done < "$file"
 
 ```

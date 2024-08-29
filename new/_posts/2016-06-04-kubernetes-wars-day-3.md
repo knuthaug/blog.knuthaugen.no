@@ -16,7 +16,7 @@ _Operation k8s log, day 3 1300 Zulu_
 Day three and we have treated the wounded and regrouped after our initial encounter with the enemy.
 There are yaks everywhere, get your razors ready, boys!
 
-## Config
+### Config
 
 How to deal with configuration? Kubernetes likes app config in environment variables, not config files. This is easy in our node apps using convict, pretty easy in our ruby apps and ranging from relatively easy to bloody hard in our java apps. But how to get config into the replication controllers? We opted for using configmaps (a kubernetes object) to store the config, reference the variables from the rc files and maintain it in git controlled files. So when we want to change to app config, update the config files and run a script which updates the configmap and reloads all the pods for the app. Incidentally, the way we do that, is to delete them, and let kubernetes recreate them. Don't do this if you run one cluster ;-) We _should_ make the apps read the config automatically, but since none our apps do that, we needed a solution that works now.
 
@@ -28,7 +28,7 @@ The deploy script which either creates everything on the first deploy (from yaml
 
 <style> code.language-bash { font-size: 70% }</style>
 
-````bash
+```bash
 #!/bin/bash
 
 . /usr/local/amedia-tools/dev/dev_functions.sh
@@ -164,6 +164,7 @@ fi
 
 report_deploy $env $app $version
 ```
+{: class="full-bleed"}
 
 And then the script for _just_ updating the config of an app, without deploying anything.
 
@@ -291,10 +292,11 @@ fi
 rm ${configmap_file}
 
 ```
+{: class="full-bleed"}
 
 (Yeah, it could do with some refactoring)
 
-## Container Metrics
+### Container Metrics
 
 The question that popped up was: when do we know the cluster is running out of resources, and preferably _before_ the deploy fails with events saying you're shit out of memory or cpu? Container metrics to the rescue.
 
@@ -303,4 +305,4 @@ We have a existing metric system backed in graphite which has worked well for us
 Next time on the kubernetes wars: the curious case of the slow node apps.
 
 _End log Operation k8s, day 3_
-````
+

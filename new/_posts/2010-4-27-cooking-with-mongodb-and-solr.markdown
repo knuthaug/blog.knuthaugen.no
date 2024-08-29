@@ -46,7 +46,7 @@ Both Solr and MongoDB are _fast and easy_ to work with. There is very little in 
 
 I created a very thin layer between mongodb and the domain, with an `insert()` method (which as we will see, also handles updates) that take a `DataRecord` (read from the file) as an argument.
 
-````php
+```php
 
 public function insert(DataRecord $record) {
        $this->collection->update(array('id' => $record->id() ),
@@ -56,11 +56,13 @@ public function insert(DataRecord $record) {
 }
 
 ```
+{: class="full-bleed"}
 
 This will insert a document in the collection if it's not there. When it is there, it will add an element to the (nested) 'list' element with the value of `$record->year()` as key. The value will be the value of `$record->getDetails()`. The `toArray()` call is there because the mongo driver expects arrays to store. The super cool part is that if the key exists, it will just be updated with the data from the details object. Read more on the details of the [MongoDB update options](http://www.mongodb.org/display/DOCS/Updating).
 
 For indexing the document in Solr, I added a similarly thin wrapper for the SolrClient object with an `index()` method. This method takes a `SolrInputDocument` as an argument. I chose to delegate to the domain object to decide what should be indexed and thus create the index document object but the responsibilities could easily have switched around. The finer point is that when indexing you have to read the complete object from the database in order to get all data. The DataRecord that was read from file and stored with upsert may just have been part of the picture. Reading back the updated object incurs a performance penalty that wasn't present in the old system. It was also a consequence of structuring the data as a collection of person objects in Mongodb, rather than a long list of records in the old version. This maps better to the domain.
-```php
+
+
 ```php
 
 public function index(SolrInputDocument $document) {
@@ -76,10 +78,12 @@ public function index(SolrInputDocument $document) {
     }
 
 ```
+{: class="full-bleed"}
 
 Commit on every Solr document makes indexing very slow. Small tests indicated 3 minutes for indexing 5000 documents with commit on every submit and 15 seconds with one commit every 2000 document (and at the end of course). The code above commits every `$commitInterval`(10000 default) to speed things up a bit. Note also that the `commit()` and `optimize()` calls for Solr may time out as they can take a long time to finish. Solr does not time out but rather the java application server you're running times out. When this happens an exception is thrown in the php driver which has to be caught.
 
 ### The Results
+
 Platform is Ubuntu 9.10 server edition 64 bit and all timings from the shell are done with `time` on linux. MySQL times are the times reported from MySQL itself.
 
 ### Time for batch insert/update
@@ -88,7 +92,7 @@ Platform is Ubuntu 9.10 server edition 64 bit and all timings from the shell are
 * update-logging for Solr turned off (default is very verbose)
 * nssize=1024 for Mongodb
 
-<table class="blogtable" width="100%">
+<table width="100%">
  <thead>
 <tr>
   <th>System</th>
@@ -189,4 +193,4 @@ When importing to MySQL it more or less maxes on CPU for the entire import. When
 
 Solr and mongodb seem to be a bit more sloppy with their space usage than MySQL but I guess this is the price to pay for some of the other benefits you get. See [mongo faq on data files](http://www.mongodb.org/display/DOCS/Developer+FAQ#DeveloperFAQ-Whyaremydatafilessolarge?) for info on how to see real space usage for databases and not just file sizes. In return for more storage space spent, you get _much_ better search capabilities (and faster) and faster (although small improvement) query times against database.
 
-````
+

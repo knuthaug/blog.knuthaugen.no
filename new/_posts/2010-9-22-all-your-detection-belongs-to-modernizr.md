@@ -13,18 +13,36 @@ I'll hopefully be doing some HTML5 work soon and I came across the
 
 Load it like this:
 
-````html
+```html
 <script src="modernizr-1.5.min.js" type="text/javascript" charset="utf-8"
-```javascript ``` and the next time you need to know it some feature is
-supported, check the automagically created Modernizr object and see if that
-property is true or false: ```javascript if (Modernizr.canvas) { var c =
-document.createElement('canvas'); } ``` As a nice bonus it assigns css classes
-to the <code>html</code> element so you can do different styling based on
-whether a feature is available or not. ```css /* In your CSS: */ .no-audio
-#audio { display: none; /* Don't show Audio options */ } .audio #audio button {
-/* Style the Play and Pause buttons nicely */ } ```
-````
+```
+{: class="full-bleed"}
 
-```css
+ and the next time you need to know it some feature is
+supported, check the automagically created Modernizr object and see if that
+property is true or false: 
+
+```javascript 
+if (Modernizr.canvas) { var c =
+document.createElement('canvas'); } 
+``` 
+{: class="full-bleed"}
+
+As a nice bonus it assigns css classes
+to the <code>html</code> element so you can do different styling based on
+whether a feature is available or not. 
+
+```css 
+/* In your CSS: */ 
+.no-audio
+#audio { 
+    display: none; /* Don't show Audio options */ 
+} 
+.audio #audio button {
+  /* Style the Play and Pause buttons nicely */ 
+  }
 
 ```
+{: class="full-bleed"}
+
+
