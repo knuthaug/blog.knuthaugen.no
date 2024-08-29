@@ -12,20 +12,26 @@ The following setup was used in this little adventure:
 	<li>Ubuntu 9.04 (as X client only)</li>
 	<li>Xorg server 1.5.7 with Xkb packages running in cygwin.</li>
 </ul>
-<h2>Caps lock remapping</h2>
+
+### Caps lock remapping
 The caps lock key is irritating and I've never used as far as I can tell. But I haven't gotten around to doing anything about it. Now's the time. First I thought about remapping it to control and binding a lot the characters I want more accessible to ctrl+ bindings. This messes with application shortcuts a lot so I went for altGr instead. I used a small program named <a href="http://webpages.charter.net/krumsick/">KeyTweak</a> to perform the binding. The result of running that program is that i new value is written to the registry. It looks like this:
-<pre class="brush: bash">
+
+```bash
 Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
 
 "Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,38,e0,3a,00,00,00,00,00
-</pre>
+```
+{: class="full-bleed"}
 
 Either apply the file or do it from within KeyTweak and the caps lock key is now an AltGr key. A reboot is probably in order to put it into effect. It is windows, after all.
-<h2>Keyboard layout for windows</h2>
+
+### Keyboard layout for windows
 I used a Microsoft tool called <a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=8be579aa-780d-4253-9e0a-e17e51db2223&amp;DisplayLang=en">Microsoft Keyboard Layout Creator</a> which is a nice tool for creating a new layout from scratch or basing it on an existing layout. It has some limitations however in that you can't remap things like caps lock and the windows key. But on the other hand it generates nice install packages for your keyboard layout. I decided on the following keyboard shortcuts (remember caps lock is now AltGr so it is easily available for the left pinky finger):
-<pre class="brush: bash">
+
+```bash
+
 	AltGr+a = !
 	AltGr+s = #
 	AltGr+d = @
@@ -41,9 +47,10 @@ I used a Microsoft tool called <a href="http://www.microsoft.com/downloads/detai
 	AltGr+i = [
 	AltGr+o = ]
 	AltGr+p = }
-</pre>
+```
+{: class="full-bleed"}
 
-<h2>Keyboard layout for linux/ Xorg</h2>
+### Keyboard layout for linux/ Xorg
 When applying the custom layout for windows this worked well for native windows apps, but when logging into the linux servers and X-forwarding apps to the cygwin X server, it naturally didn't work. A similar custom keyboard layout for the X server was needed.
 
 I found a great <a href="http://hektor.umcs.lublin.pl/~mikosmul/computing/articles/custom-keyboard-layouts-xkb.html">detailed guide</a> on creating keyboad layouts for X11/Xorg with XKB. There are some steps involved:
@@ -54,11 +61,13 @@ I found a great <a href="http://hektor.umcs.lublin.pl/~mikosmul/computing/articl
 	<li>Restart your X server and use <code>setxkbmap</code> to set it, or add it in xorg.conf</li>
 </ol>
 The interesting parts of the symbols file looks like this:
-<pre class="brush: bash">
-key { [	u,	U,	braceleft,		uparrow ] };
+
+```bash
+key { [	u,	U,	braceleft,	uparrow ] };
 key { [	i,	I, 	bracketleft,	idotless ] };
 key { [	o,	O,	bracketright,	Ooblique ] };
-</pre>
+```
+{: class="full-bleed"}
 
 This snippet maps e.g. AltGr+u to braceleft which displays a nice left curly brace.
 The format is broken down like this:

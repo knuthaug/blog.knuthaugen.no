@@ -10,7 +10,7 @@ I found two interesting blog posts via Twitter, [Just Interview new Developers](
 
 Both posts cover this from the viewpoint of the potential employer but I can see just as much value for the employee. When interviewing for a new job you rarely get an accurate view of how the company really is through the interview. The reality really dawns on you a couple of months into the job. My (somewhat limited) experience with interviews is that they are very rarely used to dig deep enough, both from the standpoint of the employer and the employee. But we should! Hiring the wrong people is expensive for the company and choosing to work for the wrong company is just waste of time for an employee. Or worse.
 
-###The Questions to Ask
+### The Questions to Ask
 
 If I where to look for a new job I would milk the interview for all it's worth and use it to see what kind of company I'm dealing with. 
 

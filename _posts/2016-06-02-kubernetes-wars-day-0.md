@@ -2,16 +2,14 @@
 layout: post
 title: "The Kubernetes Wars: Day 0"
 published: true
-tags: [Kubernetes,Devops,Ops,Skydns,Docker]
+tags: [Kubernetes, Devops, Ops, Skydns, Docker]
 ---
-
-{% include JB/setup %}
 
 #### Other post in the series
 
-- [Kubernetes Wars Day 3](/2016/06/kubernetes-wars-day-3.html)
-- [Kubernetes Wars Day 7](/2016/06/kubernetes-wars-day-7.html)
-- [Kubernetes Wars Day 34](/2016/12/the-kubernetes-wars-day-34.html)
+- [Kubernetes Wars Day 3](/2016/06/04/kubernetes-wars-day-3.html)
+- [Kubernetes Wars Day 7](/2016/06/12/kubernetes-wars-day-7.html)
+- [Kubernetes Wars Day 34](/2016/12/25/the-kubernetes-wars-day-34.html)
 
 _Operation k8s log, day 0 1100 Zulu_
 
@@ -47,23 +45,29 @@ The result was actually two scripts.
 
 ````bash
 osl2:
-NAME        DESIRED   CURRENT   AGE       CONTAINER(S)   IMAGE(S)                           SELECTOR
-manifesto   1         1         44d       manifesto      dr.api.no/amedia/manifesto:0.0.3   name=manifesto
-NAME              READY     STATUS    RESTARTS   AGE       NODE
-manifesto-lxf9x   1/1       Running   3          15d       docker006-osl2
------------------------------------
+NAME DESIRED CURRENT AGE CONTAINER(S) IMAGE(S) SELECTOR
+manifesto 1 1 44d manifesto dr.api.no/amedia/manifesto:0.0.3 name=manifesto
+NAME READY STATUS RESTARTS AGE NODE
+manifesto-lxf9x 1/1 Running 3 15d docker006-osl2
+
+---
+
 osl3:
-NAME        DESIRED   CURRENT   AGE       CONTAINER(S)   IMAGE(S)                           SELECTOR
-manifesto   1         1         44d       manifesto      dr.api.no/amedia/manifesto:0.0.3   name=manifesto
-NAME              READY     STATUS    RESTARTS   AGE       NODE
-manifesto-uwu4l   1/1       Running   0          2d        docker009-osl3
------------------------------------
+NAME DESIRED CURRENT AGE CONTAINER(S) IMAGE(S) SELECTOR
+manifesto 1 1 44d manifesto dr.api.no/amedia/manifesto:0.0.3 name=manifesto
+NAME READY STATUS RESTARTS AGE NODE
+manifesto-uwu4l 1/1 Running 0 2d docker009-osl3
+
+---
+
 ksd1:
-NAME        DESIRED   CURRENT   AGE       CONTAINER(S)   IMAGE(S)                           SELECTOR
-manifesto   1         1         44d       manifesto      dr.api.no/amedia/manifesto:0.0.3   name=manifesto
-NAME              READY     STATUS    RESTARTS   AGE       NODE
-manifesto-8q4f7   1/1       Running   0          16d       docker008-ksd1
------------------------------------
+NAME DESIRED CURRENT AGE CONTAINER(S) IMAGE(S) SELECTOR
+manifesto 1 1 44d manifesto dr.api.no/amedia/manifesto:0.0.3 name=manifesto
+NAME READY STATUS RESTARTS AGE NODE
+manifesto-8q4f7 1/1 Running 0 16d docker008-ksd1
+
+---
+
 ```
 
 ```bash
@@ -73,32 +77,33 @@ kubectl="/usr/local/bin/kubectl"
 kube_opt="--kubeconfig=/etc/kubernetes/config"
 
 if [ -z $1 ]; then
-    echo "usage: k8sstatus APP ENV"
-    echo "Display status for an app, both Replication controller and pods"
-    exit 1
+echo "usage: k8sstatus APP ENV"
+echo "Display status for an app, both Replication controller and pods"
+exit 1
 fi
 
 app=$1
 
 if [ ! -z $2 ]; then
-    env=$2
+env=$2
 fi
 
 function list_pods() {
-    app=$1
-    cluster=$2
-    namespace=$3
+app=$1
+cluster=$2
+namespace=$3
 
     ${kubectl} ${kube_opt} get pods --cluster=${cluster} --namespace=${namespace} -o wide
     echo "-----------------------------------"
+
 }
 
 #default is prod
-if [[ -z ${env} || ${env} == prod* ]]; then
-    namespace=${app}
+if [[-z ${env} || ${env} == prod*]]; then
+namespace=${app}
     echo "osl2: "
     ${kubectl} ${kube_opt} get rc --cluster=osl2 --namespace=${namespace} ${app} -o wide
-    list_pods ${app} osl2 ${namespace}
+list_pods ${app} osl2 ${namespace}
 
     echo "osl3: "
     ${kubectl} ${kube_opt} get rc --cluster=osl3 --namespace=${namespace} ${app} -o wide
@@ -107,14 +112,15 @@ if [[ -z ${env} || ${env} == prod* ]]; then
     echo "ksd1: "
     ${kubectl} ${kube_opt} get rc --cluster=ksd1 --namespace=${namespace} ${app} -o wide
     list_pods ${app} ksd1 ${namespace}
+
 elif [ ${env} == "test" ]; then
-    namespace=${app}
+namespace=${app}
     ${kubectl} ${kube_opt} get rc --cluster=test --namespace=${namespace} ${app} -o wide
     list_pods ${app} test ${namespace}
 else
     namespace="${app}-${env}"
     ${kubectl} ${kube_opt} get rc --cluster=snapshot --namespace=${namespace} ${app} -o wide
-    list_pods ${app} snapshot ${namespace}
+list_pods ${app} snapshot ${namespace}
 fi
 ```
 
@@ -138,9 +144,9 @@ kubectl="/usr/local/bin/kubectl"
 kube_opt="--kubeconfig=/etc/kubernetes/config"
 
 if [ -z $1 ]; then
-    echo "usage: k8sping APP ENV"
-    echo "Ping application ping endpoint the pods, all instances."
-  exit 1
+echo "usage: k8sping APP ENV"
+echo "Ping application ping endpoint the pods, all instances."
+exit 1
 fi
 
 app=$1
@@ -151,8 +157,8 @@ port=$(port_for_app $app)
 #echo "Deploying $app $version on jump.api.no"
 
 function ping_app() {
-    local dc=$1
-    local app=$2
+local dc=$1
+local app=$2
 
     IFS=$'\n'
     ips=($(${kubectl} ${kube_opt} get pods --cluster=${dc} --namespace=${namespace} -o yaml | grep -i podip | cut -f2 -d: | sed 's/\s//g'))
@@ -163,17 +169,17 @@ function ping_app() {
 
 }
 
-if [[ ${env} == prod* ]]; then
-    namespace=${app}
+if [[${env} == prod*]]; then
+namespace=${app}
     for dc in osl2 osl3 ksd1; do
         ping_app ${dc} ${app}
     done
 elif [ ${env} == "test" ]; then
     namespace=${app}
-    ping_app ${env} ${app}
+ping_app ${env} ${app}
 else
     namespace="${app}-${env}"
-    ping_app snapshot ${app}
+ping_app snapshot ${app}
 fi
 ```
 
@@ -182,6 +188,4 @@ Kubectl command output is a joy to parse. Everything (well, almost everything) m
 That's enough for one day, this is Gordon, signing off :-)
 
 _End log Operation k8s, day 0_
-
-
 ````

@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: "Continuous Delivery I: Pipeline Plugin and a Ruby Project"
 mt_id: 38
@@ -77,6 +77,7 @@ namespace :jenkins do
 
 end
 ```
+{: class="full-bleed"}
 
 It does some setup of of report output directories, some setup of ci_reporter in the :setup task and makes sure rspec tasks does some setup first. The tasks called from jenkins are jenkins:unit for the first build step and jenkins:functional for the second step. The jenkins:ci task is an all in one if that's your bag. The main point is that the first step runs unit test, hence rake:spec:lib only, and the second step runs all tests and metrics. Ideally if the metric_fu plugin in Jenkins had supported bundler well, I would like to run some metrics in the first step and fail the build if values where below or above a limit. But that does not seem to fly easily.
 
@@ -88,7 +89,7 @@ If the first step fails you get unit level and metric violations feedback. If th
 
 The [build pipeline plugin](http://code.google.com/p/build-pipeline-plugin/) basically gives you a view and a(nother) way of specifying upstream/downstream projects. The view looks like this after it is configured according to [this article](http://www.wakaleo.com/blog/312-build-pipelines-with-jenkinshudson) with the four build steps in place.
 
-<img src="/images/jenkinspipe.png" width="600" height="228" alt="Jenkins pipeline" class="mt-image-none" style="" />
+<img src="/assets/images/jenkinspipe.png" width="600" height="228" alt="Jenkins pipeline" class="mt-image-none" style="" />
 
 The build pipeline plugin is in version 1.0.0 and has some major drawbacks. The main one being that it doesn't stop the pipeline when one step fails. This is a bug and it has been reported on the issue tracker already. I would guess this is fixed in the next release. Another is that it does not seem to be easy to pass params from one build step to the next. There has been some mention of using the parameterized build plugin for that, but haven't had a chance to test it yet and I don't know how well the two plugins play well together.
 
@@ -102,6 +103,4 @@ The fourth step deploys to heroku via a script and runs the same smoke test as t
 
 The biggest benefit of using a pipeline is more fine grained feedback on the build process. The compile step is fast and fails almost immediately. The separate steps for integration tests and deployment to test server and heroku gives more accurate feedback on those steps too. I mean, combining deployment to test and production in a single step would be nonsensical. And you can do the deployment to production (or test) a manual one, which the plugin supports. For instance only after manual testing in the test environment. Combined with Jenkins' matrix style security model you can grant access to certain users for running that build step. There are a lot of possibilities and I will be exploring more of them in part three of the series. Part two is implementation of the smoke tests in ruby.
 
-```
 
-```

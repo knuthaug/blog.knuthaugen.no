@@ -2,12 +2,11 @@
 layout: post
 title: "Talk Friday: Microservice Architecture"
 published: true
-tags: [javazone,microservices,neal ford,architecture]
+tags: [javazone, microservices, neal ford, architecture]
 ---
-{% include JB/setup %}
 
 I quick post recommending a good talk on microservice architecture by Neal Ford from the JavaZone conference
-last year. He touches on the implications of a microservice architecture and the how and why of it. Lots of details and a broad coverage, delivered in usual neal Ford style. Worth a watch if you're about to jump on the microservice bandwagon. 
+last year. He touches on the implications of a microservice architecture and the how and why of it. Lots of details and a broad coverage, delivered in usual neal Ford style. Worth a watch if you're about to jump on the microservice bandwagon.
 
 Why this talk now? Because I just saw it now ;-)
 

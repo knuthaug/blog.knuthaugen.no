@@ -5,7 +5,7 @@ mt_id: 3
 date: 2009-09-15 10:08:32 +02:00
 ---
  This is a list of all the books I've read that are in some way related to programming and software development, along with some thoughts on them.
-<h2>Languages</h2>
+### Languages
 <ul>
 	<li><a href="http://www.amazon.co.uk/Ruby-Programming-Language-David-Flanagan/dp/0596516177">The Ruby Programming Language</a> by David Flanagan and Yukihiro Matsumoto. Really a comprehensive guide to Ruby 1.8 and Ruby 1.9, but not a "how-to program" type of book. Simply wonderful information density and one of the clearest programming books I've read in a long time.</li>
 	<li>Programming C# 3.0</li>
@@ -22,7 +22,7 @@ date: 2009-09-15 10:08:32 +02:00
 	<li>Ansi Common Lisp by Paul Graham. I would say this book can be compared to Kernigan & Ritchie's The C Programming Language. More parenthesis, though.</li>
 	<li>XSLT 2.0 by Michael Kay. Handy reference for those times when there's no way to escape XSLT. </li>
 </ul>
-<h2>Methodology</h2>
+### Methodology
 <ul>
 	<li>Agile Software Development with Scrum By Ken Schwaber</li>
 	<li><a title="amazon: Agile estimating and planning" href="http://www.amazon.co.uk/Agile-Estimating-Planning-Robert-Martin/dp/0131479415/">Agile Estimating and planning</a> by Mike Cohn. A very nice book covering a lot of nooks and crannies regarding estimating and planning agile software development. I would say a must for all people involved in agile projects.</li>
@@ -41,13 +41,13 @@ date: 2009-09-15 10:08:32 +02:00
 	<li>Extreme Programming explained by Kent Beck</li>
 	<li><a href="http://www.amazon.co.uk/Software-Development-Principles-Patterns-Practices/dp/0135974445/ref=sr_1_3?ie=UTF8&amp;s=books&amp;qid=1248250805&amp;sr=8-3">Agile Software Development, Principles, Patterns, and Practices</a></li>
 </ul>
-<h2>Design and architecture</h2>
+### Design and architecture
 <ul>
 	<li>Domain-driven Design by Eric Evans</li>
 	<li>Refactoring by Martin Fowler</li>
        <li>Code Complete 2nd ed. by Steve McConnell</li>
 </ul>
-<h2>Machine learning</h2>
+### Machine learning
 <ul>
 	<li>Data mining by Ian H. Witten and Eibe Frank</li>
 	<li>Data Mining - Concepts and Techniques by Jiawei Han and Micheline Kamber</li>
@@ -57,9 +57,9 @@ date: 2009-09-15 10:08:32 +02:00
 	<li>Neural Networks for Pattern Recognition by Christopher M. Bishop</li>
 	<li>Fuzzy Modeling and Genetic Algorithms for Data Mining and Exploration by Earl Coz</li>
 </ul>
-<h2>Other</h2>
+### Other
 <ul>
-	<li>Applied Cryptography by Bruce Schneier. If you don't know who Bruce Schneier is, take a look at <a href="http://www.schneierfacts.com/"></a>.</li>
+	<li>Applied Cryptography by Bruce Schneier. If you don't know who Bruce Schneier is, take a look at <a href="http://www.schneierfacts.com/">schneierfacts</a>.</li>
 </ul>
 
 <h2>Wish list/future reading</h2>
