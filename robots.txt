@@ -57,5 +57,5 @@ Disallow: /
 User-agent: Webzio-Extended
 Disallow: /
 
-User -agent: YouBot
+User-agent: YouBot
 Disallow: /

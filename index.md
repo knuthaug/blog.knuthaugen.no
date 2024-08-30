@@ -16,7 +16,7 @@ title: All About the code
       <h3>Other recent posts</h3>
       <ul>
       {% else %}
-      <li><span>{{ post.date | date: "%Y-%m-%d" }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+      <li><span>{{ post.date | date: "%Y-%m-%d" }}</span> <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endif %}
   {% endfor %}
   </ul>
