@@ -2,7 +2,7 @@
 layout: post
 title: "Rapid Java Deployment"
 published: true
-tags: [Java, Continuous Delivery, Jenkins, Puppet, Jetty]
+tags: [java, continuous delivery, jenkins, puppet, jetty]
 ---
 
 At my job, Norway's now second largest online (and paper) newspaper company, I have been doing some work to cut down on deployment and delivery times for our java applications, as well as simplifying the procedures involved. Continuous Delivery is a hot buzzword nowadays, along with DevOps and I think we are quite good at the latter, but we needed improvement on the former. Besides, continuous delivery is about continuous improvements to the pipeline too. And we had some stales processes and tools in place.
@@ -84,6 +84,7 @@ update-dev dev0 appname:branch-foo:21451a
 # script fetches it from there. if revision is omitted, you get HEAD (no pun intended).
 
 ```
+
 {: class="full-bleed"}
 
 The main points here are:
@@ -118,4 +119,3 @@ Updating one app to latest snapshot or release and banning app URLs in Varnish i
 Next up is using the same deployment strategy for all environments, but with a custom rollback feature for production and a wait strategy between servers. We thinking about extending this to not wait a certain amount of time, but rather monitor Varnish and move on once the backend is reported as up, and answering requests. Also, a wrapper script to be called from Jenkins for deploying to stage, run smoke tests, await result and deploy to prod if all is well is planned. And of course, no varnish flushing in production.
 
 All in all, shaving of ~10 minutes of deploy time (this amounts to hours of wait/ineffective time on a busy day) is pretty significant. But the main win is less manual procedures in production, more power to the developers and faster delivery, when we need to.
-

@@ -2,7 +2,7 @@
 layout: post
 title: "Blog Reboot"
 published: true
-tags: [Meta, Jekyll, Git]
+tags: [meta, jekyll, git]
 ---
 
 Firstly, I apologize for resetting the RSS feed for my blog, but that was I am afraid, unavoidable :-)

@@ -3,7 +3,7 @@ layout: post
 title: Cooking with Mongodb and Solr
 mt_id: 30
 date: 2010-04-27 13:46:28 +02:00
-tags: [NoSQL, MongoDB, Solr, Java]
+tags: [nosql, mongodb, solr, java]
 ---
 
 I've recently changed storage backend and search backend for a small web project and it has been a real blast. What follows is an overview of the reasons for the change, what the change actually was and the relative amount of joy involved.
@@ -56,12 +56,12 @@ public function insert(DataRecord $record) {
 }
 
 ```
+
 {: class="full-bleed"}
 
 This will insert a document in the collection if it's not there. When it is there, it will add an element to the (nested) 'list' element with the value of `$record->year()` as key. The value will be the value of `$record->getDetails()`. The `toArray()` call is there because the mongo driver expects arrays to store. The super cool part is that if the key exists, it will just be updated with the data from the details object. Read more on the details of the [MongoDB update options](http://www.mongodb.org/display/DOCS/Updating).
 
 For indexing the document in Solr, I added a similarly thin wrapper for the SolrClient object with an `index()` method. This method takes a `SolrInputDocument` as an argument. I chose to delegate to the domain object to decide what should be indexed and thus create the index document object but the responsibilities could easily have switched around. The finer point is that when indexing you have to read the complete object from the database in order to get all data. The DataRecord that was read from file and stored with upsert may just have been part of the picture. Reading back the updated object incurs a performance penalty that wasn't present in the old system. It was also a consequence of structuring the data as a collection of person objects in Mongodb, rather than a long list of records in the old version. This maps better to the domain.
-
 
 ```php
 
@@ -78,6 +78,7 @@ public function index(SolrInputDocument $document) {
     }
 
 ```
+
 {: class="full-bleed"}
 
 Commit on every Solr document makes indexing very slow. Small tests indicated 3 minutes for indexing 5000 documents with commit on every submit and 15 seconds with one commit every 2000 document (and at the end of course). The code above commits every `$commitInterval`(10000 default) to speed things up a bit. Note also that the `commit()` and `optimize()` calls for Solr may time out as they can take a long time to finish. Solr does not time out but rather the java application server you're running times out. When this happens an exception is thrown in the php driver which has to be caught.
@@ -88,9 +89,9 @@ Platform is Ubuntu 9.10 server edition 64 bit and all timings from the shell are
 
 ### Time for batch insert/update
 
-* Commit interval for solr: 10000
-* update-logging for Solr turned off (default is very verbose)
-* nssize=1024 for Mongodb
+- Commit interval for solr: 10000
+- update-logging for Solr turned off (default is very verbose)
+- nssize=1024 for Mongodb
 
 <table width="100%">
  <thead>
@@ -179,7 +180,6 @@ No pre-allocation was done for MongoDB so it created the data files as needed. T
 <td>4348 MB</td>
   </tr>
 
-
  </tbody>
 </table>
 
@@ -187,10 +187,8 @@ No pre-allocation was done for MongoDB so it created the data files as needed. T
 
 ### CPU usage
 
-When importing to MySQL it more or less maxes on CPU for the entire import. When doing the import with a php script feeding data to mongodb and solr, the component using the most cpu is the php script splitting the file, creating objects and calling the mongodb and solr APIs.This takes up 35-40% CPU and around 10 MB of ram.  Mongodb is using around 10% cpu (with 1.1GB of ram) and solr (tomcat, that is) is spending 30% and around 300MB of ram. Disks on these machines are virtualized, through Vmware, 15K SAS disks on an IBM S3200 storage array with dedicated GB LAN between blade center and storage. Disk IO seems to be the bottleneck here.
+When importing to MySQL it more or less maxes on CPU for the entire import. When doing the import with a php script feeding data to mongodb and solr, the component using the most cpu is the php script splitting the file, creating objects and calling the mongodb and solr APIs.This takes up 35-40% CPU and around 10 MB of ram. Mongodb is using around 10% cpu (with 1.1GB of ram) and solr (tomcat, that is) is spending 30% and around 300MB of ram. Disks on these machines are virtualized, through Vmware, 15K SAS disks on an IBM S3200 storage array with dedicated GB LAN between blade center and storage. Disk IO seems to be the bottleneck here.
 
 ### Space usage
 
 Solr and mongodb seem to be a bit more sloppy with their space usage than MySQL but I guess this is the price to pay for some of the other benefits you get. See [mongo faq on data files](http://www.mongodb.org/display/DOCS/Developer+FAQ#DeveloperFAQ-Whyaremydatafilessolarge?) for info on how to see real space usage for databases and not just file sizes. In return for more storage space spent, you get _much_ better search capabilities (and faster) and faster (although small improvement) query times against database.
-
-

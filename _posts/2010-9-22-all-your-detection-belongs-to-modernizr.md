@@ -3,7 +3,7 @@ layout: post
 title: All Your Detection Belongs to Modernizr
 mt_id: 34
 date: 2010-09-22 12:19:00 +02:00
-tags: [Javascript, CSS, Modernizr]
+tags: [javascript, css, modernizr]
 ---
 
 I'll hopefully be doing some HTML5 work soon and I came across the
@@ -16,33 +16,34 @@ Load it like this:
 ```html
 <script src="modernizr-1.5.min.js" type="text/javascript" charset="utf-8"
 ```
+
 {: class="full-bleed"}
 
- and the next time you need to know it some feature is
+and the next time you need to know it some feature is
 supported, check the automagically created Modernizr object and see if that
-property is true or false: 
+property is true or false:
 
-```javascript 
+```javascript
 if (Modernizr.canvas) { var c =
-document.createElement('canvas'); } 
-``` 
+document.createElement('canvas'); }
+```
+
 {: class="full-bleed"}
 
 As a nice bonus it assigns css classes
 to the <code>html</code> element so you can do different styling based on
-whether a feature is available or not. 
+whether a feature is available or not.
 
-```css 
-/* In your CSS: */ 
+```css
+/* In your CSS: */
 .no-audio
-#audio { 
-    display: none; /* Don't show Audio options */ 
-} 
+#audio {
+    display: none; /* Don't show Audio options */
+}
 .audio #audio button {
-  /* Style the Play and Pause buttons nicely */ 
+  /* Style the Play and Pause buttons nicely */
   }
 
 ```
+
 {: class="full-bleed"}
-
-

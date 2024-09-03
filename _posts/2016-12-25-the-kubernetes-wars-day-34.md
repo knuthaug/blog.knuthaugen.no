@@ -2,7 +2,7 @@
 layout: post
 title: "The Kubernetes Wars: Day 34"
 published: true
-tags: [Kubernetes, Docker, DevOps]
+tags: [kubernetes, docker, devops]
 ---
 
 #### Other post in the series

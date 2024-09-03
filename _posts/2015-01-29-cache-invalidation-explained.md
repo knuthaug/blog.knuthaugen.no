@@ -2,7 +2,7 @@
 layout: post
 title: "Cache invalidation: explained"
 published: true
-tags: [Cache, Varnish, Amedia, Headers, HTTP]
+tags: [cache, varnish, headers, http]
 ---
 
 <p style="width: 75%; margin-left: auto; margin-right: auto;font-size: 150%; font-weight: normal; font-family: times, 'times new roman', serif; font-style: italic; line-height: 130%;">"There are two hard things in computer science: cache invalidation, naming things, and off-by-one errors"</p>
@@ -67,7 +67,7 @@ Varnish does not out of the box use channel-maxage so this is our implementation
 sub vcl_fetch {
 if (beresp.http.cache-control ~ "channel-maxage=[0-9]") {
 
-      set beresp.http.x-channel-maxage = regsub(beresp.http.cache-control, 
+      set beresp.http.x-channel-maxage = regsub(beresp.http.cache-control,
       ".*channel-maxage=([0-9]+).*", "\1");
 
       set beresp.ttl = std.duration(beresp.http.x-channel-maxage + "s", 3666s);
@@ -77,10 +77,10 @@ if (beresp.http.cache-control ~ "channel-maxage=[0-9]") {
       set beresp.ttl = beresp.ttl - std.duration(beresp.http.age + "s" , 0s);
 
       # debug
-      std.log("CC:beresp.ttl before: " + req.http.x-beresp.ttl + 
+      std.log("CC:beresp.ttl before: " + req.http.x-beresp.ttl +
       " beresp.http.age: " + beresp.http.age + " beresp.ttl after: " + beresp.ttl);
-      std.log("CC:channel-maxage found in " + beresp.http.cache-control + 
-      ", duration: " + std.duration(beresp.http.x-channel-maxage + "s", 3666s) + 
+      std.log("CC:channel-maxage found in " + beresp.http.cache-control +
+      ", duration: " + std.duration(beresp.http.x-channel-maxage + "s", 3666s) +
       "Age: " + beresp.http.age + ", beresp.ttl: " + beresp.ttl );
 
     }
@@ -88,6 +88,7 @@ if (beresp.http.cache-control ~ "channel-maxage=[0-9]") {
 }
 
 ```
+
 {: class="full-bleed"}
 
 ### Example
@@ -98,33 +99,33 @@ The app _pollux_ generates complete web pages meant for the end user browser. Th
 
 HTTP/1.1 200 OK
 Date: Sun, 05 Oct 2014 16:18:54 GMT
-Cache-Control: must-revalidate, channel-maxage=216, group="/pub41", 
-group="/relax-isdans", group="/ece_frontpage", group="/sec71", 
-group="/dashboard", group="/sec25292", group="/art7620213", 
-group="/art7619956", group="/art7620986", group="/art7498595", 
-group="/art7620735", group="/art7619069", group="/art7619936", 
-group="/art7620157", group="/art7619542", group="/art7618923", 
-group="/art7617985", group="/art7617623", group="/art7617283", 
-group="/art7617256", group="/art7617019", group="/art7613958", 
-group="/art7612903", group="/art7615510", group="/art7615883", 
-group="/art7615813", group="/art5520206", group="/art7622276", 
-group="/art7622263", group="/art7622226", group="/art7622224", 
-group="/art7622201", group="/art7622165", group="/art7622067", 
-group="/art7621945", group="/art7621937", group="/art7621892", 
-group="/art7621926", group="/art7621706", group="/art7621476", 
-group="/art7618522", group="/art7621204", group="/art5520202", 
-group="/art7621332", group="/art7621874", group="/art7620605", 
-group="/art7619046", group="/art7620962", group="/art7620562", 
-group="/art7620557", group="/art7620036", group="/art7620014", 
-group="/art7436640", group="/art7621809", group="/art7619526", 
-group="/art7622215", group="/art7622347", group="/art7367496", 
-group="/art7621708", group="/art6456542", group="/art7621547", 
-group="/art7621542", group="/art7619791", group="/art7617979", 
-group="/art7621393", group="/art7619986", group="/art7620883", 
-group="/art7622414", group="/art7621772", group="/art7619994", 
-group="/art7619234", group="/art5520191", group="/art7617945", 
-group="/art7618720", group="/art7621635", group="/art7617936", 
-group="/art7618688", group="/art7620739", group="/art7620879", 
+Cache-Control: must-revalidate, channel-maxage=216, group="/pub41",
+group="/relax-isdans", group="/ece_frontpage", group="/sec71",
+group="/dashboard", group="/sec25292", group="/art7620213",
+group="/art7619956", group="/art7620986", group="/art7498595",
+group="/art7620735", group="/art7619069", group="/art7619936",
+group="/art7620157", group="/art7619542", group="/art7618923",
+group="/art7617985", group="/art7617623", group="/art7617283",
+group="/art7617256", group="/art7617019", group="/art7613958",
+group="/art7612903", group="/art7615510", group="/art7615883",
+group="/art7615813", group="/art5520206", group="/art7622276",
+group="/art7622263", group="/art7622226", group="/art7622224",
+group="/art7622201", group="/art7622165", group="/art7622067",
+group="/art7621945", group="/art7621937", group="/art7621892",
+group="/art7621926", group="/art7621706", group="/art7621476",
+group="/art7618522", group="/art7621204", group="/art5520202",
+group="/art7621332", group="/art7621874", group="/art7620605",
+group="/art7619046", group="/art7620962", group="/art7620562",
+group="/art7620557", group="/art7620036", group="/art7620014",
+group="/art7436640", group="/art7621809", group="/art7619526",
+group="/art7622215", group="/art7622347", group="/art7367496",
+group="/art7621708", group="/art6456542", group="/art7621547",
+group="/art7621542", group="/art7619791", group="/art7617979",
+group="/art7621393", group="/art7619986", group="/art7620883",
+group="/art7622414", group="/art7621772", group="/art7619994",
+group="/art7619234", group="/art5520191", group="/art7617945",
+group="/art7618720", group="/art7621635", group="/art7617936",
+group="/art7618688", group="/art7620739", group="/art7620879",
 group="/art7620237", group="/art7620872"
 X-Cache-Status: [ normal ; ]
 X-Trace-App: [ pollux ; $host ; Sun, 05 Oct 2014 16:18:54 GMT ] [ acpcomposer ; $host ; Sun, 05 Oct 2014 12:10:14 GMT ] [ acpece4 ; $host ; Sun, 05 Oct 2014 12:10:14 GMT ] [ relax ; $host ; Sun Oct 05 14:10:12 CEST 2014 ]
@@ -133,6 +134,7 @@ Content-Type: text/html; charset=UTF-8
 Transfer-Encoding: chunked
 
 ```
+
 {: class="full-bleed"}
 
 We see the channel-maxage for this object is calculated by Varnish to be 216 seconds, and that is how long it will live in the cache if no purging occurs before that. We also include the _must-revalidate_ keyword for responses meant for browsers, so they will ask varnish on each request. Response headers meant for other apps do not include this.
@@ -158,6 +160,7 @@ sub vcl_recv {
 }
 
 ```
+
 {: class="full-bleed"}
 
 The implementation and use of this feature is in essence the varnish-cc daemon doing curl on the varnish servers with the HTTP method set to PURGE with the name of the group we want to purge in the path.
@@ -180,4 +183,7 @@ References:
 4. <a name="4"></a>[http://www.smashingmagazine.com/2014/04/23/cache-invalidation-strategies-with-varnish-cache/](http://www.smashingmagazine.com/2014/04/23/cache-invalidation-strategies-with-varnish-cache/)
 5. <a name="5"></a>[https://www.varnish-cache.org/docs/3.0/tutorial/purging.html](https://www.varnish-cache.org/docs/3.0/tutorial/purging.html)
 6. <a name="6"></a>[https://github.com/amedia/atomizer](https://github.com/amedia/atomizer)
-````
+
+```
+
+```

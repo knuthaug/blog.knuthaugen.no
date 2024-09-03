@@ -2,7 +2,7 @@
 layout: post
 title: "Latest is Such a Bad Idea"
 published: true
-tags: [opinions, caching, versioning]
+tags: opinions caching versioning
 ---
 
 For the second time I have found myself pulling what little hair I have left out because of people falling for the trap that is using "latest" as version number in a dependency, on the web specifically. This is such a bad idea, but people keep falling into the pit of using it. I can understand that, because it is very alluring and simple. "Just use latest, and you're always up-to-date. No need to keep track of releases and just code and be happy." Understandable reasons, but the downsides are huge.

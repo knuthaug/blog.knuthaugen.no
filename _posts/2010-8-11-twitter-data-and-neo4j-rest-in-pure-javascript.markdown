@@ -3,7 +3,7 @@ layout: post
 title: Twitter Data and Neo4j-rest in Pure Javascript
 mt_id: 33
 date: 2010-08-11
-tags: [Javascript, Neo4J, REST, Twitter]
+tags: [javascript, neo4j, rest, twitter]
 ---
 
 Some free time prompted me to test out the [REST interface](http://components.neo4j.org/neo4j-rest/) for the most excellent graph database Neo4j. And to gives those rusty javascript skills a refresh, I'd thought I'd to it in pure javascript. To help see what is going on, I visualize the graph using [JIT](http://thejit.org/) and use jQuery under the hood to do the rest calls and the DOM scripting more efficiently.
@@ -22,11 +22,11 @@ describe 'twitter'
   before
     network = {}
     neo = {}
-    stub(neo, 'node_exists').and_return( { 
+    stub(neo, 'node_exists').and_return( {
       status: true,
       data: {
         self:"http://localhost:9999/node/1"
-        } 
+        }
       })
 
     stub(neo, 'get_node').and_return( {id: 123} )
@@ -56,9 +56,10 @@ describe 'twitter'
    end
 end
 ```
+
 {: class="full-bleed"}
 
-### Patterns 
+### Patterns
 
 Javascript gives you plenty of ammunition to shoot yourself in the foot, and I decided to follow a pattern from Douglas Crockfords book "Javascript, The Good Parts" and implement my objects with what we can call the "that" pattern. Instead of defining the object like this:
 
@@ -77,6 +78,7 @@ var Node = function(spec){
 var myNode = new Node( {id: 1} );
 
 ```
+
 {: class="full-bleed"}
 
 we write it like this.
@@ -101,19 +103,19 @@ var Node = function(spec){
 var myNode = Node( {id: 1} );
 
 ```
+
 {: class="full-bleed"}
 
-This encapsulates all variables and functions into a variable which is returned to the caller and if we were to implement private functions on the object, something javascript normally doesn't let you do, we define them on "this" instead of "that".  The spec argument to the constructor is just an easy way of passing in default values to the object being created, or giving it a prototype to inherit from. the "new" keyword normally does this for you and with this technique you have to do it yourself to get a prototype chain set up.
+This encapsulates all variables and functions into a variable which is returned to the caller and if we were to implement private functions on the object, something javascript normally doesn't let you do, we define them on "this" instead of "that". The spec argument to the constructor is just an easy way of passing in default values to the object being created, or giving it a prototype to inherit from. the "new" keyword normally does this for you and with this technique you have to do it yourself to get a prototype chain set up.
 
 The point is that I'm not sure I'm fond of this technique since I find the code to get a bit muddled and the "that" keyword has a strange ring to it. Next time round I'll probably stick to the normal way of setting up objects.
 
 I ended up with and object encapsulating the graph, one for the node, one wrapping the twitter API and lastly one wrapping neo4j-rest for storing and retrieving data. The code, if you're interested can be found on [github](http://github.com/knuthaug/twitter-navigator) (very unpolished and probably won't ever be polished so take it with a grain of salt or two).
 
-### Gephi 
+### Gephi
+
 Gephi is an open source tool for visualizing a graph using Open GL for fast and fancy rendering capabilities. A version released a short time ago ([get it here](http://gephi.org/2010/gsoc-2010-mid-term-adding-support-for-neo4j-in-gephi/)) has support for connecting directly to a (sadly, not running) instance of Neo4J and import the whole graph.
 
 For this little pet project the main focus for using Gephi was to test it out and see how it works, but the potential is huge for graphs with more data in them. Gephi can do all sorts of graph manipulation and analysis and showing the graph according to values stored in the nodes etc. In the twitter graph I stored the number of followers in each of my followers as a number and Gephi could easily be configured to draw the node size relative to that, color edges based on data and much more. And all in nice openGL smooth graphics performance.
 
-
 All in all a great little adventure. And you should learn proper javascript :-)
-

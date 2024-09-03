@@ -3,7 +3,7 @@ layout: post
 title: "Continuous Delivery I: Pipeline Plugin and a Ruby Project"
 mt_id: 38
 date: 2011-04-04 17:57:44 +02:00
-tags: [Ruby, Continuous Delivery]
+tags: [ruby, continuous delivery]
 ---
 
 I have been reading the excellent book [Continuous Delivery](http://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912/) by Jez Humble and Dave Farley and been dying to try out some of it in practice. Since work these days is filled with big not-so-easy-to-change java legacy systems, a small greenfield ruby project was the way to go.
@@ -77,6 +77,7 @@ namespace :jenkins do
 
 end
 ```
+
 {: class="full-bleed"}
 
 It does some setup of of report output directories, some setup of ci_reporter in the :setup task and makes sure rspec tasks does some setup first. The tasks called from jenkins are jenkins:unit for the first build step and jenkins:functional for the second step. The jenkins:ci task is an all in one if that's your bag. The main point is that the first step runs unit test, hence rake:spec:lib only, and the second step runs all tests and metrics. Ideally if the metric_fu plugin in Jenkins had supported bundler well, I would like to run some metrics in the first step and fail the build if values where below or above a limit. But that does not seem to fly easily.
@@ -102,5 +103,3 @@ The fourth step deploys to heroku via a script and runs the same smoke test as t
 ### Benefits and Ending Thoughts
 
 The biggest benefit of using a pipeline is more fine grained feedback on the build process. The compile step is fast and fails almost immediately. The separate steps for integration tests and deployment to test server and heroku gives more accurate feedback on those steps too. I mean, combining deployment to test and production in a single step would be nonsensical. And you can do the deployment to production (or test) a manual one, which the plugin supports. For instance only after manual testing in the test environment. Combined with Jenkins' matrix style security model you can grant access to certain users for running that build step. There are a lot of possibilities and I will be exploring more of them in part three of the series. Part two is implementation of the smoke tests in ruby.
-
-

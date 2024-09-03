@@ -2,7 +2,7 @@
 layout: post
 title: "The Effects of Automation"
 published: true
-tags: [DevOps, Automation, CD]
+tags: [devops, automation, continous delivery]
 ---
 
 I want to reflect on the effects that automation can have on your daily life as a developer, after I came to think of the shift I have been through the last couple of years when it comes to deployments and habits and automation surrounding deployments. I dawned on me the other day, that deployments are now completely a non-event for me, and has been so for quite some time. I just don't think about it anymore. In stark contrast to the extremely tired meme [#nodeployfriday](https://twitter.com/hashtag/noDeployFriday) circulating on twitter. How did that happen?

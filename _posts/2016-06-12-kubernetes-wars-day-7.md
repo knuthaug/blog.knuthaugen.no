@@ -2,7 +2,7 @@
 layout: post
 title: "The Kubernetes Wars: Day 7"
 published: true
-tags: [Kubernetes, DevOps, Ops, Skydns, Docker]
+tags: [kubernetes, devops, ops, skydns, docker]
 ---
 
 #### Other post in the series

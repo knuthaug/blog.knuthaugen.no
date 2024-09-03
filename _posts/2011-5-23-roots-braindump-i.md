@@ -3,8 +3,9 @@ layout: post
 title: Roots 2011 braindump I
 mt_id: 41
 date: 2011-05-23 13:29:58 +02:00
-tags: [Roots, Agile]
+tags: [roots, agile]
 ---
+
 <p>I'm here at the <a href="http://rootsconf.no/">Roots 2011 conference</a> in Bergen and the program is packed with wonderful stuff. So I thought I'd venture into liveblogging/core dumping the interesting stuff I see.</p>
 
 <h3>A Way North!</h3>
@@ -29,5 +30,3 @@ tags: [Roots, Agile]
 <p>The open spaces didn't work as well as I have grown accustomed to at Smidig. I think a lot of people went home before them. So few ideas and small groups, but it turned out OK. First slot i used to hack on couchDB replication (dead simple and cool) and <a href="http://couchapp.org/page/index">CouchApp</a> with a few of the local bergen couch mafia. Good fun. Last slot was the question of are we doing to much automated testing through the GUI. It turned into testing strategies and at the end Dan North popped up and joined too.</p>
 
 <p>And then there was beer and music...</p>
- 
-

@@ -2,7 +2,7 @@
 layout: post
 title: "A Usable and Robust Private Npm Repo"
 published: true
-tags: [npm, DevOps, Node.js]
+tags: [npm, devops, node.js]
 ---
 
 Since we started using a node.js stack in Amedia we have gone through several generations of private npm repos. And since we finally have found a model that acutally works I thought I'd share it.

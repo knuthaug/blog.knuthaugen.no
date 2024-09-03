@@ -2,7 +2,7 @@
 layout: post
 title: "The Metrics Approach"
 published: true
-tags: [DevOps, Metrics, Java, Node.js, Ruby]
+tags: [devops, metrics, monitoring, java, node.js, ruby]
 ---
 
 Recently we started a new initiative at work, and as per usual in our company, things just start to trickle into production when somebody (usually I) get an idea. This time, it was metrics. I read some articles from Etsy and not to forget Coda Hale from Yammer (at the time, at least) (see [http://pivotallabs.com/139-metrics-metrics-everywhere/](http://pivotallabs.com/139-metrics-metrics-everywhere/))

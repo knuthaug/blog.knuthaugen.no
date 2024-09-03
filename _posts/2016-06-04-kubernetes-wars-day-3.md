@@ -2,7 +2,7 @@
 layout: post
 title: "The Kubernetes Wars: Day 3"
 published: true
-tags: [Kubernetes, Devops, Ops, Skydns, Docker]
+tags: [kubernetes, devops, ops, skydns, docker]
 ---
 
 #### Other post in the series
@@ -164,6 +164,7 @@ fi
 
 report_deploy $env $app $version
 ```
+
 {: class="full-bleed"}
 
 And then the script for _just_ updating the config of an app, without deploying anything.
@@ -292,6 +293,7 @@ fi
 rm ${configmap_file}
 
 ```
+
 {: class="full-bleed"}
 
 (Yeah, it could do with some refactoring)
@@ -305,4 +307,3 @@ We have a existing metric system backed in graphite which has worked well for us
 Next time on the kubernetes wars: the curious case of the slow node apps.
 
 _End log Operation k8s, day 3_
-

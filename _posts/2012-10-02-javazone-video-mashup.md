@@ -2,7 +2,7 @@
 layout: post
 title: "JavaZone Video Mashup"
 published: true
-tags: [JavaZone, Java, Play]
+tags: [javazone, java, play]
 ---
 
 [Video.javazone.no](http://video.javazone.no) was just sorta soft launched, a mashup site collecting the videos of talks from [JavaZone](http://www.javazone.no) from 2009 through 2012. As with any project where you don't have the time you want, there are some things I am happy with, and some things i am, well not so happy about. But overall I am pretty happy.
