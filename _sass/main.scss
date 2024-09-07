@@ -1,66 +1,4 @@
-:root {
-  --page-margin: 24px;
-  --primary-color: hsl(213, 62%, 41%);
-  --primary-gray: #444;
-  --link-transition: all 0.2s ease-in-out;
-  --gradient-blue: rgb(215, 234, 247);
-}
-
-* {
-  box-sizing: border-box;
-}
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/inter.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Inter italic";
-  src: url("/assets/fonts/inter-italic.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Source serif";
-  src: url("/assets/fonts/source-serif.woff2") format("woff2");
-  font-weight: 200 900;
-  font-style: normal;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Source serif italic";
-  src: url("/assets/fonts/source-serif-italic.woff2") format("woff2");
-  font-weight: 200 900;
-  font-style: italic;
-  font-display: fallback;
-}
-
-@font-face {
-  font-family: "Stacker";
-  src: url("/assets/fonts/stacker.ttf") format("truetype");
-  font-weight: 200 900;
-  font-style: normal;
-  font-display: fallback;
-}
-
-html,
-body {
-  height: 100%;
-  position: relative;
-  margin-left: 0;
-  margin-right: 0;
-}
+@import "root.scss";
 
 main {
   border-top: 2px solid #d0e7fa;
@@ -330,9 +268,13 @@ main #meta {
       display: inline-block;
       width: fit-content;
       margin: 4px;
-      padding: 1px 4px;
+      padding: 0;
       border-radius: 4px;
       border: 1px solid var(--primary-color);
+
+      a {
+        padding: 3px 6px;
+      }
     }
 
     li:hover {
