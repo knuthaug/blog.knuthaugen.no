@@ -2,7 +2,7 @@
 layout: post
 title: "Cache invalidation: explained"
 published: true
-tags: [cache, varnish, headers, http]
+tags: [caching, varnish, headers, http]
 ---
 
 <p style="width: 75%; margin-left: auto; margin-right: auto;font-size: 150%; font-weight: normal; font-family: times, 'times new roman', serif; font-style: italic; line-height: 130%;">"There are two hard things in computer science: cache invalidation, naming things, and off-by-one errors"</p>

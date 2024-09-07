@@ -8,14 +8,14 @@
         <section class="niceties"></section>
         <article class="hero display-grid">
           <section id="meta">
-            <div>Published: {{ page.date | date: "%Y-%m-%d"}}</div>
-            {% if page.tags %}
-            <ul class="tags">
-              {% for tag in page.tags %}
-              <li><a href="/tag/{{tag}}.html">{{ tag }}</a></li>
-              {% endfor %}
+            <div id="published">
+              Published: {{ page.date | date: "%Y-%m-%d"}}
+            </div>
+            <ul id="tags">
+              {% if page.tags %} {% for tag in page.tags %}
+              <li><a href="/tag/{{tag | slugify }}.html">{{ tag }}</a></li>
+              {% endfor %} {% endif %}
             </ul>
-            {% endif %}
           </section>
           <h2>{{ page.title }}</h2>
 
