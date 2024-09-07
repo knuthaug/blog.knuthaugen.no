@@ -88,7 +88,6 @@ if (beresp.http.cache-control ~ "channel-maxage=[0-9]") {
 }
 
 ```
-
 {: class="full-bleed"}
 
 ### Example
@@ -134,7 +133,6 @@ Content-Type: text/html; charset=UTF-8
 Transfer-Encoding: chunked
 
 ```
-
 {: class="full-bleed"}
 
 We see the channel-maxage for this object is calculated by Varnish to be 216 seconds, and that is how long it will live in the cache if no purging occurs before that. We also include the _must-revalidate_ keyword for responses meant for browsers, so they will ask varnish on each request. Response headers meant for other apps do not include this.
@@ -160,7 +158,6 @@ sub vcl_recv {
 }
 
 ```
-
 {: class="full-bleed"}
 
 The implementation and use of this feature is in essence the varnish-cc daemon doing curl on the varnish servers with the HTTP method set to PURGE with the name of the group we want to purge in the path.
@@ -184,6 +181,3 @@ References:
 5. <a name="5"></a>[https://www.varnish-cache.org/docs/3.0/tutorial/purging.html](https://www.varnish-cache.org/docs/3.0/tutorial/purging.html)
 6. <a name="6"></a>[https://github.com/amedia/atomizer](https://github.com/amedia/atomizer)
 
-```
-
-```
