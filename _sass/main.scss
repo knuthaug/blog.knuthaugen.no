@@ -322,6 +322,7 @@ main #meta {
   #tags {
     height: fit-content;
     margin-bottom: 0;
+    padding-left: 0;
 
     li {
       white-space: nowrap;
@@ -335,7 +336,7 @@ main #meta {
     }
 
     li:hover {
-      background-color: #d9d9d9;
+      background-color: #dfdfdf;
     }
   }
 }
