@@ -2,7 +2,7 @@
 layout: post
 title: "The Clash of the Classnames"
 published: true
-tags: [typescript, web components, html, web]
+tags: [typescript, web components, web]
 ---
 
 I recently came across a very sneaky bug in one of our projects using custom web components at work and I thought I'd document it for future google searches. The structure of the code is this: We have a shared base class called `ReactiveElement` which is, as the name implies, a class handling reacting to property and attribute changes, via several different callbacks abstracting some of the functionality of custom web components. The project in questions has a lot of components extending this class, specifying which properties and attributes it wants to have callbacks fired for. This is the very core of several projects and it works well.
