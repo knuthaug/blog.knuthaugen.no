@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Latest is Such a Bad Idea"
+title: "Latest is a Bad Idea"
 published: true
 tags: opinions caching versioning
 ---
