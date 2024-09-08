@@ -9,14 +9,13 @@
         <article class="hero display-grid">
           <h2>Tag: {{ page.tag}}</h2>
 
-          <ul>
-            {% for post in page.posts %}
-            <li>
-              {{ post.date | date: "%Y-%m-%d" }}
-              <a href="{{ post.url }}">{{ post.title }}</a>
-            </li>
-            {% endfor %}
-          </ul>
+          {% for post in page.posts %}
+
+          <div class="display-block">
+            <span>{{ post.date | date: "%Y-%m-%d" }}</span> &raquo;
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </div>
+          {% endfor %}
         </article>
       </main>
       {% include footer.html %}
