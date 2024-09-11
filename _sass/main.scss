@@ -26,6 +26,10 @@ main {
 }
 
 #header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
   margin-left: var(--page-margin);
   display: grid;
   grid-template-columns: minmax(200px, 2fr) 1fr;
@@ -183,23 +187,35 @@ main {
   margin-bottom: calc(var(--page-margin) * 2);
 
   a {
-    text-decoration: none;
-    color: hsl(213, 78%, 25%);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    text-decoration-skip-ink: none;
+    text-decoration-color: #666;
+    color: var(--primary-color);
     font-weight: 450;
     transition: var(--link-transition);
+    border-radius: 2px;
+    padding: 0px 1px;
   }
 
   a:hover {
     color: var(--primary-color);
+    text-decoration-color: var(--primary-color);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  a:visited {
+    color: var(--secondary-color);
   }
 
   h2 {
     font-family: "Inter italic", sans-serif;
     margin-bottom: 0;
-    margin-top: var(--page-margin);
+    margin-top: calc(var(--page-margin) * 2);
     font-size: clamp(1.3rem, 3vw + 1rem, 2.5rem);
     min-height: 0vh;
-    font-weight: 300;
+    font-weight: 450;
     letter-spacing: 0.08em;
   }
 }
@@ -222,7 +238,8 @@ h5 {
   font-weight: 500;
 }
 
-main h2 a {
+main h2 a,
+main h2 a:visited {
   text-decoration: none;
   color: #000;
   transition: var(--link-transition);
@@ -230,8 +247,8 @@ main h2 a {
 
 main .hero:nth-child(2) {
   grid-template-columns:
-    minmax(var(--page-margin), 1fr)
-    min(70ch, 90%) minmax(var(--page-margin), 1fr);
+    minmax(0, 1fr)
+    min(70ch, 90%) minmax(0, 1fr);
   gap: calc(var(--page-margin) / 2);
 }
 
@@ -247,7 +264,12 @@ main #meta {
   font-size: 1.2rem;
   font-family: "Source serif italic", serif;
   grid-column: 2;
-  margin-top: var(--page-margin);
+  margin-bottom: var(--page-margin);
+}
+
+:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary-color);
 }
 
 #meta {

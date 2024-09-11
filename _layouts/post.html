@@ -2,23 +2,17 @@
 <html lang="en">
   {% include head.html %}
   <body>
+    {% include header.html %}
     <div class="main-container">
-      {% include header.html %}
       <main>
         <section class="niceties"></section>
         <article class="hero display-grid">
+          <h2>{{ page.title }}</h2>
           <section id="meta">
             <div id="published">
-              Published: {{ page.date | date: "%Y-%m-%d"}}
+              Published on {{ page.date | date: "%B %e, %Y"}}
             </div>
-            <ul id="tags">
-              {% if page.tags %} {% for tag in page.tags %}
-              <li><a href="/tag/{{tag | slugify }}.html">{{ tag }}</a></li>
-              {% endfor %} {% endif %}
-            </ul>
           </section>
-          <h2>{{ page.title }}</h2>
-
           {{ content }}
         </article>
       </main>
