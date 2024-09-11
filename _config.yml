@@ -1,4 +1,13 @@
+plugins:
+  - jekyll-archives
+
 markdown: kramdown
 highlighter: rouge
 tag_page_layout: tag_page
 tag_page_dir: tag
+jekyll-archives:
+  enabled:
+    - categories
+  layout: tag_page
+  permalinks:
+    category: "/:name/"

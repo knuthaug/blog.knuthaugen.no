@@ -3,6 +3,7 @@ layout: post
 title: "The Kubernetes Wars: Day 0"
 published: true
 tags: [kubernetes, devops, ops, skydns, docker]
+excerpt_separator: <!--more-->
 ---
 
 #### Other post in the series
@@ -18,7 +19,7 @@ So, we are sent out on a mission to deploy Kubernetes in our data centers, Googl
 So what is this beast we are about to tackle? Anything like running 15-node elasticsearch clusters with bad sharding policies and crappy index patterns? Or as bad as trying to make sense of an apache cassandra cluster without knowing much about native american tribes? Well, we are about to find out.
 
 We have been running docker containers in production for a while now, and ops complained about lack of control on resources and limits and developers complained about lack of orchestration and scheduling. After a small firefight with the sales department on docker.com, who tried their probably-best-but-not-so-very-good to sell us some enterprisey stuff, along came kubernetes as the most likeley bogey we had to face.
-
+<!--more-->
 ## So What is Kubernetes?
 
 [Kubernetes](http://kubernetes.io) is container orchestration, deployment, management and scaling, simply put. And boy can it do a lot for you. Take the kubectl cli, with its 48 commands and a grand total of 22 shared command line options and about 10-12 options _per command_ it's a whopper of a system. So what to do?

@@ -10,7 +10,9 @@
           <h2>{{ page.title }}</h2>
           <section id="meta">
             <div id="published">
-              Published on {{ page.date | date: "%B %e, %Y"}}
+              Published in
+              <span class="category">{{ page.categories }}</span> on {{
+              page.date | date: "%B %e, %Y"}}
             </div>
           </section>
           {{ content }}

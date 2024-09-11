@@ -3,6 +3,7 @@ layout: post
 title: "The Kubernetes Wars: Day 34"
 published: true
 tags: [kubernetes, docker, devops]
+excerpt_separator: <!--more-->
 ---
 
 #### Other post in the series
@@ -15,7 +16,7 @@ _Operation k8s log, day 34 1100 Zulu_
 
 We got used to this kind of fighting after a while, you ease into it and accept it as the new standard operating
 procedure. More and more apps where moved to the kubernetes stack and things where running smoothly. But, when you think to yourself «hmm, I haven't gotten any surprises lately?» that's when they hit you in the face.
-
+<!--more-->
 ### Memory? Who needs it?
 
 As more java apps where being moved whe started out by duplicating the memory settings for the old app, e.g. -Xmx 1024mb on the command line for the JVM. And then setting the memory limit for the container to 2-300 MB more than that. This works fine. Sometimes. For a while.

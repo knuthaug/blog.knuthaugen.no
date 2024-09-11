@@ -5,3 +5,4 @@ gem "jekyll"
 gem "base64"
 gem "rouge"
 gem 'jekyll-tagging'
+gem "jekyll-archives"

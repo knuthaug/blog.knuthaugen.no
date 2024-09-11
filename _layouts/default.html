@@ -4,7 +4,11 @@
   <body>
     <div class="main-container">
       {% include header.html %}
-      <main>
+       {% if page.name == 'archive.md' %}
+       <main id="archive">
+        {% else %}
+        <main id="frontpage">
+        {% endif %}
         <section class="niceties"></section>
         {{ content }}
       </main>

@@ -3,6 +3,7 @@ layout: post
 title: "The Kubernetes Wars: Day 3"
 published: true
 tags: [kubernetes, devops, ops, skydns, docker]
+excerpt_separator: <!--more-->
 ---
 
 #### Other post in the series
@@ -19,7 +20,7 @@ There are yaks everywhere, get your razors ready, boys!
 ### Config
 
 How to deal with configuration? Kubernetes likes app config in environment variables, not config files. This is easy in our node apps using convict, pretty easy in our ruby apps and ranging from relatively easy to bloody hard in our java apps. But how to get config into the replication controllers? We opted for using configmaps (a kubernetes object) to store the config, reference the variables from the rc files and maintain it in git controlled files. So when we want to change to app config, update the config files and run a script which updates the configmap and reloads all the pods for the app. Incidentally, the way we do that, is to delete them, and let kubernetes recreate them. Don't do this if you run one cluster ;-) We _should_ make the apps read the config automatically, but since none our apps do that, we needed a solution that works now.
-
+<!--more-->
 This also means we can have separate config for different environments while the file definition of the RC remains the same. We started out with only the configuration variables external to the RC file, but soon realized we needed to externalize the version of the image, the replica number and the limits too.
 
 This has worked really well so far.
