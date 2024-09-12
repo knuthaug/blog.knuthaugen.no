@@ -2,12 +2,16 @@
 <html lang="en">
   {% include head.html %}
   <body>
+    {% include header.html %}
     <div class="main-container">
-      {% include header.html %}
+      
        {% if page.name == 'archive.md' %}
        <main id="archive">
-        {% else %}
+        {% endif %}
+        {% if page.name == 'index.md' %}
         <main id="frontpage">
+        {% else %}
+        <main id="other">
         {% endif %}
         <section class="niceties"></section>
         {{ content }}
