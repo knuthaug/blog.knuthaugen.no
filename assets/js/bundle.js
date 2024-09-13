@@ -3,6 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function load() {
+  addClickHandlers();
+  scrollHandler();
+}
+
+function addClickHandlers() {
   document.querySelectorAll("summary").forEach((element) => {
     element.addEventListener("click", (event) => {
       const detailsElement = event.target.parentElement.parentElement;
@@ -31,5 +36,19 @@ function load() {
         });
       }
     });
+  });
+}
+
+function scrollHandler() {
+  window.addEventListener("scroll", (event) => {
+    if (window.scrollY > 10 && window.scrollY < 50) {
+      console.log("scrolling", window.scrollY);
+      document.querySelector("header").classList.add("fixed");
+    }
+
+    if (window.scrollY === 0) {
+      console.log("scrolling", window.scrollY);
+      document.querySelector("header").classList.remove("fixed");
+    }
   });
 }
