@@ -1,5 +1,6 @@
 @import "root.scss";
 @import "dropdown.scss";
+@import "menu.scss";
 
 body {
   background-color: var(--background);
@@ -28,12 +29,6 @@ main {
   display: block;
   position: relative;
   padding-bottom: 100px; /* height of your footer */
-}
-
-#category-sidebar {
-  h3 {
-    margin-top: calc(var(--page-margin) * 2.4);
-  }
 }
 
 main#frontpage h2,
@@ -83,7 +78,7 @@ header {
 }
 
 header.fixed {
-  border-radius: 4px;
+  border-radius: var(--border-radius-default);
   top: 10px;
   background-color: var(--background);
   box-shadow: 1px 1px 4px #0006;
@@ -245,7 +240,6 @@ main {
     color: var(--primary-color);
     font-weight: 450;
     transition: var(--link-transition);
-    border-radius: 2px;
     padding: 0px 1px;
   }
 
@@ -354,31 +348,6 @@ main #meta {
     grid-row: 1;
     height: 20px;
   }
-
-  #tags {
-    height: fit-content;
-    margin-bottom: 0;
-    padding-left: 0;
-
-    li {
-      white-space: nowrap;
-      font-family: "Inter", sans-serif;
-      display: inline-block;
-      width: fit-content;
-      margin: 4px;
-      padding: 0;
-      border-radius: 4px;
-      border: 1px solid var(--primary-color);
-
-      a {
-        padding: 3px 6px;
-      }
-    }
-
-    li:hover {
-      background-color: #dfdfdf;
-    }
-  }
 }
 
 main .hero:nth-child(2) .full-bleed {
@@ -387,7 +356,7 @@ main .hero:nth-child(2) .full-bleed {
 }
 
 .full-bleed div {
-  border-radius: 4px;
+  border-radius: var(--border-radius-default);
   padding-left: calc(var(--page-margin) - 8px);
 }
 
@@ -403,7 +372,7 @@ div.highlight {
 p code,
 li code {
   background-color: hsl(0, 0%, 90%);
-  border-radius: 4px;
+  border-radius: var(--border-radius-default);
   padding: 1px 3px 1px 3px;
   font-size: 0.95rem;
   letter-spacing: 1px;
@@ -412,7 +381,7 @@ li code {
 pre {
   background-color: hsl(213, 76%, 73%);
   font-weight: 200;
-  border-radius: 4px;
+  border-radius: var(--border-radius-default);
   padding: 10px;
   font-size: 1rem;
 }

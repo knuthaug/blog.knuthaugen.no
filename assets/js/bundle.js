@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function load() {
   addClickHandlers();
   scrollHandler();
+  hamburgerMenu();
 }
 
 function addClickHandlers() {
@@ -36,6 +37,46 @@ function addClickHandlers() {
         });
       }
     });
+  });
+}
+
+function hamburgerMenu() {
+  const hamburger = document.querySelector(".hamburger");
+  const menu = document.querySelector("#mobile-menu");
+
+  hamburger.addEventListener("click", (event) => {
+    if (!menu.classList.contains("active")) {
+      menu.classList.add("active");
+      menu.classList.add("show");
+      void menu.offsetWidth;
+
+      const onAnimationEnd = (cb) =>
+        menu.addEventListener("animationend", cb, { once: true });
+
+      // request an animation frame to force Safari 16 to actually perform the animation
+      requestAnimationFrame(() => menu.classList.add("show"));
+      onAnimationEnd(() => {
+        console.log("onAnimationEnd show");
+        menu.classList.remove("show");
+      });
+
+      return;
+    }
+
+    if (menu.classList.contains("active")) {
+      event.preventDefault();
+      menu.classList.remove("show");
+      menu.classList.add("hide");
+
+      const onAnimationEnd2 = (cb) =>
+        menu.addEventListener("animationend", cb, { once: true });
+
+      onAnimationEnd2(() => {
+        console.log("onAnimationEnd2 hide");
+        menu.classList.remove("hide");
+        menu.classList.remove("active");
+      });
+    }
   });
 }
 

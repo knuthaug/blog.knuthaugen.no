@@ -1,0 +1,17 @@
+<div id="mobile-menu">
+  <ul>
+    <li>
+      <details open>
+        <summary role="button">
+          <a class="link">Categories</a>
+        </summary>
+        <ul class="display-grid">
+          {% for cat in site.categories %}
+          <li><a class="" href="/{{cat[0]}}/">{{cat[0]}}</a></li>
+          {% endfor %}
+        </ul>
+      </details>
+    </li>
+    <li><a class="link" href="/about.html">About</a></li>
+  </ul>
+</div>

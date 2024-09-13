@@ -1,3 +1,4 @@
+@import "animation.scss";
 /* Dropdown styles */
 .dropdown {
   position: relative;
@@ -41,26 +42,8 @@
   z-index: 2;
 
   background: var(--dropdown-background);
-  border-radius: 8px;
+  border-radius: var(--border-radius-default);
   border: 1px solid var(--light-gray);
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
 }
 
 details > .animation {

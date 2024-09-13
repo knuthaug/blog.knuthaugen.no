@@ -7,15 +7,19 @@
        {% if page.name == 'archive.md' %}
        <main id="archive">
         {% endif %}
+
         {% if page.name == 'index.md' %}
         <main id="frontpage">
         {% else %}
         <main id="other">
         {% endif %}
+
         <section class="niceties"></section>
         {{ content }}
       </main>
+      {% include menu.html %}
       {% include footer.html %}
     </div>
+   
   </body>
 </html>
