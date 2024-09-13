@@ -31,7 +31,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
   list-style-type: none;
-  margin: 0;
   padding: 8px;
   position: absolute;
   margin: 30px 0 0 0;
@@ -62,6 +61,18 @@
   100% {
     opacity: 0;
   }
+}
+
+details > .animation {
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-out;
+}
+
+details > .collapsing {
+  animation-direction: reverse;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in;
 }
 
 .dropdown ul li {
@@ -103,14 +114,6 @@
 /* Close the dropdown with outside clicks */
 .dropdown > summary::before {
   display: none;
-}
-
-.dropdown[open] > ul {
-  animation: fadeIn 0.4s ease-in-out;
-}
-
-.dropdown > ul {
-  animation: fadeOut 0.2s ease-in-out;
 }
 
 .dropdown[open] > summary::before {

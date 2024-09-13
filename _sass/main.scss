@@ -26,15 +26,6 @@ main {
   padding-bottom: 100px; /* height of your footer */
 }
 
-.posts {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: auto 1fr;
-  gap: calc(var(--page-margin) * 2);
-  grid-template-areas: "posts cats";
-  align-items: start;
-}
-
 #category-sidebar {
   h3 {
     margin-top: calc(var(--page-margin) * 2.4);
@@ -55,20 +46,22 @@ main#archive h2 {
   transition: var(--link-transition);
 }
 
-#header {
+header {
   position: sticky;
   top: 0;
   background-color: white;
   z-index: 2;
-  margin-left: var(--page-margin);
   display: grid;
   grid-template-columns: minmax(200px, 2fr) 1fr;
   gap: var(--page-margin);
   align-items: center;
+  max-width: 70rem;
+  margin: 0 auto;
 
   h1 {
     font-family: "Stacker", sans-serif;
-    font-size: clamp(1.2rem, 3vw + 1rem, 3rem);
+    margin-left: var(--page-margin);
+    font-size: clamp(1.2rem, 2vw + 1rem, 2rem);
     letter-spacing: 0.1em;
     font-weight: 700;
     margin-top: 0;
@@ -153,8 +146,7 @@ nav {
 nav ul {
   list-style-type: none;
   vertical-align: middle;
-  padding-top: 10px;
-  margin-bottom: 0;
+  padding-top: 14px;
 
   li {
     display: inline-block;
@@ -183,10 +175,6 @@ nav ul {
       letter-spacing: 0.05rem;
       background-color: inherit;
       cursor: pointer;
-
-      &:focus {
-        box-shadow: none;
-      }
     }
   }
 }
@@ -224,14 +212,6 @@ nav ul {
 
   #header h1 {
     margin-top: 4px;
-  }
-
-  main#frontpage .posts {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-      "posts"
-      "cats";
   }
 }
 
@@ -317,13 +297,6 @@ main .hero:nth-child(2) {
   gap: calc(var(--page-margin) / 2);
 }
 
-main#frontpage .hero:nth-child(2) {
-  grid-template-columns:
-    minmax(0, 1fr)
-    min(90ch, 90%) minmax(0, 1fr);
-  gap: calc(var(--page-margin) / 2);
-}
-
 main .hero > * {
   grid-column: 2;
 }
@@ -332,11 +305,21 @@ article p:first-of-type {
   margin-top: 0;
 }
 
+article h2 {
+  margin-bottom: var(--page-margin);
+  text-align: center;
+}
+
 main #meta {
   font-size: 1.2rem;
   font-family: "Source serif italic", serif;
   grid-column: 2;
-  margin-bottom: var(--page-margin);
+  margin-bottom: calc(var(--page-margin) * 2);
+  margin-top: calc(var(--page-margin) * -1.5);
+
+  div {
+    text-align: center;
+  }
 }
 
 :focus {
