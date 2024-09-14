@@ -30,13 +30,13 @@
 
 .dropdown ul {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  grid-template-columns: 2fr 1.5fr;
   gap: 6px;
   list-style-type: none;
   padding: 8px;
   position: absolute;
   margin: 30px 0 0 0;
-  width: 22rem;
+  width: 18rem;
   left: 10%;
   margin-left: calc((var(--dropdown-width) / 2) * -1);
   box-sizing: border-box;
