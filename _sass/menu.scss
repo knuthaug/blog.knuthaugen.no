@@ -6,6 +6,10 @@
   color: black;
   cursor: pointer;
   margin-top: -5px;
+
+  svg {
+    transition: all 1.5s ease-in-out;
+  }
 }
 
 #mobile-menu {
@@ -23,6 +27,53 @@
 
   ul {
     list-style-type: none;
+
+    li {
+      display: block;
+      margin-right: calc(var(--page-margin) / 2);
+      margin-bottom: 4px;
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.05rem;
+
+      a {
+        transition: var(--link-transition);
+        color: var(--primary-gray);
+        text-decoration: none;
+
+        &:active {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  summary {
+    list-style: none;
+    list-style-type: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details ul {
+    padding-inline-start: 20px;
+
+    li {
+      margin: 2px 4px 0px 4px;
+      display: inline;
+      width: max-content;
+      padding: 0px 3px 2px 2px;
+
+      svg {
+        margin-right: 6px;
+      }
+    }
+
+    li:hover {
+      background-color: var(--gradient-blue);
+    }
   }
 }
 

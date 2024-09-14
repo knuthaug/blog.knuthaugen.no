@@ -7,7 +7,13 @@
         </summary>
         <ul class="display-grid">
           {% for cat in site.categories %}
-          <li><a class="" href="/{{cat[0]}}/">{{cat[0]}}</a></li>
+          <li>
+            <a class="" href="/{{cat[0]}}/">
+              {% capture category %}{{ cat[0] }}{% endcapture %} {% capture
+              class %}icon{% endcapture %} {% include icon.liquid %}
+              {{cat[0]}}</a
+            >
+          </li>
           {% endfor %}
         </ul>
       </details>

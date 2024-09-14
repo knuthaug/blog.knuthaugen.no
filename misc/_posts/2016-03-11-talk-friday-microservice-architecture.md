@@ -5,8 +5,7 @@ published: true
 tags: [javazone, microservices, architecture]
 ---
 
-I quick post recommending a good talk on microservice architecture by Neal Ford from the JavaZone conference
-last year. He touches on the implications of a microservice architecture and the how and why of it. Lots of details and a broad coverage, delivered in usual Neal Ford style. Worth a watch if you're about to jump on the microservice bandwagon.
+A quick post recommending a good talk on microservice architecture by Neal Ford from the JavaZone conference last year. He touches on the implications of a microservice architecture and the how and why of it. Lots of details and a broad coverage, delivered in usual Neal Ford style. Worth a watch if you're about to jump on the microservice bandwagon.
 
 Why this talk now? Because I just saw it now ;-)
 

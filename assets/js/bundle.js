@@ -43,12 +43,14 @@ function addClickHandlers() {
 function hamburgerMenu() {
   const hamburger = document.querySelector(".hamburger");
   const menu = document.querySelector("#mobile-menu");
+  const use = document.querySelector("#menu-icon");
 
   hamburger.addEventListener("click", (event) => {
     if (!menu.classList.contains("active")) {
       menu.classList.add("active");
       menu.classList.add("show");
       void menu.offsetWidth;
+      use.setAttribute("href", "/assets/icons/feather-sprite.svg#x");
 
       const onAnimationEnd = (cb) =>
         menu.addEventListener("animationend", cb, { once: true });
@@ -56,7 +58,6 @@ function hamburgerMenu() {
       // request an animation frame to force Safari 16 to actually perform the animation
       requestAnimationFrame(() => menu.classList.add("show"));
       onAnimationEnd(() => {
-        console.log("onAnimationEnd show");
         menu.classList.remove("show");
       });
 
@@ -67,12 +68,12 @@ function hamburgerMenu() {
       event.preventDefault();
       menu.classList.remove("show");
       menu.classList.add("hide");
+      use.setAttribute("href", "/assets/icons/feather-sprite.svg#menu");
 
       const onAnimationEnd2 = (cb) =>
         menu.addEventListener("animationend", cb, { once: true });
 
       onAnimationEnd2(() => {
-        console.log("onAnimationEnd2 hide");
         menu.classList.remove("hide");
         menu.classList.remove("active");
       });
@@ -83,12 +84,10 @@ function hamburgerMenu() {
 function scrollHandler() {
   window.addEventListener("scroll", (event) => {
     if (window.scrollY > 10 && window.scrollY < 50) {
-      console.log("scrolling", window.scrollY);
       document.querySelector("header").classList.add("fixed");
     }
 
     if (window.scrollY === 0) {
-      console.log("scrolling", window.scrollY);
       document.querySelector("header").classList.remove("fixed");
     }
   });
