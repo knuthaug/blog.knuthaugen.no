@@ -31,12 +31,13 @@
 .dropdown ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+  gap: 4px;
   list-style-type: none;
   padding: 8px;
   position: absolute;
   margin: 30px 0 0 0;
-  width: 18rem;
-  left: 33%;
+  width: 20rem;
+  left: 10%;
   margin-left: calc((var(--dropdown-width) / 2) * -1);
   box-sizing: border-box;
   z-index: 2;
@@ -67,12 +68,13 @@ details > .collapsing {
 .dropdown ul li a:link,
 .dropdown ul li a:visited {
   display: inline-block;
-  padding: 10px 0.8rem;
+  padding: 4px 4px;
   width: 100%;
   box-sizing: border-box;
 
   color: var(--dropdown-color);
   text-decoration: none;
+  position: relative;
 }
 
 .dropdown ul li a:hover {

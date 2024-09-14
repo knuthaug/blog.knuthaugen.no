@@ -1,0 +1,25 @@
+{% if category == 'devops' %}
+<svg class="{{class}}">
+  <use href="/assets/icons/feather-sprite.svg#box" />
+</svg>
+{% elsif category == 'agile' %}
+<svg class="{{class}}">
+  <use href="/assets/icons/feather-sprite.svg#coffee" />
+</svg>
+{% elsif category == 'infrastructure' %}
+<svg class="{{class}}">
+  <use href="/assets/icons/feather-sprite.svg#server" />
+</svg>
+{% elsif category == 'web' %}
+<svg class="{{class}}">
+  <use href="/assets/icons/feather-sprite.svg#chrome" />
+</svg>
+{% elsif category == 'code' %}
+<svg class="{{class}}">
+  <use href="/assets/icons/feather-sprite.svg#git-merge" />
+</svg>
+{% elsif category == 'misc' %}
+<svg class="{{class}}">
+  <use href="/assets/icons/feather-sprite.svg#info" />
+</svg>
+{% endif %}
