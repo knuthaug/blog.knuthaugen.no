@@ -4,6 +4,7 @@
 
 body {
   background-color: var(--background);
+  margin-top: 0;
 }
 
 main {
@@ -51,7 +52,7 @@ header {
   background-color: var(--background);
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(200px, 2fr) 1fr;
+  grid-template-columns: minmax(200px, 1.5fr) 1fr;
   gap: var(--page-margin);
   align-items: center;
   max-width: 60rem;
@@ -122,6 +123,10 @@ header {
 }
 
 @media screen and (max-width: 650px) {
+  body {
+    margin-top: 4px;
+  }
+
   .backdrop {
     margin-top: 20px;
     margin-left: 10px;
@@ -131,6 +136,7 @@ header {
 header.fixed {
   border-radius: var(--border-radius-default);
   top: 10px;
+  padding-top: 4px;
   background-color: var(--background);
   box-shadow: 1px 1px 4px #0006;
 }
@@ -221,6 +227,14 @@ nav ul {
 
       &:active {
         box-shadow: none;
+      }
+
+      &:hover svg {
+        filter: var(--icon-drop-shadow);
+      }
+
+      svg {
+        transition: var(--icon-hover-animation);
       }
     }
 

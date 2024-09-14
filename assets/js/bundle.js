@@ -41,7 +41,7 @@ function addClickHandlers() {
 }
 
 function hamburgerMenu() {
-  const hamburger = document.querySelector(".hamburger");
+  const hamburger = document.querySelector("#burger");
   const menu = document.querySelector("#mobile-menu");
   const use = document.querySelector("#menu-icon");
 

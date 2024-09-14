@@ -1,23 +1,37 @@
 <div id="mobile-menu">
+  <details open>
+    <summary role="button">
+      <a class="link">Categories</a>
+    </summary>
+    <ul class="display-grid">
+      {% for cat in site.categories %}
+      <li>
+        <a class="" href="/{{cat[0]}}/">
+          {% capture category %}{{ cat[0] }}{% endcapture %} {% capture class
+          %}icon{% endcapture %} {% include icon.liquid %} {{cat[0]}}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+  </details>
   <ul>
-    <li>
-      <details open>
-        <summary role="button">
-          <a class="link">Categories</a>
-        </summary>
-        <ul class="display-grid">
-          {% for cat in site.categories %}
-          <li>
-            <a class="" href="/{{cat[0]}}/">
-              {% capture category %}{{ cat[0] }}{% endcapture %} {% capture
-              class %}icon{% endcapture %} {% include icon.liquid %}
-              {{cat[0]}}</a
-            >
-          </li>
-          {% endfor %}
-        </ul>
-      </details>
-    </li>
+    <li></li>
     <li><a class="link" href="/about.html">About</a></li>
+    <li>
+      <a href="/rss.xml"
+        ><svg class="icon">
+          <use href="/assets/icons/feather-sprite.svg#rss" />
+        </svg>
+        RSS feed
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/knuthaug"
+        ><svg class="icon">
+          <use href="/assets/icons/feather-sprite.svg#github" />
+        </svg>
+        Github page
+      </a>
+    </li>
   </ul>
 </div>

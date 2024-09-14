@@ -11,3 +11,7 @@ jekyll-archives:
   layout: tag_page
   permalinks:
     category: "/:name/"
+
+name: All About the Code
+description: Personal tech blog of Knut Haugen
+url: http://blog.knuthaugen.no

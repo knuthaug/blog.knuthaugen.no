@@ -7,39 +7,60 @@
   cursor: pointer;
   margin-top: -5px;
 
+  a {
+    text-decoration: none;
+  }
+
+  a:hover svg {
+    filter: var(--icon-drop-shadow);
+  }
+
   svg {
-    transition: all 1.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    margin: 3px;
   }
 }
 
 #mobile-menu {
   position: fixed;
-  top: 56px;
+  top: 54px;
   left: 0;
   display: none;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--background);
+  gap: 8px;
   width: calc(100vw - 8px);
   margin-left: 4px;
   margin-right: 4px;
   margin-top: 4px;
-  transition: all 1s ease-in-out;
+  padding-left: 8px;
   border: 1px solid var(--light-gray);
   border-radius: var(--border-radius-default);
 
   ul {
     list-style-type: none;
+    padding-inline-start: 10px;
+    margin-block-start: 10px;
 
     li {
       display: block;
       margin-right: calc(var(--page-margin) / 2);
-      margin-bottom: 4px;
+      margin: 2px 4px 0 4px;
       font-family: "Inter", sans-serif;
       font-weight: 600;
       letter-spacing: 0.05rem;
 
+      a:hover svg {
+        filter: var(--icon-drop-shadow);
+      }
       a {
         transition: var(--link-transition);
         color: var(--primary-gray);
         text-decoration: none;
+
+        svg {
+          transition: var(--icon-hover-animation);
+        }
 
         &:active {
           box-shadow: none;
@@ -51,6 +72,16 @@
   summary {
     list-style: none;
     list-style-type: none;
+
+    a {
+      display: block;
+      margin-right: calc(var(--page-margin) / 2);
+      margin-bottom: 4px;
+      margin-top: 12px;
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.05rem;
+    }
   }
 
   summary::-webkit-details-marker {
@@ -58,7 +89,8 @@
   }
 
   details ul {
-    padding-inline-start: 20px;
+    padding-inline-start: 10px;
+    margin-block-start: 2px;
 
     li {
       margin: 2px 4px 0px 4px;
@@ -71,10 +103,14 @@
       }
     }
 
-    li:hover {
-      background-color: var(--gradient-blue);
+    li:hover svg {
+      filter: var(--icon-drop-shadow);
     }
   }
+}
+
+details {
+  padding-left: 10px;
 }
 
 #mobile-menu.show {
@@ -100,7 +136,6 @@
   }
 
   #mobile-menu.active {
-    display: block;
-    background-color: var(--background);
+    display: grid;
   }
 }

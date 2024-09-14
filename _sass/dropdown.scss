@@ -63,6 +63,11 @@ details > .collapsing {
   padding: 0;
   margin: 0;
   font-weight: 500;
+  a {
+    &:hover svg {
+      filter: var(--icon-drop-shadow);
+    }
+  }
 }
 
 .dropdown ul li a:link,
@@ -76,10 +81,6 @@ details > .collapsing {
   color: var(--dropdown-color);
   text-decoration: none;
   position: relative;
-}
-
-.dropdown ul li a:hover {
-  background-color: var(--gradient-blue);
 }
 
 /* Dropdown triangle */
