@@ -94,10 +94,6 @@ header {
 .icon {
   width: 20px;
   height: 20px;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
   fill: none;
   position: relative;
   top: 4px;
@@ -115,7 +111,7 @@ header {
   img {
     transform: rotate(-15deg);
     stroke: var(--light-gray);
-    opacity: 0.3;
+    opacity: 0.05;
     stroke-width: 2px;
     width: 100%;
     height: 100%;
