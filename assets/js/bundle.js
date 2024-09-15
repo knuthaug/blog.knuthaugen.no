@@ -48,11 +48,28 @@ function hamburgerMenu() {
     if (!menu.classList.contains("active")) {
       menu.classList.add("active");
       menu.classList.add("show");
+      hamburger.classList.add("icon-fade-out");
       void menu.offsetWidth;
-      hamburger.setAttribute("src", "/assets/icons/x.svg");
 
       const onAnimationEnd = (cb) =>
         menu.addEventListener("animationend", cb, { once: true });
+
+      const iconOnAnimationEnd = (cb) =>
+        hamburger.addEventListener("animationend", cb, { once: true });
+
+      iconOnAnimationEnd(() => {
+        hamburger.setAttribute("src", "/assets/icons/x.svg");
+        hamburger.classList.remove("icon-fade-out");
+        hamburger.classList.add("icon-fade-in");
+
+        hamburger.addEventListener(
+          "animationend",
+          () => {
+            hamburger.classList.remove("icon-fade-in");
+          },
+          { once: true },
+        );
+      });
 
       // request an animation frame to force Safari 16 to actually perform the animation
       requestAnimationFrame(() => menu.classList.add("show"));
@@ -64,10 +81,10 @@ function hamburgerMenu() {
     }
 
     if (menu.classList.contains("active")) {
-      event.preventDefault();
       menu.classList.remove("show");
       menu.classList.add("hide");
-      hamburger.setAttribute("src", "/assets/icons/menu.svg");
+      hamburger.classList.add("icon-fade-out");
+      void menu.offsetWidth;
 
       const onAnimationEnd2 = (cb) =>
         menu.addEventListener("animationend", cb, { once: true });
@@ -75,6 +92,23 @@ function hamburgerMenu() {
       onAnimationEnd2(() => {
         menu.classList.remove("hide");
         menu.classList.remove("active");
+      });
+
+      const iconOnAnimationEnd = (cb) =>
+        hamburger.addEventListener("animationend", cb, { once: true });
+
+      iconOnAnimationEnd(() => {
+        hamburger.setAttribute("src", "/assets/icons/menu.svg");
+        hamburger.classList.remove("icon-fade-out");
+        hamburger.classList.add("icon-fade-in");
+
+        hamburger.addEventListener(
+          "animationend",
+          () => {
+            hamburger.classList.remove("icon-fade-in");
+          },
+          { once: true },
+        );
       });
     }
   });
