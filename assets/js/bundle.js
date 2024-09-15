@@ -43,14 +43,13 @@ function addClickHandlers() {
 function hamburgerMenu() {
   const hamburger = document.querySelector("#burger");
   const menu = document.querySelector("#mobile-menu");
-  const use = document.querySelector("#menu-icon");
 
   hamburger.addEventListener("click", (event) => {
     if (!menu.classList.contains("active")) {
       menu.classList.add("active");
       menu.classList.add("show");
       void menu.offsetWidth;
-      use.setAttribute("href", "/assets/icons/feather-sprite.svg#x");
+      hamburger.setAttribute("src", "/assets/icons/x.svg");
 
       const onAnimationEnd = (cb) =>
         menu.addEventListener("animationend", cb, { once: true });
@@ -68,7 +67,7 @@ function hamburgerMenu() {
       event.preventDefault();
       menu.classList.remove("show");
       menu.classList.add("hide");
-      use.setAttribute("href", "/assets/icons/feather-sprite.svg#menu");
+      hamburger.setAttribute("src", "/assets/icons/menu.svg");
 
       const onAnimationEnd2 = (cb) =>
         menu.addEventListener("animationend", cb, { once: true });

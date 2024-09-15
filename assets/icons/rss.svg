@@ -1,6 +1,6 @@
 <!-- @license lucide-static v0.441.0 - ISC -->
 <svg
-  class="lucide lucide-git-merge"
+  class="lucide lucide-rss"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -11,7 +11,7 @@
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <circle cx="18" cy="18" r="3" />
-  <circle cx="6" cy="6" r="3" />
-  <path d="M6 21V9a9 9 0 0 0 9 9" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <circle cx="5" cy="19" r="1" />
 </svg>

@@ -11,11 +11,11 @@
     text-decoration: none;
   }
 
-  a:hover svg {
+  a:hover img {
     filter: var(--icon-drop-shadow);
   }
 
-  svg {
+  img {
     transition: all 0.2s ease-in-out;
     margin: 3px;
   }
@@ -50,7 +50,7 @@
       font-weight: 600;
       letter-spacing: 0.05rem;
 
-      a:hover svg {
+      a:hover img {
         filter: var(--icon-drop-shadow);
       }
       a {
@@ -58,7 +58,7 @@
         color: var(--primary-gray);
         text-decoration: none;
 
-        svg {
+        img {
           transition: var(--icon-hover-animation);
         }
 
@@ -98,12 +98,12 @@
       width: max-content;
       padding: 0px 3px 2px 2px;
 
-      svg {
+      img {
         margin-right: 6px;
       }
     }
 
-    li:hover svg {
+    li:hover img {
       filter: var(--icon-drop-shadow);
     }
   }

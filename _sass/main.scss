@@ -112,7 +112,7 @@ header {
   background-repeat: no-repeat;
   background-size: 40%;
 
-  svg {
+  img {
     transform: rotate(-15deg);
     stroke: var(--light-gray);
     opacity: 0.3;
@@ -229,11 +229,11 @@ nav ul {
         box-shadow: none;
       }
 
-      &:hover svg {
+      &:hover img {
         filter: var(--icon-drop-shadow);
       }
 
-      svg {
+      img {
         transition: var(--icon-hover-animation);
       }
     }
