@@ -31,7 +31,10 @@
           <ul class="display-grid">
             {% for cat in site.categories %}
             <li>
-              <a class="" href="/{{cat[0]}}/">
+              <a
+                class="{% if page.title == cat[0] %}marked{% endif %}"
+                href="/{{cat[0]}}/"
+              >
                 {% capture category %}{{ cat[0] }}{% endcapture %} {% capture
                 class %}icon{% endcapture %} {% include icon.liquid %}
                 {{cat[0]}}</a

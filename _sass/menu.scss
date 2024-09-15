@@ -53,10 +53,12 @@
       a:hover img {
         filter: var(--icon-drop-shadow);
       }
+
       a {
         transition: var(--link-transition);
         color: var(--primary-gray);
         text-decoration: none;
+        padding: 4px;
 
         img {
           transition: var(--icon-hover-animation);
@@ -77,7 +79,8 @@
       display: block;
       margin-right: calc(var(--page-margin) / 2);
       margin-bottom: 4px;
-      margin-top: 12px;
+      margin-top: 7px;
+      padding: 4px 2px 5px 2px;
       font-family: "Inter", sans-serif;
       font-weight: 600;
       letter-spacing: 0.05rem;
