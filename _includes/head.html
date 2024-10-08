@@ -36,4 +36,11 @@
   />
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <script type="text/javascript" src="/assets/js/bundle.js"></script>
+  <script type="module">
+    import {onCLS, onINP, onLCP} from 'https://unpkg.com/web-vitals@4?module';
+
+    onCLS(console.log);
+    onINP(console.log);
+    onLCP(console.log);
+  </script>
 </head>
