@@ -84,6 +84,7 @@
       font-family: "Inter", sans-serif;
       font-weight: 600;
       letter-spacing: 0.05rem;
+      cursor: pointer;
     }
   }
 
@@ -127,6 +128,14 @@ details {
   animation-direction: reverse;
   animation-duration: 0.2s;
   animation-timing-function: ease-in;
+}
+
+#mobile-menu ul.right-column li:first-child {
+  margin-bottom: 10px;
+}
+
+#mobile-menu ul.right-column li {
+  margin-bottom: 4px;
 }
 
 @media screen and (max-width: 650px) {

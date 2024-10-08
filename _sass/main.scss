@@ -224,6 +224,7 @@ nav ul {
       transition: var(--link-transition);
       color: var(--primary-gray);
       text-decoration: none;
+      cursor: pointer;
 
       &:active {
         box-shadow: none;
@@ -231,6 +232,7 @@ nav ul {
 
       &:hover img {
         filter: var(--icon-drop-shadow);
+        cursor: pointer;
       }
 
       img {

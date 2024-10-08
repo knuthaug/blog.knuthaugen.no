@@ -10,6 +10,10 @@
 .dropdown summary {
   list-style: none;
   list-style-type: none;
+
+  a {
+    cursor: pointer;
+  }
 }
 
 .dropdown > summary::-webkit-details-marker {
