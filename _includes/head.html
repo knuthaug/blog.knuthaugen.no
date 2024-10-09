@@ -37,10 +37,12 @@
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <script type="text/javascript" src="/assets/js/bundle.js"></script>
   <script type="module">
-    import {onCLS, onINP, onLCP} from 'https://unpkg.com/web-vitals@4?module';
+    import {onCLS, onINP, onLCP, onTTFB, onFCP} from 'https://unpkg.com/web-vitals@4.2.3?module';
 
     onCLS(console.log);
     onINP(console.log);
     onLCP(console.log);
+    onFCP(console.log);
+    onTTFB(console.log);
   </script>
 </head>
