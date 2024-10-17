@@ -11,6 +11,25 @@ main {
   border-top: 2px solid #d0e7fa;
 }
 
+#toc {
+  position: fixed;
+  top: 200px;
+  right: -300px;
+
+  ul {
+    list-style-type: none;
+    li {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.slide-in {
+  animation-timing-function: ease-in-out;
+  right: 0px !important;
+}
+
 .niceties {
   background: linear-gradient(
     180deg,
@@ -348,6 +367,12 @@ h5 {
   margin-bottom: 0;
   font-family: "Inter italic", sans-serif;
   font-weight: 500;
+
+  a,
+  a:hover,
+  a:active {
+    color: inherit;
+  }
 }
 
 .category {
@@ -471,6 +496,18 @@ pre {
   display: block;
 }
 
+.display-inline-block {
+  display: inline-block;
+}
+
+.display-none {
+  display: none;
+}
+
 .display-grid {
   display: grid;
+}
+
+.opacity-0 {
+  opacity: 0;
 }

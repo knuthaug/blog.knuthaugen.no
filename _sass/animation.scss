@@ -7,6 +7,15 @@
   }
 }
 
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes iconFadeOut {
   0% {
     opacity: 1;
@@ -25,16 +34,30 @@
   }
 }
 
-.icon-fade-in {
-  animation-name: iconFadeIn;
+.fade-in {
+  animation-name: fadeIn;
   animation-fill-mode: forwards;
-  animation-duration: 0.2s;
+  animation-duration: var(--in-animation-duration);
+  animation-timing-function: ease-in-out;
+}
+
+.fade-out {
+  animation-name: fadeOut;
+  animation-fill-mode: forwards;
+  animation-duration: var(--out-animation-duration);
+  animation-timing-function: ease-in-out;
+}
+
+.icon-fade-in {
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+  animation-duration: var(--out-animation-duration);
   animation-timing-function: ease-out;
 }
 
 .icon-fade-out {
-  animation-name: iconFadeOut;
+  animation-name: fadeOut;
   animation-fill-mode: forwards;
-  animation-duration: 0.2s;
+  animation-duration: var(--out-animation-duration);
   animation-timing-function: ease-out;
 }

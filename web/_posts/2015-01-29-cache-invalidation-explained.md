@@ -11,7 +11,7 @@ After seeing a talk on JavaZone 2014 which touched on cache handling in a very u
 
 There are many ways to do cache invalidation, and I am going to be talking about how we do it at Amedia, one of Norways largest online media houses. We use [Varnish](http://www.varnish-cache.org/) [[3]](#3) for all our caching needs and the implementation is kind of tightly coupled to that. But the _principles_ should be useful across other technologies. The central point is providing enough information in your cache objects, to be able to flush what you need, when you need it.
 
-### Setup
+<h3><a name="setup">Setup</a></h3>
 
 The server setup which acts as a background for all this, is a fairly complex one. Amedia runs the digital parts of 79 (give or take) small and large newspapers in Norway. This means 151 app servers (excluding the CMS servers, which are 246 instances alone) of which 39 are running Varnish instances with differing configurations. These are physical or virtual machines running multiple apps, spread across 10 different environments and 3 data centers. This system has roughly 6.5M page views daily (in prod) and the sustained throughput of the front varnishes during the day is about 45 Mbps of traffic (each) and combined bandwith usage is around 800Mb/s in the daytime.
 
@@ -19,7 +19,7 @@ Every piece of data, except app <-> database communication, runs over HTTP and t
 
 Also, the main use of cache invalidation is journalist writing and updating articles (and other content created by internal users in a similar way) and we, devopsers and developers flushing cache more or less manually by deploying apps, fixing bugs and generally sorting through all the weirdness we can experience in our stack.
 
-### Cache headers in general
+<h3><a name="cache">Cache headers in general</a></h3>
 
 [RFC 7234](http://tools.ietf.org/html/rfc7234) [[1]](#1) (the revised HTTP/1.1 spec, cache portion) mentions the normal cache headers, which can be useful to know about, even though all of them are not part of the cache invalidation scheme I will be discussing.
 
@@ -31,11 +31,11 @@ Also, the main use of cache invalidation is journalist writing and updating arti
 
 See RFC 7234 for the whole truth on these headers. When one app uses several other apps under the hood, the lowest channel-maxage and max-age header from all the backends is used for the response. So a compound response is never older than the youngest "member" object.
 
-### Extensions to cache-channel
+<h3><a name="extensions">Extensions to cache-channel</a></h3>
 
 A [draft by Mark Nottingham](http://tools.ietf.org/html/rfc7234) [[2]](#2) back in 2007 introduced the concept of _Cache channels_ which are specified as an extension to the cache-channel header (See RFC 7234). Extensions are a part of the HTTP/1.1 spec (revised) and nothing new, but the channel, channel-maxage and group extensions were introduced in this draft but seem to have been shelved after that. I can't find a mention in any RFC after this. But Varnish can implement this easily through VCL and this is what we do. And it is very useful for cache invalidation.
 
-### Varnish Concepts
+<h3><a name="varnish">Varnish Concepts</a></h3>
 
 Some key varnish concepts you should be familiar with:
 
@@ -45,11 +45,11 @@ Some key varnish concepts you should be familiar with:
 - _Grace mode_: Enables grace time for objects softbanned. Grace time is of course configurable.
 - _Saint mode_: This mode lets you configure Varnish to not ask a backend for an object for a period of time, in case of errors or other unwanted replies. If all backends fails and saint kicks in, the existing object will be served according to grace config.
 
-### Headers
+<h3><a name="headers">Headers</a></h3>
 
 Under this regime HTTP headers becomes all important and not something you just throw around for good measure. They make or break the performance of the whole stack, and need to be kept a watchful eye on. The first thing to be checked when a new app approaches production, is that the cache headers make sense and follow protocol.
 
-### Implementation
+<h3><a name="implementation">Implementation</a></h3>
 
 We have enforced very strict rules in all our apps regarding cache headers and run them through filtering or a library removing headers we do not want. This is important! Rogue expires headers can wreak havoc on a caching solution such as this. The short version is this:
 
@@ -90,7 +90,8 @@ if (beresp.http.cache-control ~ "channel-maxage=[0-9]") {
 ```
 {: class="full-bleed"}
 
-### Example
+
+<h3><a name="example">Example</a></h3>
 
 The app _pollux_ generates complete web pages meant for the end user browser. The data comes from severals systems. One is the data backend, connected to the CMS for the relevant publication. One other is for ad information and a third is a component app, producing parts of the page (served through ESI) again calling other systems further down. These are HTTP requests done in the backend when serving up the page. All these responses have cache-control groups on them, relevant for the app serving them. These are then aggregated up the chain and gets added to the final response to Varnish. Varnish removes them on the way out to the browser, replacing them with "must-revalidate" so the browser always asks Varnish for a fresh copy. But these groups are stored with the object in Varnish and can be used to invalidate the object, on demand if the object should need to be before it expires. Allow me to illustrate:
 
@@ -168,7 +169,7 @@ The whole chain from backend system registering that someone is editing an objec
 
 The app itself will send a HTTP message to Atomizer [[6]](#6) saying that a certain cache-control group should be invalidated. Atomizer (open sourced by us, under the Apache license) persists this in a MongoDB database. The atom feed that Atomizer produces is a 30 second rolling window of cache invalidation events, which atomizer-cc (a perl script, of all things) reads and sends PURGE requests to varnish instances. One varnish cc for each varnish instance is required in this setup. Varnish CC also holds some state internally to make sure that we don't purge objects that just have been purged, via timestamps but it is quite simple (if you can call anything written in Perl simple, that is).
 
-### Some stats
+<h3><a name="stats">Some stats</a></h3>
 
 On a normal day, there are about 1500 journalists writing and updating articles, and classified ads being created feeding this system with cache invalidation requests. Normally during the day we see about 50-150 invalidation requests per minute, with an average around 60 or so.
 
