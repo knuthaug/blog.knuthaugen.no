@@ -44,7 +44,7 @@
 .fade-out {
   animation-name: fadeOut;
   animation-fill-mode: forwards;
-  animation-duration: var(--out-animation-duration);
+  animation-duration: var(--in-animation-duration);
   animation-timing-function: ease-in-out;
 }
 

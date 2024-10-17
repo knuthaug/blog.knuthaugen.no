@@ -47,7 +47,7 @@ function initTOC() {
 
   if (headings.length >= 6) {
     for (const heading of headings) {
-      tocContainer.firstElementChild.appendChild(createElement("li", heading));
+      tocContainer.lastElementChild.appendChild(createElement("li", heading));
     }
   }
 }
