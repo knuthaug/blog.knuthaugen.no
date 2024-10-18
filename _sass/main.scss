@@ -14,9 +14,10 @@ main {
 #toc {
   grid-column: 3;
   grid-row: 1/4;
-  position: sticky;
+  position: fixed;
   width: fit-content;
-  top: 3em;
+  top: calc(calc(100vh / 2 - 150px));
+  right: 16px;
   align-self: start;
   display: inline-block;
   background-color: var(--background);
