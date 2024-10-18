@@ -12,9 +12,13 @@ main {
 }
 
 #toc {
-  position: fixed;
-  top: calc(100vh / 2 - 100px);
-  right: -300px;
+  grid-column: 3;
+  grid-row: 1/4;
+  position: sticky;
+  width: fit-content;
+  top: 3em;
+  align-self: start;
+  display: inline-block;
   background-color: var(--background);
   border: 1px solid var(--light-gray);
   border-radius: var(--border-radius-default);

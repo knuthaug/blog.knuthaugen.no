@@ -7,6 +7,10 @@
       <main>
         <section class="niceties"></section>
         <article class="hero display-grid">
+          <section id="toc" class="opacity-0">
+            <h4>Table of Contents</h4>
+            <ul></ul>
+          </section>
           <h2>{{ page.title }}</h2>
           <section id="meta">
             <div id="published">
@@ -17,10 +21,6 @@
           </section>
           {{ content }}
         </article>
-        <section id="toc" class="opacity-0">
-          <h4>Table of Contents</h4>
-          <ul></ul>
-        </section>
       </main>
       {% include menu.html %} {% include footer.html %}
     </div>

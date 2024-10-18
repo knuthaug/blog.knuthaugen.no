@@ -45,10 +45,11 @@ function initTOC() {
   const headings = document.querySelectorAll("h3");
   const tocContainer = document.querySelector("#toc");
 
-  if (headings.length >= 6) {
+  if (headings.length >= 5) {
     for (const heading of headings) {
       tocContainer.lastElementChild.appendChild(createElement("li", heading));
     }
+    document.querySelector("#toc").classList.remove("opacity-0");
   }
 }
 
@@ -141,16 +142,10 @@ function scrollHandler() {
   window.addEventListener("scroll", (event) => {
     if (window.scrollY > 10 && window.scrollY < 50) {
       document.querySelector("header").classList.add("fixed");
-      document.querySelector("#toc").classList.remove("fade-out");
-      document.querySelector("#toc").classList.add("fade-in");
-      document.querySelector("#toc").classList.add("slide-in");
     }
 
     if (window.scrollY === 0) {
       document.querySelector("header").classList.remove("fixed");
-      document.querySelector("#toc").classList.remove("fade-in");
-      document.querySelector("#toc").classList.add("fade-out");
-      document.querySelector("#toc").classList.remove("slide-in");
     }
   });
 }

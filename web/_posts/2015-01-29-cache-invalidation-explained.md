@@ -165,7 +165,7 @@ The implementation and use of this feature is in essence the varnish-cc daemon d
 
 The whole chain from backend system registering that someone is editing an object, to the varnish cache being invalidated look like this:
 
-<img src="/assets/images/arch_exp.001_s.jpg" width="800" height="384" alt="Cache invalidation architecture"/>
+<img src="/assets/images/arch_exp.001_s.jpg" width="800" height="384" class="full-bleed" alt="Cache invalidation architecture"/>
 
 The app itself will send a HTTP message to Atomizer [[6]](#6) saying that a certain cache-control group should be invalidated. Atomizer (open sourced by us, under the Apache license) persists this in a MongoDB database. The atom feed that Atomizer produces is a 30 second rolling window of cache invalidation events, which atomizer-cc (a perl script, of all things) reads and sends PURGE requests to varnish instances. One varnish cc for each varnish instance is required in this setup. Varnish CC also holds some state internally to make sure that we don't purge objects that just have been purged, via timestamps but it is quite simple (if you can call anything written in Perl simple, that is).
 
