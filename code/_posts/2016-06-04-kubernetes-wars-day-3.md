@@ -294,7 +294,6 @@ fi
 rm ${configmap_file}
 
 ```
-
 {: class="full-bleed"}
 
 (Yeah, it could do with some refactoring)

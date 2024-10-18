@@ -8,7 +8,7 @@ tags: [nosql, mongodb, solr, java]
 
 I've recently changed storage backend and search backend for a small web project and it has been a real blast. What follows is an overview of the reasons for the change, what the change actually was and the relative amount of joy involved.
 
-### The Old System
+<h3><a name="theold">The Old System</a></h3>
 
 System was built using PHP/Apache2 and MySQL and it covers a _very_ simple domain with only a single object (Person, sort of) and simple data records for several years.
 
@@ -18,13 +18,13 @@ System was built using PHP/Apache2 and MySQL and it covers a _very_ simple domai
 - InnoDB backend
 - File is transformed to [LOAD DATA INFILE](http://dev.mysql.com/doc/refman/5.1/en/load-data.html) format and fed into MySQL with manual delete of the set for that year beforehand.
 
-### The Pain Points
+<h3><a name="thepain">The Pain Points</a></h3>
 
 - Batch update with 4 million rows averages (on prod machine: dual core 3GHz 4GB Ram, roughly 1GB set aside for MySQL) taking 4-5 hours hours with index updates being the main culprit. This could be done as a check-the-record-and-update-if-changed but that would also require a lot of queries and updates to the database.
 - Queries with wildcards are dead slow when hitting outside the query cache.
 - Not really advanced search as such.
 
-### The Plan
+<h3><a name="theplan">The Plan</a></h3>
 
 - Replacing MySQL with [MongoDB](http://www.mongodb.org/) as there is no actual relations needed and everything fits in one collection of documents
 - Replacing MySQL indexes with [Apache Solr](http://lucene.apache.org/solr/) for consolidating search across several other systems. And speed.
@@ -34,7 +34,7 @@ MongoDB is a document database storing documents in binary json form, written in
 
 Solr is built on top of the java version of Lucene and does indexing over HTTP and runs happily in tomcat, jetty or most other servlet engines.
 
-### The Implementation
+<h3><a name="implementation">The Implementation</a></h3>
 
 Names of domain objects are changed to protect the guilty - and the domain.
 
@@ -56,7 +56,6 @@ public function insert(DataRecord $record) {
 }
 
 ```
-
 {: class="full-bleed"}
 
 This will insert a document in the collection if it's not there. When it is there, it will add an element to the (nested) 'list' element with the value of `$record->year()` as key. The value will be the value of `$record->getDetails()`. The `toArray()` call is there because the mongo driver expects arrays to store. The super cool part is that if the key exists, it will just be updated with the data from the details object. Read more on the details of the [MongoDB update options](http://www.mongodb.org/display/DOCS/Updating).
@@ -78,16 +77,15 @@ public function index(SolrInputDocument $document) {
     }
 
 ```
-
 {: class="full-bleed"}
 
 Commit on every Solr document makes indexing very slow. Small tests indicated 3 minutes for indexing 5000 documents with commit on every submit and 15 seconds with one commit every 2000 document (and at the end of course). The code above commits every `$commitInterval`(10000 default) to speed things up a bit. Note also that the `commit()` and `optimize()` calls for Solr may time out as they can take a long time to finish. Solr does not time out but rather the java application server you're running times out. When this happens an exception is thrown in the php driver which has to be caught.
 
-### The Results
+<h3><a name="results">The Results</a></h3>
 
 Platform is Ubuntu 9.10 server edition 64 bit and all timings from the shell are done with `time` on linux. MySQL times are the times reported from MySQL itself.
 
-### Time for batch insert/update
+<h3><a name="time">Time for batch insert/update</a></h3>
 
 - Commit interval for solr: 10000
 - update-logging for Solr turned off (default is very verbose)
@@ -143,8 +141,6 @@ Platform is Ubuntu 9.10 server edition 64 bit and all timings from the shell are
 
 <br/>
 
-### Space usage
-
 No pre-allocation was done for MongoDB so it created the data files as needed. This means that the last was created at 2GB and very well may be almost empty. Mongo creates files in a doubling fashion from 64 MB to 2G like this: 64, 128, 256, 512, 1GB, 2GB.
 
 <table class="blogtable" width="100%">
@@ -185,10 +181,10 @@ No pre-allocation was done for MongoDB so it created the data files as needed. T
 
 <br/>
 
-### CPU usage
+<h3><a name="cpu">CPU usage</a></h3>
 
 When importing to MySQL it more or less maxes on CPU for the entire import. When doing the import with a php script feeding data to mongodb and solr, the component using the most cpu is the php script splitting the file, creating objects and calling the mongodb and solr APIs.This takes up 35-40% CPU and around 10 MB of ram. Mongodb is using around 10% cpu (with 1.1GB of ram) and solr (tomcat, that is) is spending 30% and around 300MB of ram. Disks on these machines are virtualized, through Vmware, 15K SAS disks on an IBM S3200 storage array with dedicated GB LAN between blade center and storage. Disk IO seems to be the bottleneck here.
 
-### Space usage
+<h3><a name="spaceusage">Space usage</a></h3>
 
 Solr and mongodb seem to be a bit more sloppy with their space usage than MySQL but I guess this is the price to pay for some of the other benefits you get. See [mongo faq on data files](http://www.mongodb.org/display/DOCS/Developer+FAQ#DeveloperFAQ-Whyaremydatafilessolarge?) for info on how to see real space usage for databases and not just file sizes. In return for more storage space spent, you get _much_ better search capabilities (and faster) and faster (although small improvement) query times against database.
