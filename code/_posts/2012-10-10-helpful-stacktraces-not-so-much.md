@@ -20,7 +20,6 @@ at ChildProcess.EventEmitter.emit (events.js:91:17)
 at Process.\_handle.onexit (child_process.js:674:10)
 
 ```
-
 {: class="full-bleed"}
 
 Hookay, something is clearly wrong here but what is it? There's some event emitting going on, and some mixins being visited. And an `exec()` there too. Well, if we inspect the build script there is exec'ing of some shell commands for catting some files together. But what is the error being thrown from the shell command? Turns out, the error is actually a missing directory. Jake and Node could really be more helpful by giving some hints of that. No mention of the underlying OS error, no mention of the exit status, nor the command throwing the error (the exec call can take an array of commands to exec) or anything. Score -1 for Jake when it comes to good error messages. I'll see if I'll try to fork it and submit a patch on the `mixin._run` method to spare some other soul some useless debugging.

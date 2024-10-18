@@ -165,7 +165,6 @@ fi
 
 report_deploy $env $app $version
 ```
-
 {: class="full-bleed"}
 
 And then the script for _just_ updating the config of an app, without deploying anything.

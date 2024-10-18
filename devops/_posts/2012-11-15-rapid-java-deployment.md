@@ -84,7 +84,6 @@ update-dev dev0 appname:branch-foo:21451a
 # script fetches it from there. if revision is omitted, you get HEAD (no pun intended).
 
 ```
-
 {: class="full-bleed"}
 
 The main points here are:
