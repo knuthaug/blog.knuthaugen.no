@@ -12,30 +12,39 @@ main {
 }
 
 #toc {
+  --bar-grid-row: 2;
+
   grid-column: 3;
   grid-row: 1/4;
   position: fixed;
   width: fit-content;
-  top: calc(calc(100vh / 2 - 150px));
+  top: calc(calc(100vh / 2 - 100px));
   right: 30px;
   align-self: start;
   display: inline-block;
   background-color: var(--background);
   padding: 6px 10px;
+  display: grid;
+  grid-template-columns: 8px auto;
+
+  .bar {
+    position: relative;
+    background-color: var(--primary-gray);
+    width: 4px;
+    height: 26px;
+    margin-top: 3px;
+    position: relative;
+    top: 0px;
+    transition: top 0.5s ease-in-out;
+  }
 
   h4 {
     margin-top: 0;
+    grid-column: 2;
   }
 
-  & > ul {
-    padding-left: 0;
-    margin-top: 6px;
-    list-style-type: none;
-
-    li {
-      padding: 0;
-      margin: 0;
-    }
+  a.toc-link {
+    grid-column: 2;
   }
 }
 

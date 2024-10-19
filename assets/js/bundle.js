@@ -46,22 +46,55 @@ function initTOC() {
   const tocContainer = document.querySelector("#toc");
 
   if (headings.length >= 5) {
+    let i = 1;
     for (const heading of headings) {
-      tocContainer.lastElementChild.appendChild(createElement("li", heading));
+      tocContainer.appendChild(createElementTocLink(heading, i++));
     }
     document.querySelector("#toc").classList.remove("opacity-0");
   }
+
+  // Intersection Observer Options
+  var options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: [1],
+  };
+  var observeHtags = new IntersectionObserver(setCurrent, options);
+
+  headings.forEach((tag) => {
+    observeHtags.observe(tag);
+  });
 }
 
-function createElement(type, el) {
-  const li = document.createElement(type);
+// intersectiobserver callback
+function setCurrent(e) {
+  const allSectionLinks = document.querySelectorAll("#toc .toc-link");
+  const bar = document.querySelector("#toc .bar");
+  e.map((i) => {
+    if (i.isIntersecting === true) {
+      const current = document.querySelector(
+        `#toc a[href="#${i.target.firstElementChild.getAttribute("name")}"]`,
+      );
+      const row = current.getAttribute("data-row");
+      const previousRow = bar.getAttribute("data-row");
+      bar.setAttribute("data-row", Number(row));
+
+      if (Number(row) !== 1) {
+        bar.style.setProperty("top", `calc(${row - 1} * 28px)`);
+      } else {
+        bar.style.setProperty("top", `0px`);
+      }
+    }
+  });
+}
+
+function createElementTocLink(el, num) {
   const a = document.createElement("a");
-  if (el.firstElementChild) {
-    a.href = `#${el.firstElementChild.name}`;
-    a.appendChild(document.createTextNode(el.firstElementChild.innerHTML));
-    li.appendChild(a);
-  }
-  return li;
+  a.classList.add("toc-link");
+  a.setAttribute("data-row", num);
+  a.href = `#${el.firstElementChild.name}`;
+  a.appendChild(document.createTextNode(el.firstElementChild.innerHTML));
+  return a;
 }
 
 function hamburgerMenu() {
