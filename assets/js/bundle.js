@@ -56,8 +56,8 @@ function initTOC() {
   // Intersection Observer Options
   var options = {
     root: null,
-    rootMargin: "0px",
-    threshold: [1],
+    rootMargin: "10px",
+    threshold: 1.0,
   };
   var observeHtags = new IntersectionObserver(setCurrent, options);
 
@@ -67,16 +67,18 @@ function initTOC() {
 }
 
 // intersectiobserver callback
-function setCurrent(e) {
-  const allSectionLinks = document.querySelectorAll("#toc .toc-link");
+function setCurrent(entries) {
+  console.log("intersection", entries);
   const bar = document.querySelector("#toc .bar");
-  e.map((i) => {
-    if (i.isIntersecting === true) {
+  for (const entry of entries) {
+    if (entry.isIntersecting === true) {
       const current = document.querySelector(
-        `#toc a[href="#${i.target.firstElementChild.getAttribute("name")}"]`,
+        `#toc a[href="#${entry.target.firstElementChild.getAttribute(
+          "name",
+        )}"]`,
       );
+      console.log("current", current);
       const row = current.getAttribute("data-row");
-      const previousRow = bar.getAttribute("data-row");
       bar.setAttribute("data-row", Number(row));
 
       if (Number(row) !== 1) {
@@ -84,8 +86,9 @@ function setCurrent(e) {
       } else {
         bar.style.setProperty("top", `0px`);
       }
+      return;
     }
-  });
+  }
 }
 
 function createElementTocLink(el, num) {

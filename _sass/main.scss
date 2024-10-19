@@ -19,7 +19,7 @@ main {
   position: fixed;
   width: fit-content;
   top: calc(calc(100vh / 2 - 100px));
-  right: 30px;
+  right: 16px;
   align-self: start;
   display: inline-block;
   background-color: var(--background);
@@ -30,11 +30,13 @@ main {
   .bar {
     position: relative;
     background-color: var(--primary-gray);
-    width: 4px;
+    width: 3px;
     height: 26px;
     margin-top: 3px;
     position: relative;
+    left: 10px;
     top: 0px;
+    border-radius: 4px;
     transition: top 0.5s ease-in-out;
   }
 
@@ -45,6 +47,7 @@ main {
 
   a.toc-link {
     grid-column: 2;
+    margin-left: 12px;
   }
 }
 
@@ -156,17 +159,18 @@ header {
     margin-top: 4px;
   }
 
-  main .hero:nth-child(2) {
-    grid-template-columns: minmax(0, 1fr) (70ch, 90%) minmax(0, 1fr) !important;
-    gap: calc(var(--page-margin) / 2) !important;
-  }
-
   #toc {
     visibility: hidden;
   }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1300px) and (min-width: 1040px) {
+  main .hero:nth-child(2) {
+    grid-template-columns: 20px 70ch 20px !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
   #toc {
     visibility: hidden;
     ul {
@@ -174,7 +178,6 @@ header {
     }
   }
 }
-
 .marked {
   background-color: var(--gradient-blue);
 }
