@@ -37,7 +37,7 @@ This is an overview of the current state of the NoSQL landscape. It's getting la
 
 If we graph all the projects by type we get this view:
 
-<img alt="projects_by_type(2).png" src="../../../images/projects_by_type%282%29.png" width="597" height="438" class="mt-image-center" style="text-align: center; display: block; margin: 0 auto 20px;" />
+<img alt="projects_by_type(2).png" src="/assets/images/projects_by_type%282%29.png" width="597" height="438" class="mt-image-center" style="text-align: center; display: block; margin: 0 auto 20px;" />
 
 There are more key/value stores than the other types combined. Why is this? Are key/value stores that much easier to implement? I would at least guess that the first area where we see projects being abandoned and convergence of projects is this one. The important thing is the features users want, not the project themselves. There **must** be a lot of overlap here and a lot of projects that are slightly different and almost identical. On the other hand a lot of knowledge of these kinds of system is spread around and there is a good chance of innovation. The combination of the best technical features and API features will hopefully bubble to top and stay on.
 
