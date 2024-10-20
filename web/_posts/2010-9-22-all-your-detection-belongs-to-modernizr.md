@@ -16,7 +16,6 @@ Load it like this:
 ```html
 <script src="modernizr-1.5.min.js" type="text/javascript" charset="utf-8"
 ```
-
 {: class="full-bleed"}
 
 and the next time you need to know it some feature is
@@ -27,7 +26,6 @@ property is true or false:
 if (Modernizr.canvas) { var c =
 document.createElement('canvas'); }
 ```
-
 {: class="full-bleed"}
 
 As a nice bonus it assigns css classes
@@ -45,5 +43,4 @@ whether a feature is available or not.
   }
 
 ```
-
 {: class="full-bleed"}

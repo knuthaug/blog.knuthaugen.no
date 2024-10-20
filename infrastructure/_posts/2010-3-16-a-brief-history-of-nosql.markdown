@@ -8,19 +8,19 @@ tags: [nosql]
 
 [NoSQL](http://en.wikipedia.org/wiki/NoSQL) is getting a lot of traction and hype these days but in reality it's not that new of a thing. I thought I'd trace the roots of NoSQL and see what I'd find. The name "NoSQL" was in fact first used by Carlo Strozzi in 1998 as the name of file-based [database he was developing](http://www.strozzi.it/cgi-bin/CSA/tw7/I/en_US/nosql/Home%20Page). Ironically it's relational database just one without a SQL interface. As such it is not actually a part of the whole NoSQL movement we see today. The term re-surfaced in 2009 when Eric Evans used it to name the current surge in non-relational databases. It seems like the name has stuck for better or for worse. Note that not all projects are included in this post. See the [post on analyzing the NoSQL landscape](http://blog.knuthaugen.no/2010/03/the-nosql-landscape.html) for a more complete listing.
 
-### 1960s
+<h3><a name="1960">1960s</a></h3>
 
 - [MultiValue](http://en.wikipedia.org/wiki/MultiValue) (aka PICK) databases are developed at TRW in 1965.
 - According to comment from Scott Jones [M[umps]](http://en.wikipedia.org/wiki/MUMPS) is developed at Mass General Hospital in 1966. It is a programming language that incorporates a hierarchical database with B+ tree storage.
 - IBM [IMS](http://en.wikipedia.org/wiki/IBM_Information_Management_System), a hierarchical database, is developed with Rockwell and Caterpillar for the Apollo space program in 1966.
 
-### 1970s
+<h3><a name="1970">1970s</a></h3>
 
 - InterSystems develops the ISM product family succeeded by the Open M product, all M[umps] implementations. See comment from Scott Jones below.
 - M[umps] is approved as a ANSI standard language in 1977.
 - in 1979 Ken Thompson creates [DBM](http://en.wikipedia.org/wiki/Dbm) which is released by AT&T. At it's core it is a file-based hash.
 
-### 1980's
+<h3><a name="1980">1980's</a></h3>
 
 Several successors to DBM spring into life.
 
@@ -31,14 +31,14 @@ Several successors to DBM spring into life.
 - [BerkeleyDB](http://en.wikipedia.org/wiki/Berkeley_DB) is created at Berkeley in the transition from 4.3BSD to 4.4BSD. Sleepycat software is started as a company in 1996 when Netscape needed new features for BerkeleyDB. Later acquired by Oracle which still sell and maintain BerkeleyDB.
 - [Lotus Notes](http://www-01.ibm.com/software/lotus/) or rather the server part, Lotus Domino, which really is a document database has it's initial release in 1989, now sold by IBM. It has evolved a lot from the early versions and is now a full office and collaboration suite.
 
-### 1990's
+<h3><a name="1990">1990's</a></h3>
 
 - [GDBM](http://www.vivtek.com/gdbm/) is the Gnu project clone of DBM
 - [Mnesia](http://en.wikipedia.org/wiki/Mnesia) is developed by Ericsson as a soft real-time database to be used in telecom. It is relational in nature but does not use SQL as query language but rather Erlang itself.
 - [InterSystems Caché](http://www.intersystems.com/) launched in 1997 and is a hybrid so-called post-relational database. It has object interfaces, SQL, PICK/MultiValue and direct manipulation of data structures. It is a M[umps] implementation. See Scott Jones comment below for more on the history of InterSystems
 - [Metakit](http://en.wikipedia.org/wiki/Metakit) is started in 1997 and is probably the first document oriented database. Supports smaller datasets than the ones in vogue nowadays.
 
-### 2000-2005
+<h3><a name="2000">2000-2005</a></h3>
 
 This is were the NoSQL train really picks up some momentum and a lot is starting to happen.
 
@@ -50,7 +50,7 @@ This is were the NoSQL train really picks up some momentum and a lot is starting
 - [CouchDB](http://couchdb.apache.org/) is started in 2005 and provides a document database inspired by Lotus Notes. The project moves to the Apache Foundation in 2008.
 - Google [BigTable](http://en.wikipedia.org/wiki/BigTable) is started in 2004 and the research paper is released in 2006.
 
-### 2006-2010
+<h3><a name="2006">2006-2010</a></h3>
 
 - [JackRabbit](http://jackrabbit.apache.org/) is started in 2006 as an implementation of JSR 170 and 283.
 - [Tokyo Cabinet](http://1978th.net/tokyocabinet/) is a successor to QDBM by (Mikio Hirabayashi) started in 2006

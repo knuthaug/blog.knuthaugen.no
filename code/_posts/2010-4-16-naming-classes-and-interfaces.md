@@ -32,7 +32,6 @@ public class DatabaseUserManager : IUserManager {
 }
 
 ```
-
 {: class="full-bleed"}
 
 javas different:
@@ -50,7 +49,6 @@ public class LDAPUserManager extends UserManager {
 }
 
 ```
-
 {: class="full-bleed"}
 
 <p>

@@ -12,7 +12,7 @@ Perhaps the most known craftsmanship consulting firms are Obtiva and 8th Light, 
 
 Let's examine some other tools to use, more tuned in to (Norwegian) consulting firms and companies that do not have this in place now, but rather have their hands full with competing and hanging on to clients. What should one do?
 
-### Organic interest groups
+<h3><a name="organic">Organic interest groups</a></h3>
 
 Mike Cohn explained in Oslo XP meetup talk recently Google's model of special groups within the company forming horizontally across projects. <a href="http://softwareapprenticeship.wordpress.com/">A talk</a> on the same subject at JavaZone 2009 in Oslo discussed the same idea employed in <a href="http://www.knowit.no/">KnowIT ObjectNet</a>, a consulting firm in Oslo, Norway. They even have a cooperation with the Simula Research center on finding out what actually works best.The important bits are:
 
@@ -28,19 +28,19 @@ Reports, internal or external talks or patterns &amp; practises changes are some
 
 This should work well for consultancies in my opinion. People need some time off the project to keep in touch with the company and what better way than to spend it doing research on a hot topic that may bring in future clients? KnowIt also found that you need some hot topics to keep the juices flowing in the developers, but the company could put more regular topics to good use to. And it all depends on the people you have on board.
 
-### Coaching
+<h3><a name="coaching">Coaching</a></h3>
 
 A new programmer fresh out of college, needs guidance to avoid stepping into balls of mud and re-inventing the wrong wheels. How do we accomplish this? Several thoughts emerged on the open space at smidig 2009. Pair programming is an excellent way of transfering knowledge from one head to another. There are a number of factors that <a href="http://blog.obiefernandez.com/content/2009/09/10-reasons-pair-programming-is-not-for-the-masses.html">need to be in place</a> for it to function properly, but done right can produce great results. For a consultancy it requires that a customer allows junior programmers to be put on the project team and the (at least perceived overhead) of mentoring them.
 
 Concrete feedback and guidance while working on real-world problems was mentioned by several people and the rationale was that learning isn't as rapid or valuable in constructed problems. You need wet feet to really appreciate the boots you're getting. Code reviews can also be used to make novice programmers see the errors of their ways <i>and</i> seeing how it should have been done.
 
-### Quality
+<h3><a name="quality">Quality</a></h3>
 
 Never compromise on quality. If a customer ask you to deliver the same features, only a little bit faster, say no. Plain old no. If you're doing it faster, you're cutting corners. You may not think you are, but you are. This requires backbone from both developers in the trenches and managers negotiating contracts.
 
 Don't do overtime (at least not as a rule). You need sustainable pace. Burned-out developers make poor craftsmen and they need a life outside work. Besides, who has the energy to learn Clojure or contribute on open source projects if they spend all their time and energy on work? You need time off. Use it.
 
-### Learning and teaching
+<h3><a name="learning">Learning and teaching</a></h3>
 
 At the core of it all is learning. Becoming a craftsman requires lifelong learning.The principle of Kaizen (from Lean) embodies what I think is the right path: small incremental learning each and every day, improving a small part of the workplace, your skills or your team. Big steps are much harder to do and get right.
 
@@ -51,7 +51,7 @@ Some other points regarding learning: some for the developer and some are for th
 - Keep up with the trends
 - Seek new challenges
 
-### For the company:
+<h3><a name="forcomp">For the company:</a></h3>
 
 - Allow consultants the time to develop
 - Nurture a culture of learning and improve the company in small increments, not just the people. Kaizen all the way.
@@ -59,11 +59,11 @@ Some other points regarding learning: some for the developer and some are for th
 
 And remember: you can't expect to change other people, you can only change yourself. A craftsman shares his knowledge with others and tries to make the community around him grow with him. Give talks at conferences, user groups or inside you company. As a company, encourage developers to give talks, give them time and resources to do so. Follow up on it. Spread the word. Nothing forces you to know your stuff quite like giving a talk on it to an audience. Scary but rewarding.
 
-### Tools
+<h3><a name="tools">Tools</a></h3>
 
 A craftsman needs to know the tools of the trade and to use the right tool for the right job. This is mainly a skill one gets through experience. But the right kind of experience - a varied one. This is the consultants world and consultants are in better shape than most in-house developers when it comes to this. But learning a new paradigm or language will take you far in my opinion. Just the act of learning a totally different language, even though you just use if for toy projects, refreshes your perspectives on your "day-job" language. Especially if your job language is C# or java and you learn a dynamic language or a functional one. The perspective you attack problems with in your job language will change and change for the better. <br /><br />Knowing your IDE or other developer tools is essential, as is knowing and tweaking you platform. This means also that companies must let developers have full control over their development machine. The opposite actually still occurs. And not to mention: the developers need the sexiest hardware money can buy and plenty of screen real-estate.
 
-### People skills
+<h3><a name="theold">People skills</a></h3>
 
 A craftsman need people skills. She needs to understand the customer and make the customer understand her. She needs to be a team player and know when to shut up and when to speak up. She must be responsible, honest and brave. How to achieve all this? Can introvert geeks manage these things? Well, some people will have to work more on it than others, but I feel the environment we operate in and the feedback we get, can develop many of the skills. Keywords are giving developers responsibility to make technical decisions, to work independently, embrace, encourage and reward team efforts, not individual efforts. Challenge their fears and push the limits of their comfort zone a bit, within reason. Careful not to push to hard :-)
 

@@ -6,6 +6,7 @@ function load() {
   addClickHandlers();
   scrollHandler();
   hamburgerMenu();
+  initTOC();
 }
 
 function addClickHandlers() {
@@ -38,6 +39,65 @@ function addClickHandlers() {
       }
     });
   });
+}
+
+function initTOC() {
+  const headings = document.querySelectorAll("h3");
+  const tocContainer = document.querySelector("#toc");
+
+  if (headings.length >= 5) {
+    let i = 1;
+    for (const heading of headings) {
+      tocContainer.appendChild(createElementTocLink(heading, i++));
+    }
+    document.querySelector("#toc").classList.remove("opacity-0");
+  }
+
+  // Intersection Observer Options
+  var options = {
+    root: null,
+    rootMargin: "10px",
+    threshold: 1.0,
+  };
+  var observeHtags = new IntersectionObserver(setCurrent, options);
+
+  headings.forEach((tag) => {
+    observeHtags.observe(tag);
+  });
+}
+
+// intersectiobserver callback
+function setCurrent(entries) {
+  console.log("intersection", entries);
+  const bar = document.querySelector("#toc .bar");
+  for (const entry of entries) {
+    if (entry.isIntersecting === true) {
+      const current = document.querySelector(
+        `#toc a[href="#${entry.target.firstElementChild.getAttribute(
+          "name",
+        )}"]`,
+      );
+      console.log("current", current);
+      const row = current.getAttribute("data-row");
+      bar.setAttribute("data-row", Number(row));
+
+      if (Number(row) !== 1) {
+        bar.style.setProperty("top", `calc(${row - 1} * 28px)`);
+      } else {
+        bar.style.setProperty("top", `0px`);
+      }
+      return;
+    }
+  }
+}
+
+function createElementTocLink(el, num) {
+  const a = document.createElement("a");
+  a.classList.add("toc-link");
+  a.setAttribute("data-row", num);
+  a.href = `#${el.firstElementChild.name}`;
+  a.appendChild(document.createTextNode(el.firstElementChild.innerHTML));
+  return a;
 }
 
 function hamburgerMenu() {
