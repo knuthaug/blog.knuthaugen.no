@@ -11,6 +11,9 @@ In his great talk at [JavaZone this year](https://2024.javazone.no/program/944da
 <p class="quote">"How many tests should we have? What tests should we write? What kind of tests should we write? It's impossible to give a quantitative answer to that, but I can answer with a... feeling!<br/><br/>
 If you run all your tests and they all pass and go green, we will then automatically deploy to production without a human verifying that it works. <br/><br/>If you're comfortable with that, you have enough tests."</p>
 <!--more-->
+
+First things first, the talk is great and you should see it. Now. The rest of the post can wait (in Norwegian though, or possibly auto-translated to you language of choice through your AI service of choice). 
+
 This is extremely well put and hits the nail squarely on the head. I have in the past 7-8 years been trying but also at least sometimes succeeding, to automatically deploy to production whenever all relevant tests pass. I may have been guilty of, along the way of doing this without sufficient test coverage of the important bits, but we all live and learn, don't we? The project I am currently working on, the web and Samsung Smart-tv versions of NRK TV, is doing this and deploying to production many times each day. 
 
 But let's go a little deeper into what Christian is saying. 
