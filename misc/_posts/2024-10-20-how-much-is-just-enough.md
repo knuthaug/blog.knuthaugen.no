@@ -18,6 +18,12 @@ This is extremely well put and hits the nail squarely on the head. I have in the
 
 But let's go a little deeper into what Christian is saying. 
 
+### Lagom 
+
+But first, a small interlude. The Swedes have the wonderful word ["lagom"](https://en.wikipedia.org/wiki/Lagom) which means "just right", not to much, not to little, suitable, appropriateness without necessary perfection etc. And this word in Swedish perfectly captures a feeling, when it's "just right". You know deep down in your bones that this, yes _this_ is just as it should be. And of course the perfect amount of test does not exist. Aim for good enough, aim for just the right amount, make lagom you target today! (I would maintain that this goes for many things in life such a mobile phone screen time, netflix, training, other people or indeed chocolate. Just kidding, chocolate is awesome and too much of a good thing is fantastic).  
+
+Now, back to our regular scheduled programming. 
+
 ### How Many, What and What Kind?
 
 As in the quote, there is no number, percentage or coverage. Test coverage and other related metrics can fool you into believing the number instead of actually knowing that the tests are actually covering the important parts _in the right way_. Test coverage is meaningless without the experience of seeing that tests actually catch the bugs before they go into production. This, in my experience, comes over time, seeing that the tests work by testing what you set out to test, seeing them catch errors in the CD pipeline. Slowly, day by day, you come to trust them more and more until you stop thinking about them, unless they break. 
