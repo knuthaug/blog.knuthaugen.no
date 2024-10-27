@@ -44,11 +44,9 @@ function addClickHandlers() {
 function initTOC() {
   const headings = document.querySelectorAll("h3");
   const tocContainer = document.querySelector("#toc");
-
-  if (headings.length >= 5) {
-    let i = 1;
-    for (const heading of headings) {
-      tocContainer.appendChild(createElementTocLink(heading, i++));
+  if (headings.length >= 6) {
+    for (let i = 1; i <= headings.length; i++) {
+      tocContainer.appendChild(createElementTocLink(headings[i], i++));
     }
     document.querySelector("#toc").classList.remove("opacity-0");
   }
@@ -68,7 +66,6 @@ function initTOC() {
 
 // intersectiobserver callback
 function setCurrent(entries) {
-  console.log("intersection", entries);
   const bar = document.querySelector("#toc .bar");
   for (const entry of entries) {
     if (entry.isIntersecting === true) {
@@ -77,7 +74,8 @@ function setCurrent(entries) {
           "name",
         )}"]`,
       );
-      console.log("current", current);
+      if (!current) return;
+
       const row = current.getAttribute("data-row");
       bar.setAttribute("data-row", Number(row));
 
