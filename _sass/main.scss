@@ -165,7 +165,7 @@ header {
 }
 
 @media screen and (max-width: 1300px) and (min-width: 1040px) {
-  main .hero:nth-child(2) {
+  .has-toc main .hero:nth-child(2) {
     grid-template-columns: 20px 70ch 20px !important;
   }
 }

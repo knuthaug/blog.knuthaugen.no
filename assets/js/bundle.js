@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function load() {
   addClickHandlers();
-  scrollHandler();
+  addScrollHandler();
   hamburgerMenu();
   initTOC();
 }
@@ -42,13 +42,21 @@ function addClickHandlers() {
 }
 
 function initTOC() {
-  const headings = document.querySelectorAll("h3");
+  const headings = Array.from(document.querySelectorAll("h3"));
   const tocContainer = document.querySelector("#toc");
+
   if (headings.length >= 6) {
     for (let i = 1; i <= headings.length; i++) {
-      tocContainer.appendChild(createElementTocLink(headings[i], i++));
+      if (headings[i] === undefined) {
+        continue;
+      }
+
+      tocContainer.appendChild(createElementTocLink(headings[i], i));
     }
     document.querySelector("#toc").classList.remove("opacity-0");
+    document.querySelector("body").classList.add("has-toc");
+  } else {
+    document.querySelector("#toc").remove();
   }
 
   // Intersection Observer Options
@@ -80,7 +88,7 @@ function setCurrent(entries) {
       bar.setAttribute("data-row", Number(row));
 
       if (Number(row) !== 1) {
-        bar.style.setProperty("top", `calc(${row - 1} * 28px)`);
+        bar.style.setProperty("top", `calc(${row - 1} * 29px)`);
       } else {
         bar.style.setProperty("top", `0px`);
       }
@@ -172,7 +180,7 @@ function hamburgerMenu() {
   });
 }
 
-function scrollHandler() {
+function addScrollHandler() {
   window.addEventListener("scroll", (event) => {
     if (window.scrollY > 10 && window.scrollY < 50) {
       document.querySelector("header").classList.add("fixed");
