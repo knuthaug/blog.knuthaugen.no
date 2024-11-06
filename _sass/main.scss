@@ -248,6 +248,16 @@ table {
   }
 }
 
+main p:has(img.center) {
+  text-align: center;
+}
+
+main p img.full-bleed {
+  width: 110%;
+  max-width: 800px;
+  min-width: 300px;
+}
+
 main ol {
   list-style-type: lower-roman;
 }
