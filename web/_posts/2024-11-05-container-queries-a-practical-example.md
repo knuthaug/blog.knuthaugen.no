@@ -19,7 +19,7 @@ The player looks like this in a medium size (600 - 1024px size):
 
 <img src="/assets/images/player-large.png" class="center full-bleed" alt="Large player with control ui"/>
 
-Ant this is how it looks in a small (< 600px size)
+An this is how it looks in a small (< 600px size, zoomed in)
 
 <img src="/assets/images/player-small.png" class="center full-bleed" alt="Small player with control ui"/>
 
@@ -32,11 +32,11 @@ So container queries comes to the rescue.
 
 ### To name or not to name?
 
-A container (or more specifically a _containment context_) can be either nameless or named with the `container-name` property (or a shorthand for both size and name if you prefer). What should you do?
+A container (or more specifically a [_containment context_](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment) (there is more to containers than container queries))  can be either nameless or named with the `container-name` property (or a shorthand for both size and name if you prefer). What should you do?
 
 Well, it depends (of course it depends, it always depends). 
 
-My general rule, based on not so broad an experience, but I still think it's valid is to always name the _containers_ and think very carefully about what will happen if I name the container in the `@container` query or not. That is where stuff can break in interesting ways. Consider this code:
+My general rule, based on not so broad an experience, but which I still think is valid, is to always name the _containers_ and think very carefully about what will happen if I use that name of the container in the `@container` query or not. That is where stuff can break in interesting ways. Consider this code:
 
 ```css
 
