@@ -6,7 +6,7 @@ tags: [kubernetes, devops, ops, skydns, docker]
 excerpt_separator: <!--more-->
 ---
 
-#### Other post in the series
+### Other post in the series
 
 - [Kubernetes Wars Day 0](/2016/06/02/kubernetes-wars-day-0.html)
 - [Kubernetes Wars Day 7](/2016/06/12/kubernetes-wars-day-7.html)

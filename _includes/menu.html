@@ -1,7 +1,7 @@
 <div id="mobile-menu">
   <details open>
     <summary role="button">
-      <a class="link">Categories</a>
+      <a class="link" aria-label="Categories">Categories</a>
     </summary>
     <ul class="display-grid">
       {% for cat in site.categories %}
@@ -21,13 +21,13 @@
     <li><a class="link" href="/about.html">About</a></li>
     <li>
       <a href="/rss.xml"
-        ><img class="icon" src="/assets/icons/rss.svg" />
+        ><img class="icon" alt="RSS icon" src="/assets/icons/rss.svg" />
         RSS feed
       </a>
     </li>
     <li>
       <a href="https://github.com/knuthaug"
-        ><img class="icon" src="/assets/icons/github.svg" />
+        ><img class="icon" alt="Github icon" src="/assets/icons/github.svg" />
         Github page
       </a>
     </li>

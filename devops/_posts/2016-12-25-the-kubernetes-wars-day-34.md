@@ -6,13 +6,13 @@ tags: [kubernetes, docker, devops]
 excerpt_separator: <!--more-->
 ---
 
-#### Other post in the series
+### Other post in the series
 
 - [Kubernetes Wars Day 0](/2016/06/02/kubernetes-wars-day-0.html)
 - [Kubernetes Wars Day 3](/2016/06/04/kubernetes-wars-day-3.html)
 - [Kubernetes Wars Day 7](/2016/06/12/kubernetes-wars-day-7.html)
 
-_Operation k8s log, day 34 1100 Zulu_
+#### _Operation k8s log, day 34 1100 Zulu_
 
 We got used to this kind of fighting after a while, you ease into it and accept it as the new standard operating
 procedure. More and more apps where moved to the kubernetes stack and things where running smoothly. But, when you think to yourself «hmm, I haven't gotten any surprises lately?» that's when they hit you in the face.
