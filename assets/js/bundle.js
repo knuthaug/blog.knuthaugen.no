@@ -44,14 +44,13 @@ function addClickHandlers() {
 function initTOC() {
   const headings = Array.from(document.querySelectorAll("h3"));
   const tocContainer = document.querySelector("#toc");
-
   if (headings.length >= 6) {
-    for (let i = 1; i <= headings.length; i++) {
+    for (let i = 0; i <= headings.length; i++) {
       if (headings[i] === undefined) {
         continue;
       }
 
-      tocContainer.appendChild(createElementTocLink(headings[i], i));
+      tocContainer.appendChild(createElementTocLink(headings[i], i + 1));
     }
     document.querySelector("#toc").classList.remove("opacity-0");
     document.querySelector("body").classList.add("has-toc");
@@ -98,6 +97,7 @@ function setCurrent(entries) {
 }
 
 function createElementTocLink(el, num) {
+  console.log(el);
   const a = document.createElement("a");
   a.classList.add("toc-link");
   a.setAttribute("data-row", num);
