@@ -52,10 +52,10 @@ function initTOC() {
 
       tocContainer.appendChild(createElementTocLink(headings[i], i + 1));
     }
-    document.querySelector("#toc").classList.remove("opacity-0");
+    document.querySelector("#toc")?.classList.remove("opacity-0");
     document.querySelector("body").classList.add("has-toc");
   } else {
-    document.querySelector("#toc").remove();
+    document.querySelector("#toc")?.remove();
   }
 
   // Intersection Observer Options
@@ -97,7 +97,6 @@ function setCurrent(entries) {
 }
 
 function createElementTocLink(el, num) {
-  console.log(el);
   const a = document.createElement("a");
   a.classList.add("toc-link");
   a.setAttribute("data-row", num);
