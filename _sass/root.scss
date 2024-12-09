@@ -21,6 +21,7 @@ html {
   --gradient-blue: rgb(215, 234, 247);
   --gradient-white: rgb(247, 247, 247);
   --main-border-top: #d0e7fa;
+  --header-box-shadow: rgb(0, 0, 0);
 
   --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
 
@@ -38,6 +39,7 @@ html.dark {
   --text-color: rgb(209, 209, 209);
   --main-border-top: #666;
   --primary-gray: rgb(209, 209, 209);
+  --header-box-shadow: rgb(209, 209, 209);
 
   --gradient-blue: #333;
   --gradient-white: rgb(22, 22, 22);
