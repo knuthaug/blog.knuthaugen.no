@@ -17,6 +17,7 @@ html {
   --background: rgb(247, 247, 247);
   --primary-gray: #444;
   --light-gray: rgb(209, 209, 209);
+  --code-quote-bg: hsl(0, 0%, 90%);
 
   --gradient-blue: rgb(215, 234, 247);
   --gradient-white: rgb(247, 247, 247);
@@ -35,11 +36,13 @@ html {
 html.dark {
   --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
   --primary-color: rgb(215, 234, 247);
+  --secondary-color: hsl(213, 47%, 63%);
   --background: rgb(22, 22, 22);
   --text-color: rgb(209, 209, 209);
   --main-border-top: #666;
   --primary-gray: rgb(209, 209, 209);
   --header-box-shadow: rgb(209, 209, 209);
+  --code-quote-bg: hsl(240, 1%, 30%);
 
   --gradient-blue: #333;
   --gradient-white: rgb(22, 22, 22);

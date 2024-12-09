@@ -538,7 +538,7 @@ div.highlight {
 
 p code,
 li code {
-  background-color: hsl(0, 0%, 90%);
+  background-color: var(--code-quote-bg);
   border-radius: var(--border-radius-default);
   padding: 1px 3px 1px 3px;
   font-size: 0.95rem;
