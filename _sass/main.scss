@@ -81,7 +81,6 @@ main#frontpage h2,
 main#category h2,
 main#archive h2 {
   font-size: clamp(1.2rem, 3vw + 1rem, 2rem);
-  color: var(--primary-color);
 }
 
 .cat-button {
@@ -458,7 +457,7 @@ h5 {
 main h2 a,
 main h2 a:visited {
   text-decoration: none;
-  color: var(--primary-color);
+  color: var(--text-color);
   transition: var(--link-transition);
 }
 
