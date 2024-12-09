@@ -1,28 +1,46 @@
 :root {
   --page-margin: 24px;
+  --border-radius-default: 4px;
+  --link-transition: all 0.2s ease-in-out;
+  --header-transition: all 0.2s ease-in-out;
+  --icon-hover-animation: all 0.2s ease-in-out;
+
+  --dropdown-width: 240px;
+
+  --in-animation-duration: 0.4s;
+  --out-animation-duration: 0.2s;
+}
+
+html {
   --primary-color: hsl(213, 62%, 41%);
   --secondary-color: hsl(213, 29%, 51%);
   --background: rgb(247, 247, 247);
   --primary-gray: #444;
   --light-gray: rgb(209, 209, 209);
-  --link-transition: all 0.2s ease-in-out;
-  --header-transition: all 0.2s ease-in-out;
-  --gradient-blue: rgb(215, 234, 247);
-  --border-radius-default: 4px;
-  --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
-  --icon-hover-animation: all 0.2s ease-in-out;
-  --in-animation-duration: 0.4s;
-  --out-animation-duration: 0.2s;
 
+  --gradient-blue: rgb(215, 234, 247);
+  --gradient-white: rgb(247, 247, 247);
+  --main-border-top: #d0e7fa;
+
+  --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
+
+  --text-color: rgb(68, 68, 68);
   --button-color: white;
 
-  --dropdown-width: 240px;
   --dropdown-background: white;
   --dropdown-color: black;
 }
 
-* {
-  box-sizing: border-box;
+html.dark {
+  --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
+  --primary-color: rgb(215, 234, 247);
+  --background: rgb(22, 22, 22);
+  --text-color: rgb(209, 209, 209);
+  --main-border-top: #666;
+  --primary-gray: rgb(209, 209, 209);
+
+  --gradient-blue: #333;
+  --gradient-white: rgb(22, 22, 22);
 }
 
 *:before,

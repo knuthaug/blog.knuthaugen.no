@@ -1,12 +1,50 @@
+const modeLocalStorageKey = "blog.knuthaugen.no.mode";
+
 document.addEventListener("DOMContentLoaded", () => {
   load();
 });
 
 function load() {
+  darkMode();
   addClickHandlers();
   addScrollHandler();
   hamburgerMenu();
   initTOC();
+}
+
+function darkMode() {
+  const mode = localStorage.getItem(modeLocalStorageKey) || "dark";
+  setMode(mode);
+  const icon = document.querySelector("#dark-mode");
+
+  icon.addEventListener("click", (event) => {
+    const currentMode = localStorage.getItem(modeLocalStorageKey);
+    if (currentMode === "dark") {
+      localStorage.setItem(modeLocalStorageKey, "light");
+      setMode("light");
+    } else {
+      localStorage.setItem(modeLocalStorageKey, "dark");
+      setMode("dark");
+    }
+  });
+}
+
+function setMode(mode) {
+  const icon = document.querySelector("#dark-mode");
+
+  if (mode === "dark") {
+    document.querySelector("html").classList.remove("light");
+    document.querySelector("html").classList.add("dark");
+
+    icon.ariaLabel = "Switch to light mode";
+    icon.src = "/assets/icons/sun-moon.svg";
+  } else {
+    document.querySelector("html").classList.remove("dark");
+    document.querySelector("html").classList.add("light");
+
+    icon.ariaLabel = "Switch to dark mode";
+    icon.src = "/assets/icons/moon.svg";
+  }
 }
 
 function addClickHandlers() {
