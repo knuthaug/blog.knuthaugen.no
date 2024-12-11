@@ -1,23 +1,24 @@
 :root {
   --page-margin: 24px;
   --border-radius-default: 4px;
+  --dropdown-width: 240px;
+
   --link-transition: all 0.2s ease-in-out;
   --header-transition: all 0.2s ease-in-out;
   --icon-hover-animation: all 0.2s ease-in-out;
 
-  --dropdown-width: 240px;
-
   --in-animation-duration: 0.4s;
   --out-animation-duration: 0.2s;
+  --body-letter-spacing: 0.02rem;
 }
 
 html {
   --primary-color: hsl(213, 62%, 41%);
   --secondary-color: hsl(213, 29%, 51%);
-  --background: rgb(247, 247, 247);
-  --primary-gray: #444;
+  --background-color: rgb(247, 247, 247);
+  --primary-gray: rgb(68, 68, 68);
   --light-gray: rgb(209, 209, 209);
-  --code-quote-bg: hsl(0, 0%, 90%);
+  --code-quote-background-color: hsl(0, 0%, 90%);
 
   --gradient-blue: rgb(215, 234, 247);
   --gradient-white: rgb(247, 247, 247);
@@ -27,25 +28,28 @@ html {
   --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
 
   --text-color: rgb(68, 68, 68);
-  --button-color: white;
 
-  --dropdown-background: white;
-  --dropdown-color: black;
+  --dropdown-background: var(--background-color);
+  --dropdown-text-color: var(--primary-gray);
 }
 
 html.dark {
-  --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
-  --primary-color: rgb(215, 234, 247);
+  --primary-color: rgb(169, 218, 251);
   --secondary-color: hsl(213, 47%, 63%);
-  --background: rgb(22, 22, 22);
-  --text-color: rgb(209, 209, 209);
+  --background-color: rgb(22, 22, 22);
+  --text-color: rgb(199, 199, 199);
   --main-border-top: #666;
   --primary-gray: rgb(209, 209, 209);
+  --light-gray: rgb(81, 81, 81);
   --header-box-shadow: rgb(209, 209, 209);
-  --code-quote-bg: hsl(240, 1%, 30%);
+  --code-quote-background-color: hsl(240, 1%, 30%);
+  --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
 
-  --gradient-blue: #333;
+  --gradient-blue: rgb(51, 51, 51);
   --gradient-white: rgb(22, 22, 22);
+
+  --dropdown-background: var(--background-color);
+  --dropdown-text-color: var(--primary-gray);
 }
 
 *:before,
