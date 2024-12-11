@@ -261,6 +261,8 @@ main p img.full-bleed {
   width: 110%;
   max-width: 800px;
   min-width: 300px;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius-default);
 }
 
 main ol {
@@ -534,7 +536,8 @@ p {
 }
 
 div.highlight {
-  border: 2px solid #545454;
+  border: 2px solid var(--light-gray);
+  border-radius: var(--border-radius-default);
 }
 
 p code,
