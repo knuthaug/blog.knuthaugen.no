@@ -20,13 +20,18 @@ function darkMode() {
   icon.addEventListener("click", (event) => {
     const currentMode = localStorage.getItem(modeLocalStorageKey);
     if (currentMode === "dark") {
-      localStorage.setItem(modeLocalStorageKey, "light");
-      document.startViewTransition(() => setMode("light"));
+      if (!document.startViewTransition) {
+        setMode("light");
+      } else {
+        document.startViewTransition(() => setMode("light"));
+      }
     } else {
-      localStorage.setItem(modeLocalStorageKey, "dark");
-      document.startViewTransition(() => setMode("dark"));
+      if (!document.startViewTransition) {
+        setMode("dark");
+      } else {
+        document.startViewTransition(() => setMode("dark"));
+      }
     }
-    icon.getBoundingClientRect;
   });
 }
 
@@ -34,16 +39,20 @@ function setMode(mode) {
   const icon = document.querySelector("#dark-mode");
 
   if (mode === "dark") {
+    localStorage.setItem(modeLocalStorageKey, mode);
     document.querySelector("html").classList.remove("light");
-    document.querySelector("html").classList.add("dark");
+    document.querySelector("html").classList.add(mode);
 
     icon.parentElement.ariaLabel = "Switch to light mode";
+    icon.parentElement.title = "Switch to light mode";
     icon.src = "/assets/icons/sun-moon.svg";
   } else {
+    localStorage.setItem(modeLocalStorageKey, mode);
     document.querySelector("html").classList.remove("dark");
-    document.querySelector("html").classList.add("light");
+    document.querySelector("html").classList.add(mode);
 
     icon.parentElement.ariaLabel = "Switch to dark mode";
+    icon.parentElement.title = "Switch to dark mode";
     icon.src = "/assets/icons/moon.svg";
   }
 }
