@@ -13,8 +13,27 @@ function load() {
 }
 
 function darkMode() {
-  const mode = localStorage.getItem(modeLocalStorageKey) || "dark";
-  setMode(mode);
+  const mode = localStorage.getItem(modeLocalStorageKey);
+
+  if (mode) {
+    setMode(mode);
+  } else {
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      setMode("dark");
+    } else {
+      setMode("light");
+    }
+  }
+
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (event) => {
+      setMode(event.matches ? "dark" : "light");
+    });
+
   const icon = document.querySelector("#dark-mode");
 
   icon.addEventListener("click", (event) => {
@@ -138,6 +157,7 @@ function initTOC() {
     document.querySelector("body").classList.add("has-toc");
   } else {
     document.querySelector("#toc")?.remove();
+    return;
   }
 
   // Intersection Observer Options
