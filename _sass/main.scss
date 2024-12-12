@@ -185,7 +185,8 @@ header {
   }
 }
 .marked {
-  background-color: var(--gradient-blue);
+  background-color: var(--header-nav-background-color);
+  color: var(--dark-hover-color) !important;
 }
 
 .quote {
