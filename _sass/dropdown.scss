@@ -68,7 +68,7 @@ details > .collapsing {
   margin: 0;
   font-weight: 500;
   a {
-    &:hover img {
+    &:hover svg {
       filter: var(--icon-drop-shadow);
     }
   }

@@ -11,7 +11,7 @@
     text-decoration: none;
   }
 
-  a:hover img {
+  a:hover svg {
     filter: var(--icon-drop-shadow);
   }
 
@@ -50,7 +50,7 @@
       font-weight: 600;
       letter-spacing: 0.05rem;
 
-      a:hover img {
+      a:hover scss {
         filter: var(--icon-drop-shadow);
       }
 
@@ -108,7 +108,7 @@
       }
     }
 
-    li:hover img {
+    li:hover svg {
       filter: var(--icon-drop-shadow);
     }
   }
