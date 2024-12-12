@@ -21,11 +21,12 @@ function darkMode() {
     const currentMode = localStorage.getItem(modeLocalStorageKey);
     if (currentMode === "dark") {
       localStorage.setItem(modeLocalStorageKey, "light");
-      setMode("light");
+      document.startViewTransition(() => setMode("light"));
     } else {
       localStorage.setItem(modeLocalStorageKey, "dark");
-      setMode("dark");
+      document.startViewTransition(() => setMode("dark"));
     }
+    icon.getBoundingClientRect;
   });
 }
 
@@ -36,13 +37,13 @@ function setMode(mode) {
     document.querySelector("html").classList.remove("light");
     document.querySelector("html").classList.add("dark");
 
-    icon.ariaLabel = "Switch to light mode";
+    icon.parentElement.ariaLabel = "Switch to light mode";
     icon.src = "/assets/icons/sun-moon.svg";
   } else {
     document.querySelector("html").classList.remove("dark");
     document.querySelector("html").classList.add("light");
 
-    icon.ariaLabel = "Switch to dark mode";
+    icon.parentElement.ariaLabel = "Switch to dark mode";
     icon.src = "/assets/icons/moon.svg";
   }
 }

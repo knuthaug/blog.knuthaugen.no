@@ -11,6 +11,12 @@ main {
   border-top: 2px solid var(--main-border-top);
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 400ms;
+  animation-timing-function: ease-in-out;
+}
+
 #toc {
   --bar-grid-row: 2;
 
@@ -495,7 +501,13 @@ main #meta {
   }
 }
 
-:focus {
+:focus:not(:focus-visible) {
+  outline: 0;
+  box-shadow: none;
+}
+
+:focus,
+.focus-visible:focus:not(:focus-visible) {
   outline: none;
   box-shadow: 0 0 0 2px var(--primary-color);
 }
