@@ -19,11 +19,13 @@ html {
   --primary-gray: rgb(68, 68, 68);
   --light-gray: rgb(209, 209, 209);
   --code-quote-background-color: hsl(0, 0%, 90%);
+  --dark-hover-color: var(--primary-gray);
 
   --gradient-blue: rgb(215, 234, 247);
   --gradient-white: rgb(247, 247, 247);
   --main-border-top: #d0e7fa;
   --header-box-shadow: rgb(0, 0, 0);
+  --header-nav-background-color: rgb(215, 234, 247);
 
   --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
 
@@ -42,8 +44,10 @@ html.dark {
   --primary-gray: rgb(209, 209, 209);
   --light-gray: rgb(81, 81, 81);
   --header-box-shadow: rgb(209, 209, 209);
+  --header-nav-background-color: var(--secondary-color);
   --code-quote-background-color: hsl(240, 1%, 30%);
   --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
+  --dark-hover-color: rgb(51, 51, 51);
 
   --gradient-blue: rgb(51, 51, 51);
   --gradient-white: rgb(22, 22, 22);

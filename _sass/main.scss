@@ -340,6 +340,10 @@ nav ul {
         box-shadow: none;
       }
 
+      &:hover {
+        color: var(--dark-hover-color);
+      }
+
       &:hover img {
         filter: var(--icon-drop-shadow);
         cursor: pointer;
@@ -378,7 +382,7 @@ nav ul {
   bottom: 0;
   left: -0.2em;
   right: -0.2em;
-  background-color: var(--gradient-blue);
+  background-color: var(--header-nav-background-color);
   transform-origin: bottom center;
   transform: scaleY(0.1);
   transition: var(--link-transition);
@@ -386,7 +390,7 @@ nav ul {
 
 .link:hover::before {
   transform: scaleY(1);
-  background-color: var(--gradient-blue);
+  background-color: var(--header-nav-background-color);
 }
 
 #frontpage h2 {
@@ -405,7 +409,7 @@ main {
     text-underline-offset: 4px;
     text-decoration-thickness: 1px;
     text-decoration-skip-ink: none;
-    text-decoration-color: #666;
+    text-decoration-color: var(--primary-color);
     color: var(--primary-color);
     font-weight: 450;
     transition: var(--link-transition);
