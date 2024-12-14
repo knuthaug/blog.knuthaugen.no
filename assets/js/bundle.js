@@ -70,7 +70,7 @@ function setMode(mode) {
     icon.parentElement.ariaLabel = "Switch to light mode";
     icon.parentElement.title = "Switch to light mode";
     icon.innerHTML = `<svg
-  class="lucide lucide-sun-moon"
+  class="lucide lucide-sun-moon icon"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -123,7 +123,7 @@ function setMode(mode) {
     icon.parentElement.ariaLabel = "Switch to dark mode";
     icon.parentElement.title = "Switch to dark mode";
     icon.innerHTML = `<svg
-  class="lucide lucide-moon"
+  class="lucide lucide-moon icon"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
