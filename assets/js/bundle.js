@@ -16,15 +16,27 @@ function darkMode() {
   const mode = localStorage.getItem(modeLocalStorageKey);
 
   if (mode) {
-    setMode(mode);
+    if (!document.startViewTransition) {
+      setMode(mode);
+    } else {
+      document.startViewTransition(() => setMode(mode));
+    }
   } else {
     if (
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches
     ) {
-      setMode("dark");
+      if (!document.startViewTransition) {
+        setMode("dark");
+      } else {
+        document.startViewTransition(() => setMode("dark"));
+      }
     } else {
-      setMode("light");
+      if (!document.startViewTransition) {
+        setMode("light");
+      } else {
+        document.startViewTransition(() => setMode("light"));
+      }
     }
   }
 
