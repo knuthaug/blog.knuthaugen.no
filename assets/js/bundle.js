@@ -20,11 +20,11 @@ function darkMode() {
   } else {
     if (
       window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
+      window.matchMedia("(prefers-color-scheme: light)").matches
     ) {
-      setMode("dark");
-    } else {
       setMode("light");
+    } else {
+      setMode("dark");
     }
   }
 
@@ -68,90 +68,25 @@ function setMode(mode) {
     document.querySelector("html").classList.add(mode);
 
     icon.parentElement.ariaLabel = "Switch to light mode";
-    icon.parentElement.title = "Switch to light mode";
-    icon.innerHTML = `<svg
-  class="lucide lucide-sun-moon icon"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4" />
-  <path d="M12 2v2" />
-  <path d="M12 20v2" />
-  <path d="m4.9 4.9 1.4 1.4" />
-  <path d="m17.7 17.7 1.4 1.4" />
-  <path d="M2 12h2" />
-  <path d="M20 12h2" />
-  <path d="m6.3 17.7-1.4 1.4" />
-  <path d="m19.1 4.9-1.4 1.4" />
-</svg>`;
+    icon.parentElement.title =
+      "May the light be with you and illuminate your path";
+    icon.innerHTML = getIcon("sun-moon");
+
     mobileIcon.ariaLabel = "Switch to light mode";
-    mobileIcon.title = "Switch to light mode";
-    mobileIcon.innerHTML = `<svg
-  class="lucide lucide-sun-moon icon"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4" />
-  <path d="M12 2v2" />
-  <path d="M12 20v2" />
-  <path d="m4.9 4.9 1.4 1.4" />
-  <path d="m17.7 17.7 1.4 1.4" />
-  <path d="M2 12h2" />
-  <path d="M20 12h2" />
-  <path d="m6.3 17.7-1.4 1.4" />
-  <path d="m19.1 4.9-1.4 1.4" />
-</svg> Light Mode`;
+    mobileIcon.title = "May the light be with you and illuminate your path";
+    mobileIcon.innerHTML = `${getIcon("sun-moon")} Light Mode`;
   } else {
     localStorage.setItem(modeLocalStorageKey, mode);
     document.querySelector("html").classList.remove("dark");
     document.querySelector("html").classList.add(mode);
 
     icon.parentElement.ariaLabel = "Switch to dark mode";
-    icon.parentElement.title = "Switch to dark mode";
-    icon.innerHTML = `<svg
-  class="lucide lucide-moon icon"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-</svg>`;
+    icon.parentElement.title = "Enter the dark realm my lovelies";
+    icon.innerHTML = getIcon("moon");
+
     mobileIcon.ariaLabel = "Switch to dark mode";
-    mobileIcon.title = "Switch to dark mode";
-    mobileIcon.innerHTML = `<svg
-  class="lucide lucide-moon icon"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-</svg> Dark mode`;
+    mobileIcon.title = "Enter the dark realm my lovelies";
+    mobileIcon.innerHTML = `${getIcon("moon")} Dark mode`;
   }
 }
 
@@ -270,21 +205,7 @@ function hamburgerMenu() {
         hamburger.addEventListener("animationend", cb, { once: true });
 
       iconOnAnimationEnd(() => {
-        hamburger.innerHTML = `<svg
-  class="lucide lucide-x"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M18 6 6 18" />
-  <path d="m6 6 12 12" />
-</svg>`;
+        hamburger.innerHTML = getIcon("x");
         hamburger.classList.remove("icon-fade-out");
         hamburger.classList.add("icon-fade-in");
 
@@ -324,22 +245,7 @@ function hamburgerMenu() {
         hamburger.addEventListener("animationend", cb, { once: true });
 
       iconOnAnimationEnd(() => {
-        hamburger.innerHTML = `<svg
-  class="lucide lucide-menu"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <line x1="4" x2="20" y1="12" y2="12" />
-  <line x1="4" x2="20" y1="6" y2="6" />
-  <line x1="4" x2="20" y1="18" y2="18" />
-</svg>`;
+        hamburger.innerHTML = getIcon("menu");
         hamburger.classList.remove("icon-fade-out");
         hamburger.classList.add("icon-fade-in");
 
@@ -365,4 +271,79 @@ function addScrollHandler() {
       document.querySelector("header").classList.remove("fixed");
     }
   });
+}
+
+function getIcon(icon) {
+  if (icon === "sun-moon") {
+    return `<svg
+  class="lucide lucide-sun-moon icon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.9 4.9 1.4 1.4" />
+  <path d="m17.7 17.7 1.4 1.4" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.3 17.7-1.4 1.4" />
+  <path d="m19.1 4.9-1.4 1.4" />
+</svg>`;
+  } else if (icon === "moon") {
+    return `<svg
+  class="lucide lucide-moon icon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+</svg>`;
+  } else if (icon === "x") {
+    return `<svg
+  class="lucide lucide-x"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M18 6 6 18" />
+  <path d="m6 6 12 12" />
+</svg>`;
+  } else if (icon === "menu") {
+    return `<svg
+  class="lucide lucide-menu"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <line x1="4" x2="20" y1="12" y2="12" />
+  <line x1="4" x2="20" y1="6" y2="6" />
+  <line x1="4" x2="20" y1="18" y2="18" />
+</svg>`;
+  }
 }
