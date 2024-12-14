@@ -9,5 +9,5 @@ A quick post recommending a good talk on microservice architecture by Neal Ford 
 
 Why this talk now? Because I just saw it now ;-)
 
-<iframe src="https://player.vimeo.com/video/138956644" width="100%" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe src="https://player.vimeo.com/video/138956644" width="100%" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <p><a href="https://vimeo.com/138956644">Building Microservice Architectures - Neal Ford</a> from <a href="https://vimeo.com/javazone">JavaZone</a> on <a href="https://vimeo.com">Vimeo</a>.</p>

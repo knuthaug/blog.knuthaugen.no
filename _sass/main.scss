@@ -2,13 +2,23 @@
 @import "dropdown.scss";
 @import "menu.scss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: var(--background);
+  background-color: var(--background-color);
   margin-top: 0;
 }
 
 main {
-  border-top: 2px solid #d0e7fa;
+  border-top: 2px solid var(--main-border-top);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 400ms;
+  animation-timing-function: ease-in-out;
 }
 
 #toc {
@@ -22,7 +32,7 @@ main {
   right: 16px;
   align-self: start;
   display: inline-block;
-  background-color: var(--background);
+  /*background-color: var(--background-color);*/
   padding: 6px 10px;
   display: grid;
   grid-template-columns: 8px auto;
@@ -60,8 +70,8 @@ main {
   background: linear-gradient(
     180deg,
     var(--gradient-blue) 0%,
-    rgb(247, 247, 247) 40%,
-    rgba(247, 247, 247, 1) 100%
+    var(--gradient-white) 40%,
+    var(--gradient-white) 100%
   );
   width: 100%;
   height: 300px;
@@ -94,7 +104,9 @@ main#archive h2 {
 header {
   position: sticky;
   top: 0;
-  background-color: var(--background);
+  background-color: var(--background-color);
+  opacity: 0.95;
+  backdrop-filter: blur(10px);
   z-index: 2;
   display: grid;
   grid-template-columns: minmax(200px, 1.5fr) 1fr;
@@ -179,7 +191,12 @@ header {
   }
 }
 .marked {
-  background-color: var(--gradient-blue);
+  background-color: var(--header-nav-background-color);
+  color: var(--dark-hover-color) !important;
+
+  svg {
+    stroke: var(--dark-hover-color);
+  }
 }
 
 .quote {
@@ -196,9 +213,14 @@ header {
 .icon {
   width: 20px;
   height: 20px;
-  fill: none;
   position: relative;
   top: 4px;
+
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  color: var(--text-color);
 }
 
 .backdrop {
@@ -210,10 +232,10 @@ header {
   background-repeat: no-repeat;
   background-size: 40%;
 
-  img {
+  svg {
     transform: rotate(-15deg);
     stroke: var(--light-gray);
-    opacity: 0.05;
+    opacity: 0.5;
     stroke-width: 2px;
     width: 100%;
     height: 100%;
@@ -224,8 +246,8 @@ header.fixed {
   border-radius: var(--border-radius-default);
   top: 10px;
   padding-top: 4px;
-  background-color: var(--background);
-  box-shadow: 1px 1px 4px #0006;
+  /*background-color: var(--background-color);*/
+  box-shadow: 1px 1px 4px var(--header-box-shadow);
 }
 
 table {
@@ -256,6 +278,8 @@ main p img.full-bleed {
   width: 110%;
   max-width: 800px;
   min-width: 300px;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius-default);
 }
 
 main ol {
@@ -276,7 +300,7 @@ footer {
   font-size: 0.9rem;
   font-family: "Inter italic", sans-serif;
   letter-spacing: 0.05rem;
-  color: #666;
+  color: var(--text-color);
   justify-content: center;
 
   position: absolute;
@@ -287,8 +311,8 @@ footer {
   background: linear-gradient(
     0deg,
     var(--gradient-blue) 0%,
-    rgba(247, 247, 247, 1) 60%,
-    rgba(247, 247, 247, 1) 100%
+    var(--gradient-white) 60%,
+    var(--gradient-white) 100%
   );
 
   & > div {
@@ -302,6 +326,25 @@ footer {
 nav {
   justify-self: end;
   margin-right: var(--page-margin);
+}
+
+@keyframes bounce {
+  0% {
+    transform-origin: center;
+    transform: rotate(0deg);
+  }
+  20% {
+    transform-origin: center;
+    transform: rotate(10deg) scale(1.05);
+  }
+  70% {
+    transform-origin: center;
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform-origin: center;
+    transform: rotate(0deg) scale(1);
+  }
 }
 
 nav ul {
@@ -327,13 +370,22 @@ nav ul {
         box-shadow: none;
       }
 
-      &:hover img {
+      &:hover {
+        color: var(--dark-hover-color);
+      }
+
+      &:hover svg {
         filter: var(--icon-drop-shadow);
         cursor: pointer;
+        animation-name: bounce;
+        animation-duration: 500ms;
+        animation-direction: forwards;
       }
 
       img {
         transition: var(--icon-hover-animation);
+        color: var(--text-color);
+        stroke: var(--text-color);
       }
     }
 
@@ -363,7 +415,7 @@ nav ul {
   bottom: 0;
   left: -0.2em;
   right: -0.2em;
-  background-color: var(--gradient-blue);
+  background-color: var(--header-nav-background-color);
   transform-origin: bottom center;
   transform: scaleY(0.1);
   transition: var(--link-transition);
@@ -371,7 +423,7 @@ nav ul {
 
 .link:hover::before {
   transform: scaleY(1);
-  background-color: var(--gradient-blue);
+  background-color: var(--header-nav-background-color);
 }
 
 #frontpage h2 {
@@ -383,14 +435,14 @@ main {
   font-size: 1.25rem;
   font-family: "Source serif", serif;
   font-weight: 350;
-  color: #444;
+  color: var(--text-color);
   margin-bottom: calc(var(--page-margin) * 2);
 
   a {
     text-underline-offset: 4px;
     text-decoration-thickness: 1px;
     text-decoration-skip-ink: none;
-    text-decoration-color: #666;
+    text-decoration-color: var(--primary-color);
     color: var(--primary-color);
     font-weight: 450;
     transition: var(--link-transition);
@@ -450,7 +502,7 @@ h5 {
 main h2 a,
 main h2 a:visited {
   text-decoration: none;
-  color: #000;
+  color: var(--text-color);
   transition: var(--link-transition);
 }
 
@@ -486,7 +538,13 @@ main #meta {
   }
 }
 
-:focus {
+:focus:not(:focus-visible) {
+  outline: 0;
+  box-shadow: none;
+}
+
+:focus,
+.focus-visible:focus:not(:focus-visible) {
   outline: none;
   box-shadow: 0 0 0 2px var(--primary-color);
 }
@@ -523,15 +581,17 @@ main .hero:nth-child(2) .full-bleed {
 p {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+  letter-spacing: var(--body-letter-spacing);
 }
 
 div.highlight {
-  border: 2px solid #545454;
+  border: 2px solid var(--light-gray);
+  border-radius: var(--border-radius-default);
 }
 
 p code,
 li code {
-  background-color: hsl(0, 0%, 90%);
+  background-color: var(--code-quote-background-color);
   border-radius: var(--border-radius-default);
   padding: 1px 3px 1px 3px;
   font-size: 0.95rem;
