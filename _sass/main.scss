@@ -326,6 +326,25 @@ nav {
   margin-right: var(--page-margin);
 }
 
+@keyframes bounce {
+  0% {
+    transform-origin: center;
+    transform: rotate(0deg);
+  }
+  20% {
+    transform-origin: center;
+    transform: rotate(10deg) scale(1.05);
+  }
+  70% {
+    transform-origin: center;
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform-origin: center;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
 nav ul {
   list-style-type: none;
   vertical-align: middle;
@@ -356,6 +375,9 @@ nav ul {
       &:hover svg {
         filter: var(--icon-drop-shadow);
         cursor: pointer;
+        animation-name: bounce;
+        animation-duration: 500ms;
+        animation-direction: forwards;
       }
 
       img {
