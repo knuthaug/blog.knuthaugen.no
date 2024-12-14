@@ -29,11 +29,10 @@
   grid-template-columns: 1fr 1fr;
   background-color: var(--background-color);
   gap: 8px;
-  width: calc(100vw - 8px);
-  margin-left: 4px;
-  margin-right: 4px;
-  margin-top: 4px;
+  width: calc(95vw);
+  margin: 4px;
   padding-left: 8px;
+  padding-right: 8px;
   border: 1px solid var(--light-gray);
   border-radius: var(--border-radius-default);
 
@@ -50,22 +49,21 @@
       font-weight: 600;
       letter-spacing: 0.05rem;
 
-      a:hover scss {
-        filter: var(--icon-drop-shadow);
-      }
-
       a {
         transition: var(--link-transition);
         color: var(--primary-gray);
         text-decoration: none;
         padding: 4px;
 
-        img {
-          transition: var(--icon-hover-animation);
+        &:hover svg {
+          filter: var(--icon-drop-shadow);
         }
 
         &:active {
           box-shadow: none;
+        }
+        &:hover:not(:has(svg)) {
+          color: var(--dark-hover-color);
         }
       }
     }
@@ -84,7 +82,12 @@
       font-family: "Inter", sans-serif;
       font-weight: 600;
       letter-spacing: 0.05rem;
+      color: var(--primary-gray);
       cursor: pointer;
+
+      &:hover {
+        color: var(--dark-hover-color);
+      }
     }
   }
 
