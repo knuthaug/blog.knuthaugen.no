@@ -6,16 +6,16 @@ tags: []
 excerpt_separator: <!--more-->
 ---
 
-In the year 2024, very nearly 2025, what use is a website without dark mode? I can't really recall how long it's been since I started using a dark theme in my programming editor of choice. I _think_ it was as early as uni, where the painfully bright white look of the Microsoft Visual Basic developer tool made me see the, eh, darkness. It was my first programming language in uni, after a brief stint of actual basic on a Casio calculator during a summer holiday a few years earlier. Ahh, the not so good old days. 
+In the year 2024, very nearly 2025, what use is a website without dark mode? I can't really recall how long it's been since I started using a dark theme in my programming editor of choice. I _think_ it was as early as university, where the painfully bright white look of the Microsoft Visual Basic developer tool made me see the, eh, darkness. It was my first programming language in uni, after a brief stint of actual basic on a Casio calculator during a summer holiday a few years earlier. Ahh, the not so good old days. 
 
-Luckily, I've since moved on.
+Luckily, I've since moved on to darker pastures.
 
-This post is not really meant to reminisce too much about the old days, but rather about implementing dark mode on this very blog and along the way, some tidbits about [view transitions](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) and the `prefers-color-scheme` ([read more](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)) css feature for bringing the users OS preference, where supported, into play. 
+This post is not really meant to reminisce too much about the old days, but rather about implementing dark mode on this very blog and along the way, some tidbits about [view transitions](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) and the `prefers-color-scheme` ([read more](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)) css feature for bringing the users OS preference, where it's supported, into play. 
 <!--more-->
 
 <h3><a name="darkmode">Dark Mode</a></h3>
 
-There are several options available when implementing dark mode. I started out with a light design where most of the colours in use where defined in css custom properties on the `:root` selector for no specific reason other than convenience. So I chose the model of re-defining all variables for a dark mode and tweaking them for looks. I moved all variables tpo the `html` selector instead, and they where then re-defined on `html.dark` for dark mode. Variables for paddings, margins and the like, the same for both modes stayed on `:root`. 
+There are several options available when implementing dark mode. I started out with a light design where most of the colours in use where defined in css custom properties on the `:root` selector for no specific reason other than convenience. So I chose the model of re-defining all variables for a dark mode and tweaking them for looks and then switching with a css class on `html`. I moved all variables tpo the `html` selector instead, and they where then re-defined on `html.dark` for dark mode. Variables for paddings, margins and the like, the same for both modes stayed on `:root`. 
 
 ```css
 :root {
@@ -50,7 +50,7 @@ html.dark {
 ```
 {: class="full-bleed"}
 
-The default is dark mode, so the page is rendered with `class="dark"` on page load and then the logic for selecting the appropriate mode kicks in in a `DOMContentLoaded` callback. If you have a page that is clients-side rendered you can delay the rendering until the decision on which mode to use is clear, but since this blog is statically rendered, the default needs to be sane and the code to switch modes needs to be loaded early to avoid flickering.
+The default is dark mode, so the page is rendered with `class="dark"` on page load and then the logic for selecting the appropriate mode kicks in in a `DOMContentLoaded` callback. If you have a page that is clients-side rendered you can delay the rendering until the decision on which mode to use is clear, but since this blog is statically rendered, the default needs to be sane and the code to switch modes needs to be loaded early to avoid flickering when the selected theme is applied.
 
 <h3><a name="prefers">Enter prefers-color-scheme</a></h3>
 
@@ -95,7 +95,7 @@ function darkMode() {
 
 The `setMode` function also stores the preference in localStorage so it is remembered for the next page load/visit. 
 
-There is also a possibility of reacting to a change in the OS preference with an event handler, which is nifty feature. This little snippet accomplishes that. Other things to do in this function is to make labels and icons switch according to the current mode so the menu looks nice and is accessible (omitted for brevity).
+There is also a possibility of reacting to a change in the OS preference with an event handler, which is nifty feature. This little snippet accomplishes that. Other things to do in this function is to make labels and icons switch according to the current mode so the menu looks nice and is accessible (omitted in the example for brevity).
 
 ```javascript
   window
@@ -106,7 +106,7 @@ There is also a possibility of reacting to a change in the OS preference with an
 ```
 {: class="full-bleed"}
 
-<h3><a name="viewtrans">View Transitions</a></h3>
+<h3><a name="viewtrans">Adding a Transition</a></h3>
 
 The [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) is not yet widely supported (Chrome@111 \| Edge@111 \| Safari@18 \| Firefox@n/a) so use only user with fairly recent browser will get the benefit of using them. But as the fallback is just no animations, it degrades fairly well. And it's very little code required to use it for an in-page transition such as this. The API gives us a lot of possibilities of creating smooth transitions between page views or any kind of DOM changes. For an SPA the use case is pretty much given, to mimic a native app when navigating between screens. For in-page transitions, such as this, it will smooth the changing of all colours between light and dark mode. 
 
