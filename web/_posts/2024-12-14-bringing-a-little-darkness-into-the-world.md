@@ -108,7 +108,7 @@ There is also a possibility of reacting to a change in the OS preference with an
 
 <h3><a name="viewtrans">View Transitions</a></h3>
 
-The [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) is not yet widely supported (Chrome@111 \| Edge@111 \| Safari@18 \| Firefox@n/a) so use only user with fairly recent browser will get the benefit of using them. But as the fallback is just no animations, it degrades fairly well. And it's very little code required to use it for an in-page transition such as this. 
+The [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) is not yet widely supported (Chrome@111 \| Edge@111 \| Safari@18 \| Firefox@n/a) so use only user with fairly recent browser will get the benefit of using them. But as the fallback is just no animations, it degrades fairly well. And it's very little code required to use it for an in-page transition such as this. The API gives us a lot of possibilities of creating smooth transitions between page views or any kind of DOM changes. For an SPA the use case is pretty much given, to mimic a native app when navigating between screens. For in-page transitions, such as this, it will smooth the changing of all colours between light and dark mode. 
 
 Styling and tweaking the animation is done via a css block. 
 
@@ -121,7 +121,9 @@ Styling and tweaking the animation is done via a css block.
 ```
 {: class="full-bleed"}
 
-`view-transition-old` is a screenshot of the old state, and `view-transition-new` is a live snapshot of the new state. The actual transition is triggered in javascript with a fallback if the `startViewTransition` function is unavailable in the browser. `startViewTransition` takes a callback to be called when the transition snapshot is made and which should change the DOM for the new state. 
+`view-transition-old` is a screenshot of the old state, and `view-transition-new` is a live snapshot of the new state. The default animation is for the old snapshot to animate from opacity 1 to 0 and the new animates from opacity 0 to 1, creating a cross-fade. This works well in my case, so I kept it. 
+
+The actual transition is triggered in javascript with a fallback if the `startViewTransition` function is unavailable in the browser. `startViewTransition` takes a callback to be called when the transition snapshot is made and which should change the DOM for the new state. 
 
 ```javascript
 
