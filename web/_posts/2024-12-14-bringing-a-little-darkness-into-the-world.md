@@ -126,7 +126,7 @@ Styling and tweaking the animation is done via a css block.
 The actual transition is triggered in javascript with a fallback if the `startViewTransition` function is unavailable in the browser. `startViewTransition` takes a callback to be called when the transition snapshot is made and which should change the DOM for the new state. 
 
 ```javascript
-
+if(something) {
  if (!document.startViewTransition) {
       setMode("light");
     } else {
