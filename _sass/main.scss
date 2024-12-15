@@ -66,6 +66,12 @@ main {
   right: 20px !important;
 }
 
+video {
+  width: 113%;
+  border-radius: var(--border-radius-default);
+  border: 2px solid var(--light-gray);
+}
+
 .niceties {
   background: linear-gradient(
     180deg,
@@ -154,6 +160,19 @@ header {
       letter-spacing: 0;
       font-weight: 600;
     }
+  }
+
+  main .hero:nth-child(2) .full-bleed {
+    margin-left: calc(var(--page-margin) * -1) !important;
+    margin-right: calc(var(--page-margin) * -1) !important;
+  }
+
+  video {
+    min-width: 107%;
+    border-radius: var(--border-radius-default);
+    border: 2px solid var(--light-gray);
+    padding-left: 0;
+    padding-right: 0;
   }
 
   #toc {
