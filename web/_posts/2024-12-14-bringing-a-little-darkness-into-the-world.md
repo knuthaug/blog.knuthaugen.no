@@ -3,6 +3,7 @@ layout: post
 title: "Bringing a Little Darkness Into the World"
 published: true
 tags: []
+excerpt_separator: <!--more-->
 ---
 
 In the year 2024, very nearly 2025, what use is a website without dark mode? I can't really recall how long it's been since I started using a dark theme in my programming editor of choice. I _think_ it was as early as uni, where the painfully bright white look of the Microsoft Visual Basic developer tool made me see the, eh, darkness. It was my first programming language in uni, after a brief stint of actual basic on a Casio calculator during a summer holiday a few years earlier. Ahh, the not so good old days. 
@@ -10,6 +11,7 @@ In the year 2024, very nearly 2025, what use is a website without dark mode? I c
 Luckily, I've since moved on.
 
 This post is not really meant to reminisce too much about the old days, but rather about implementing dark mode on this very blog and along the way, some tidbits about [view transitions](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) and the `prefers-color-scheme` ([read more](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)) css feature for bringing the users OS preference, where supported, into play. 
+<!--more-->
 
 <h3><a name="darkmode">Dark Mode</a></h3>
 
