@@ -147,7 +147,7 @@ It looks like this
 
 <video class="full-bleed" src="/assets/media/darkness.mov" autoplay loop muted></video>
 
-I'm gonna be exploring the View Transition API more in a future post, with a look at cross-page transitions in combination with the very promising (Speculation Rules API)[https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API], so stay tuned. 
+I'm gonna be exploring the View Transition API more in a future post, with a look at cross-page transitions in combination with the very promising [Speculation Rules API](https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API), so stay tuned. 
 
 <h3><a name="caveat">Pitfalls and parting thoughts</a></h3>
 
