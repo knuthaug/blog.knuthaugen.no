@@ -15,7 +15,7 @@ This post is not really meant to reminisce too much about the old days, but rath
 
 <h3><a name="darkmode">Dark Mode</a></h3>
 
-There are several options available when implementing dark mode. I started out with a light design where most of the colours in use where defined in css custom properties on the `:root` selector for no specific reason other than convenience. So I chose the model of re-defining all variables for a dark mode and tweaking them for looks and then switching with a css class on `html`. I moved all variables tpo the `html` selector instead, and they where then re-defined on `html.dark` for dark mode. Variables for paddings, margins and the like, the same for both modes stayed on `:root`. 
+There are several options available when implementing dark mode. I started out with a light design where most of the colours in use where defined in css custom properties on the `:root` selector for no specific reason other than convenience. So I chose the model of re-defining all variables for a dark mode and tweaking them for looks and then switching with a css class on `<html>`. I moved all variables to the `<html>` selector instead, and they where then re-defined on `html.dark` for dark mode. Variables for paddings, margins and the like, the same for both modes stayed on `:root`. 
 
 ```css
 :root {
@@ -70,7 +70,7 @@ So first step is checking if the user has a preference. Since I opted to make th
 ```
 {: class="full-bleed"}
 
-`setMode` in this case sets a class on `html`, "light" or "dark" accordingly. To support that the user might have a preference on _this_ site that is different than the OS preference, we store it in localStorage too, and read that first. 
+`setMode` in this case sets a class on `<html>`, "light" or "dark" accordingly. To support that the user might have a preference on _this_ site that is different than the OS preference, we store it in localStorage too, and read that first. 
 
 
 ```javascript
@@ -121,7 +121,7 @@ Styling and tweaking the animation is done via a css block.
 ```
 {: class="full-bleed"}
 
-`view-transition-old` is a screenshot of the old state, and `view-transition-new` is a live snapshot of the new state. The default animation is for the old snapshot to animate from opacity 1 to 0 and the new animates from opacity 0 to 1, creating a cross-fade. This works well in my case, so I kept it. 
+`view-transition-old` is a screenshot of the old state, and `view-transition-new` is a live snapshot of the new state. The default animation is for the old snapshot to animate from opacity 1 to 0 and the new animates from opacity 0 to 1, creating a cross-fade. This works well in my case, so I kept it.
 
 The actual transition is triggered in javascript with a fallback if the `startViewTransition` function is unavailable in the browser. `startViewTransition` takes a callback to be called when the transition snapshot is made and which should change the DOM for the new state. 
 
@@ -147,12 +147,12 @@ It looks like this
 
 <video class="full-bleed" src="/assets/media/darkness.mov" autoplay loop muted></video>
 
-<h3><a name="caveat">Caveats and parting thoughts</a></h3>
+<h3><a name="caveat">Pitfalls and parting thoughts</a></h3>
 
 I encountered a couple of snags along the way, that might come in handy for the next one to come along. 
 
-* At first I didn't specify a class on `html` as a default. This creates a very unwanted flash on loading, before the class is set. Always specify a default class for the initial colours. 
+* At first I didn't specify a class on `<html>` as a default. This creates a very unwanted flash on loading, before the class is set. Always specify a default class for the initial colours. 
 
-* I learned the hard way that if you use svgs in an `img` element, you will get the default stroke colour on the svg, and it will not (at least not easily) be styled by a colour variable. By using the svgs directly with an `<svg>` tag, they can be styles easily with variables when switching modes. 
+* I learned the hard way that if you use svgs in an `<img>` element, you will get the default stroke colour on the svg, and it will not (at least not easily) be styled by a colour variable. By using the svgs directly with an `<svg>` tag, they can be styles easily with variables when switching modes. 
 
 Dark mode/light mode can be achieved with little code both in css and javascript and does not need to complicate your webapp or code. Hopefully you found it useful. 
