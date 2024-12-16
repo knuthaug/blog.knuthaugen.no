@@ -54,7 +54,7 @@ The default is dark mode, so the page is rendered with `class="dark"` on page lo
 
 <h3><a name="prefers">Enter prefers-color-scheme</a></h3>
 
-For operating systems supporting it (MacOS and Windows at least) the system setting of preferring a dark theme will make the browsers also return true when using `prefers-color-schema` in a media query in css or using `window.matchMedia("(prefers-color-scheme: dark)")` in javascript. This feature is widely available in browsers since chrome@76 \| Edge@79 \| Firefox@67 \| Safari@12.1
+For operating systems supporting it (MacOS and Windows at least) the system setting of preferring a dark theme will make the browsers also return true when using `prefers-color-schema` in a media query in css or using `window.matchMedia("(prefers-color-scheme: dark)")` in javascript. This feature is widely available in browsers since **chrome@76 \| Edge@79 \| Firefox@67 \| Safari@12.1**
 
 So first step is checking if the user has a preference. Since I opted to make the dark mode the default, I'll check for a light mode preference. 
 
@@ -108,7 +108,7 @@ There is also a possibility of reacting to a change in the OS preference with an
 
 <h3><a name="viewtrans">Adding a Transition</a></h3>
 
-The [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) is not yet widely supported (Chrome@111 \| Edge@111 \| Safari@18 \| Firefox@n/a) so use only user with fairly recent browser will get the benefit of using them. But as the fallback is just no animations, it degrades fairly well. And it's very little code required to use it for an in-page transition such as this. The API gives us a lot of possibilities of creating smooth transitions between page views or any kind of DOM changes. For an SPA the use case is pretty much given, to mimic a native app when navigating between screens. For in-page transitions, such as this, it will smooth the changing of all colours between light and dark mode. 
+The [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API) is not yet widely supported (**Chrome@111 \| Edge@111 \| Safari@18 \| Firefox@n/a**) so use only user with fairly recent browser will get the benefit of using them. But as the fallback is just no animations, it degrades fairly well. And it's very little code required to use it for an in-page transition such as this. The API gives us a lot of possibilities of creating smooth transitions between page views or any kind of DOM changes. For an SPA the use case is pretty much given, to mimic a native app when navigating between screens. For in-page transitions, such as this, it will smooth the changing of all colours between light and dark mode. 
 
 Styling and tweaking the animation is done via a css block. 
 
@@ -146,6 +146,8 @@ if(something) {
 It looks like this
 
 <video class="full-bleed" src="/assets/media/darkness.mov" autoplay loop muted></video>
+
+I'm gonna be exploring the View Transition API more in a future post, with a look at cross-page transitions in combination with the very promising (Speculation Rules API)[https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API], so stay tuned. 
 
 <h3><a name="caveat">Pitfalls and parting thoughts</a></h3>
 
