@@ -322,7 +322,6 @@ footer {
   color: var(--text-color);
   align-items: center;
   line-height: 1.5em;
-  background-color: red;
 
   position: absolute;
   bottom: 0;
@@ -342,7 +341,16 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
+    h4 {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-top: 0;
+    }
+
     div {
+      align-self: center;
+    }
+    div:last-child {
       align-self: center;
       text-align: center;
     }
@@ -392,11 +400,12 @@ footer {
   footer {
     & > div {
       grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    ul {
-      display: none;
+      gap: 10px;
+      div {
+        ul {
+          display: none;
+        }
+      }
     }
   }
 }
