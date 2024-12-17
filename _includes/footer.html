@@ -1,8 +1,23 @@
 <footer>
-  <div>
-    All sins and virtues committed by Knut Haugen. <br />Errors and omissions
-    are, sadly, a part of life.<br />
-    © 2012-2024
+  <div class="display-grid">
+    <ul class="display-grid">
+      {% for cat in site.categories %}
+      <li>
+        <a
+          class="{% if page.title == cat[0] %}marked{% endif %}"
+          href="/{{cat[0]}}/"
+        >
+          {% capture category %}{{ cat[0] }}{% endcapture %} {% capture class
+          %}icon{% endcapture %} {% include icon.liquid %} {{cat[0]}}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    <div>
+      All sins and virtues belong to yours truly. Errors and omissions are,
+      sadly, a part of life.<br />
+      Knut Haugen © 2012-2024
+    </div>
   </div>
 </footer>
 <script>
