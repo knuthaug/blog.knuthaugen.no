@@ -3,6 +3,7 @@ layout: post
 title: My book list
 mt_id: 3
 date: 2009-09-15 10:08:32 +02:00
+excerpt_separator: <!--more-->
 ---
  This is a list of all the books I've read that are in some way related to programming and software development, along with some thoughts on them.
 ### Languages
@@ -14,6 +15,7 @@ date: 2009-09-15 10:08:32 +02:00
 	<li>Programming Perl. A must when beginning to program Perl. Nice reference and enough depth to keep you going for a long time.</li>
 	<li>Practical mod_perl</li>
 	<li>Perl Best Practices by Damian Conway</li>
+	<!--more-->
 	<li>Higher-order Perl by Mark Jason Dominus. This is a gem of a book for every Perl developer that wishes to expand her repertoire of tricks, but not suitable for beginners. It tackles topics such as memoization, currying, recursion and iterators, recursive-descent parsers and other neat stuff for transforming code using code.</li>
 	<li>Perl Cookbook. A collection of recipes for solving small and large problems in idiomatic Perl.</li>
 	<li>Perl Testing by Ian langworth and Chromatic. Nice rundown of Perl testing covering both Test::Class and Test::More. It's in the developer notebooks series so it's really hands on all the way through.</li>
