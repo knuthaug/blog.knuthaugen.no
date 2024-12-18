@@ -1,8 +1,154 @@
 <footer>
-  <div>
-    All sins and virtues committed by Knut Haugen. <br />Errors and omissions
-    are, sadly, a part of life.<br />
-    © 2012-2024
+  <div class="footer-wrapper">
+    <div id="footer-left">
+      <h4>Categories</h4>
+      <ul class="display-grid">
+        {% for cat in site.categories %}
+        <li>
+          <a
+            class="{% if page.title == cat[0] %}marked{% endif %}"
+            href="/{{cat[0]}}/"
+          >
+            {% capture category %}{{ cat[0] }}{% endcapture %} {% capture class
+            %}icon{% endcapture %} {% include icon.liquid %} {{cat[0]}}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div id="footer-right">
+      <ul>
+        <li>
+          <a
+            href="#"
+            aria-label="Switch to dark mode"
+            title="Switch to dark mode"
+          >
+            <svg
+              class="lucide lucide-moon icon"
+              id="dark-mode-footer"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="/rss.xml" aria-label="rss feed" title="RSS feed for site">
+            <svg
+              class="lucide lucide-rss icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 11a9 9 0 0 1 9 9" />
+              <path d="M4 4a16 16 0 0 1 16 16" />
+              <circle cx="5" cy="19" r="1" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/knuthaug"
+            aria-label="Github page"
+            title="my github page"
+            ><svg
+              class="lucide lucide-github icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+              />
+              <path d="M9 18c-4.51 2-5-2-7-2" />
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://bsky.app/profile/knuthaug.bsky.social"
+            aria-label="Bluesky profile"
+            title="Bluesky profile"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="icon"
+              stroke="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 8.56675C12 8.56675 7.87619 0.22183 2.70999 1.05903C-0.906331 1.64506 2.17634 10.571 3.21796 12.0702C4.25958 13.5694 6.32331 12.5684 6.32331 12.5684C6.32331 12.5684 0.640808 14.0699 5.29012 18.5743C9.73023 22.876 12 16.0718 12 16.0718"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M12.1523 8.62388C12.1523 8.62388 16.2762 0.278959 21.4424 1.11616C25.0587 1.70219 21.976 10.6281 20.9344 12.1273C19.8928 13.6265 17.829 12.6255 17.829 12.6255C17.829 12.6255 23.5115 14.127 18.8622 18.6314C14.4221 22.9331 12.1523 16.129 12.1523 16.129"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/knuthaugen/"
+            aria-label="LinkedIn profile"
+            title="LinkedIn profile"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="icon"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-linkedin"
+            >
+              <path
+                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+              ></path>
+              <rect width="4" height="12" x="2" y="9"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+        </li>
+      </ul>
+      <span id="fluff"
+        >All sins and virtues belong to yours truly. Errors and omissions are,
+        sadly, a part of life.<br
+      /></span>
+      Knut Haugen © 2012-2024
+    </div>
   </div>
 </footer>
 <script>

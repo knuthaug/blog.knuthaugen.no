@@ -28,7 +28,7 @@
   display: none;
   grid-template-columns: 1fr 1fr;
   background-color: var(--background-color);
-  gap: 8px;
+  gap: var(--icon-grid-gap);
   width: calc(95vw);
   margin: 4px;
   padding-left: 8px;
