@@ -365,6 +365,7 @@ footer {
       margin-block-start: 10px;
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: var(--icon-grid-gap);
 
       li {
         display: block;
@@ -373,6 +374,10 @@ footer {
         font-family: "Inter", sans-serif;
         font-weight: 600;
         letter-spacing: 0.05rem;
+
+        &:nth-child(odd) {
+          justify-self: right;
+        }
 
         a {
           transition: var(--link-transition);
@@ -413,6 +418,10 @@ footer {
     gap: 10px;
     div {
       ul {
+        display: none;
+      }
+
+      #fluff {
         display: none;
       }
     }
