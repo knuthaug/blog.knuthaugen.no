@@ -315,7 +315,7 @@ main ul {
 
 footer {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) min(80ch, 90%) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) min(90ch, 90%) minmax(0, 1fr);
   font-size: 0.9rem;
   font-family: "Inter italic", sans-serif;
   letter-spacing: 0.05rem;
@@ -335,11 +335,15 @@ footer {
     var(--gradient-white) 100%
   );
 
-  & > div {
-    padding-top: 10px;
+  .footer-wrapper {
     grid-column: 2;
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+
+  #footer-left {
+    padding-top: 10px;
+    display: grid;
 
     h4 {
       text-align: center;
@@ -347,64 +351,59 @@ footer {
       margin-top: 0;
     }
 
-    div {
-      align-self: center;
-    }
-    div:last-child {
-      align-self: center;
-      text-align: center;
-    }
-  }
+    ul {
+      list-style-type: none;
+      padding-inline-start: 10px;
+      margin-block-start: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
 
-  ul {
-    list-style-type: none;
-    padding-inline-start: 10px;
-    margin-block-start: 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+      li {
+        display: block;
+        margin-right: calc(var(--page-margin) / 2);
+        margin: 2px 4px 0 4px;
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.05rem;
 
-    li {
-      display: block;
-      margin-right: calc(var(--page-margin) / 2);
-      margin: 2px 4px 0 4px;
-      font-family: "Inter", sans-serif;
-      font-weight: 600;
-      letter-spacing: 0.05rem;
+        a {
+          transition: var(--link-transition);
+          color: var(--primary-gray);
+          text-decoration: none;
+          padding: 4px;
 
-      a {
-        transition: var(--link-transition);
-        color: var(--primary-gray);
-        text-decoration: none;
-        padding: 4px;
+          &:hover svg {
+            filter: var(--icon-drop-shadow);
+            cursor: pointer;
+            animation-name: bounce;
+            animation-duration: 500ms;
+            animation-direction: forwards;
+          }
 
-        &:hover svg {
-          filter: var(--icon-drop-shadow);
-          cursor: pointer;
-          animation-name: bounce;
-          animation-duration: 500ms;
-          animation-direction: forwards;
-        }
-
-        &:active {
-          box-shadow: none;
-        }
-        &:hover:not(:has(svg)) {
-          color: var(--dark-hover-color);
+          &:active {
+            box-shadow: none;
+          }
+          &:hover:not(:has(svg)) {
+            color: var(--dark-hover-color);
+          }
         }
       }
     }
   }
+
+  #footer-right {
+    align-self: center;
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 650px) {
-  footer {
-    & > div {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      div {
-        ul {
-          display: none;
-        }
+  div.footer-wrapper {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    div {
+      ul {
+        display: none;
       }
     }
   }
