@@ -36,9 +36,11 @@ function darkMode() {
 
   const icon = document.querySelector("#dark-mode");
   const mobileIcon = document.querySelector("#dark-mode-mobile");
+  const footerIcon = document.querySelector("#dark-mode-footer");
 
   icon.addEventListener("click", darkModeClickHandler);
   mobileIcon.addEventListener("click", darkModeClickHandler);
+  footerIcon.addEventListener("click", darkModeClickHandler);
 }
 
 function darkModeClickHandler(_event) {
@@ -61,6 +63,7 @@ function darkModeClickHandler(_event) {
 function setMode(mode) {
   const icon = document.querySelector("#dark-mode");
   const mobileIcon = document.querySelector("#dark-mode-mobile");
+  const footerIcon = document.querySelector("#dark-mode-footer");
 
   if (mode === "dark") {
     localStorage.setItem(modeLocalStorageKey, mode);
@@ -75,6 +78,10 @@ function setMode(mode) {
     mobileIcon.ariaLabel = "Switch to light mode";
     mobileIcon.title = "May the light be with you and illuminate your path";
     mobileIcon.innerHTML = `${getIcon("sun-moon")} Light Mode`;
+
+    footerIcon.ariaLabel = "Switch to light mode";
+    footerIcon.title = "May the light be with you and illuminate your path";
+    footerIcon.innerHTML = `${getIcon("sun-moon")} Light Mode`;
   } else {
     localStorage.setItem(modeLocalStorageKey, mode);
     document.querySelector("html").classList.remove("dark");
@@ -87,6 +94,10 @@ function setMode(mode) {
     mobileIcon.ariaLabel = "Switch to dark mode";
     mobileIcon.title = "Enter the dark realm my lovelies";
     mobileIcon.innerHTML = `${getIcon("moon")} Dark mode`;
+
+    footerIcon.ariaLabel = "Switch to light mode";
+    footerIcon.title = "May the light be with you and illuminate your path";
+    footerIcon.innerHTML = `${getIcon("sun-moon")} Light Mode`;
   }
 }
 

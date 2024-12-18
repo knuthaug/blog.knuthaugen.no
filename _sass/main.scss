@@ -408,6 +408,11 @@ footer {
       justify-self: center;
       margin-block-start: 0;
       padding-inline-start: 0;
+
+      li a {
+        padding: 10px;
+        margin: -10px;
+      }
     }
   }
 }
