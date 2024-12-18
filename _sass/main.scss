@@ -313,6 +313,14 @@ main ul {
   }
 }
 
+a:hover svg {
+  filter: var(--icon-drop-shadow);
+  cursor: pointer;
+  animation-name: bounce;
+  animation-duration: 500ms;
+  animation-direction: forwards;
+}
+
 footer {
   display: grid;
   grid-template-columns: minmax(0, 1fr) min(90ch, 90%) minmax(0, 1fr);
@@ -372,17 +380,10 @@ footer {
           text-decoration: none;
           padding: 4px;
 
-          &:hover svg {
-            filter: var(--icon-drop-shadow);
-            cursor: pointer;
-            animation-name: bounce;
-            animation-duration: 500ms;
-            animation-direction: forwards;
-          }
-
           &:active {
             box-shadow: none;
           }
+
           &:hover:not(:has(svg)) {
             color: var(--dark-hover-color);
           }
@@ -394,6 +395,15 @@ footer {
   #footer-right {
     align-self: center;
     text-align: center;
+
+    ul {
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: repeat(5, 50px);
+      justify-self: center;
+      margin-block-start: 0;
+      padding-inline-start: 0;
+    }
   }
 }
 
@@ -458,14 +468,6 @@ nav ul {
 
       &:hover {
         color: var(--dark-hover-color);
-      }
-
-      &:hover svg {
-        filter: var(--icon-drop-shadow);
-        cursor: pointer;
-        animation-name: bounce;
-        animation-duration: 500ms;
-        animation-direction: forwards;
       }
 
       img {
