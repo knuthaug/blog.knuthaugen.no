@@ -49,4 +49,26 @@
   <link rel="stylesheet" href="/assets/css/styles.css" />
   <script type="text/javascript" src="/assets/js/bundle.js"></script>
   <link rel="expect" href="main" blocking="render" />
+  <script type="speculationrules">
+        {
+      "prerender": [{
+        "where": {
+          "and": [
+            { "href_matches": "/*/2024/*" },
+            { "not": {"href_matches": "/*/*/*/*darkness*"}}
+          ]
+        },
+        "eagerness": "moderate"
+      }],
+      "prefetch": [{
+        "where": {
+          "and": [
+            { "href_matches": "/*" },
+            { "not": {"selector_matches": ".do-not-prefetch"}}
+          ]
+        },
+        "eagerness": "moderate"
+      }]
+    }
+  </script>
 </head>

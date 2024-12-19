@@ -2,6 +2,20 @@ const modeLocalStorageKey = "blog.knuthaugen.no.mode";
 
 document.addEventListener("DOMContentLoaded", () => {
   load();
+
+  // Load web-vitals.js and log LCP updates to console
+  var script = document.createElement("script");
+  script.src =
+    "https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.iife.js";
+  script.onload = function () {
+    window.webVitals.onLCP(
+      ({ value }) => {
+        console.log(`LCP time: ${Math.round(value)} ms`);
+      },
+      { reportAllChanges: true },
+    );
+  };
+  document.head.appendChild(script);
 });
 
 function load() {
@@ -36,6 +50,15 @@ function addPageEventHandlers() {
   onpageswap = (event) => {
     console.log("pageswap", event);
   };
+
+  document.addEventListener("prerenderingchange", () => {
+    console.log(`The page has been activated!`);
+
+    const activationStart = Math.round(
+      performance.getEntriesByType("navigation")[0].activationStart,
+    );
+    console.log(`The page was activated at: ${activationStart}`);
+  });
 }
 
 function darkMode() {
