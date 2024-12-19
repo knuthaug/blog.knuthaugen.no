@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  view-transition-name: mode;
 }
 
 body {
@@ -15,10 +16,13 @@ main {
   border-top: 2px solid var(--main-border-top);
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 400ms;
-  animation-timing-function: ease-in-out;
+::view-transition-old(mode) {
+  animation-duration: 150ms;
+  animation-timing-function: ease-out;
+}
+::view-transition-new(mode) {
+  animation-duration: 300ms;
+  animation-timing-function: ease-in;
 }
 
 #toc {
