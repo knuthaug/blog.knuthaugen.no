@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark" style="--mode-animation-duration-hide: 250ms;
+  --mode-animation-duration-show: 250ms;">
   {% include head.html %}
   <body>
     {% include header.html %}
-    <div class="main-container">
+    <div id="main-container">
        {% if page.name == 'archive.md' %}
        <main id="archive">
         {% endif %}

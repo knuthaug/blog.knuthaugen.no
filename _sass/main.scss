@@ -2,9 +2,12 @@
 @import "dropdown.scss";
 @import "menu.scss";
 
+@view-transition {
+  navigation: auto;
+}
+
 html {
   scroll-behavior: smooth;
-  view-transition-name: mode;
 }
 
 body {
@@ -12,17 +15,18 @@ body {
   margin-top: 0;
 }
 
-main {
-  border-top: 2px solid var(--main-border-top);
+::view-transition-old(root) {
+  animation-duration: var(--mode-animation-duration-hide);
+  animation-timing-function: ease-in-out;
 }
 
-::view-transition-old(mode) {
-  animation-duration: 150ms;
-  animation-timing-function: ease-out;
+::view-transition-new(root) {
+  animation-duration: var(--mode-animation-duration-show);
+  animation-timing-function: ease-in-out;
 }
-::view-transition-new(mode) {
-  animation-duration: 300ms;
-  animation-timing-function: ease-in;
+
+main {
+  border-top: 2px solid var(--main-border-top);
 }
 
 #toc {
@@ -89,7 +93,7 @@ video {
   z-index: -2;
 }
 
-.main-container {
+#main-container {
   min-height: 100vh; /* will cover the 100% of viewport */
   overflow: hidden;
   display: block;
@@ -125,6 +129,7 @@ header {
   max-width: 60rem;
   margin: 0 auto;
   transition: var(--header-transition);
+  view-transition-name: header;
 
   h1 {
     font-family: "Stacker", sans-serif;

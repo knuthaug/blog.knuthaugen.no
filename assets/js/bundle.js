@@ -8,8 +8,34 @@ function load() {
   darkMode();
   addClickHandlers();
   addScrollHandler();
+  addPageEventHandlers();
   hamburgerMenu();
   initTOC();
+}
+
+function addPageEventHandlers() {
+  onpagehide = (event) => {
+    console.log("pagehide", event);
+  };
+
+  onpagereveal = (event) => {
+    console.log("pagereveal", event);
+    if (event.viewTransition) {
+      const fromUrl = new URL(navigation.activation.from.url);
+      const currentUrl = new URL(navigation.activation.entry.url);
+      console.log("view transition", fromUrl, currentUrl, event.viewTransition);
+    } else {
+      console.log("pagereveal: no view transition");
+    }
+  };
+
+  onpageshow = (event) => {
+    console.log("pageshow", event);
+  };
+
+  onpageswap = (event) => {
+    console.log("pageswap", event);
+  };
 }
 
 function darkMode() {
@@ -43,19 +69,61 @@ function darkMode() {
   footerIcon.addEventListener("click", darkModeClickHandler);
 }
 
-function darkModeClickHandler(_event) {
+async function darkModeClickHandler(_event) {
+  const modetransitionDurationHide = "350ms";
+  const modeTransitionDurationShow = "350ms";
+
+  const pageTransitionDurationHide = "250ms";
+  const pageTransitionDurationShow = "250ms";
   const currentMode = localStorage.getItem(modeLocalStorageKey);
+
+  const body = document.querySelector("body");
+
   if (currentMode === "dark") {
     if (!document.startViewTransition) {
       setMode("light");
     } else {
-      document.startViewTransition(() => setMode("light"));
+      body.style.setProperty(
+        "--mode-animation-duration-hide",
+        modetransitionDurationHide,
+      );
+      body.style.setProperty(
+        "--mode-animation-duration-show",
+        modeTransitionDurationShow,
+      );
+      const trans = document.startViewTransition(() => setMode("light"));
+      await trans.finished;
+      body.style.setProperty(
+        "--mode-animation-duration-hide",
+        pageTransitionDurationHide,
+      );
+      body.style.setProperty(
+        "--mode-animation-duration-show",
+        pageTransitionDurationShow,
+      );
     }
   } else {
     if (!document.startViewTransition) {
       setMode("dark");
     } else {
-      document.startViewTransition(() => setMode("dark"));
+      body.style.setProperty(
+        "--mode-animation-duration-hide",
+        modetransitionDurationHide,
+      );
+      body.style.setProperty(
+        "--mode-animation-duration-show",
+        modeTransitionDurationShow,
+      );
+      const trans = document.startViewTransition(() => setMode("dark"));
+      await trans.finished;
+      body.style.setProperty(
+        "--mode-animation-duration-hide",
+        pageTransitionDurationHide,
+      );
+      body.style.setProperty(
+        "--mode-animation-duration-show",
+        pageTransitionDurationShow,
+      );
     }
   }
 }
