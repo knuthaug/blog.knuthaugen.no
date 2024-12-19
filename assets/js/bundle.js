@@ -64,12 +64,14 @@ function darkMode() {
   const mobileIcon = document.querySelector("#dark-mode-mobile");
   const footerIcon = document.querySelector("#dark-mode-footer");
 
-  icon.addEventListener("click", darkModeClickHandler);
+  icon.parentElement.addEventListener("click", darkModeClickHandler);
   mobileIcon.addEventListener("click", darkModeClickHandler);
   footerIcon.addEventListener("click", darkModeClickHandler);
 }
 
 async function darkModeClickHandler(_event) {
+  const hideProp = "--mode-animation-duration-hide";
+  const showProp = "--mode-animation-duration-show";
   const modetransitionDurationHide = "350ms";
   const modeTransitionDurationShow = "350ms";
 
@@ -83,49 +85,29 @@ async function darkModeClickHandler(_event) {
     if (!document.startViewTransition) {
       setMode("light");
     } else {
-      body.style.setProperty(
-        "--mode-animation-duration-hide",
-        modetransitionDurationHide,
-      );
-      body.style.setProperty(
-        "--mode-animation-duration-show",
-        modeTransitionDurationShow,
-      );
+      setProperty(body, hideProp, modetransitionDurationHide);
+      setProperty(body, showProp, modeTransitionDurationShow);
       const trans = document.startViewTransition(() => setMode("light"));
       await trans.finished;
-      body.style.setProperty(
-        "--mode-animation-duration-hide",
-        pageTransitionDurationHide,
-      );
-      body.style.setProperty(
-        "--mode-animation-duration-show",
-        pageTransitionDurationShow,
-      );
+      setProperty(body, hideProp, pageTransitionDurationHide);
+      setProperty(body, showProp, pageTransitionDurationShow);
     }
   } else {
     if (!document.startViewTransition) {
       setMode("dark");
     } else {
-      body.style.setProperty(
-        "--mode-animation-duration-hide",
-        modetransitionDurationHide,
-      );
-      body.style.setProperty(
-        "--mode-animation-duration-show",
-        modeTransitionDurationShow,
-      );
+      setProperty(body, hideProp, modetransitionDurationHide);
+      setProperty(body, showProp, modeTransitionDurationShow);
       const trans = document.startViewTransition(() => setMode("dark"));
       await trans.finished;
-      body.style.setProperty(
-        "--mode-animation-duration-hide",
-        pageTransitionDurationHide,
-      );
-      body.style.setProperty(
-        "--mode-animation-duration-show",
-        pageTransitionDurationShow,
-      );
+      setProperty(body, hideProp, pageTransitionDurationHide);
+      setProperty(body, showProp, pageTransitionDurationShow);
     }
   }
+}
+
+function setProperty(element, property, value) {
+  element.style.setProperty(property, value);
 }
 
 function setMode(mode) {
@@ -138,34 +120,45 @@ function setMode(mode) {
     document.querySelector("html").classList.remove("light");
     document.querySelector("html").classList.add(mode);
 
+    for (const el of [icon, footerIcon]) {
+    }
+
     icon.parentElement.ariaLabel = "Switch to light mode";
     icon.parentElement.title =
       "May the light be with you and illuminate your path";
-    icon.innerHTML = getIcon("sun-moon");
+    icon.parentElement.innerHTML = getIcon("sun-moon", "dark-mode");
 
     mobileIcon.ariaLabel = "Switch to light mode";
     mobileIcon.title = "May the light be with you and illuminate your path";
-    mobileIcon.innerHTML = `${getIcon("sun-moon")} Light Mode`;
+    mobileIcon.innerHTML = `${getIcon(
+      "sun-moon",
+      "dark-mode-mobile",
+    )} Light Mode`;
 
-    footerIcon.ariaLabel = "Switch to light mode";
-    footerIcon.title = "May the light be with you and illuminate your path";
-    footerIcon.innerHTML = `${getIcon("sun-moon")} Light Mode`;
+    footerIcon.parentElement.ariaLabel = "Switch to light mode";
+    footerIcon.parentElement.title =
+      "May the light be with you and illuminate your path";
+    footerIcon.innerHTML = `${getIcon("sun-moon", "dark-mode-footer")}`;
   } else {
     localStorage.setItem(modeLocalStorageKey, mode);
     document.querySelector("html").classList.remove("dark");
     document.querySelector("html").classList.add(mode);
 
+    for (const el of [icon, footerIcon]) {
+    }
+
     icon.parentElement.ariaLabel = "Switch to dark mode";
     icon.parentElement.title = "Enter the dark realm my lovelies";
-    icon.innerHTML = getIcon("moon");
+    icon.parentElement.innerHTML = getIcon("moon", "dark-mode");
+    icon.id = "dark-mode";
 
     mobileIcon.ariaLabel = "Switch to dark mode";
     mobileIcon.title = "Enter the dark realm my lovelies";
-    mobileIcon.innerHTML = `${getIcon("moon")} Dark mode`;
+    mobileIcon.innerHTML = `${getIcon("moon", "dark-mode-mobile")} Dark mode`;
 
-    footerIcon.ariaLabel = "Switch to light mode";
-    footerIcon.title = "May the light be with you and illuminate your path";
-    footerIcon.innerHTML = `${getIcon("sun-moon")} Light Mode`;
+    footerIcon.parentElement.ariaLabel = "Switch to dark mode";
+    footerIcon.parentElement.title = "Enter the dark realm my lovelies";
+    footerIcon.innerHTML = `${getIcon("moon", "dark-mode-footer")}`;
   }
 }
 
@@ -352,10 +345,11 @@ function addScrollHandler() {
   });
 }
 
-function getIcon(icon) {
+function getIcon(icon, id) {
   if (icon === "sun-moon") {
     return `<svg
   class="lucide lucide-sun-moon icon"
+  id="${id}"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -379,6 +373,7 @@ function getIcon(icon) {
   } else if (icon === "moon") {
     return `<svg
   class="lucide lucide-moon icon"
+  id="${id}"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -394,6 +389,7 @@ function getIcon(icon) {
   } else if (icon === "x") {
     return `<svg
   class="lucide lucide-x"
+  id="${id}"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -410,6 +406,7 @@ function getIcon(icon) {
   } else if (icon === "menu") {
     return `<svg
   class="lucide lucide-menu"
+  id="${id}"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
