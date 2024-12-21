@@ -37,7 +37,7 @@ function addPageEventHandlers() {
     if (event.viewTransition) {
       const fromUrl = new URL(navigation.activation.from.url);
       const currentUrl = new URL(navigation.activation.entry.url);
-      console.log("view transition", fromUrl, currentUrl, event.viewTransition);
+      console.log("view transition", fromUrl.toString(), currentUrl.toString());
     } else {
       console.log("pagereveal: no view transition");
     }
@@ -51,8 +51,8 @@ function addPageEventHandlers() {
     console.log("pageswap", event);
   };
 
-  document.addEventListener("prerenderingchange", () => {
-    console.log(`The page has been activated!`);
+  document.addEventListener("prerenderingchange", (event) => {
+    console.log(`prerenderingchange:`, event);
 
     const activationStart = Math.round(
       performance.getEntriesByType("navigation")[0].activationStart,
