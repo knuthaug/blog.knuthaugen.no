@@ -52,19 +52,20 @@
   <script type="speculationrules">
         {
       "prerender": [{
+        "source": "document",
         "where": {
-          "and": [
-            { "href_matches": "/*/2024/*" },
-            { "not": {"href_matches": "/*/*/*/*darkness*"}}
+           "and": [
+             { "href_matches": "/*/2024*" },
+            { "not": {"selector_matches": ".no-prerender"}}
           ]
-        },
+       },
         "eagerness": "moderate"
       }],
       "prefetch": [{
         "where": {
-          "and": [
-            { "href_matches": "/*" },
-            { "not": {"selector_matches": ".do-not-prefetch"}}
+           "and": [
+             {"href_matches": "/*"},
+             { "not": {"selector_matches": ".no-prefetch"}}
           ]
         },
         "eagerness": "moderate"
