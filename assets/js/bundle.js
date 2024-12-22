@@ -5,11 +5,61 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function load() {
+  addWebVitals();
   darkMode();
   addClickHandlers();
   addScrollHandler();
   hamburgerMenu();
   initTOC();
+}
+
+function addWebVitals() {
+  // Load web-vitals.js and log LCP updates to console
+  var script = document.createElement("script");
+  script.src =
+    "https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.iife.js";
+  script.onload = function () {
+    const values = {};
+
+    window.webVitals.onLCP(
+      ({ value }) => {
+        values.lcp = `${Math.round(value)} ms`;
+      },
+      { reportAllChanges: true },
+    );
+
+    window.webVitals.onFCP(
+      ({ value }) => {
+        values.fcp = `${Math.round(value)} ms`;
+      },
+      { reportAllChanges: true },
+    );
+
+    window.webVitals.onINP(
+      ({ value }) => {
+        console.log(`INP time: ${Math.round(value)} ms`);
+      },
+      { reportAllChanges: true },
+    );
+
+    window.webVitals.onCLS(
+      ({ value }) => {
+        values.cls = `${value}`;
+      },
+      { reportAllChanges: true },
+    );
+    window.webVitals.onTTFB(
+      ({ value }) => {
+        values.ttfb = `${Math.round(value)} ms`;
+      },
+      { reportAllChanges: true },
+    );
+
+    setTimeout(() => {
+      console.log("Web Vitals", values);
+    }, 2000);
+  };
+  document.head.appendChild(script);
 }
 
 function darkMode() {
