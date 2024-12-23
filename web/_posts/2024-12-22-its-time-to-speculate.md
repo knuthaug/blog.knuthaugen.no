@@ -28,6 +28,33 @@ Be vary of your users and what kind of browsers and hardware they are on, as alw
 
 <h3><a name="events">Events</a></h3>
 
+There are several events that are relevant to prerendering, prefetching and view transitions, some new and some existing. 
+
+- [prerenderingchange](https://developer.mozilla.org/en-US/docs/Web/API/Document/prerenderingchange_event): This event is fired on a prerendered document when the document is shown to the user. This can be handy for triggering browser apis that are delayed during prerendering. Related, the speculation rules API introduces the 
+[prerendering property](https://developer.mozilla.org/en-US/docs/Web/API/Document/prerendering) which is true when a document is being prerendered, false otherwise. 
+- [pageswap](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageswap_event): The pageswap event is fired when you navigate across documents, when the previous document is about to unload. The event has a `viewTransition` property that represents the inbound document view transition.  
+- [pageshow](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageshow_event): This event is sent to the window when the browser displays a page due to navigation. 
+- [pagereveal](https://developer.mozilla.org/en-US/docs/Web/API/Window/pagereveal_event): The pagereveal event is fired when a document is first rendered, either when loading a fresh document from the network or activating a document (either from back/forward cache (bfcache) or prerender).
+
+This creates a life cycle of these events when loading e.g. the front page page, prerendering the next and navigating to it with a pretty view transition on top. 
+
+```md
+            (any previous page): pageswap
+                      |
+            (any previous page): pagehide
+                      |
+            front page: pageshow
+                      |
+            next page: pageshow
+                      |
+            next page: pageswap
+                      |
+            next page: prerenderingchange
+                      |
+            next page: pagereveal
+
+```
+
 <h3><a name="implementation">Implementation Details</a></h3>
 
 To get some numbers to compare, I implemented [Core Web Vitals](https://web.dev/explore/learn-core-web-vitals) on this blog before beginning to speculate about what to preload. Since this blog is statically generated and there is only small amounts of javascript, it's pretty fast from the get-go. Values for largest contentful paint and first contentful paint are normally between 200 and 400 ms and time to first byte is > 50ms. These are low numbers, so I also implemented a test site with some blocking javascript in the pages to simulate a beast of a page with 1500-2000 ms loading/rendering time. These are not uncommon values for framework-heavy sites with a lot of client-side rendering or lots of API calls in the page. I mean, everything below 2.5s is considered good in web vitals speak. I think that number is way too high, but that is a story for another day. 
@@ -87,6 +114,7 @@ This snippet enables view transitions for cross-page navigations.
 
 And adjusting the animation duration allows for shorter duration for navigation transitions than for the <a href="/web/2024/12/14/bringing-a-little-darkness-into-the-world.html" class="no-prerender">earlier mentioned</a> dark mode transition. 
 
+A prerendered page typically gets a LCP time of around 50-100ms while prefetched pages land around 120-150ms. 
 
 <h3><a name="debug">Debugging Speculation Rules</a></h3>
 

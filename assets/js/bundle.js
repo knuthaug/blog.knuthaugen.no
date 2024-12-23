@@ -14,7 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       { reportAllChanges: true },
     );
+
+    window.webVitals.onFCP(
+      ({ value }) => {
+        console.log(`FCP time: ${Math.round(value)} ms`);
+      },
+      { reportAllChanges: true },
+    );
   };
+  window.webVitals.onTTFB(
+    ({ value }) => {
+      console.log(`TTFB time: ${Math.round(value)} ms`);
+    },
+    { reportAllChanges: true },
+  );
   document.head.appendChild(script);
 });
 

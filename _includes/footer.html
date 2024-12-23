@@ -159,6 +159,6 @@
   ga('create', 'UA-60838481-1', 'auto');
   ga('send', 'pageview', {
     'page': '{{ page.url }}',
-    'title': '{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}'
+    'title': "{% if page.title %}{{ page.title | uri_escape }}{% else %}{{ site.title | uri_escape}}{% endif %}"
   });
 </script>
