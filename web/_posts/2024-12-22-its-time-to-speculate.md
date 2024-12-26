@@ -4,6 +4,7 @@ title: "It's Time to Speculate"
 published: true
 date: 2024-12-23
 tags: []
+desc: "Let's take the speculation rules API for a spin and see what the benefits are"
 ---
 
 After my colleague Ingvild made me aware of the [Speculation Rules API](https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API) I got really interested in learning more about it, testing it out and see how it feels to use in actual code. The ability to specify rules about how and when to prefetch or even prerender future navigations on a website or in an app is very powerful. But as always, with [great power comes great responsibility](https://en.wikipedia.org/wiki/With_great_power_comes_great_responsibility). 

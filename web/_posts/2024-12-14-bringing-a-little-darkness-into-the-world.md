@@ -4,6 +4,7 @@ title: "Bringing a Little Darkness Into the World"
 published: true
 tags: []
 excerpt_separator: <!--more-->
+desc: "Let's implement dark mode and view transitions on this blog, and explore css selectors for detecting theme preference from the OS"
 ---
 
 In the year 2024, very nearly 2025, what use is a website without dark mode? I can't really recall how long it's been since I started using a dark theme in my programming editor of choice. I _think_ it was as early as university, where the painfully bright white look of the Microsoft Visual Basic developer tool made me see the, eh, darkness. It was my first programming language in uni, after a brief stint of actual basic on a Casio calculator during a summer holiday a few years earlier. Ahh, the not so good old days. 

@@ -14,10 +14,10 @@
   />
   <meta
     property="og:description"
-    content="Views on code, IT and the life of a Nerd"
+    content="{% if page.desc != undefined %} {{page.desc}} {% else %} Views on code, IT and the life of a Nerd{% endif %}"
   />
-  <meta property="og:url" content="https://blog.knuthaugen.no/" />
-  <meta property="og:title" content="{{page.title }}" />
+  <meta property="og:url" content="https://blog.knuthaugen.no{{page.url}}" />
+  <meta property="og:title" content="{{page.title}}" />
   <link
     rel="preload"
     href="/assets/fonts/source-serif.woff2"
