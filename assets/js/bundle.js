@@ -2,42 +2,13 @@ const modeLocalStorageKey = "blog.knuthaugen.no.mode";
 
 document.addEventListener("DOMContentLoaded", () => {
   load();
-
-  // Load web-vitals.js and log LCP updates to console
-  var script = document.createElement("script");
-  script.src =
-    "https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.iife.js";
-  script.onload = function () {
-    window.webVitals.onLCP(
-      ({ value }) => {
-        console.log(`LCP time: ${Math.round(value)} ms`);
-      },
-      { reportAllChanges: true },
-    );
-
-    window.webVitals.onFCP(
-      ({ value }) => {
-        console.log(`FCP time: ${Math.round(value)} ms`);
-      },
-      { reportAllChanges: true },
-    );
-
-    window.webVitals.onTTFB(
-      ({ value }) => {
-        console.log(`TTFB time: ${Math.round(value)} ms`);
-      },
-      { reportAllChanges: true },
-    );
-  };
-
-  document.head.appendChild(script);
 });
 
 function load() {
   darkMode();
   addClickHandlers();
   addScrollHandler();
-  addPageEventHandlers();
+  //addPageEventHandlers();
   hamburgerMenu();
   initTOC();
 }

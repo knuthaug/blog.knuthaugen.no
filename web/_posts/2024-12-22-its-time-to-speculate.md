@@ -6,7 +6,7 @@ date: 2024-12-23
 tags: []
 ---
 
-After my colleague Ingvild made me aware of the [Speculation Rules API](https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API) I have been quite obsessed with learning more about it, testing it out and see how it feels to use in actual code. The ability to specify rules about how and when to prefetch or even prerender future navigations on a website or in an app is very powerful. But as always, with [great power comes great responsibility](https://en.wikipedia.org/wiki/With_great_power_comes_great_responsibility). 
+After my colleague Ingvild made me aware of the [Speculation Rules API](https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API) I got really interested in learning more about it, testing it out and see how it feels to use in actual code. The ability to specify rules about how and when to prefetch or even prerender future navigations on a website or in an app is very powerful. But as always, with [great power comes great responsibility](https://en.wikipedia.org/wiki/With_great_power_comes_great_responsibility). 
 
 <h3><a name="rules">Speculation Rules API</a></h3>
 
@@ -34,7 +34,7 @@ There are several events that are relevant to prerendering, prefetching and view
 [prerendering property](https://developer.mozilla.org/en-US/docs/Web/API/Document/prerendering) which is true when a document is being prerendered, false otherwise. 
 - [pageswap](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageswap_event): The pageswap event is fired when you navigate across documents, when the previous document is about to unload. The event has a `viewTransition` property that represents the inbound document view transition.  
 - [pageshow](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageshow_event): This event is sent to the window when the browser displays a page due to navigation. 
-- [pagereveal](https://developer.mozilla.org/en-US/docs/Web/API/Window/pagereveal_event): The pagereveal event is fired when a document is first rendered, either when loading a fresh document from the network or activating a document (either from back/forward cache (bfcache) or prerender).
+- [pagereveal](https://developer.mozilla.org/en-US/docs/Web/API/Window/pagereveal_event): The pagereveal event is fired when a document is first rendered, either when loading a fresh document from the network or activating a document (either from back/forward cache (bfcache) or prerender). `pagereveal` also has the `viewTransition` property. 
 
 This creates a life cycle of these events when loading e.g. the front page page, prerendering the next and navigating to it with a pretty view transition on top. 
 
@@ -55,9 +55,33 @@ This creates a life cycle of these events when loading e.g. the front page page,
 
 ```
 
+<h3><a name="debug">Debugging Speculation Rules</a></h3>
+
+The main way to debug the speculative rules is found under the "Application" tab in chrome devtools. Under "Background services" there's a "Speculative loads" entry with sub-entries "Rules" and "Speculations". 
+
+**Overview view**
+
+<img src="/assets/images/speculation-1.png" alt="Overview of speculation debugger" class="full-bleed"/>
+
+In the event of navigating to a page which is not covered by the speculation rules, the overview tab will show why the rules did not match and this can be very helpful in deciding whether this is the correct behaviour or if the rules should be changed. 
+
+**Ruleset view**
+
+<img src="/assets/images/speculation-2.png" alt="Rules view" class="full-bleed"/>
+
+**Speculations detail**
+
+<img src="/assets/images/speculation-3.png" alt="Speculation detail view" class="full-bleed"/>
+
+This last view is the most useful in my experience. The status column will change when speculations are triggered, from "not triggered" to "ready" or possibly to "Failure" when it either fails to prerender due to an error or is kicked out of the cache due to another prerender being performed. 
+
+The really cool feature is if you click on the "inspect" button on a ready speculation, and then switch to e.g. the network pane, you will get the network data for the prerendered page instead of the page you are on. This is very neat!
+
+Barry Pollard has written a fantastic [blog post](https://developer.chrome.com/docs/devtools/application/debugging-speculation-rules) on the chrome dev blog on debugging speculation rules. Read that for the full lowdown on debugging. 
+
 <h3><a name="implementation">Implementation Details</a></h3>
 
-To get some numbers to compare, I implemented [Core Web Vitals](https://web.dev/explore/learn-core-web-vitals) on this blog before beginning to speculate about what to preload. Since this blog is statically generated and there is only small amounts of javascript, it's pretty fast from the get-go. Values for largest contentful paint and first contentful paint are normally between 200 and 400 ms and time to first byte is > 50ms. These are low numbers, so I also implemented a test site with some blocking javascript in the pages to simulate a beast of a page with 1500-2000 ms loading/rendering time. These are not uncommon values for framework-heavy sites with a lot of client-side rendering or lots of API calls in the page. I mean, everything below 2.5s is considered good in web vitals speak. I think that number is way too high, but that is a story for another day. 
+To get some numbers to compare, I implemented [Core Web Vitals](https://web.dev/explore/learn-core-web-vitals) on this blog before beginning to speculate about what to preload. Since this blog is statically generated and there is only small amounts of javascript, it's pretty fast from the get-go. Values for largest contentful paint and first contentful paint are normally between 200 and 400 ms and time to first byte is ~ 50ms. These are low numbers, so I also implemented a test site with some blocking javascript in the pages to simulate a beast of a page with 1500-2000 ms loading/rendering time. These are not uncommon values for framework-heavy sites with a lot of client-side rendering or lots of API calls in the page. I mean, everything below 2.5s is considered a good value in web vitals speak. I think that number is way too high, but that is a story for another day. 
 
 The speculation rules I implemented for this site is as of now like this:
 
@@ -80,7 +104,7 @@ The speculation rules I implemented for this site is as of now like this:
   </script>
 ```
 
-This ruleset will prerender everything matching `2024` in the url (articles written this year) and prefetch everything. Prerendering takes precedence and stuff that is prerendered is not prefetched. One important detail is that a setting of `eagerness: moderate` will only prerender after hovering on the link for more than 200ms, which is slightly conservative and shouldn't prerender too much content that isn't used. Also, page loads on my blog are light, so not a lot of bandwidth is wasted. 
+This ruleset will prerender everything matching `2024` in the url (articles written this year) and prefetch everything else that is local urls. Prerendering takes precedence and stuff that is prerendered is not prefetched. One important detail is that a setting of `eagerness: moderate` will only prerender after hovering on the link for more than 200ms, which is slightly conservative and shouldn't prerender too much content that isn't used. Also, page loads on my blog are light, so not a lot of bandwidth is wasted. 
 
 The eagerness settings are as follows
 
@@ -114,28 +138,8 @@ This snippet enables view transitions for cross-page navigations.
 
 And adjusting the animation duration allows for shorter duration for navigation transitions than for the <a href="/web/2024/12/14/bringing-a-little-darkness-into-the-world.html" class="no-prerender">earlier mentioned</a> dark mode transition. 
 
-A prerendered page typically gets a LCP/FCP time of around 50-100ms while prefetched pages land around 120-150ms. TTFB for a prerendered page is 0ms. Still a good chunk of time shaved off an already pretty quick site. 
+A prerendered page typically gets a LCP/FCP time of around 50-100ms while prefetched pages land around 120-150ms. TTFB for a prerendered page is 0ms. So a good chunk of time shaved off an already pretty quick site. 
 
-The example site with a 1500ms delay to simulate a slow site, LCP is of course around 1500ms before using speculative loading. After, and with a completed pre-render it's around 60-70ms. If the pre-render isn't completed when navigation happens the page is displayed as is at the stage of the loading. So it might be handy to keep a loading spinner if you have slow site and don't want to use immediate prerendering. 
+The example site with a 1500ms delay to simulate a slow site, LCP is of course around 1500ms before using speculative loading. After, and with a completed pre-render it's around 60-70ms. If the prerender isn't completed when navigation happens the page is displayed as is at the stage of the loading. So it might be handy to keep a loading spinner if you have slow site and don't want to use immediate prerendering. 
 
-<h3><a name="debug">Debugging Speculation Rules</a></h3>
-
-The main way to debug the speculative rules is found under the "Application" tab in chrome devtools. Under "Background services" there's a "Speculative loads" entry with subentries "Rules" and "Speculations". 
-
-**Overview view**
-
-<img src="/assets/images/speculation-1.png" alt="Overview of speculation debugger" class="full-bleed"/>
-
-**Ruleset view**
-
-<img src="/assets/images/speculation-2.png" alt="Rules view" class="full-bleed"/>
-
-**Speculations detail**
-
-<img src="/assets/images/speculation-3.png" alt="Speculation detail view" class="full-bleed"/>
-
-This last view is the most useful in my experience. The status column will change when speculations are triggered, from not triggered to ready and over to "Failure" when it either fails to prerender or is kicked out of the cache due to another prerender being performed. 
-
-The really cool feature is if you click on the "inspect" button on a ready speculation, and then switch to e.g. the network pane, you will get the network data for the prerendered page instead of the page you are on. This is very neat!
-
-Barry Pollard has written a fantastic [blog post](https://developer.chrome.com/docs/devtools/application/debugging-speculation-rules) on the chrome dev blog on debugging speculation rules. Read that for the full lowdown on debugging. 
+I haven't been able to find any information about the status of implementing speculation rules in either Safari or Firefox, but as the behaviour for non-supporting browsers are just as normal loading today, I can't really see the downside of implementing it, as the implementation is easy and the potential upside is huge. 
