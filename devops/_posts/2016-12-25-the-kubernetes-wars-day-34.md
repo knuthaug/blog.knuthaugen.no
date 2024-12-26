@@ -8,9 +8,9 @@ excerpt_separator: <!--more-->
 
 ### Other post in the series
 
-- [Kubernetes Wars Day 0](/2016/06/02/kubernetes-wars-day-0.html)
-- [Kubernetes Wars Day 3](/2016/06/04/kubernetes-wars-day-3.html)
-- [Kubernetes Wars Day 7](/2016/06/12/kubernetes-wars-day-7.html)
+- [Kubernetes Wars Day 0](/devops/2016/06/02/kubernetes-wars-day-0.html)
+- [Kubernetes Wars Day 3](/devops/2016/06/04/kubernetes-wars-day-3.html)
+- [Kubernetes Wars Day 7](/devops/2016/06/12/kubernetes-wars-day-7.html)
 
 #### _Operation k8s log, day 34 1100 Zulu_
 
