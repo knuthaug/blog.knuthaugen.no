@@ -4,6 +4,7 @@ title: "How Much is Just Enough?"
 published: true
 tags: [testing, web]
 excerpt_separator: <!--more-->
+desc: "How many tests does it take to make you comfortable deploying to production without a human being checking it afterwards?"
 ---
 
 In his great talk at [JavaZone this year](https://2024.javazone.no/program/944da7b7-9c3f-414a-8368-e0d21be9aba3), Christian Johansen gave the following answer to how many tests is enough tests. 
