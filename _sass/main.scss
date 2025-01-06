@@ -1,6 +1,6 @@
-@import "root.scss";
-@import "dropdown.scss";
-@import "menu.scss";
+@use "root.scss";
+@use "dropdown.scss";
+@use "menu.scss";
 
 @view-transition {
   navigation: auto;
