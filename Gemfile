@@ -6,4 +6,5 @@ gem "base64"
 gem "rouge"
 gem 'jekyll-tagging'
 gem "jekyll-archives"
+gem "jekyll-minibundle"
 gem "csv"
