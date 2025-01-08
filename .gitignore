@@ -4,3 +4,4 @@ _gist_cache
 vendor
 _oldsite
 node_modules
+_assets/scripts/bundle.js

@@ -20,6 +20,11 @@ exclude:
   - node_modules
   - pnpm-lock.yaml
   - package.json
+  - _assets/scripts/bundle.js
+
+minibundle:
+  minifier_commands:
+    js: node_modules/.bin/rollup
 
 name: All About the Code
 description: Personal tech blog of Knut Haugen
