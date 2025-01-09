@@ -7,8 +7,8 @@
   ExpiresByType image/jpeg "access plus 2592000 seconds"
   ExpiresByType image/png "access plus 2592000 seconds"
   ExpiresByType image/svg+xml "access plus 2592000 seconds"
-  ExpiresByType text/css "access plus 3600 seconds"
-  ExpiresByType text/javascript "access plus 86400 seconds"
+  ExpiresByType text/css "access plus 31556952 seconds"
+  ExpiresByType text/javascript "access plus 31556952 seconds"
   ExpiresByType font/woff2 "access plus 31556952 seconds"
   ExpiresByType font/ttf "access plus 31556952 seconds"
 </IfModule>
