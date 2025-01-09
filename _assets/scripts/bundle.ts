@@ -63,7 +63,7 @@ function addWebVitals(): void {
 
   setTimeout(() => {
     console.log("Web Vitals", values);
-  }, 2000);
+  }, 1000);
 }
 
 function darkMode(): void {
