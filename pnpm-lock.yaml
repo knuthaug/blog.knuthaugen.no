@@ -11,6 +11,9 @@ importers:
       esbuild:
         specifier: 0.24.2
         version: 0.24.2
+      preact:
+        specifier: 10.25.4
+        version: 10.25.4
       rollup:
         specifier: 4.30.1
         version: 4.30.1
@@ -275,6 +278,9 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
+  preact@10.25.4:
+    resolution: {integrity: sha512-jLdZDb+Q+odkHJ+MpW/9U5cODzqnB+fy2EiHSZES7ldV5LK7yjlVzTp7R8Xy6W6y75kfK8iWYtFVH7lvjwrCMA==}
+
   rollup@4.30.1:
     resolution: {integrity: sha512-mlJ4glW020fPuLi7DkM/lN97mYEZGWeqBnrljzN0gs7GLctqX3lNWxKQ7Gl712UAX+6fog/L3jh4gb7R6aVi3w==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -446,6 +452,8 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
+
+  preact@10.25.4: {}
 
   rollup@4.30.1:
     dependencies:

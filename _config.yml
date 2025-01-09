@@ -20,6 +20,7 @@ exclude:
   - node_modules
   - pnpm-lock.yaml
   - package.json
+  - _assets/scripts/bundle.js
 
 name: All About the Code
 description: Personal tech blog of Knut Haugen
