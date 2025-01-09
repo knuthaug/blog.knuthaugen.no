@@ -104,7 +104,7 @@ async function darkModeClickHandler(_event: Event): Promise<void> {
   const pageTransitionDurationShow = "250ms";
   const currentMode = localStorage.getItem(modeLocalStorageKey);
 
-  const body = document.querySelector("body");
+  const body = document.querySelector("body")!;
 
   if (currentMode === "dark") {
     if (!document.startViewTransition) {
@@ -131,7 +131,11 @@ async function darkModeClickHandler(_event: Event): Promise<void> {
   }
 }
 
-function setProperty(element, property, value) {
+function setProperty(
+  element: HTMLElement,
+  property: string,
+  value: string,
+): void {
   element.style.setProperty(property, value);
 }
 
@@ -191,7 +195,7 @@ function setMode(mode: string): void {
   }
 }
 
-function addClickHandlers() {
+function addClickHandlers(): void {
   document.querySelectorAll("summary").forEach((element) => {
     element.addEventListener("click", (event) => {
       const detailsElement = (event.target as HTMLElement).parentElement
@@ -232,7 +236,7 @@ function addClickHandlers() {
   });
 }
 
-function initTOC() {
+function initTOC(): void {
   const headings = Array.from(document.querySelectorAll("h3"));
   const tocContainer = document.querySelector("#toc");
   if (headings.length >= 6 && tocContainer) {
@@ -241,7 +245,7 @@ function initTOC() {
         continue;
       }
 
-      tocContainer.appendChild(createElementTocLink(headings[i], i + 1));
+      tocContainer.appendChild(createElementTocLink(headings[i], `${i + 1}`));
     }
     document.querySelector("#toc")?.classList.remove("opacity-0");
     document.querySelector("body")?.classList.add("has-toc");
@@ -290,16 +294,18 @@ function setCurrent(entries: any[]): void {
   }
 }
 
-function createElementTocLink(el, num) {
+function createElementTocLink(el: HTMLElement, num: string) {
   const a = document.createElement("a");
   a.classList.add("toc-link");
   a.setAttribute("data-row", num);
-  a.href = `#${el.firstElementChild.name}`;
-  a.appendChild(document.createTextNode(el.firstElementChild.innerHTML));
+  if (el.firstElementChild) {
+    a.href = `#${(el.firstElementChild as HTMLAnchorElement).name}`;
+    a.appendChild(document.createTextNode(el.firstElementChild.innerHTML));
+  }
   return a;
 }
 
-function hamburgerMenu() {
+function hamburgerMenu(): void {
   const hamburger = document.querySelector("#burger");
   const menu = document.querySelector("#mobile-menu") as HTMLElement;
 
@@ -307,7 +313,7 @@ function hamburgerMenu() {
     return;
   }
 
-  hamburger.addEventListener("click", (event) => {
+  hamburger.addEventListener("click", (_event) => {
     if (!menu.classList.contains("active")) {
       menu.classList.add("active");
       menu.classList.add("show");
@@ -377,7 +383,7 @@ function hamburgerMenu() {
   });
 }
 
-function addScrollHandler() {
+function addScrollHandler(): void {
   window.addEventListener("scroll", (event) => {
     if (window.scrollY > 10 && window.scrollY < 50) {
       document.querySelector("header")?.classList.add("fixed");
