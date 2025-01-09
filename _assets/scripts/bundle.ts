@@ -1,7 +1,9 @@
 import { onCLS, onFCP, onLCP, onINP, onTTFB } from "web-vitals";
 import { Vitals } from "./types";
+import { Influx } from "./influx";
 
 const modeLocalStorageKey = "blog.knuthaugen.no.mode";
+const influx: Influx = new Influx();
 
 document.addEventListener("DOMContentLoaded", () => {
   load();
@@ -15,6 +17,15 @@ function load(): void {
   //addPageEventHandlers();
   hamburgerMenu();
   initTOC();
+  influxSetup();
+}
+
+function influxSetup(): void {
+  document.addEventListener("visibilitychange", (event) => {
+    if (document.visibilityState === "hidden") {
+      influx.destroy();
+    }
+  });
 }
 
 function addWebVitals(): void {
@@ -28,7 +39,7 @@ function addWebVitals(): void {
 
   onLCP(
     ({ value }) => {
-      values.lcp = `${Math.round(value)} ms`;
+      values.lcp = `${Math.round(value)}`;
     },
     { reportAllChanges: true },
   );
@@ -43,6 +54,7 @@ function addWebVitals(): void {
   onINP(
     ({ value }) => {
       console.log(`INP time: ${Math.round(value)} ms`);
+      influx.writeINP(value);
     },
     { reportAllChanges: true },
   );
@@ -63,7 +75,8 @@ function addWebVitals(): void {
 
   setTimeout(() => {
     console.log("Web Vitals", values);
-  }, 1000);
+    influx.writeVitals(values);
+  }, 1500);
 }
 
 function darkMode(): void {

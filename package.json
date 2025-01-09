@@ -20,6 +20,7 @@
     "rollup": "4.30.1",
     "esbuild": "0.24.2",
     "preact": "10.25.4",
-    "web-vitals": "4.2.4"
+    "web-vitals": "4.2.4",
+    "@influxdata/influxdb-client-browser": "1.35.0"
   }
 }

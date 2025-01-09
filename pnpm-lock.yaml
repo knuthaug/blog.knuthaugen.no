@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@influxdata/influxdb-client-browser':
+        specifier: 1.35.0
+        version: 1.35.0
       esbuild:
         specifier: 0.24.2
         version: 0.24.2
@@ -172,6 +175,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@influxdata/influxdb-client-browser@1.35.0':
+    resolution: {integrity: sha512-qcQK/d+JVEBBkXmN0DFoFSTPZpA+L+oC5GqVWxeJuJEjo7WsbldEeJQGPeftMBnGeMI+fFGoCPYGB/VX1kQoSw==}
 
   '@rollup/rollup-android-arm-eabi@4.30.1':
     resolution: {integrity: sha512-pSWY+EVt3rJ9fQ3IqlrEUtXh3cGqGtPDH1FQlNZehO2yYxCHEX1SPsz1M//NXwYfbTlcKr9WObLnJX9FsS9K1Q==}
@@ -368,6 +374,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.24.2':
     optional: true
+
+  '@influxdata/influxdb-client-browser@1.35.0': {}
 
   '@rollup/rollup-android-arm-eabi@4.30.1':
     optional: true
