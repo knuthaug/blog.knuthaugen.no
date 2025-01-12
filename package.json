@@ -21,6 +21,7 @@
     "esbuild": "0.24.2",
     "preact": "10.25.4",
     "web-vitals": "4.2.4",
+    "detect-browser": "5.3.0",
     "@influxdata/influxdb-client-browser": "1.35.0"
   }
 }

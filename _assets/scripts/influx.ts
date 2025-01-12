@@ -1,4 +1,5 @@
 import { Vitals } from "./types";
+import { detect } from "detect-browser";
 
 const baseURL = "https://api.knuthaugen.no";
 
@@ -25,12 +26,19 @@ export async function writeVitals(
   page: string = document.location.pathname,
 ) {
   const token = await getToken(page);
+  const browser = detect();
 
   try {
     const res = await fetch(`${baseURL}/vitals`, {
       method: "POST",
       mode: "cors",
-      body: JSON.stringify({ ...vitals, page: page }),
+      body: JSON.stringify({
+        ...vitals,
+        page: page,
+        browser: browser?.name,
+        browserVersion: browser?.version,
+        os: browser?.os,
+      }),
       headers: {
         "Content-Type": "application/json",
         "x-token": token,
@@ -48,12 +56,19 @@ export async function writeINP(
   page: string = document.location.pathname,
 ) {
   const token = await getToken(page);
+  const browser = detect();
 
   try {
     const res = await fetch(`${baseURL}/inp`, {
       method: "POST",
       mode: "cors",
-      body: JSON.stringify({ inp, page: page }),
+      body: JSON.stringify({
+        inp,
+        page: page,
+        browser: browser?.name,
+        browserVersion: browser?.version,
+        os: browser?.os,
+      }),
       headers: {
         "Content-Type": "application/json",
         "x-token": token,
