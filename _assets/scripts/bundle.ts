@@ -1,3 +1,7 @@
+import { onCLS, onFCP, onLCP, onINP, onTTFB } from "web-vitals";
+import { Vitals } from "./types";
+import { writeINP, writeVitals } from "./influx";
+
 const modeLocalStorageKey = "blog.knuthaugen.no.mode";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,52 +19,54 @@ function load(): void {
 }
 
 function addWebVitals(): void {
-  // Load web-vitals.js and log LCP updates to console
-  var script = document.createElement("script");
-  script.src =
-    "https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.iife.js";
-  script.onload = function () {
-    const values = {};
-
-    window.webVitals.onLCP(
-      ({ value }) => {
-        values.lcp = `${Math.round(value)} ms`;
-      },
-      { reportAllChanges: true },
-    );
-
-    window.webVitals.onFCP(
-      ({ value }) => {
-        values.fcp = `${Math.round(value)} ms`;
-      },
-      { reportAllChanges: true },
-    );
-
-    window.webVitals.onINP(
-      ({ value }) => {
-        console.log(`INP time: ${Math.round(value)} ms`);
-      },
-      { reportAllChanges: true },
-    );
-
-    window.webVitals.onCLS(
-      ({ value }) => {
-        values.cls = `${value}`;
-      },
-      { reportAllChanges: true },
-    );
-    window.webVitals.onTTFB(
-      ({ value }) => {
-        values.ttfb = `${Math.round(value)} ms`;
-      },
-      { reportAllChanges: true },
-    );
-
-    setTimeout(() => {
-      console.log("Web Vitals", values);
-    }, 2000);
+  const values: Vitals = {
+    cls: "",
+    ttfb: "",
+    inp: "",
+    lcp: "",
+    fcp: "",
   };
-  document.head.appendChild(script);
+
+  onLCP(
+    ({ value }) => {
+      values.lcp = `${Math.round(value)}`;
+    },
+    { reportAllChanges: true },
+  );
+
+  onFCP(
+    ({ value }) => {
+      values.fcp = `${Math.round(value)}`;
+    },
+    { reportAllChanges: true },
+  );
+
+  onINP(
+    ({ value }) => {
+      console.log(`INP time: ${Math.round(value)}`);
+      writeINP(value);
+    },
+    { reportAllChanges: true },
+  );
+
+  onCLS(
+    ({ value }) => {
+      values.cls = `${value}`;
+    },
+    { reportAllChanges: true },
+  );
+
+  onTTFB(
+    ({ value }) => {
+      values.ttfb = `${Math.round(value)}`;
+    },
+    { reportAllChanges: true },
+  );
+
+  setTimeout(() => {
+    console.log("Web Vitals", values);
+    writeVitals(values);
+  }, 1500);
 }
 
 function darkMode(): void {
