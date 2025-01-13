@@ -35,6 +35,7 @@ export async function writeVitals(
       body: JSON.stringify({
         ...vitals,
         page: page,
+        domain: "blog.knuthaugen.no",
         browser: browser?.name,
         browserVersion: browser?.version,
         os: browser?.os,
@@ -65,6 +66,7 @@ export async function writeINP(
       body: JSON.stringify({
         inp,
         page: page,
+        domain: "blog.knuthaugen.no",
         browser: browser?.name,
         browserVersion: browser?.version,
         os: browser?.os,
