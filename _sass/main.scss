@@ -538,7 +538,12 @@ nav ul {
 }
 
 #frontpage h2 {
+  margin-bottom: calc(var(--page-margin) / 2);
   font-size: clamp(1.2rem, 3vw + 1rem, 2rem);
+}
+
+#frontpage p {
+  margin-bottom: 0;
 }
 
 main {

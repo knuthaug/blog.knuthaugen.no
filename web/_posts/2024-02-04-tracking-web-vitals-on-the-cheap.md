@@ -236,16 +236,16 @@ Now, this could be anything capable of storing the values, but I felt InfluxDB w
 
 Time to analyse those data! So how is my vitals over time? I cobbled together a quick dashboard (InfluxDB built-in dashboard) to try to answer that. The Vitals article linked in the start of this post recommends measuring the 75th percentile segmented for mobile and desktop as a start, as individual values can vary a lot due to differences in user hardware and bandwidth. I used the histogram widget in the InfluxDB dashboard, which gives a nice view of how the values for LCP, FCP and TTF are distributed, and I used a gauge for average CLS values. 
 
-<img class="full-bleed" src="/assets/images/dash1.png"/>
+<img class="full-bleed" src="/assets/images/dash1.png" width=765 />
 
 I also made a normal line graph displaying the average values per day (this dashboard view using last 7 days as the time period), to see if there are big differences over time. 
 
-<img class="full-bleed" src="/assets/images/dash2.png"/>
+<img class="full-bleed" src="/assets/images/dash2.png" width=765/>
 
 I have been experimenting with gauges for the 75th percentile as well (time period 24h for these and the site is norskenduro.no)
 
-<img class="full-bleed" src="/assets/images/dash3.png"/>
+<img class="full-bleed" src="/assets/images/dash3.png" width=765/>
 
 There all sorts of widgets you could make here, such as values for the different measurements per page/url in order to see which pages are the slowest ones, see outlier values to try and pinpoint if there are common causes, different percentiles to see the distribution etc. The ratings values could also be included in the dashboards. Personally I don't think I need that, as my focus will be to just getting the values down. Whether they are good or very good is secondary to me. I also think the general recommendations are very conservative and we should have higher, ehr, lower, goals than 2.5s for LCP. 
 
-Our users deserves better. 
+Our users definitely deserves better. 
