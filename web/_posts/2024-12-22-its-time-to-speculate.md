@@ -55,6 +55,7 @@ This creates a life cycle of these events when loading e.g. the front page page,
             next page: pagereveal
 
 ```
+{: class="full-bleed"}
 
 <h3><a name="debug">Debugging Speculation Rules</a></h3>
 
@@ -104,6 +105,7 @@ The speculation rules I implemented for this site is as of now like this:
     }
   </script>
 ```
+{: class="full-bleed"}
 
 This ruleset will prerender everything matching `2024` in the url (articles written this year) and prefetch everything else that is local urls. Prerendering takes precedence and stuff that is prerendered is not prefetched. One important detail is that a setting of `eagerness: moderate` will only prerender after hovering on the link for more than 200ms, which is slightly conservative and shouldn't prerender too much content that isn't used. Also, page loads on my blog are light, so not a lot of bandwidth is wasted. 
 
@@ -136,6 +138,7 @@ This snippet enables view transitions for cross-page navigations.
   animation-timing-function: ease-in-out;
 }
 ```
+{: class="full-bleed"}
 
 And adjusting the animation duration allows for shorter duration for navigation transitions than for the <a href="/web/2024/12/14/bringing-a-little-darkness-into-the-world.html" class="no-prerender">earlier mentioned</a> dark mode transition. 
 

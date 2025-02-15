@@ -1,4 +1,4 @@
-import { onCLS, onFCP, onLCP, onINP, onTTFB } from "web-vitals";
+import { onCLS, onFCP, onLCP, onINP, onTTFB } from "web-vitals/attribution";
 import { Vitals } from "./types";
 import { writeINP, writeVitals } from "./influx";
 
@@ -28,22 +28,36 @@ function addWebVitals(): void {
   };
 
   onLCP(
-    ({ value }) => {
+    ({ value, rating, attribution }) => {
       values.lcp = `${Math.round(value)}`;
+      console.log(
+        "LCP time: ",
+        Math.round(value),
+        "rating:",
+        rating,
+        attribution,
+      );
     },
     { reportAllChanges: true },
   );
 
   onFCP(
-    ({ value }) => {
+    ({ value, rating, attribution }) => {
       values.fcp = `${Math.round(value)}`;
+      console.log(
+        "FCP time",
+        Math.round(value),
+        "rating:",
+        rating,
+        attribution,
+      );
     },
     { reportAllChanges: true },
   );
 
   onINP(
-    ({ value }) => {
-      console.log(`INP time: ${Math.round(value)}`);
+    ({ value, rating }) => {
+      console.log(`INP time: ${Math.round(value)}, rating ${rating}`);
       writeINP(value);
     },
     { reportAllChanges: true },
@@ -66,7 +80,7 @@ function addWebVitals(): void {
   setTimeout(() => {
     console.log("Web Vitals", values);
     writeVitals(values);
-  }, 1500);
+  }, 2500);
 }
 
 function darkMode(): void {
