@@ -71,15 +71,9 @@ function addWebVitals(): void {
   );
 
   onCLS(
-    ({ value, rating, attribution }) => {
+    ({ value, rating }) => {
       values.cls = `${value}`;
-      console.log(
-        "CLS value",
-        Math.round(value),
-        "rating:",
-        rating,
-        attribution,
-      );
+      console.log("CLS value", value, "rating:", rating);
     },
     { reportAllChanges: true },
   );
