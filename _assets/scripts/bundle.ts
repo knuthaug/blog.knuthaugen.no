@@ -56,23 +56,44 @@ function addWebVitals(): void {
   );
 
   onINP(
-    ({ value, rating }) => {
+    ({ value, rating, attribution }) => {
       console.log(`INP time: ${Math.round(value)}, rating ${rating}`);
       writeINP(value);
+      console.log(
+        "INP time",
+        Math.round(value),
+        "rating:",
+        rating,
+        attribution,
+      );
     },
     { reportAllChanges: true },
   );
 
   onCLS(
-    ({ value }) => {
+    ({ value, rating, attribution }) => {
       values.cls = `${value}`;
+      console.log(
+        "CLS value",
+        Math.round(value),
+        "rating:",
+        rating,
+        attribution,
+      );
     },
     { reportAllChanges: true },
   );
 
   onTTFB(
-    ({ value }) => {
+    ({ value, rating, attribution }) => {
       values.ttfb = `${Math.round(value)}`;
+      console.log(
+        "TTFB time",
+        Math.round(value),
+        "rating:",
+        rating,
+        attribution,
+      );
     },
     { reportAllChanges: true },
   );

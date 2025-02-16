@@ -46,7 +46,7 @@ export async function writeVitals(
       },
     });
     const body = await res.json();
-    console.log("message", body.message);
+    //console.log("message", body.message);
   } catch (err) {
     console.error(err);
   }
@@ -77,7 +77,7 @@ export async function writeINP(
       },
     });
     const body = await res.json();
-    console.log("message", body.message);
+    //console.log("message", body.message);
   } catch (err) {
     console.error(err);
   }

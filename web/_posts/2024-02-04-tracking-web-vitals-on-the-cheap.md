@@ -163,6 +163,8 @@ time between first byte and fcp was 126ms. The document was in a `dom-content-lo
 `domContentLoaded` at 140-141ms, `domComplete` at 271ms and `load` at 271ms). The property `delivertype` can tell you wether it was delivered from `cache` or not (`""`),  `nextHopProtocol` which http version was used, as well as timings for network stack work, 
 such as domain lookup, request init, response init and so on. And you can see if there was redirects involved, the time they took and the count. So much to learn here!
 
+By the way, you see the attributions objects for this very page in the console.
+
 The `navigationEntry` property is of type [PerformanceNavigationTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming) while
 the `fcpEntry` property is of type [PerformancePaintTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming)
 
