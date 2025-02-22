@@ -103,7 +103,7 @@ export async function writeHit(page: string = document.location.pathname) {
       },
     });
     const body = await res.json();
-    console.log("hit message", body.message);
+    //console.log("hit message", body.message);
   } catch (err) {
     console.error(err);
   }
