@@ -1,11 +1,12 @@
 import { onCLS, onFCP, onLCP, onINP, onTTFB } from "web-vitals/attribution";
 import { Vitals } from "./types";
-import { writeINP, writeVitals } from "./influx";
+import { writeINP, writeVitals, writeHit } from "./influx";
 
 const modeLocalStorageKey = "blog.knuthaugen.no.mode";
 
 document.addEventListener("DOMContentLoaded", () => {
   load();
+  hit();
 });
 
 function load(): void {
@@ -16,6 +17,10 @@ function load(): void {
   //addPageEventHandlers();
   hamburgerMenu();
   initTOC();
+}
+
+function hit(): void {
+  writeHit();
 }
 
 function addWebVitals(): void {
