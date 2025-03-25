@@ -246,7 +246,7 @@ I also made a normal line graph displaying the average values per day (this dash
 
 I have been experimenting with gauges for the 75th percentile as well (time period 24h for these and the site is norskenduro.no)
 
-<img class="full-bleed" src="/assets/images/dash3.webp" width=765alt ="Graph widgets with data on aggregated vitals data"/>
+<img class="full-bleed" src="/assets/images/dash3.webp" width=765 alt ="Graph widgets with data on aggregated vitals data"/>
 
 There all sorts of widgets you could make here, such as values for the different measurements per page/url in order to see which pages are the slowest ones, see outlier values to try and pinpoint if there are common causes, different percentiles to see the distribution etc. The ratings values could also be included in the dashboards. Personally I don't think I need that, as my focus will be to just getting the values down. Whether they are good or very good is secondary to me. I also think the general recommendations are very conservative and we should have higher, ehr, lower, goals than 2.5s for LCP. 
 
