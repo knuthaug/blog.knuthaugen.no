@@ -33,7 +33,7 @@ Note: the field data is only possible because the web.dev blog, which I used for
 
 By clicking the little "reload" button near the top, you will get this incredibly detailed view of the loading characteristics of your page. 
 
-<img class="full-bleed" src="/assets/images/performance2.webp"alt="performance tab with all the details"/>
+<img class="full-bleed" src="/assets/images/performance2.webp" alt="performance tab with all the details"/>
 
 It can show you, well, just about everything about your page load, which elements are causing layout shifts, which assets are taking long to load and where in the process they are loaded, screenshots of the page at different stages of rendering, timings, sizes, which part of the rendering process is spending how much time doing its thing and so much more. It's a real treasure trove of performance information and well worth spending some time on. 
 
