@@ -27,13 +27,13 @@ The easiest way to see Web Vitals in action is on the Lighthouse tab of the chro
 
 By opening the Performance tab for a Web.dev blog article, we get the following display:
 
-<img class="full-bleed" src="/assets/images/performance.webp" alt="performance tab with basic vitals measurements"/>
+<img class="full-bleed" loading="lazy" src="/assets/images/performance.webp" alt="performance tab with basic vitals measurements"/>
 
 Note: the field data is only possible because the web.dev blog, which I used for this screenshot, tracks data to Chrome User Experience Report and is not something you will see locally without doing the same. You'll get the local values for your site, though, which can reveal a lot of useful information. You can also run the sampling with either CPU or network (or both) throttling to see the effects for user with older and slower devices. 
 
 By clicking the little "reload" button near the top, you will get this incredibly detailed view of the loading characteristics of your page. 
 
-<img class="full-bleed" src="/assets/images/performance2.webp" alt="performance tab with all the details"/>
+<img class="full-bleed" loading="lazy" src="/assets/images/performance2.webp" alt="performance tab with all the details"/>
 
 It can show you, well, just about everything about your page load, which elements are causing layout shifts, which assets are taking long to load and where in the process they are loaded, screenshots of the page at different stages of rendering, timings, sizes, which part of the rendering process is spending how much time doing its thing and so much more. It's a real treasure trove of performance information and well worth spending some time on. 
 
@@ -238,15 +238,15 @@ Now, this could be anything capable of storing the values, but I felt InfluxDB w
 
 Time to analyse those data! So how is my vitals over time? I cobbled together a quick dashboard (InfluxDB built-in dashboard) to try to answer that. The Vitals article linked in the start of this post recommends measuring the 75th percentile segmented for mobile and desktop as a start, as individual values can vary a lot due to differences in user hardware and bandwidth. I used the histogram widget in the InfluxDB dashboard, which gives a nice view of how the values for LCP, FCP and TTF are distributed, and I used a gauge for average CLS values. 
 
-<img class="full-bleed" src="/assets/images/dash1.webp" width=765 alt="Graph widgets with data on aggregated vitals data"/>
+<img class="full-bleed" loading="lazy" src="/assets/images/dash1.webp" width=765 alt="Graph widgets with data on aggregated vitals data"/>
 
 I also made a normal line graph displaying the average values per day (this dashboard view using last 7 days as the time period), to see if there are big differences over time. 
 
-<img class="full-bleed" src="/assets/images/dash2.webp" width=765 alt="Graph widgets with data on aggregated vitals data"/>
+<img class="full-bleed" loading="lazy" src="/assets/images/dash2.webp" width=765 alt="Graph widgets with data on aggregated vitals data"/>
 
 I have been experimenting with gauges for the 75th percentile as well (time period 24h for these and the site is norskenduro.no)
 
-<img class="full-bleed" src="/assets/images/dash3.webp" width=765 alt ="Graph widgets with data on aggregated vitals data"/>
+<img class="full-bleed" loading="lazy" src="/assets/images/dash3.webp" width=765 alt ="Graph widgets with data on aggregated vitals data"/>
 
 There all sorts of widgets you could make here, such as values for the different measurements per page/url in order to see which pages are the slowest ones, see outlier values to try and pinpoint if there are common causes, different percentiles to see the distribution etc. The ratings values could also be included in the dashboards. Personally I don't think I need that, as my focus will be to just getting the values down. Whether they are good or very good is secondary to me. I also think the general recommendations are very conservative and we should have higher, ehr, lower, goals than 2.5s for LCP. 
 
