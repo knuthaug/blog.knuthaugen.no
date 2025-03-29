@@ -62,7 +62,6 @@ function addWebVitals(): void {
 
   onINP(
     ({ value, rating, attribution }) => {
-      console.log(`INP time: ${Math.round(value)}, rating ${rating}`);
       writeINP(value);
       console.log(
         "INP time",
