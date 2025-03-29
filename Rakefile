@@ -60,7 +60,7 @@ end # task :build
 
 
 task :deploy => [:build] do
-  exec("rsync -e ssh -a _site/ knuthaugen@login.domeneshop.no:www/blog/")
+  exec("rsync -e ssh -a _site/ hotel:/var/www/html/blog/")
   #exec("ssh knuthaugen@login.domeneshop.no cd www/blog && for name in `find . -mindepth 2 -name index.html -printf '%P\n'`; do base=`echo $name | cut -f1-3 -d'/'`; rm $base.html; cp $name $base.html; done");
 end
 
