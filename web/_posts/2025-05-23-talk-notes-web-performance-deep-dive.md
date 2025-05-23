@@ -30,6 +30,7 @@ I gave a talk on web performance and web performance API on May 22th 2025 on a m
 - [MDN: Server-Timing headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Server-Timing)
 - [Rumvision talk slides from performance.now() 2024 ](https://www.rumvision.com/file/upload/doc/20241115-performance-now.pdf)
 - [Moores Law is dead](https://cap.csail.mit.edu/death-moores-law-what-it-means-and-what-might-fill-gap-going-forward)
+- [Klaas Ole Jordan: Takeaways from this years Web Almanac](https://www.kojordan.com/blog/takeaways-from-this-years-web-almanac)
 - [Statistisk Sentralbyrå](https://ssb.no/)
 
 #### Talks
