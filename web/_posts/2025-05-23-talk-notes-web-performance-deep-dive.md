@@ -15,6 +15,8 @@ I gave a talk on web performance and web performance API on May 22th 2025 on a m
 
 ### References
 
+[perf-test repo with server and html/js code for performance test scripts used in the talk (and more)](https://github.com/knuthaug/perf-test)
+
 #### Articles/Web Pages
 
 - [Web Vitals README](https://github.com/GoogleChrome/web-vitals/)
