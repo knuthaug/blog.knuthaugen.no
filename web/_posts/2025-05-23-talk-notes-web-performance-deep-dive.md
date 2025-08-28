@@ -28,7 +28,7 @@ I gave a talk on web performance and web performance API on May 22th 2025 on a m
 - [HTTP Archive Web Almanac 2024](https://almanac.httparchive.org/en/2024/)
 - [Statcounter: Mobile market share Norway](https://gs.statcounter.com/vendor-market-share/mobile/norway)
 - [Wondernetwork ping times](https://wondernetwork.com/pings/Bangkok)
-- [Web.dev: Server-timinh](https://web.dev/articles/custom-metrics?utm_source=devtools#server-timing-api)
+- [Web.dev: Server-timing](https://web.dev/articles/custom-metrics?utm_source=devtools#server-timing-api)
 - [MDN: Server-Timing headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Server-Timing)
 - [Rumvision talk slides from performance.now() 2024 ](https://www.rumvision.com/file/upload/doc/20241115-performance-now.pdf)
 - [Moores Law is dead](https://cap.csail.mit.edu/death-moores-law-what-it-means-and-what-might-fill-gap-going-forward)
