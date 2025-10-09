@@ -22,4 +22,4 @@ This is slides and (link to references for) a talk I gave at JavaZone 2025. Talk
 - [What forces layout recalculation](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)
 - [Optimize Long Tasks](https://web.dev/articles/optimize-long-tasks#what-is-task)
 
-The rest of the references are the same as for the [previous version of the talk](/web/2025/05/23/talk-notes-web-performance-deep-dive.html) of the talk.
+The rest of the references are the same as for the [previous version of the talk](/web/2025/05/23/talk-notes-web-performance-deep-dive.html).
