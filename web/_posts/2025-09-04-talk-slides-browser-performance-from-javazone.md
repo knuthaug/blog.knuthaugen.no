@@ -15,7 +15,7 @@ This is slides and (link to references for) a talk I gave at JavaZone 2025. Talk
 
 ### References
 
-- [Preventing layout thrasing](https://wilsonpage.uk/preventing-layout-thrashing/)
+- [Preventing layout thrashing](https://wilsonpage.uk/preventing-layout-thrashing/)
 - [Speculation Rules API](https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API)
 - [View Transitions](https://developer.mozilla.org/en-US/docs/Web/API/ViewTransition)
 - [PageSpeed Insights](https://pagespeed.web.dev/analysis/https-tv-nrk-no/8k2whu3a4i?form_factor=desktop)
