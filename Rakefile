@@ -58,17 +58,15 @@ task :build do
   system "jekyll build"
 end # task :build
 
-
 task :deploy => [:build] do
-  #print "Fixing rights..."
-  #exec("chmod -R 755 _site/")
-  #exec("chmod -R 755 site/assets/")
-  #exec("chmod 700 _site/.htaccess")
   print "Uploading..."
   exec("rsync -e ssh -a _site/ hotel:/var/www/html/blog/")
-  exec("ssh hotel chmod -R 755 /var/www/html/blog")
 end
 
+task :fixrights => [] do
+  print "Fixing rights..."
+  exec("ssh hotel chmod -R 755 /var/www/html/blog")
+end
 
 def ask(message, valid_options)
   if valid_options
