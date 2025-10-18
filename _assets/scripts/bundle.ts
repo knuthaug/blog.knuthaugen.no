@@ -13,6 +13,7 @@ function load(): void {
   addWebVitals();
   darkMode();
   addClickHandlers();
+  addKeyHandlers();
   addScrollHandler();
   //addPageEventHandlers();
   hamburgerMenu();
@@ -234,7 +235,22 @@ function setMode(mode: string): void {
   }
 }
 
+function addKeyHandlers(): void {
+  window.addEventListener("keyup", (event) => {
+    if (event.key === "Escape") {
+      document.getElementById("big-menu")?.removeAttribute("open");
+    }
+  });
+}
+
 function addClickHandlers(): void {
+  // click handler for closing the details when clicking outside it
+  window.addEventListener("click", (event) => {
+    if ((event.target as HTMLElement)?.nodeName === "a") {
+      return;
+    }
+    document.getElementById("big-menu")?.removeAttribute("open");
+  });
   document.querySelectorAll("summary").forEach((element) => {
     element.addEventListener("click", (event) => {
       const detailsElement = (event.target as HTMLElement).parentElement
