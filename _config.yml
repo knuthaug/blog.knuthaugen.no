@@ -21,6 +21,7 @@ exclude:
   - pnpm-lock.yaml
   - package.json
   - _assets/scripts/bundle.js
+  - _assets/scripts/ni-api.js
 
 name: All About the Code
 description: Personal tech blog of Knut Haugen

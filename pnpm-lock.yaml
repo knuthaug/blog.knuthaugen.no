@@ -11,6 +11,9 @@ importers:
       '@influxdata/influxdb-client-browser':
         specifier: 1.35.0
         version: 1.35.0
+      chart.js:
+        specifier: 4.5.1
+        version: 4.5.1
       detect-browser:
         specifier: 5.3.0
         version: 5.3.0
@@ -182,6 +185,9 @@ packages:
   '@influxdata/influxdb-client-browser@1.35.0':
     resolution: {integrity: sha512-qcQK/d+JVEBBkXmN0DFoFSTPZpA+L+oC5GqVWxeJuJEjo7WsbldEeJQGPeftMBnGeMI+fFGoCPYGB/VX1kQoSw==}
 
+  '@kurkle/color@0.3.4':
+    resolution: {integrity: sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==}
+
   '@rollup/rollup-android-arm-eabi@4.30.1':
     resolution: {integrity: sha512-pSWY+EVt3rJ9fQ3IqlrEUtXh3cGqGtPDH1FQlNZehO2yYxCHEX1SPsz1M//NXwYfbTlcKr9WObLnJX9FsS9K1Q==}
     cpu: [arm]
@@ -279,6 +285,10 @@ packages:
 
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
+
+  chart.js@4.5.1:
+    resolution: {integrity: sha512-GIjfiT9dbmHRiYi6Nl2yFCq7kkwdkp1W/lp2J99rX0yo9tgJGn3lKQATztIjb5tVtevcBtIdICNWqlq5+E8/Pw==}
+    engines: {pnpm: '>=8'}
 
   detect-browser@5.3.0:
     resolution: {integrity: sha512-53rsFbGdwMwlF7qvCt0ypLM5V5/Mbl0szB7GPN8y9NCcbknYOeVVXdrXEq+90IwAfrrzt6Hd+u2E2ntakICU8w==}
@@ -383,6 +393,8 @@ snapshots:
 
   '@influxdata/influxdb-client-browser@1.35.0': {}
 
+  '@kurkle/color@0.3.4': {}
+
   '@rollup/rollup-android-arm-eabi@4.30.1':
     optional: true
 
@@ -441,6 +453,10 @@ snapshots:
     optional: true
 
   '@types/estree@1.0.6': {}
+
+  chart.js@4.5.1:
+    dependencies:
+      '@kurkle/color': 0.3.4
 
   detect-browser@5.3.0: {}
 

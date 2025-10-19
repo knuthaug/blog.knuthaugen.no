@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="dark"
+  style="--mode-animation-duration-hide: 250ms;
+  --mode-animation-duration-show: 250ms;"
+>
+ {% include labs-head.html %}
+  <body>
+    {% include header.html %}
+    <div id="main-container">
+      <main>
+        <section class="niceties"></section>
+        <article class="hero display-grid">
+          <h2>{{ page.title }}</h2>
+          <section id="meta">
+            <div id="published">
+              <span class="category">Published {{
+              page.date | date: "%B %e, %Y"}}
+            </div>
+          </section>
+          {{ content }}
+        </article>
+      </main>
+      {% include menu.html %} {% include footer.html %}
+    </div>
+  </body>
+</html>

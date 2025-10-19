@@ -1,0 +1,58 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page.title }}</title>
+  <link
+    href="/rss.xml"
+    rel="alternate"
+    title="All About the Code - a knuthaug production"
+    type="application/atom+xml"
+  />
+  <meta
+    name="description"
+    content="Knut Haugens blog about programming and all things related to programming."
+  />
+  <meta
+    property="og:description"
+    content="{% if page.desc != undefined %} {{page.desc}} {% else %} Views on code, IT and the life of a Nerd{% endif %}"
+  />
+  <meta property="og:url" content="https://blog.knuthaugen.no{{page.url}}" />
+  <meta property="og:title" content="{{page.title}}" />
+  <link
+    rel="preload"
+    href="/assets/fonts/source-serif.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+  <link
+    rel="preload"
+    href="/assets/fonts/inter-italic.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+  <link
+    rel="preload"
+    href="/assets/fonts/inter.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+  <link
+    rel="preload"
+    href="/assets/fonts/stacker.ttf"
+    as="font"
+    type="font/ttf"
+    crossorigin
+  />
+  <link
+    rel="stylesheet"
+    href="{% ministamp _site/assets/css/toplevel.css /assets/css/style.css %}"
+  />
+  <script
+    type="text/javascript"
+    src="{% ministamp {source_path: '_assets/scripts/{{page.bundle}}', destination_path: '/assets/js/ni-api.js' } %}"
+  ></script>
+  <link rel="expect" href="main" blocking="render" />
+</head>

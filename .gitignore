@@ -5,3 +5,4 @@ vendor
 _oldsite
 node_modules
 _assets/scripts/bundle.js
+_assets/scripts/ni-api.js
