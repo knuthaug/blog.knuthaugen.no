@@ -1,6 +1,6 @@
 ---
 layout: lab-post
-title: "Network Information API"
+title: "Network Information API Test"
 published: true
 tags: []
 date: 2025-10-19
