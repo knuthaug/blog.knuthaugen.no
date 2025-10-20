@@ -6,17 +6,20 @@ tags: []
 date: 2025-10-19
 desc: Test page printing out changes to the network information API over time
 bundle: ni-api.js
+category: labs
 ---
 
-[Network Information API Specification](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API)
-
-This page tracks and prints every time the network information API detects a change in your devices
+This page/post tracks and prints every time the network information API detects a change in your devices
 network. Most useful on mobile devices when travelling through areas of spotty wireless coverage. 
 
 Works in chrome (61+), Edge (79+), Opera (48+), Chrome Android (38+), Opera Android (25+), Samsung Internet (3+) and
 Android WebView (50+), so it's not great and not every part of the spec is implemented either. WebKit teams is reluctant based on privacy concerns (can you believe it?)
 
+[Network Information API Specification](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API)
+
 ### API Information
+
+<span id="support">Browser support:</span> 
 
 <div>
 <h4>Downlink</h4>
@@ -88,12 +91,15 @@ function updateConnectionStatus() {
 }
 
 function load() {
+  const support = document.getElementById("support");
+
   initCharts(myNavigator.connection);
   if (!myNavigator.connection) {
     console.log("Network Information API not supported in this browser");
+    support!.innerText = "Browser support: ❌ Not supported in this browser";
     return;
   }
-
+  support!.innerText = "Browser support: ✅ Supported in this browser";
   console.log("Network Information API Test");
   updateCurrent(myNavigator.connection);
   addToLog(myNavigator.connection);
@@ -151,14 +157,14 @@ function initCharts(conn: NetworkInformation) {
 }
 
 function addToDatasets(conn: NetworkInformation) {
-  pushToDataset(downlinkChart, conn.downlink)
-  pushToDataset(rttChart, conn.rtt)
+  pushToDataset(downlinkChart, conn.downlink);
+  pushToDataset(rttChart, conn.rtt);
   downlinkChart.update();
   rttChart.update();
 }
 
 function pushToDataset(chart: Chart, value: number) {
-    chart.data.datasets[0].data.push(value);
+  chart.data.datasets[0].data.push(value);
 
   if (chart.data.labels!.length === 0) {
     chart.data.labels?.push(0);
@@ -192,6 +198,5 @@ function updateCurrent(connection: NetworkInformation) {
     connection.downlinkMax ? ` (max: ${connection.downlinkMax}Mbps` : ""
   }, rtt:${connection.rtt}ms, saveData:${connection.saveData}`;
 }
-
 
 ```

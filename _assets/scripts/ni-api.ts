@@ -41,18 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function updateConnectionStatus() {
+  console.log("Connection change detected", myNavigator.connection);
   updateCurrent(myNavigator.connection);
   addToLog(myNavigator.connection);
   addToDatasets(myNavigator.connection);
 }
 
 function load() {
+  const support = document.getElementById("support");
+
   initCharts(myNavigator.connection);
   if (!myNavigator.connection) {
     console.log("Network Information API not supported in this browser");
+    support!.innerText = "Browser support: ❌ Not supported in this browser";
     return;
   }
-
+  support!.innerText = "Browser support: ✅ Supported in this browser";
   console.log("Network Information API Test");
   updateCurrent(myNavigator.connection);
   addToLog(myNavigator.connection);
