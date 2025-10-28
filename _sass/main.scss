@@ -734,6 +734,11 @@ textarea {
   min-height: 150px;
 }
 
+textarea.tall {
+  min-height: 400px;
+  max-height: 800px;
+}
+
 canvas {
   width: 100%;
   min-height: 150px;

@@ -15,3 +15,11 @@ await esbuild.build({
   bundle: true,
   minify: false,
 });
+
+console.log("Build labs-vitals.ts -> labs-vitals.js");
+await esbuild.build({
+  entryPoints: ["_assets/scripts/labs-vitals.ts"],
+  outdir: "_assets/scripts/",
+  bundle: true,
+  minify: false,
+});
