@@ -8,21 +8,28 @@ bundle: labs-vitals.js
 category: labs
 ---
 
+
+
+
+
 ### Web Vitals (normal mode)
 
-<form>
-    <textarea class="tall" id="log"></textarea>
-</form>
+<pre class="font-highlight full-bleed scrollable">
+<code id="log" class="inner-syntax"></code>
+</pre>
 
 ### Web Vitals (attribution build)
 
-<form>
-    <textarea class="tall" id="attr-log"></textarea>
-</form>
+<pre class="font-highlight full-bleed scrollable">
+<code id="attr-log" class="inner-syntax"></code>
+</pre>
+
 
 ### The Code Running on This Page
 
-```typescript
+
+<pre class="font-highlight full-bleed no-overflow">
+<code class="inner-syntax">
 import { onCLS, onFCP, onLCP, onINP, onTTFB } from "web-vitals";
 import {
   onCLS as onCLSAttr,
@@ -31,14 +38,15 @@ import {
   onINP as onINPAttr,
   onTTFB as onTTFBAttr,
 } from "web-vitals/attribution";
+import { printTokens, tokenize } from "./json-tokenizer";
 
-let log: HTMLTextAreaElement;
-let attrLog: HTMLTextAreaElement;
+let log: HTMLPreElement;
+let attrLog: HTMLPreElement;
 
 document.addEventListener("DOMContentLoaded", () => {
   load();
-  log = document.getElementById("log") as HTMLTextAreaElement;
-  attrLog = document.getElementById("attr-log") as HTMLTextAreaElement;
+  log = document.getElementById("log") as HTMLPreElement;
+  attrLog = document.getElementById("attr-log") as HTMLPreElement;
 });
 
 function metricCallback(metric: any) {
@@ -63,16 +71,18 @@ function load() {
   onTTFBAttr(metricCallbackAttr, { reportAllChanges: true });
 }
 
-function addToLog(element: HTMLTextAreaElement, data: any) {
+function addToLog(element: HTMLPreElement, data: any) {
   if (!element) {
     return;
   }
-  element.value +=
+  element.innerText +=
     JSON.stringify(data, undefined, 2) +
     "\n" +
-    "--------------------------------------------------------------------\n";
+    "--------------------------------------------\n";
 
   element.scrollTop = element.scrollHeight;
 }
 
-```
+</code>
+</pre>
+

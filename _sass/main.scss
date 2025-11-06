@@ -700,7 +700,8 @@ p {
   letter-spacing: var(--body-letter-spacing);
 }
 
-div.highlight {
+div.highlight,
+div.syntax-highlight {
   border: 2px solid var(--light-gray);
   border-radius: var(--border-radius-default);
 }
@@ -737,6 +738,25 @@ textarea {
 textarea.tall {
   min-height: 400px;
   max-height: 800px;
+}
+
+pre.font-highlight {
+  font-size: 1rem;
+  white-space: pre-wrap;
+  min-width: fit-content;
+  border: 2px solid var(--light-gray);
+  border-radius: var(--border-radius-default);
+  background: #282a36;
+  color: #f8f8f2;
+
+  code {
+    font-family: "Syntax regular", monospace;
+  }
+}
+
+.scrollable {
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 canvas {

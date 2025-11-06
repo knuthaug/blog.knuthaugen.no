@@ -67,6 +67,14 @@ html.dark {
 }
 
 @font-face {
+  font-family: "Syntax regular";
+  src: url("/assets/fonts/syntax-regular.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
   font-family: "Inter italic";
   src: url("/assets/fonts/inter-italic.woff2") format("woff2");
   font-weight: 100 900;
