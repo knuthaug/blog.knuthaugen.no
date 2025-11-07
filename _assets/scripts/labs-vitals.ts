@@ -7,21 +7,21 @@ import {
   onTTFB as onTTFBAttr,
 } from "web-vitals/attribution";
 
-let log: HTMLPreElement;
-let attrLog: HTMLPreElement;
+let logAnchor: HTMLElement;
+let attrLogAnchor: HTMLElement;
 
 document.addEventListener("DOMContentLoaded", () => {
   load();
-  log = document.getElementById("log") as HTMLPreElement;
-  attrLog = document.getElementById("attr-log") as HTMLPreElement;
+  logAnchor = document.getElementById("log-anchor") as HTMLElement;
+  attrLogAnchor = document.getElementById("attr-log-anchor") as HTMLElement;
 });
 
 function metricCallback(metric: any) {
-  addToLog(log, metric);
+  addToDetails(logAnchor, metric);
 }
 
 function metricCallbackAttr(metric: any) {
-  addToLog(attrLog, metric);
+  addToDetails(attrLogAnchor, metric);
 }
 
 function load() {
@@ -36,6 +36,26 @@ function load() {
   onINPAttr(metricCallbackAttr, { reportAllChanges: true });
   onCLSAttr(metricCallbackAttr, { reportAllChanges: true });
   onTTFBAttr(metricCallbackAttr, { reportAllChanges: true });
+}
+
+function addToDetails(element: HTMLElement, data: any) {
+  if (data.name === "CLS") {
+    //writing cls values in this manner will generate new CLS events
+    return;
+  }
+
+  const detail = document.createElement("details");
+  const summary = document.createElement("summary");
+  summary.innerText = `${data.name} - ${data.value.toFixed(2)}`;
+  detail.appendChild(summary);
+  const codeElement = document.createElement("pre");
+  codeElement.classList = "font-highlight";
+  const pre = document.createElement("code");
+  pre.classList = "inner-syntax";
+  pre.innerText = JSON.stringify(data, undefined, 2);
+  codeElement.appendChild(pre);
+  detail.append(codeElement);
+  element.after(detail);
 }
 
 function addToLog(element: HTMLPreElement, data: any) {

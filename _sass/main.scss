@@ -751,7 +751,17 @@ pre.font-highlight {
 
   code {
     font-family: "Syntax regular", monospace;
+    background-color: transparent;
   }
+}
+
+details::details-content {
+  opacity: 0;
+  transition: opacity 250ms, content-visibility 250ms allow-discrete;
+}
+
+details[open]::details-content {
+  opacity: 1;
 }
 
 .scrollable {
