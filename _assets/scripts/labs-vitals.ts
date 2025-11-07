@@ -6,7 +6,6 @@ import {
   onINP as onINPAttr,
   onTTFB as onTTFBAttr,
 } from "web-vitals/attribution";
-import { printTokens, tokenize } from "./json-tokenizer";
 
 let log: HTMLPreElement;
 let attrLog: HTMLPreElement;
@@ -46,7 +45,7 @@ function addToLog(element: HTMLPreElement, data: any) {
   element.innerText +=
     JSON.stringify(data, undefined, 2) +
     "\n" +
-    "--------------------------------------------\n";
+    "--------------------------------------------------------------\n";
 
   element.scrollTop = element.scrollHeight;
 }
