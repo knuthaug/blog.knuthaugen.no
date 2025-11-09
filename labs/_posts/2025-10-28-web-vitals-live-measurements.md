@@ -9,10 +9,10 @@ category: labs
 ---
 
 ### Web Vitals (normal mode)
-<span id="log-anchor"></span>
+<div id="log-anchor"></div>
 
 ### Web Vitals (attribution build)
-<span id="attr-log-anchor"></span>
+<div id="attr-log-anchor"></div>
 
 
 ### The Code Running on This Page

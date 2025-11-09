@@ -55,7 +55,11 @@ function addToDetails(element: HTMLElement, data: any) {
   pre.innerText = JSON.stringify(data, undefined, 2);
   codeElement.appendChild(pre);
   detail.append(codeElement);
-  element.after(detail);
+  if (element.children.length > 0) {
+    element.lastChild?.after(detail);
+  } else {
+    element.appendChild(detail);
+  }
 }
 
 function addToLog(element: HTMLPreElement, data: any) {
