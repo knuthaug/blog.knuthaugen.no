@@ -7,16 +7,13 @@ desc: Test page printing Web Vitals live data
 bundle: labs-vitals.js
 category: labs
 ---
-
-### Web Vitals (normal mode)
+### Web Vitals events (normal mode)
 <div id="log-anchor"></div>
 
-### Web Vitals (attribution build)
+### Web Vitals events (attribution build)
 <div id="attr-log-anchor"></div>
 
-
 ### The Code Running on This Page
-
 
 <pre class="font-highlight full-bleed no-overflow">
 <code class="inner-syntax">
@@ -31,7 +28,8 @@ import {
 
 let logAnchor: HTMLElement;
 let attrLogAnchor: HTMLElement;
-
+let count = 0;
+let attrCount = 0;
 document.addEventListener("DOMContentLoaded", () => {
   load();
   logAnchor = document.getElementById("log-anchor") as HTMLElement;
@@ -39,11 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function metricCallback(metric: any) {
-  addToDetails(logAnchor, metric);
+  addToDetails(logAnchor, metric, ++count);
 }
 
 function metricCallbackAttr(metric: any) {
-  addToDetails(attrLogAnchor, metric);
+  addToDetails(attrLogAnchor, metric, ++attrCount);
 }
 
 function load() {
@@ -60,7 +58,7 @@ function load() {
   onTTFBAttr(metricCallbackAttr, { reportAllChanges: true });
 }
 
-function addToDetails(element: HTMLElement, data: any) {
+function addToDetails(element: HTMLElement, data: any, count: number) {
   if (data.name === "CLS") {
     //writing cls values in this manner will generate new CLS events
     return;
@@ -68,7 +66,7 @@ function addToDetails(element: HTMLElement, data: any) {
 
   const detail = document.createElement("details");
   const summary = document.createElement("summary");
-  summary.innerText = `${data.name} - ${data.value.toFixed(2)}`;
+  summary.innerText = `${count} ${data.name} - ${data.value.toFixed(2)}ms`;
   detail.appendChild(summary);
   const codeElement = document.createElement("pre");
   codeElement.classList = "font-highlight";
@@ -77,8 +75,14 @@ function addToDetails(element: HTMLElement, data: any) {
   pre.innerText = JSON.stringify(data, undefined, 2);
   codeElement.appendChild(pre);
   detail.append(codeElement);
-  element.after(detail);
+
+  if (element.children.length > 0) {
+    element.lastChild?.after(detail);
+  } else {
+    element.appendChild(detail);
+  }
 }
+
 </code>
 </pre>
 
