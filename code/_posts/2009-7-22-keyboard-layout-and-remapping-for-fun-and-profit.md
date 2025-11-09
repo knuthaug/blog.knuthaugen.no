@@ -4,7 +4,7 @@ title: Keyboard layout and remapping for fun and profit
 mt_id: 6
 date: 2009-07-22 10:18:27 +02:00
 ---
-After having lived with some annoying CAPS-LOCK mishaps and a general feeling of pain in the lower forearm, I decided to remap my keyboard layout for a smoother programming experience. Since I'm Norwegian and use a Norwegian keyboard layout, I have to resort to AltGr+0 to produce a }. Brackets are equally far away. Parenthesis are shift+8 and shift+9 on the number row and all this means moving the hand away from the home row a lot. I wanted to be able to program and maintain my hands in a more or less touch typing position.The goal was improved speed at programming and less discomfort. The fact that I daily program on both windows and linux ( both native and via the cygwin X server) made things a bit more complex than anticipated, as we will see. <!--more-->This article tackles re-mapping the caps-lock key in windows and creating a new keyboard layout in both windows and linux (Xorg that is). Info about re-mapping the caps-lock key under linux is just a <a href="//http://www.google.com/search?q=xmodmap+caps+alt_gr">google search away</a>.
+After having lived with some annoying CAPS-LOCK mishaps and a general feeling of pain in the lower forearm, I decided to remap my keyboard layout for a smoother programming experience. Since I'm Norwegian and use a Norwegian keyboard layout, I have to resort to <kbd>AltGr+0</kbd> to produce a }. Brackets are equally far away. Parenthesis are <kbd>shift+8</kbd> and <kbd>shift+9</kbd> on the number row and all this means moving the hand away from the home row a lot. I wanted to be able to program and maintain my hands in a more or less touch typing position.The goal was improved speed at programming and less discomfort. The fact that I daily program on both windows and linux ( both native and via the cygwin X server) made things a bit more complex than anticipated, as we will see. <!--more-->This article tackles re-mapping the caps-lock key in windows and creating a new keyboard layout in both windows and linux (Xorg that is). Info about re-mapping the caps-lock key under linux is just a <a href="//http://www.google.com/search?q=xmodmap+caps+alt_gr">google search away</a>.
 
 The following setup was used in this little adventure:
 <ul>
@@ -14,7 +14,7 @@ The following setup was used in this little adventure:
 </ul>
 
 ### Caps lock remapping
-The caps lock key is irritating and I've never used as far as I can tell. But I haven't gotten around to doing anything about it. Now's the time. First I thought about remapping it to control and binding a lot the characters I want more accessible to ctrl+ bindings. This messes with application shortcuts a lot so I went for altGr instead. I used a small program named <a href="http://webpages.charter.net/krumsick/">KeyTweak</a> to perform the binding. The result of running that program is that i new value is written to the registry. It looks like this:
+The caps lock key is irritating and I've never used as far as I can tell. But I haven't gotten around to doing anything about it. Now's the time. First I thought about remapping it to control and binding a lot the characters I want more accessible to <kbd>ctrl</kbd> bindings. This messes with application shortcuts a lot so I went for <kbd>altGr</kbd> instead. I used a small program named <a href="http://webpages.charter.net/krumsick/">KeyTweak</a> to perform the binding. The result of running that program is that i new value is written to the registry. It looks like this:
 
 ```bash
 Windows Registry Editor Version 5.00
@@ -28,10 +28,9 @@ Windows Registry Editor Version 5.00
 Either apply the file or do it from within KeyTweak and the caps lock key is now an AltGr key. A reboot is probably in order to put it into effect. It is windows, after all.
 
 ### Keyboard layout for windows
-I used a Microsoft tool called <a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=8be579aa-780d-4253-9e0a-e17e51db2223&amp;DisplayLang=en">Microsoft Keyboard Layout Creator</a> which is a nice tool for creating a new layout from scratch or basing it on an existing layout. It has some limitations however in that you can't remap things like caps lock and the windows key. But on the other hand it generates nice install packages for your keyboard layout. I decided on the following keyboard shortcuts (remember caps lock is now AltGr so it is easily available for the left pinky finger):
+I used a Microsoft tool called <a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=8be579aa-780d-4253-9e0a-e17e51db2223&amp;DisplayLang=en">Microsoft Keyboard Layout Creator</a> which is a nice tool for creating a new layout from scratch or basing it on an existing layout. It has some limitations however in that you can't remap things like caps lock and the windows key. But on the other hand it generates nice install packages for your keyboard layout. I decided on the following keyboard shortcuts (remember caps lock is now <kbd>AltGr</kbd> so it is easily available for the left pinky finger):
 
 ```bash
-
 	AltGr+a = !
 	AltGr+s = #
 	AltGr+d = @
@@ -69,14 +68,14 @@ key { [	o,	O,	bracketright,	Ooblique ] };
 ```
 {: class="full-bleed"}
 
-This snippet maps e.g. AltGr+u to braceleft which displays a nice left curly brace.
+This snippet maps e.g. <kbd>AltGr+u</kbd> to braceleft which displays a nice left curly brace.
 The format is broken down like this:
 <ul>
 	<li>The key name AD07 is the 7th (07) alphanumeric (A) key from the left of the fourth row (D) from the bottom. Bottom row is A, second to bottom B and so on.</li>
 	<li>First column is character displayed when the key is pressed normally</li>
 	<li>Second column is character displayed when the key is pressed with shift down</li>
-	<li>Third column is character displayed when AltGr is down</li>
-	<li>Fourth column is character displayed when both AltGr and shift is down</li>
+	<li>Third column is character displayed when <kbd>AltGr</kbd> is down</li>
+	<li>Fourth column is character displayed when both <kbd>AltGr</kbd> and shift is down</li>
 </ul>
 Key names can be found in <code>/usr/X11/include/X11/keysymdef.h</code>
 

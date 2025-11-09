@@ -642,6 +642,20 @@ article h2 {
   text-align: center;
 }
 
+kbd {
+  background-color: var(--text-color);
+  border-radius: 3px;
+  border: 1px solid var(--light-gray);
+  box-shadow: 0 1px 1px rgb(0 0 0 / 0.2), 0 2px 0 0 rgb(255 255 255 / 0.7) inset;
+  color: var(--background-color);
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 2px 4px;
+  white-space: nowrap;
+}
+
 main #meta {
   font-size: 1.2rem;
   font-family: "Source serif italic", serif;
