@@ -1,28 +1,52 @@
-<div id="main-container">
-  {% capture category %}{{page.title}}{% endcapture %}{% capture class %}icon{%
-  endcapture %}
-  <div class="backdrop">{% include icon.liquid %}</div>
-  <main id="category">
-    <section class="niceties"></section>
-    <div class="hero display-grid">
-      <h2 class="text-align-center">Welcome to the Laboratory</h2>
-      <p>
-        This is a collection of tests and experiments that may or may not be
-        useful to you. I need them to be available on the internet, at least,
-        and that is why they are published here.
-      </p>
-      <ul>
-        <li>
-          <a href="/labs/2025/10/19/network-information-api.html"
-            >Network Information API</a
-          >
-        </li>
-        <li>
-          <a href="/labs/2025/10/28/web-vitals-live-measurements.html"
-            >Web Vitals Live Measurements</a
-          >
-        </li>
-      </ul>
-    </div>
-  </main>
-</div>
+{% capture category %}{{page.title}}{% endcapture %}{% capture class %}icon{%
+endcapture %}
+<div class="backdrop">{% include icon.liquid %}</div>
+<main>
+  <section class="niceties"></section>
+  <div class="hero display-grid">
+    <h2 class="text-align-center">Welcome to the Laboratory</h2>
+    <p>
+      This is a collection of tests and experiments that may or may not be
+      useful to you. I need them to be available on the internet, at least, and
+      that is why they are published here.
+    </p>
+    <ul class="cards">
+      <li class="card">
+        <a href="/labs/2025/10/19/network-information-api.html">
+          <figure>
+            <img
+              src="/assets/images/network.png"
+              alt="Network Information API illustrated by some code"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+          <h3>Network Information API</h3>
+          <p>
+            Test page which prints out changes in the network API as they happen
+            (Chrome only)
+          </p>
+        </a>
+      </li>
+      <li class="card">
+        <a href="/labs/2025/10/28/web-vitals-live-measurements.html">
+          <figure>
+            <img
+              src="/assets/images/lcp.png"
+              alt="Web Vitals data illustrated by LCP"
+              width="600"
+              height="400"
+              loading="lazy"
+            />
+          </figure>
+          <h3>Web Vitals Live Measurements</h3>
+          <p>
+            Printing live Web Vitals measurements to the screen as they happen
+            after page load.
+          </p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</main>

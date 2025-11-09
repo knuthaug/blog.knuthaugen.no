@@ -7,8 +7,12 @@
 >
   {% include head.html %}
   <body>
-    {% include header.html %} {% if page.title == 'labs' %} {% include
-    labs-main.html %} {% else %} {% include category-list.html %} {% endif %} {%
-    include menu.html %} {% include footer.html %}
+    {% include header.html %} 
+    {% if page.title == 'labs' %}
+    <div id="main-container" class="labs">{% include labs-main.html %}
+    {% else %}
+    <div id="main-container">{% include category-list.html %}
+    {% endif %} {% include menu.html %} {% include footer.html %}
+    </div>
   </body>
 </html>

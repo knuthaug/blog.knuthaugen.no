@@ -3,6 +3,7 @@
   --border-radius-default: 4px;
   --dropdown-width: 240px;
   --icon-grid-gap: 6px;
+  --card-padding: 0.5rem;
 
   --link-transition: all 0.2s ease-in-out;
   --header-transition: all 0.2s ease-in-out;
@@ -31,6 +32,7 @@ html {
 
   --header-box-shadow: rgb(0, 0, 0);
   --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
+  --card-hover-background-color: var(--gradient-blue);
 }
 
 html.dark {
@@ -51,6 +53,7 @@ html.dark {
 
   --header-box-shadow: rgb(209, 209, 209);
   --icon-drop-shadow: drop-shadow(0 0 4px var(--primary-color));
+  --card-hover-background-color: var(--gradient-blue);
 }
 
 *:before,
