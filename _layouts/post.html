@@ -23,8 +23,10 @@
           <section id="meta">
             <div id="published">
               Published in
-              <span class="category">{{ page.categories }}</span> on {{
-              page.date | date: "%B %e, %Y"}}
+              <span class="category">{{ page.categories }}</span> on
+              <time datetime="{{page.date | date: '%Y-%m-%d'}}"
+                >{{ page.date | date: "%B %e, %Y"}}</time
+              >
             </div>
           </section>
           {{ content }}
