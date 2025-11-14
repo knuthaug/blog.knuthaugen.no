@@ -155,6 +155,7 @@ li.card {
     overflow: hidden;
     aspect-ratio: 3/2;
     position: relative;
+    border: 1px solid var(--light-gray);
 
     img {
       width: 100%;
