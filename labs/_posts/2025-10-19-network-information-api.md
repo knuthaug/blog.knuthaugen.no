@@ -13,7 +13,9 @@ This page/post tracks and prints every time the network information API detects 
 network. Most useful on mobile devices when travelling through areas of spotty wireless coverage. 
 
 Works in chrome (61+), Edge (79+), Opera (48+), Chrome Android (38+), Opera Android (25+), Samsung Internet (3+) and
-Android WebView (50+), so it's not great and not every part of the spec is implemented either. WebKit teams is reluctant based on privacy concerns (can you believe it?)
+Android WebView (50+), so it's not great and not every part of the spec is implemented either. WebKit team is reluctant based on privacy concerns (can you believe it?)
+
+You can easily test it out by opening devtools and the network pane and fiddle with the throttle network dropdown list. 
 
 [Network Information API Specification](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API)
 
@@ -35,9 +37,9 @@ Android WebView (50+), so it's not great and not every part of the spec is imple
 current: undefined
 </p>
 
-<form>
-    <textarea id="log"></textarea>
-</form>
+#### Log of Changes
+<pre  class="tall font-highlight"><code id="log" class="inner-syntax"></code></pre>
+
 
 ### The Code Running on This Page
 

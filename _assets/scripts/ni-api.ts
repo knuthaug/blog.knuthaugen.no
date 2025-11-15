@@ -135,7 +135,7 @@ function pushToDataset(chart: Chart, value: number) {
 function addToLog(connection: NetworkInformation) {
   const log = document.getElementById("log");
   if (!log) return;
-  (log as HTMLTextAreaElement).value += `effective type:${
+  (log as HTMLPreElement).innerText += `effective type:${
     connection.effectiveType
   }${connection.type ? ` (${connection.type})` : ""}, downlink:${
     connection.downlink
