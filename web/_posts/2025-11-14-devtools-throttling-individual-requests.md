@@ -30,7 +30,7 @@ Your own throttling profiles can set custom values for latency, bandwidth and so
 
 #### Network Conditions
 
-Here's a screenshot of the network conditions pane where I have set all CSS files (with a wild card) to 3G speed and one particular font to 4G to simulate the effects of slow loading of just the CSS.
+Here's a screenshot of the network conditions pane where I have set all CSS files (with a wild card) to 3G speed and one particular font to 4G to simulate the effects of slow loading of the CSS and one font and see how that will impact the page. 
 
 <img class="full-bleed" loading="lazy" src="/assets/images/throttle2.png" width="765" alt="screenshot of pane with throttled requests"/>
 
@@ -43,5 +43,5 @@ the LCP measurement go to 3 seconds?
 Another use case is how will the page look when the font loading is slow and will that impact the CLS with
 a font switch after loading is complete. And how about slowing down just the LCP image on the top of the page, how will that impact things?
 
-In general, being able to reproduce/force slow loading of particular requests or a set of request is key as opposed to slowing down everything, which is a blunt tool for a sharp job. Using an axe for surgery if you will. 
-You will cut stuff of, but you know, maybe a bit more than you planned for. 
+In general, being able to reproduce/force slow loading of particular requests or a set of request is key as opposed to slowing down everything, which is a blunt tool for a detailed job. 
+Using an axe for surgery if you will. You will cut stuff off, but you know, maybe a bit more than you planned for. And instead of thinking how slow assets will impact the site, you can easily test it, specifically and accurately. 
