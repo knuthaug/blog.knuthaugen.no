@@ -36,4 +36,12 @@ Here's a screenshot of the network conditions pane where I have set all CSS file
 
 ### The Why
 
-So what is the use case for this? A lot!
+So what is the use case for this? A lot! My first thought was to use it when debugging Web Vitals 
+measurements gone awry. Is the slow loading of this particular bundle or css what is making
+the LCP measurement go to 3 seconds?
+
+Another use case is how will the page look when the font loading is slow and will that impact the CLS with
+a font switch after loading is complete. And how about slowing down just the LCP image on the top of the page, how will that impact things?
+
+In general, being able to reproduce/force slow loading of particular requests or a set of request is key as opposed to slowing down everything, which is a blunt tool for a sharp job. Using an axe for surgery if you will. 
+You will cut stuff of, but you know, maybe a bit more than you planned for. 

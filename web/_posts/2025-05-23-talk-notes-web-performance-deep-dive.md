@@ -7,7 +7,7 @@ date: 2025-05-23
 desc: References and slides for my talk on browser performance, Offentlig fagdag 2025
 ---
 
-I gave a talk on web performance and web performance API on May 22th 2025 on a mini conference for developers and  platform engineers in the public sector in Norway. This is just a quick post linking the talk slides, as PDF, and references and sources for the talk, for anyone interested. Talk and slides are in Norwegian, but all sources are in English. 
+I gave a talk on web performance and web performance APIs on May 22th 2025 on a mini conference for developers and platform engineers in the public sector in Norway. This is just a quick post linking the talk slides, as PDF, and references and sources for the talk, for anyone interested. Talk and slides are in Norwegian, but all sources are in English. 
 
 ### Talk slides
 
