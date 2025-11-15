@@ -71,7 +71,12 @@ So first step is checking if the user has a preference. Since I opted to make th
 ```
 {: class="full-bleed"}
 
-`setMode` in this case sets a class on `<html>`, "light" or "dark" accordingly. To support that the user might have a preference on _this_ site that is different than the OS preference, we store it in localStorage too, and read that first. 
+`setMode()` in this case sets a class on `<html>`, "light" or "dark" accordingly. To support that the user might have a preference on _this_ site that is different than the OS preference, we store it in <button popovertarget="test">localStorage</button> too, and read that first. 
+
+<span popover="auto" id="test" class="wordtip">
+  LocalStorage is the old-school way to store data in the browser for a page, but also the easiest to use. 
+  Use sparingly. 
+</span>
 
 
 ```javascript
@@ -94,7 +99,7 @@ function darkMode() {
 ```
 {: class="full-bleed"}
 
-The `setMode` function also stores the preference in localStorage so it is remembered for the next page load/visit. 
+The `setMode()` function also stores the preference in localStorage so it is remembered for the next page load/visit. 
 
 There is also a possibility of reacting to a change in the OS preference with an event handler, which is nifty feature. This little snippet accomplishes that. Other things to do in this function is to make labels and icons switch according to the current mode so the menu looks nice and is accessible (omitted in the example for brevity).
 
@@ -124,7 +129,7 @@ Styling and tweaking the animation is done via a css block.
 
 `view-transition-old` is a screenshot of the old state, and `view-transition-new` is a live snapshot of the new state. The default animation is for the old snapshot to animate from opacity 1 to 0 and the new animates from opacity 0 to 1, creating a cross-fade. This works well in my case, so I kept it.
 
-The actual transition is triggered in javascript with a fallback if the `startViewTransition` function is unavailable in the browser. `startViewTransition` takes a callback to be called when the transition snapshot is made and which should change the DOM for the new state. 
+The actual transition is triggered in JavaScript with a fallback if the `startViewTransition` function is unavailable in the browser. `startViewTransition` takes a callback to be called when the transition snapshot is made and which should change the DOM for the new state. 
 
 ```javascript
 if(something) {
@@ -158,4 +163,4 @@ I encountered a couple of snags along the way, that might come in handy for the 
 
 * I learned the hard way that if you use svgs in an `<img>` element, you will get the default stroke colour on the svg, and it will not (at least not easily) be styled by a colour variable. By using the svgs directly with an `<svg>` tag, they can be styles easily with variables when switching modes. 
 
-Dark mode/light mode can be achieved with little code both in css and javascript and does not need to complicate your webapp or code. Hopefully you found it useful. 
+Dark mode/light mode can be achieved with little code both in css and JavaScript and does not need to complicate your webapp or code. Hopefully you found it useful. 
