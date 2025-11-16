@@ -29,6 +29,7 @@ html {
   --dropdown-text-color: var(--primary-gray);
   --main-border-top: #d0e7fa;
   --code-quote-background-color: hsl(0, 0%, 90%);
+  --warning-color: rgb(146, 88, 2);
 
   --header-box-shadow: rgb(0, 0, 0);
   --icon-drop-shadow: drop-shadow(0 0 2px var(--primary-color));
@@ -50,6 +51,7 @@ html.dark {
   --dropdown-text-color: var(--primary-gray);
   --main-border-top: #666;
   --code-quote-background-color: hsl(240, 1%, 30%);
+  --warning-color: rgb(255, 153, 0);
 
   --header-box-shadow: rgb(209, 209, 209);
   --icon-drop-shadow: drop-shadow(0 0 4px var(--primary-color));

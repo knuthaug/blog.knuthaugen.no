@@ -850,6 +850,23 @@ pre.font-highlight {
   }
 }
 
+.old-article {
+  &:before {
+    content: "⚠️ This is an old article. Information may be outdated. ⚠️";
+    display: inline-block;
+    background-color: transparent;
+    color: var(--text-color);
+    padding: 8px;
+    text-align: center;
+    margin-bottom: -12px;
+    border-radius: var(--border-radius-default);
+    border: 1px solid var(--warning-color);
+    position: relative;
+    width: 100%;
+    margin-top: var(--page-margin);
+  }
+}
+
 details::details-content {
   opacity: 0;
   transition: opacity 250ms, content-visibility 250ms allow-discrete;

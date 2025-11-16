@@ -5,7 +5,6 @@ mt_id: 34
 date: 2010-09-22 12:19:00 +02:00
 tags: [javascript, css, modernizr]
 ---
-
 I'll hopefully be doing some HTML5 work soon and I came across the
 <a href="http://www.modernizr.com/">Modernizr</a> project, which is very cool for doing feature detection as opposed to browser detection. It does all the heavy (well, not so heavy but tedious) lifting when it comes to detecting if the browser visiting your site supports all the fancy schmancy new features from HTML5 and CSS3. Like websockets, CSS 2D and 3D transforms, web workers, canvas, offline storage, browser databases, video and audio elements and much more awesomeness. Check the link for the complete list. And it's really easy to use too. The nice thing about it is that it does not accomplish this through browser detection, which is very unreliable, but rather through checking for the feature directly by trying to call API functions or creating stuff.
 

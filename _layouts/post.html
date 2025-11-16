@@ -11,7 +11,12 @@
     <div id="main-container">
       <main>
         <section class="niceties"></section>
+
         <article class="hero display-grid">
+          {% assign articleDate = page.date | date: '%Y' | plus: 0 %} {% if
+          articleDate < 2020 %}
+          <div class="old-article"></div>
+          {% endif %}
           <section id="toc" class="opacity-0">
             <h4>Table of Contents</h4>
             <div class="bar" data-row="1"></div>
