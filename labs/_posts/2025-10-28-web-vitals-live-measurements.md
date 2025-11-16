@@ -71,7 +71,6 @@ function addToDetails(element: HTMLElement, data: any, count: number) {
   const codeElement = document.createElement("pre");
   codeElement.classList = "font-highlight";
   const pre = document.createElement("code");
-  pre.classList = "inner-syntax";
   pre.innerText = JSON.stringify(data, undefined, 2);
   codeElement.appendChild(pre);
   detail.append(codeElement);
