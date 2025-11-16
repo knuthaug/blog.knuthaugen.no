@@ -1,14 +1,25 @@
 ---
 layout: default
-title: All About the code
+title: Post archive
 ---
 
+{% assign startYear = 2025 %}
+
 <div class="hero display-grid">
- {% for post in site.posts %}
-     <article>
-     <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-      <div class="date">{{post.date | date: "%B %e, %Y" }}</div> {{ post.excerpt }}
-       &raquo; <a href="{{ post.url }}"> Read the article</a>
-    </article>
-  {% endfor %}
+  <div class="posts">
+    <h2>2025</h2>
+    <ul>
+    {% for post in site.posts %}
+        {% assign year = post.date | date: '%Y' | plus: 0 %}
+        {% if year < startYear %}
+        {% assign startYear = year %}
+        </ul>
+        <h2>{{startYear}}</h2>
+        <ul>
+        {% endif %}
+      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+  </div>
 </div>
