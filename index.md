@@ -16,7 +16,7 @@ title: All About the code
        &raquo; <a href="{{ post.url }}"> Read the article</a>
     </article>
   {% endfor %}
-  {% for post in site.posts offset: 1 limit:5 %}
+  {% for post in site.posts offset: 1 limit:7 %}
      {% if post.category == 'labs' %}
      {% continue %}
      {% endif %}
