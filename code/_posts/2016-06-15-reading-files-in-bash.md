@@ -14,7 +14,7 @@ for line in $(< ${file}); do
   echo ${line}
 done
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 It's our old friend IFS (internal field separator) at work here, with its default value of "<space><tab><newline>" in bash. So we unset it and bob's our uncle.
 
@@ -28,7 +28,7 @@ done
 
 IFS=${prev_ifs}
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 (It's nice to preserve the value of IFS and reset it after you're done. If you'r in a function you can of course local it instead)
 
@@ -41,7 +41,7 @@ while read -r line; do
 done < "$file"
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 There are manny more ways to read files in bash of course. The lesson is of course that I should have tested this better when I first wrote it :-)
 

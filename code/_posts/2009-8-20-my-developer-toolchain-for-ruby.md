@@ -41,7 +41,7 @@ IDE is a big deal for many people and I have tried two, Eclipse and Emacs. Since
 
 (provide 'ruby)
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 I use flymake to do interactive compile as I type but I suspect I'll be turning this off when Ruby gets more into my fingers.
 

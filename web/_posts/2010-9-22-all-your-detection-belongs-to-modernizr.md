@@ -16,7 +16,7 @@ Load it like this:
 ```html
 <script src="modernizr-1.5.min.js" type="text/javascript" charset="utf-8"
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 and the next time you need to know it some feature is
 supported, check the automagically created Modernizr object and see if that
@@ -26,7 +26,7 @@ property is true or false:
 if (Modernizr.canvas) { var c =
 document.createElement('canvas'); }
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 As a nice bonus it assigns css classes
 to the <code>html</code> element so you can do different styling based on
@@ -43,4 +43,4 @@ whether a feature is available or not.
   }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}

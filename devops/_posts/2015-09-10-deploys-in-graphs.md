@@ -17,7 +17,7 @@ First step is to record the deploy. From the deploy scripts, each production dep
 DATE=$(date +%s)
 echo -n "deploys.${NAME} 1 ${DATE}" | nc -w 1 -u $graphite-host 2003
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 Where NAME is the app name, the value sent is 1 and then the timestamp.
 

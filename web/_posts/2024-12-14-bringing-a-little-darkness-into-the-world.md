@@ -49,7 +49,7 @@ html.dark {
   ...
 }
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 The default is dark mode, so the page is rendered with `class="dark"` on page load and then the logic for selecting the appropriate mode kicks in in a `DOMContentLoaded` callback. If you have a page that is clients-side rendered you can delay the rendering until the decision on which mode to use is clear, but since this blog is statically rendered, the default needs to be sane and the code to switch modes needs to be loaded early to avoid flickering when the selected theme is applied.
 
@@ -69,7 +69,7 @@ So first step is checking if the user has a preference. Since I opted to make th
       setMode("dark");
     }
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 `setMode()` in this case sets a class on `<html>`, "light" or "dark" accordingly. To support that the user might have a preference on _this_ site that is different than the OS preference, we store it in <button popovertarget="test">localStorage</button> too, and read that first. 
 
@@ -97,7 +97,7 @@ function darkMode() {
   }
 }
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 The `setMode()` function also stores the preference in localStorage so it is remembered for the next page load/visit. 
 
@@ -110,7 +110,7 @@ There is also a possibility of reacting to a change in the OS preference with an
       setMode(event.matches ? "dark" : "light");
     });
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 <h3><a name="viewtrans">Adding a Transition</a></h3>
 
@@ -125,7 +125,7 @@ Styling and tweaking the animation is done via a css block.
   animation-timing-function: ease-in-out;
 }
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 `view-transition-old` is a screenshot of the old state, and `view-transition-new` is a live snapshot of the new state. The default animation is for the old snapshot to animate from opacity 1 to 0 and the new animates from opacity 0 to 1, creating a cross-fade. This works well in my case, so I kept it.
 
@@ -147,7 +147,7 @@ if(something) {
   }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 It looks like this
 

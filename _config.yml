@@ -2,11 +2,8 @@ plugins:
   - jekyll-archives
   - jekyll/minibundle
 
+highlighter: none
 markdown: kramdown
-highlighter: rouge
-kramdown:
-  syntax_highlighter_opts:
-    formatter: Rouge::Formatters::Null
 tag_page_layout: tag_page
 tag_page_dir: tag
 jekyll-archives:

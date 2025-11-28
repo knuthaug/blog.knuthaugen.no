@@ -32,7 +32,7 @@ public class DatabaseUserManager : IUserManager {
 }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 javas different:
 
@@ -49,7 +49,7 @@ public class LDAPUserManager extends UserManager {
 }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 <p>
 The need for a prefix for readability is less needed in Java, compared to C#.

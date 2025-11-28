@@ -56,7 +56,7 @@ import { onCLS, onFCP, onLCP, onINP, onTTFB } from "web-vitals";
         ...
     });
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 The web-vitals package can also include attributions, with lots of details about what might be causing your pages to be slow, and this is very cool. The attribution methods adds some KB to your bundle, but can be very helpful. Enable it by changing the import to use `web-vitals/attribution` like this:
 
@@ -64,7 +64,7 @@ The web-vitals package can also include attributions, with lots of details about
 - import {onLCP, onINP, onCLS} from 'web-vitals';
 + import {onLCP, onINP, onCLS} from 'web-vitals/attribution';
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 The attribution objects carry with them information about such things as which element caused the layout shift for CLS, which element is the largest contentful paint for LCP, how much time is spent waiting, loading resources, rendering LCP element. INP anf FCP also have a loadstate property telling you which state the document was in at the time the thing happened. 
 
@@ -77,7 +77,7 @@ type LoadState =
   | 'dom-content-loaded'
   | 'complete';
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 And to get the attributions, run
 
@@ -86,7 +86,7 @@ And to get the attributions, run
         ...
     });
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 The attributions object for e.g FCP has the following information:
 
@@ -155,7 +155,7 @@ The attributions object for e.g FCP has the following information:
 }
 }
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 Would you look at all that lovely data!? This tells us that the FCP was caused by a `navigation` (`navigationEntry.type`) 
 as opposed to for instance a `reload` type, The paint occured at 175ms (`fcpEntry.startTime`) where time to first byte was 49ms and 
 time between first byte and fcp was 126ms. The document was in a `dom-content-loaded` state when the FCP occured. 
@@ -177,7 +177,7 @@ The measurements from web-vitals also include the rating value (good, needs impr
         ...
     });
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 For all the details, see [the web-vitals documentation](https://github.com/GoogleChrome/web-vitals).
 
@@ -224,7 +224,7 @@ const values = {};
     }
   );
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 For convenience, I collect all the values, except INP which can come much later when navigation happens, and send the values collected to a endpoint storing them. INP has a separate method for sending. I recently got a virtual linux-server for running my projects, so I added some software to store vitals.
 

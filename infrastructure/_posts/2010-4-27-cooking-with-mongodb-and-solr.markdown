@@ -56,7 +56,7 @@ public function insert(DataRecord $record) {
 }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 This will insert a document in the collection if it's not there. When it is there, it will add an element to the (nested) 'list' element with the value of `$record->year()` as key. The value will be the value of `$record->getDetails()`. The `toArray()` call is there because the mongo driver expects arrays to store. The super cool part is that if the key exists, it will just be updated with the data from the details object. Read more on the details of the [MongoDB update options](http://www.mongodb.org/display/DOCS/Updating).
 
@@ -77,7 +77,7 @@ public function index(SolrInputDocument $document) {
     }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 Commit on every Solr document makes indexing very slow. Small tests indicated 3 minutes for indexing 5000 documents with commit on every submit and 15 seconds with one commit every 2000 document (and at the end of course). The code above commits every `$commitInterval`(10000 default) to speed things up a bit. Note also that the `commit()` and `optimize()` calls for Solr may time out as they can take a long time to finish. Solr does not time out but rather the java application server you're running times out. When this happens an exception is thrown in the php driver which has to be caught.
 

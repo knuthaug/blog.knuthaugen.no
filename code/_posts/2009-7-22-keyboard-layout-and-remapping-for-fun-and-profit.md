@@ -23,7 +23,7 @@ Windows Registry Editor Version 5.00
 
 "Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,38,e0,3a,00,00,00,00,00
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 Either apply the file or do it from within KeyTweak and the caps lock key is now an AltGr key. A reboot is probably in order to put it into effect. It is windows, after all.
 
@@ -47,7 +47,7 @@ I used a Microsoft tool called <a href="http://www.microsoft.com/downloads/detai
 	AltGr+o = ]
 	AltGr+p = }
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 ### Keyboard layout for linux/ Xorg
 When applying the custom layout for windows this worked well for native windows apps, but when logging into the linux servers and X-forwarding apps to the cygwin X server, it naturally didn't work. A similar custom keyboard layout for the X server was needed.
@@ -66,7 +66,7 @@ key { [	u,	U,	braceleft,	uparrow ] };
 key { [	i,	I, 	bracketleft,	idotless ] };
 key { [	o,	O,	bracketright,	Ooblique ] };
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 This snippet maps e.g. <kbd>AltGr+u</kbd> to braceleft which displays a nice left curly brace.
 The format is broken down like this:

@@ -55,7 +55,7 @@ section {
 }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 The margin of 12px will only be applied if the `h2` is within the container named `section` and that container is wider than 60rem. 
 
@@ -70,7 +70,7 @@ Whereas this code:
 }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 will apply the extra margin to a h2 if the _nearest_ ancestor which is a container in the DOM, named or unnamed, is more than 60rem wide. If you want to adjust for instance multiple article cards according to the container size, and they can be in any number of different containers, use `@container` queries without name, because names would get messy very quickly. But in general I think named containers reads better. And even a named container that isn't directly used in `@container` query doesn't cost you anything more than a few extra characters in the css. And vice versa: if styles should only apply when a specific container changes size, use the name in the query. And when you need to change from using an unnamed container query to a named one, you know all containers have names and can use the name as it is. So make it a good name, eh?
 
@@ -87,7 +87,7 @@ tv-player {
   container-type: inline-size;
 }
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 The actual player custom element is our container, since the padding should vary based on that containers size. Container queries looks as follows (some other styles omitted for brevity):
 
@@ -130,7 +130,7 @@ The actual player custom element is our container, since the padding should vary
 }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 So we set medium (by a variable) margins on medium sized players and large margins on large players (above 1024px). But wait a minute! There is now container query for smaller players (less than 600px wide). What gives?
 
@@ -156,7 +156,7 @@ tv-player-interaction-buttons div {
 }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 There are some other tweaks that have been added to the container queries after this, such as font size on the poster image of the program (before the player has started), sizing of the play button on the middle of the player and the amount of space that subtitles should be moved when controls are active. None of these are absolute show stoppers if we needed to do it without queries or only with media queries, but it's easier to fine tune and easier to get _really_ good with container queries. 
 

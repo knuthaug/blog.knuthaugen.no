@@ -165,7 +165,7 @@ fi
 
 report_deploy $env $app $version
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 And then the script for _just_ updating the config of an app, without deploying anything.
 
@@ -293,7 +293,7 @@ fi
 rm ${configmap_file}
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 (Yeah, it could do with some refactoring)
 
