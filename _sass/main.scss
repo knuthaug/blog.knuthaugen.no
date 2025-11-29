@@ -377,6 +377,10 @@ ol {
   list-style-type: lower-roman;
 }
 
+ol.numbers {
+  list-style-type: decimal;
+}
+
 ul {
   list-style-type: "\2B62";
   li {
