@@ -16,7 +16,7 @@ you have of course created en ecosystem ripe for exploitation. Which these recen
 
 ### The Low-hanging Fruit
 
-I make no claim to have solved this issue once and for all. My team got a real eye opener on the first shai-hulud attack and implemented some organisational and technical changes that we think have helped. Stress was much lower this last round, but you're never really safe, are you? Some of these things apply to other parts of the project than just the JavaScript packages, but I think they're just as relevant. Some of these are also only possible in [pnpm](https://pnpm.io/) and I would highly suggest you upgrade (yes upgrade) if you're still using npm. Pnpm implemented their `minimumReleaseAge`<sup><a href="#ref4">4</a></sup> configuration setting just days after the first attack. It's also faster and has better dependency management than npm in general. Also it supports mono-repos out of the box. More on that later. 
+I make no claim to have solved this issue once and for all. My team got a real eye opener on the first shai-hulud attack and implemented some organisational and technical changes that we think have helped. Stress was much lower this last round, but you're never really safe, are you? Some of these things apply to other parts of the project than just the JavaScript packages, but I think they're just as relevant. Some of these are also only possible in [pnpm](https://pnpm.io/) and I would highly suggest you upgrade (yes upgrade) if you're still using npm. Pnpm implemented their `minimumReleaseAge`<sup><a href="#ref4">4</a></sup> configuration setting just days after the first attack. It also, since version 10, automatically blocks `postinstall` scripts, which is the mechanism for the recent attacks. It's also faster and has better dependency management than npm in general. Also it supports mono-repos out of the box. More on that later. 
 
 First of all, your dependencies _are_ a part of your application, not some loose add-on you don't have to worry about. In fact, you should worry much more about the dependencies than your own code precisely because you haven't written it yourself. I realise this is something that will cost you a lot of time and effort, but you should consider doing things like 
 
@@ -34,6 +34,8 @@ Secondly, some low hanging fruits you absolutely should consider implementing:
 1. Use exact version numbers of most dependencies, if not all of them, and not ranges, carets and thilde-versions. 
 
 2. Set `minimumReleaseAge` in your Renovate configuration (dependabot users, see `cooldown`<sup><a href="#ref5">5</a></sup>) to the recommended two week period, or thereabouts. We quickly found out that you can install packages not meeting this requirement locally, so we followed it with setting `minimumReleaseAge` also in pnpm, but a slightly shorter time. If not, you might get race condition-like problems with package install. 
+
+2. If you set pnpm `trustPolicy` config value, to `no-downgrade`, it will refuse to install packages where the new version has a lower trust level than the previous versions, looking at things like trusted publishers and package provenance. 
 
 3. Use the `best-practices` base configuration for renovate and extend it in a central location so all repos can use it. 
 
