@@ -35,13 +35,13 @@ Secondly, some low hanging fruits you absolutely should consider implementing:
 
 2. Set `minimumReleaseAge` in your Renovate configuration (dependabot users, see `cooldown`<sup><a href="#ref5">5</a></sup>) to the recommended two week period, or thereabouts. We quickly found out that you can install packages not meeting this requirement locally, so we followed it with setting `minimumReleaseAge` also in pnpm, but a slightly shorter time. If not, you might get race condition-like problems with package install. 
 
-2. If you set pnpm `trustPolicy` config value, to `no-downgrade`, it will refuse to install packages where the new version has a lower trust level than the previous versions, looking at things like trusted publishers and package provenance. 
+2. If you set pnpm `trustPolicy` config value, to `no-downgrade`<sup><a href="#ref6">6</a></sup>, it will refuse to install packages where the new version has a lower trust level than the previous versions, looking at things like trusted publishers and package provenance. 
 
 3. Use the `best-practices` base configuration for renovate and extend it in a central location so all repos can use it. 
 
 4. All actions used in build steps and CI should be pinned on a SHA1 hash for the version, not a version tag. So instead of `actions/checkout@v4` in an github action file, you specify `actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8`. The contents of the tag `v4` can change if someone gains access to the repo containing that code. Renovate handles updates of the sha when new versions are releases. Read more about github actions exploits [this blog post from Palo Alto Networks](https://www.paloaltonetworks.com/blog/prisma-cloud/github-actions-worm-dependencies/)
 
-5. When the number of updates increase due to version pinning, consider using automerge on e.g. patch versions of dev dependencies. This can be done both with renovate or tools like bulldozer<sup><a href="#ref6">6</a></sup>. Take a good look at your test suite and ask yourself [do you have enough tests?](/misc/2024/10/20/how-much-is-just-enough.html). If the answer is no, consider writing some more tests before automerging anything. I would seriously discourage automerging without a cooldown/minimumReleaseAge setting.
+5. When the number of updates increase due to version pinning, consider using automerge on e.g. patch versions of dev dependencies. This can be done both with renovate or tools like bulldozer<sup><a href="#ref7">7</a></sup>. Take a good look at your test suite and ask yourself [do you have enough tests?](/misc/2024/10/20/how-much-is-just-enough.html). If the answer is no, consider writing some more tests before automerging anything. I would seriously discourage automerging without a cooldown/minimumReleaseAge setting.
 
 6. Consider also to group dependencies (e.g. we group `@type` deps in one group, linting deps in another) into fewer PRs to get better overview.
 
@@ -54,7 +54,7 @@ Secondly, some low hanging fruits you absolutely should consider implementing:
 10. Make sure you're running `npm ci` or `pnpm i --frozen-lockfile` in CI, and not the normal commands that mutate the lockfile and might install other versions. 
 {: class="numbers"}
 
-One thing we have not implemented yet, but may be forced to investigate in the future is Software Bill of Materials (SBOM<sup><a href="#ref7">7</a></sup>). This can be a game changer security wise, but the organisational cost of implementing it is non-trivial. 
+One thing we have not implemented yet, but may be forced to investigate in the future is Software Bill of Materials (SBOM<sup><a href="#ref8">8</a></sup>). This can be a game changer security wise, but the organisational cost of implementing it is non-trivial. 
 
 Third: I read about someone claiming they had seen, as a consultant, that teams were not committing their lock files to version control. If you should happen to be one of those, go and fix that immediately. The rest of this post can wait. Re-generating your lockfile on each install, bot locally and in CI is not the way to go. A supply chain attack disaster is waiting around the corner. 
 
@@ -272,7 +272,9 @@ When implementing some of these settings per repo, we very quickly discovered th
 
 5. <a href="https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference?versionId=free-pro-team%40latest&productId=code-security&restPage=dependabot%2Cworking-with-dependabot%2Cdependabot-options-reference#cooldown-" name="ref5">https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference?versionId=free-pro-team%40latest&productId=code-security&restPage=dependabot%2Cworking-with-dependabot%2Cdependabot-options-reference#cooldown-</a>
 
-6. <a href="https://github.com/palantir/bulldozer" name="ref6">https://github.com/palantir/bulldozer</a>
+6. <a href="https://pnpm.io/supply-chain-security" name="ref6">https://pnpm.io/supply-chain-security</a>
 
-7. <a name="ref7" href="https://www.crowdstrike.com/en-us/cybersecurity-101/exposure-management/software-bill-of-materials-sbom/">https://www.crowdstrike.com/en-us/cybersecurity-101/exposure-management/software-bill-of-materials-sbom/</a>
+7. <a href="https://github.com/palantir/bulldozer" name="ref7">https://github.com/palantir/bulldozer</a>
+
+8. <a name="ref8" href="https://www.crowdstrike.com/en-us/cybersecurity-101/exposure-management/software-bill-of-materials-sbom/">https://www.crowdstrike.com/en-us/cybersecurity-101/exposure-management/software-bill-of-materials-sbom/</a>
 {: class="numbers"}
