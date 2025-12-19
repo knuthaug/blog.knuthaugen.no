@@ -107,7 +107,7 @@ runs:
       run: |
         node ${{ github.action_path }}/scripts/create-or-update-issue.ts
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 The script on the last line will then create or update an issue with the results. It looks like this:
 
@@ -176,7 +176,7 @@ async function main() {
 main();
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 And the utils script for completeness:
 
@@ -246,7 +246,7 @@ export async function readExtraBodyFile(filePath: string | undefined) {
 }
 
 ```
-{: class="full-bleed"}
+{: class="full-bleed font-highlight"}
 
 This creates a fairly verbose security and license report on the state of the repository. 
 

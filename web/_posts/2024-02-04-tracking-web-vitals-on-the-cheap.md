@@ -153,7 +153,6 @@ The attributions object for e.g FCP has the following information:
         "navigationId": "12660db3-e3bc-4ee6-8f2e-ded0e7d5cfb2"
     }
 }
-}
 ```
 {: class="full-bleed font-highlight"}
 Would you look at all that lovely data!? This tells us that the FCP was caused by a `navigation` (`navigationEntry.type`) 
