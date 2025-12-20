@@ -802,7 +802,7 @@ pre {
   background-color: hsl(213, 76%, 73%);
   font-weight: 200;
   border-radius: var(--border-radius-default);
-  padding: 10px;
+  padding: var(--pre-padding);
   font-size: 1rem;
 }
 
@@ -855,6 +855,17 @@ pre.font-highlight {
   code {
     font-family: "Syntax regular", monospace;
     background-color: transparent;
+  }
+
+  code::before {
+    content: attr(data-lang);
+    background-color: #44475a;
+    padding: 4px 8px;
+    position: relative;
+    float: right;
+    border-radius: 0 var(--border-radius-default) 0 var(--border-radius-default);
+    margin-top: calc(-1 * var(--pre-padding));
+    margin-right: calc(-1 * var(--pre-padding));
   }
 }
 

@@ -17,7 +17,16 @@ function load(): void {
   addScrollHandler();
   //addPageEventHandlers();
   hamburgerMenu();
+  findLanguages();
   initTOC();
+}
+
+function findLanguages(): void {
+  document.querySelectorAll("pre.font-highlight code").forEach((element) => {
+    const classes = element.getAttribute("class");
+    const parts = classes ? classes.split("language-") : [];
+    element.setAttribute("data-lang", parts[1] || "text");
+  });
 }
 
 function hit(): void {
