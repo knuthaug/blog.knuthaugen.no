@@ -15,8 +15,10 @@
           <h2>{{ page.title }}</h2>
           <section id="meta">
             <div id="published">
-              <span class="published-date">Published {{
-              page.date | date: "%B %e, %Y"}}
+              
+              <span class="published-date">Published <time datetime="{{page.date | date: '%Y-%m-%d'}}"
+                >{{ page.date | date: "%B %e, %Y"}}</time
+              >
             </div>
           </section>
           {{ content }}
