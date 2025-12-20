@@ -27,6 +27,10 @@ body {
 
 main {
   border-top: 2px solid var(--main-border-top);
+
+  p {
+    font-size: 95%;
+  }
 }
 
 #toc {
@@ -104,7 +108,7 @@ video {
 main#frontpage h2,
 main.category h2,
 main#archive h2 {
-  font-size: clamp(1.2rem, 3vw + 1rem, 2rem);
+  font-size: clamp(1.2rem, 3vw + 1rem, 2.3rem);
 }
 
 /* cards for labs index */
@@ -441,7 +445,6 @@ footer {
       margin-block-start: 10px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--icon-grid-gap);
 
       li {
         display: block;
@@ -615,8 +618,8 @@ nav ul {
 
 main {
   line-height: 1.45;
-  font-size: 1.25rem;
-  font-family: "Source serif", serif;
+  font-size: 1.2rem;
+  font-family: "Inter", sans-serif;
   font-weight: 350;
   color: var(--text-color);
   margin-bottom: calc(var(--page-margin) * 2);
@@ -644,10 +647,10 @@ main {
   }
 
   h2 {
-    font-family: "Inter italic", sans-serif;
+    font-family: "Source serif italic", serif;
     margin-bottom: 0;
     margin-top: calc(var(--page-margin) * 2);
-    font-size: clamp(1.3rem, 3vw + 1rem, 2.5rem);
+    font-size: clamp(2rem, 3vw + 1rem, 4.5rem);
     min-height: 0vh;
     font-weight: 450;
     letter-spacing: 0.08em;
@@ -670,9 +673,8 @@ h3,
 h4,
 h5 {
   margin-bottom: 0;
-  font-family: "Inter italic", sans-serif;
+  font-family: "Source serif italic", serif;
   font-weight: 500;
-
   a,
   a:hover,
   a:active {
@@ -680,6 +682,9 @@ h5 {
   }
 }
 
+h3 {
+  font-size: 170%;
+}
 .published-date {
   font-weight: 600;
 }
