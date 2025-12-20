@@ -202,3 +202,4 @@ function updateCurrent(connection: NetworkInformation) {
 }
 
 ```
+{: class="full-bleed font-highlight"}
