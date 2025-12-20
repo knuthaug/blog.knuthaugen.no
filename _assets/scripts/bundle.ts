@@ -340,7 +340,7 @@ function setCurrent(entries: any[]): void {
       bar.setAttribute("data-row", Number(row).toString());
 
       if (Number(row) !== 1) {
-        bar.style.setProperty("top", `calc(${Number(row) - 1} * 29px)`);
+        bar.style.setProperty("top", `calc(${Number(row) - 1} * 26px)`);
       } else {
         bar.style.setProperty("top", `0px`);
       }
