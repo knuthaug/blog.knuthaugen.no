@@ -433,12 +433,6 @@ footer {
     padding-top: 10px;
     display: grid;
 
-    h4 {
-      text-align: center;
-      font-size: 1.1rem;
-      margin-top: 0;
-    }
-
     ul {
       list-style-type: none;
       padding-inline-start: 10px;
@@ -812,9 +806,7 @@ pre {
 }
 
 textarea {
-  font-family: "Source code pro", monospace;
   width: 100%;
-  font-size: 1rem;
   border-radius: var(--border-radius-default);
   border: 2px solid var(--light-gray);
   padding: 0;
