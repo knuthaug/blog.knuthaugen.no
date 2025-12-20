@@ -41,7 +41,7 @@ It can show you, well, just about everything about your page load, which element
 
 But let's track vitals ourselves, to see what our users are getting. The easiest way to track web vitals, is to import the library and add callbacks for the measurements you are interested in, some time after the page loads. The `web-vitals` javascript package ensures that the measurements are performed in the same manner as the beforementioned Google tools.
 
-```javascript
+```typescript
 import { onCLS, onFCP, onLCP, onINP, onTTFB } from "web-vitals";
 ...
  onLCP(({ value}) => {
@@ -81,7 +81,7 @@ type LoadState =
 
 And to get the attributions, run
 
-```javascript
+```typescript
  onLCP(({ value, attribution }) => {
         ...
     });

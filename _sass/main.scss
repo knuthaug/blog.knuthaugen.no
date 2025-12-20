@@ -857,10 +857,11 @@ pre.font-highlight {
     background-color: transparent;
   }
 
-  code::before {
+  &:has(code)::before {
     content: attr(data-lang);
     background-color: #44475a;
     padding: 4px 8px;
+    font-size: 85%;
     position: relative;
     float: right;
     border-radius: 0 var(--border-radius-default) 0 var(--border-radius-default);
