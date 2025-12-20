@@ -9,14 +9,10 @@
   <body>
     {% include header.html %}
     <div id="main-container">
-      <main>
+      <main class="display-flex">
         <section class="niceties"></section>
-        <article class="hero display-grid">
-          <section id="toc" class="opacity-0">
-            <h4>Table of Contents</h4>
-            <div class="bar" data-row="1"></div>
-          </section>
-          <h3 style="visibility: hidden">
+        <article class="hero">
+          <h3 class="beginning-anchor">
             <a name="beginning">Beginning</a>
           </h3>
           <h2>{{ page.title }}</h2>
@@ -31,6 +27,10 @@
           </section>
           {{ content }}
         </article>
+        <section id="toc" class="opacity-0">
+          <h4>Table of Contents</h4>
+          <div class="bar" data-row="1"></div>
+        </section>
       </main>
       {% include menu.html %} {% include footer.html %}
     </div>
