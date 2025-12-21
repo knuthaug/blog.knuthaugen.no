@@ -861,11 +861,13 @@ canvas {
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
   #toc {
     display: none;
   }
+}
 
+@media screen and (max-width: 1000px) {
   main .hero {
     margin-left: var(--page-margin-mobile);
     margin-right: var(--page-margin-mobile);
