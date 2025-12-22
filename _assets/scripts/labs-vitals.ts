@@ -17,6 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
   attrLogAnchor = document.getElementById("attr-log-anchor") as HTMLElement;
 });
 
+function findLanguages(): void {
+  document.querySelectorAll("pre.font-highlight code").forEach((element) => {
+    const classes = element.getAttribute("class");
+    const parts = classes ? classes.split("language-") : [];
+    element.parentElement!.setAttribute("data-lang", parts[1] || "text");
+  });
+}
+
 function metricCallback(metric: any) {
   addToDetails(logAnchor, metric, ++count);
 }
@@ -26,6 +34,7 @@ function metricCallbackAttr(metric: any) {
 }
 
 function load() {
+  findLanguages();
   onLCP(metricCallback, { reportAllChanges: true });
   onFCP(metricCallback, { reportAllChanges: true });
   onINP(metricCallback, { reportAllChanges: true });

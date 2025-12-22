@@ -1,4 +1,5 @@
-import { NetworkInformation } from "./types";
+import { findLanguages, hamburgerMenu, addScrollHandler } from "./common.ts";
+import { NetworkInformation } from "./types.ts";
 import Chart from "chart.js/auto";
 
 // convince typescript to stop complaining
@@ -39,6 +40,8 @@ const rttData = {
 document.addEventListener("DOMContentLoaded", () => {
   load();
   findLanguages();
+  hamburgerMenu();
+  addScrollHandler();
 });
 
 function updateConnectionStatus() {
@@ -46,14 +49,6 @@ function updateConnectionStatus() {
   updateCurrent(myNavigator.connection);
   addToLog(myNavigator.connection);
   addToDatasets(myNavigator.connection);
-}
-
-function findLanguages(): void {
-  document.querySelectorAll("pre.font-highlight code").forEach((element) => {
-    const classes = element.getAttribute("class");
-    const parts = classes ? classes.split("language-") : [];
-    element.parentElement!.setAttribute("data-lang", parts[1] || "text");
-  });
 }
 
 function load() {

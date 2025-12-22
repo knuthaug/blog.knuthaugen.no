@@ -16,7 +16,7 @@ category: labs
 ### The Code Running on This Page
 
 <pre class="font-highlight full-bleed no-overflow">
-<code class="inner-syntax">
+<code class="inner-syntax language-typescript">
 import { onCLS, onFCP, onLCP, onINP, onTTFB } from "web-vitals";
 import {
   onCLS as onCLSAttr,
