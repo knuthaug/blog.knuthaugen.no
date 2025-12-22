@@ -38,7 +38,7 @@ current: undefined
 </p>
 
 #### Log of Changes
-<pre  class="tall font-highlight"><code id="log" class="inner-syntax"></code></pre>
+<pre class="tall font-highlight"><code id="log" class="inner-syntax language-json"></code></pre>
 
 
 ### The Code Running on This Page

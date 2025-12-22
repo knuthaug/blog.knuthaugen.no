@@ -38,6 +38,7 @@ const rttData = {
 
 document.addEventListener("DOMContentLoaded", () => {
   load();
+  findLanguages();
 });
 
 function updateConnectionStatus() {
@@ -45,6 +46,14 @@ function updateConnectionStatus() {
   updateCurrent(myNavigator.connection);
   addToLog(myNavigator.connection);
   addToDatasets(myNavigator.connection);
+}
+
+function findLanguages(): void {
+  document.querySelectorAll("pre.font-highlight code").forEach((element) => {
+    const classes = element.getAttribute("class");
+    const parts = classes ? classes.split("language-") : [];
+    element.parentElement!.setAttribute("data-lang", parts[1] || "text");
+  });
 }
 
 function load() {
@@ -135,13 +144,13 @@ function pushToDataset(chart: Chart, value: number) {
 function addToLog(connection: NetworkInformation) {
   const log = document.getElementById("log");
   if (!log) return;
-  (log as HTMLPreElement).innerText += `effective type:${
+  (log as HTMLPreElement).innerText += `{ effective type:${
     connection.effectiveType
   }${connection.type ? ` (${connection.type})` : ""}, downlink:${
     connection.downlink
   }Mbps${
     connection.downlinkMax ? ` (max: ${connection.downlinkMax}Mbps` : ""
-  }, rtt:${connection.rtt}ms, saveData:${connection.saveData}\n`;
+  }, rtt:${connection.rtt}ms, saveData:${connection.saveData} }\n`;
 
   log.scrollTop = log.scrollHeight;
 }

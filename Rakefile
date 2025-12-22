@@ -50,7 +50,7 @@ end # task :post
 
 desc "Launch preview environment"
 task :preview do
-  system "jekyll serve --liveReload"
+  system "jekyll serve --liveReload --host 0.0.0.0"
 end # task :preview
 
 desc "Build site"
