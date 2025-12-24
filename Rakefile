@@ -60,12 +60,17 @@ end # task :build
 
 task :deploy => [:build] do
   print "Uploading..."
-  exec("rsync -e ssh -a _site/ hotel:/var/www/html/blog/")
+  `rsync -e ssh -a _site/ hotel:/var/www/html/blog/`
+  puts "done\n"
+  print "Fixing rights..."
+ `ssh hotel chmod -R 755 /var/www/html/blog`
+  print "done!\n"
 end
 
 task :fixrights => [] do
   print "Fixing rights..."
-  exec("ssh hotel chmod -R 755 /var/www/html/blog")
+ `ssh hotel chmod -R 755 /var/www/html/blog`
+  print "done!\n"
 end
 
 def ask(message, valid_options)
