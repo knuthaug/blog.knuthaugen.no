@@ -22,6 +22,8 @@ Moving to more security related stuff, we have these bad boys:
 - Configuration option for `minimumReleaseAge` to block installation of packages younger than this age, to give the ecosystem some time to remove bad packages. Also `minimumReleaseAgeExclude` to exclude your own packages or other ones you trust. 
 - Configuration options for `trustPolicy` which, when set to `no-downgrade` will refuse to install updates where the security level has been lowered compared to the previous version, looking at things like package provenance and publisher trust. There's also an `trustPolicyExclude` to go with that. 
 
+_Update on 2025-12-15_: Pnpm just released [version 10.26.0](https://pnpm.io/blog/releases/10.26) with several new security features with increased options to block dependencies that has an uncertain supply chain. Check them out!
+
 ### The Niceties
 
 - It's fast. Faster than both yarn and npm last time I tried them (which to be fair is while ago, but give it a spin and compare). First installs are fast, repeat installs when checking what needs to be done is _very_ fast. See [motivation for pnpm](https://pnpm.io/motivation) for details. 
