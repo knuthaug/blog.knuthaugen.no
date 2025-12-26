@@ -226,6 +226,12 @@ header {
   line-height: 140%;
 }
 
+.citation {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 80%;
+}
+
 .icon {
   width: 20px;
   height: 20px;
