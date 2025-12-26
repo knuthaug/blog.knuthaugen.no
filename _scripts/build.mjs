@@ -16,6 +16,14 @@ await esbuild.build({
   minify: false,
 });
 
+console.log("Build speech-api.ts -> speech-api.js");
+await esbuild.build({
+  entryPoints: ["_assets/scripts/speech-api.ts"],
+  outdir: "_assets/scripts/",
+  bundle: true,
+  minify: false,
+});
+
 console.log("Build labs-vitals.ts -> labs-vitals.js");
 await esbuild.build({
   entryPoints: ["_assets/scripts/labs-vitals.ts"],

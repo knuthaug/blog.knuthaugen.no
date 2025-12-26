@@ -22,6 +22,7 @@ exclude:
   - package.json
   - _assets/scripts/bundle.js
   - _assets/scripts/ni-api.js
+  - _assets/scripts/speech-api.js
   - _assets/scripts/labs-vitals.js
 
 name: All About the Code
