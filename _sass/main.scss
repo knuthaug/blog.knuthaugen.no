@@ -264,6 +264,26 @@ header {
   }
 }
 
+.fancylabel {
+  background-color: var(--background-color);
+  position: relative;
+  top: 36px;
+  left: 36px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 85%;
+}
+
+form.fancy {
+  margin-top: var(--page-margin);
+  border: 2px solid var(--light-gray);
+  border-radius: var(--border-radius-default);
+  padding: calc(2 * var(--card-padding));
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--page-margin) / 2);
+}
+
 header.fixed {
   border-radius: var(--border-radius-default);
   top: 10px;

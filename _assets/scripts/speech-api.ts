@@ -18,7 +18,7 @@ const lang: Record<
     lang: "de-DE",
   },
   norwegian: {
-    text: "Almennheten behøver slett ingen nye tanker. Almennheten er best tjent med de gamle, gode, og anerkjente tanker den allerede har.",
+    text: "Allmennheten behøver slett ingen nye tanker. Allmennheten er best tjent med de gamle, gode, og anerkjente tanker den allerede har.",
     author: "Henrik Ibsen",
     book: "En folkefiende",
     lang: "nb-NO",
@@ -53,6 +53,22 @@ function load() {
   ) {
     speechSynthesis.onvoiceschanged = populateVoiceList;
   }
+
+  // click handlers for inputs
+  const pitchInput = document.getElementById("pitch") as HTMLInputElement;
+  const pitchValue = document.getElementById("pitch-value") as HTMLElement;
+
+  pitchInput.addEventListener("input", (event) => {
+    // @ts-ignore
+    pitchValue.textContent = event.target?.value;
+  });
+
+  const rateInput = document.getElementById("rate") as HTMLInputElement;
+  const rateValue = document.getElementById("rate-value") as HTMLElement;
+  rateInput.addEventListener("input", (event) => {
+    // @ts-ignore
+    rateValue.textContent = event.target?.value;
+  });
 }
 
 function clickHandlers() {
@@ -79,13 +95,24 @@ function speak(text: string, lang: string) {
     voiceSelect.selectedOptions[0].getAttribute("data-name") ?? "unknown";
 
   for (const voice of voices) {
-    if (voice.name === selectedOption) {
+    if (voice.lang === lang) {
       utterThis.voice = voice;
+      const matchedOption = Array.from(
+        document.querySelectorAll("#voice-selector option"),
+      ).find((option) => option.getAttribute("data-name") === voice.name);
+      if (matchedOption) {
+        voiceSelect.value = `${matchedOption.getAttribute(
+          "data-name",
+        )} (${matchedOption.getAttribute("data-lang")})`;
+      }
+      break;
     }
   }
 
-  utterThis.pitch = 1.0;
-  utterThis.rate = 1.0;
+  const pitch = document.getElementById("pitch") as HTMLInputElement;
+  const rate = document.getElementById("rate") as HTMLInputElement;
+  utterThis.pitch = parseFloat(pitch.value);
+  utterThis.rate = parseFloat(rate.value);
   speechSynthesis.speak(utterThis);
 }
 

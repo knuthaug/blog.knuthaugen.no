@@ -27,14 +27,26 @@ Results may wary depending of the available voices and languages on your compute
   </select>
 </form>
 </p>
-<p class="quote" id="lang-source">"Almennheten behøver slett ingen nye tanker. Almennheten er best tjent med de gamle, gode, og anerkjente tanker den allerede har."</p>
+
+<p class="quote" id="lang-source">"Allmennheten behøver slett ingen nye tanker. Allmennheten er best tjent med de gamle, gode, og anerkjente tanker den allerede har."</p>
 <p class="citation" id="citation">Henrik Ibsen, En folkefiende</p>
 
-### Speech Controls
-
-<form>
- <label for="voice-selector">Voice</label>
- <select id="voice-selector"></select>
+<span class="fancylabel">Speech Controls</span>
+<form data-label="Speech Controls" class="fancy">
+ <div>
+   <label for="voice-selector" style="align-self: flex-end;">Voice</label>
+   <select id="voice-selector"></select>
+ </div>
+ <div class="display-flex" style="gap: 8px;">
+   <label style="align-self: flex-end;" for="pitch">Pitch</label>
+   <input type="range" id="pitch" name="pitch" min="0" max="2" value="1" step="0.1" list="pitch-markers"/>
+   <span id="pitch-value">1</span>
+ </div>
+ <div class="display-flex" style="gap: 8px;">
+   <label for="rate" style="align-self: flex-end;">Rate&nbsp;</label>
+   <input type="range" id="rate" name="rate" min="0.1" max="2.5" value="1" step="0.1" list="rate-markers"/>
+   <span id="rate-value">1</span>
+  </div>
 </form>
 
 ### The Code Running on This Page
