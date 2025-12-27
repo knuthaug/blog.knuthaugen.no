@@ -1,4 +1,9 @@
-import { findLanguages, hamburgerMenu, addScrollHandler } from "./common.ts";
+import {
+  findLanguages,
+  hamburgerMenu,
+  addScrollHandler,
+  getIcon,
+} from "./common.ts";
 
 let langSelector: HTMLSelectElement | null;
 const lang: Record<
@@ -73,6 +78,21 @@ function load() {
 
 function clickHandlers() {
   langSelector?.addEventListener("change", languageSwitcher);
+  document
+    .getElementById("speak-button")
+    ?.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (speechSynthesis.speaking) {
+        return;
+      }
+
+      const button = document.getElementById("speak-button")!;
+      const selectedLang = (
+        document.getElementById("lang-selector") as HTMLSelectElement
+      ).value;
+
+      speak(lang[selectedLang].text, lang[selectedLang].lang);
+    });
 }
 
 function languageSwitcher(event: Event) {
@@ -91,8 +111,6 @@ function speak(text: string, lang: string) {
   ) as HTMLSelectElement;
 
   const utterThis = new SpeechSynthesisUtterance(text);
-  const selectedOption =
-    voiceSelect.selectedOptions[0].getAttribute("data-name") ?? "unknown";
 
   for (const voice of voices) {
     if (voice.lang === lang) {
@@ -113,7 +131,15 @@ function speak(text: string, lang: string) {
   const rate = document.getElementById("rate") as HTMLInputElement;
   utterThis.pitch = parseFloat(pitch.value);
   utterThis.rate = parseFloat(rate.value);
+
+  utterThis.onend = () => {
+    const button = document.getElementById("speak-button")!;
+    button.innerHTML = getIcon("play");
+  };
+
   speechSynthesis.speak(utterThis);
+  const button = document.getElementById("speak-button")!;
+  button.innerHTML = getIcon("pause");
 }
 
 function populateVoiceList() {
