@@ -53,6 +53,10 @@
   />
   <script
     type="text/javascript"
+    src="{% ministamp _assets/scripts/bundle.js /assets/js/script.js %}"
+  ></script>
+  <script
+    type="text/javascript"
     src="{% ministamp {source_path: '_assets/scripts/{{page.bundle}}', destination_path: '/assets/js/{{page.bundle}}' } %}"
   ></script>
   <link rel="expect" href="main" blocking="render" />
