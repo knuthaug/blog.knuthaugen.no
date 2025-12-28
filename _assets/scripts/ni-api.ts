@@ -1,4 +1,3 @@
-import { findLanguages, hamburgerMenu, addScrollHandler } from "./common.ts";
 import { NetworkInformation } from "./types.ts";
 import Chart from "chart.js/auto";
 
@@ -39,9 +38,6 @@ const rttData = {
 
 document.addEventListener("DOMContentLoaded", () => {
   load();
-  findLanguages();
-  hamburgerMenu();
-  addScrollHandler();
 });
 
 function updateConnectionStatus() {

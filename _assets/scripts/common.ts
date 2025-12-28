@@ -15,73 +15,85 @@ export function hamburgerMenu(): void {
   }
 
   hamburger.addEventListener("click", (_event) => {
-    if (!menu.classList.contains("active")) {
-      menu.classList.add("active");
-      menu.classList.add("show");
-      hamburger.classList.add("icon-fade-out");
-      void menu.offsetWidth;
-
-      const onAnimationEnd = (cb: any) =>
-        menu.addEventListener("animationend", cb, { once: true });
-
-      const iconOnAnimationEnd = (cb: any) =>
-        hamburger.addEventListener("animationend", cb, { once: true });
-
-      iconOnAnimationEnd(() => {
-        hamburger.innerHTML = getIcon("x");
-        hamburger.classList.remove("icon-fade-out");
-        hamburger.classList.add("icon-fade-in");
-
-        hamburger.addEventListener(
-          "animationend",
-          () => {
-            hamburger.classList.remove("icon-fade-in");
-          },
-          { once: true },
-        );
-      });
-
-      // request an animation frame to force Safari 16 to actually perform the animation
-      requestAnimationFrame(() => menu.classList.add("show"));
-      onAnimationEnd(() => {
-        menu.classList.remove("show");
-      });
-
-      return;
-    }
-
-    if (menu.classList.contains("active")) {
-      menu.classList.remove("show");
-      menu.classList.add("hide");
-      hamburger.classList.add("icon-fade-out");
-      void menu.offsetWidth;
-
-      const onAnimationEnd2 = (cb: any) =>
-        menu.addEventListener("animationend", cb, { once: true });
-
-      onAnimationEnd2(() => {
-        menu.classList.remove("hide");
-        menu.classList.remove("active");
-      });
-
-      const iconOnAnimationEnd = (cb: any) =>
-        hamburger.addEventListener("animationend", cb, { once: true });
-
-      iconOnAnimationEnd(() => {
-        hamburger.innerHTML = getIcon("menu");
-        hamburger.classList.remove("icon-fade-out");
-        hamburger.classList.add("icon-fade-in");
-
-        hamburger.addEventListener(
-          "animationend",
-          () => {
-            hamburger.classList.remove("icon-fade-in");
-          },
-          { once: true },
-        );
-      });
-    }
+    _event.preventDefault();
+    _event.stopImmediatePropagation();
+    hamburgerClickHandler();
   });
+}
+
+export function hamburgerClickHandler(): void {
+  const hamburger = document.querySelector("#burger");
+  const menu = document.querySelector("#mobile-menu") as HTMLElement;
+  if (!hamburger || !menu) {
+    return;
+  }
+
+  if (!menu.classList.contains("active")) {
+    menu.classList.add("active");
+    menu.classList.add("show");
+    hamburger.classList.add("icon-fade-out");
+    void menu.offsetWidth;
+
+    const onAnimationEnd = (cb: any) =>
+      menu.addEventListener("animationend", cb, { once: true });
+
+    const iconOnAnimationEnd = (cb: any) =>
+      hamburger.addEventListener("animationend", cb, { once: true });
+
+    iconOnAnimationEnd(() => {
+      hamburger.innerHTML = getIcon("x");
+      hamburger.classList.remove("icon-fade-out");
+      hamburger.classList.add("icon-fade-in");
+
+      hamburger.addEventListener(
+        "animationend",
+        () => {
+          hamburger.classList.remove("icon-fade-in");
+        },
+        { once: true },
+      );
+    });
+
+    // request an animation frame to force Safari 16 to actually perform the animation
+    requestAnimationFrame(() => menu.classList.add("show"));
+    onAnimationEnd(() => {
+      menu.classList.remove("show");
+    });
+
+    return;
+  }
+
+  if (menu.classList.contains("active")) {
+    menu.classList.remove("show");
+    menu.classList.add("hide");
+    hamburger.classList.add("icon-fade-out");
+    void menu.offsetWidth;
+
+    const onAnimationEnd2 = (cb: any) =>
+      menu.addEventListener("animationend", cb, { once: true });
+
+    onAnimationEnd2(() => {
+      menu.classList.remove("hide");
+      menu.classList.remove("active");
+    });
+
+    const iconOnAnimationEnd = (cb: any) =>
+      hamburger.addEventListener("animationend", cb, { once: true });
+
+    iconOnAnimationEnd(() => {
+      hamburger.innerHTML = getIcon("menu");
+      hamburger.classList.remove("icon-fade-out");
+      hamburger.classList.add("icon-fade-in");
+
+      hamburger.addEventListener(
+        "animationend",
+        () => {
+          hamburger.classList.remove("icon-fade-in");
+        },
+        { once: true },
+      );
+    });
+  }
 }
 
 export function addScrollHandler(): void {

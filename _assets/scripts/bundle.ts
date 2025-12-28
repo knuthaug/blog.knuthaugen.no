@@ -5,6 +5,7 @@ import {
   addScrollHandler,
   findLanguages,
   getIcon,
+  hamburgerClickHandler,
   hamburgerMenu,
 } from "./common.ts";
 const modeLocalStorageKey = "blog.knuthaugen.no.mode";
@@ -245,6 +246,7 @@ function addKeyHandlers(): void {
   window.addEventListener("keyup", (event) => {
     if (event.key === "Escape") {
       document.getElementById("big-menu")?.removeAttribute("open");
+      hamburgerClickHandler();
     }
   });
 }
@@ -255,8 +257,13 @@ function addClickHandlers(): void {
     if ((event.target as HTMLElement)?.nodeName === "a") {
       return;
     }
+
     document.getElementById("big-menu")?.removeAttribute("open");
+    if (document.querySelector("#mobile-menu")?.classList.contains("active")) {
+      hamburgerClickHandler();
+    }
   });
+
   document.querySelectorAll("summary").forEach((element) => {
     element.addEventListener("click", (event) => {
       const detailsElement = (event.target as HTMLElement).parentElement
