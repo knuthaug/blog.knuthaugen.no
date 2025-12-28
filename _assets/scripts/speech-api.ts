@@ -37,19 +37,43 @@ const lang: Record<
 };
 
 let voices: SpeechSynthesisVoice[] = [];
+// @ts-expect-error foo
+let SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+// @ts-expect-error foo
+let SpeechRecognitionEvent =
+  // @ts-expect-error foo
+  SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
 document.addEventListener("DOMContentLoaded", () => {
-  load();
   findLanguages();
   hamburgerMenu();
   addScrollHandler();
+  initSpeechSynthesis();
+  initSpeechRecognition();
 });
 
-function load() {
+function initSpeechSynthesis() {
   langSelector = document.getElementById(
     "lang-selector",
   ) as HTMLSelectElement | null;
-  clickHandlers();
+
+  langSelector?.addEventListener("change", languageSwitcher);
+  document
+    .getElementById("speak-button")
+    ?.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (speechSynthesis.speaking) {
+        return;
+      }
+
+      const button = document.getElementById("speak-button")!;
+      const selectedLang = (
+        document.getElementById("lang-selector") as HTMLSelectElement
+      ).value;
+
+      speak(lang[selectedLang].text, lang[selectedLang].lang);
+    });
+
   populateVoiceList();
 
   if (
@@ -76,23 +100,91 @@ function load() {
   });
 }
 
-function clickHandlers() {
-  langSelector?.addEventListener("change", languageSwitcher);
-  document
-    .getElementById("speak-button")
-    ?.addEventListener("click", (event) => {
-      event.preventDefault();
-      if (speechSynthesis.speaking) {
-        return;
-      }
+function initSpeechRecognition() {
+  const langSelector = document.getElementById(
+    "lang-selector-recog",
+  ) as HTMLSelectElement;
 
-      const button = document.getElementById("speak-button")!;
-      const selectedLang = (
-        document.getElementById("lang-selector") as HTMLSelectElement
-      ).value;
+  const output = document.getElementById("log") as HTMLElement;
+  const eventLog = document.getElementById("event-log") as HTMLElement;
+  const recogButton = document.getElementById("recog-button");
 
-      speak(lang[selectedLang].text, lang[selectedLang].lang);
-    });
+  const recognition = new SpeechRecognition();
+  recognition.continuous = (
+    document.getElementById("cont") as HTMLInputElement
+  ).checked;
+  recognition.lang = langSelector.value;
+  recognition.interimResults = (
+    document.getElementById("int") as HTMLInputElement
+  )?.checked;
+  recognition.maxAlternatives = 1;
+
+  recogButton?.addEventListener("click", (event) => {
+    event.preventDefault();
+    recognition.lang = langSelector.value;
+    if (recogButton.innerHTML === "Recognise") {
+      recognition.start();
+      recogButton!.innerHTML = "Recognising...";
+    } else {
+      recognition.stop();
+      recogButton!.innerHTML = "Recognise";
+    }
+  });
+
+  recognition.onresult = function (event: any) {
+    console.log(event.results);
+    const text = event.results[0][0].transcript;
+    output.textContent += `{result: "${text}", confidence: "${(
+      event.results[0][0].confidence * 100
+    ).toFixed(2)}%"}\n`;
+    eventLog.textContent += `{event: "result", time: "${new Date().toISOString()}"}\n`;
+  };
+
+  recognition.onspeechstart = function () {
+    eventLog.textContent += `{event: "speechstart", time: "${new Date().toISOString()}"}\n`;
+  };
+
+  recognition.onspeechend = function () {
+    recognition.stop();
+    recogButton!.innerHTML = "Recognise";
+    eventLog.textContent += `{event: "speechend", time: "${new Date().toISOString()}"}\n`;
+  };
+
+  recognition.addEventListener("nomatch", (event: any) => {
+    output.textContent += `{result: "no match"}\n`;
+    eventLog.textContent += `{event: "nomatch", time: "${new Date().toISOString()}"}\n`;
+  });
+
+  recognition.onerror = function (event: any) {
+    output.textContent += `{error: "${event.error}"}\n`;
+    eventLog.textContent += `{event: "error", type: "${
+      event.error
+    }", time: "${new Date().toISOString()}"}\n`;
+  };
+
+  recognition.onaudiostart = function () {
+    eventLog.textContent += `{event: "audiostart", time: "${new Date().toISOString()}"}\n`;
+  };
+
+  recognition.onaudioend = function () {
+    eventLog.textContent += `{event: "audioend", time: "${new Date().toISOString()}"}\n`;
+  };
+
+  recognition.onend = function () {
+    eventLog.textContent += `{event: "end", time: "${new Date().toISOString()}"}\n`;
+  };
+
+  recognition.onstart = function () {
+    eventLog.textContent += `{event: "start", time: "${new Date().toISOString()}"}\n`;
+  };
+
+  recognition.onsoundstart = function () {
+    eventLog.textContent += `{event: "soundstart", time: "${new Date().toISOString()}"}\n`;
+  };
+
+  recognition.onsoundend = function () {
+    eventLog.textContent += `{event: "soundend", time: "${new Date().toISOString()}"}\n`;
+  };
 }
 
 function languageSwitcher(event: Event) {
@@ -146,7 +238,9 @@ function populateVoiceList() {
   const voiceSelect = document.getElementById(
     "voice-selector",
   ) as HTMLSelectElement;
+
   voices = speechSynthesis.getVoices();
+
   for (const voice of voices) {
     const option = document.createElement("option");
     option.textContent = `${voice.name} (${voice.lang})`;
