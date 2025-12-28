@@ -281,7 +281,7 @@ form.fancy {
   padding: calc(2 * var(--card-padding));
   display: flex;
   flex-direction: column;
-  gap: calc(var(--page-margin) / 2);
+  gap: var(--form-gap);
 }
 
 .icon-button {
