@@ -164,6 +164,7 @@ function darkMode(): void {
       setMode(event.matches ? "dark" : "light");
     });
 
+  darkModeIcon = document.querySelector("#dark-mode");
   darkModeIcon?.parentElement?.addEventListener("click", darkModeClickHandler);
   darkModeMobileIcon?.addEventListener("click", darkModeClickHandler);
   darkModeFooterIcon?.addEventListener("click", darkModeClickHandler);
@@ -226,7 +227,8 @@ function setMode(mode: string): void {
 
     if (darkModeMobileIcon) {
       darkModeMobileIcon.ariaLabel = "Switch to light mode";
-      darkModeMobileIcon.title = "May the light be with you and illuminate your path";
+      darkModeMobileIcon.title =
+        "May the light be with you and illuminate your path";
       darkModeMobileIcon.innerHTML = `${getIcon(
         "sun-moon",
         "dark-mode-mobile",
@@ -237,7 +239,10 @@ function setMode(mode: string): void {
       darkModeFooterIcon.parentElement.ariaLabel = "Switch to light mode";
       darkModeFooterIcon.parentElement.title =
         "May the light be with you and illuminate your path";
-      darkModeFooterIcon.innerHTML = `${getIcon("sun-moon", "dark-mode-footer")}`;
+      darkModeFooterIcon.innerHTML = `${getIcon(
+        "sun-moon",
+        "dark-mode-footer",
+      )}`;
     }
   } else {
     localStorage.setItem(modeLocalStorageKey, mode);
@@ -254,12 +259,16 @@ function setMode(mode: string): void {
     if (darkModeMobileIcon) {
       darkModeMobileIcon.ariaLabel = "Switch to dark mode";
       darkModeMobileIcon.title = "Enter the dark realm my lovelies";
-      darkModeMobileIcon.innerHTML = `${getIcon("moon", "dark-mode-mobile")} Dark mode`;
+      darkModeMobileIcon.innerHTML = `${getIcon(
+        "moon",
+        "dark-mode-mobile",
+      )} Dark mode`;
     }
 
     if (darkModeFooterIcon && darkModeFooterIcon.parentElement) {
       darkModeFooterIcon.parentElement.ariaLabel = "Switch to dark mode";
-      darkModeFooterIcon.parentElement.title = "Enter the dark realm my lovelies";
+      darkModeFooterIcon.parentElement.title =
+        "Enter the dark realm my lovelies";
       darkModeFooterIcon.innerHTML = `${getIcon("moon", "dark-mode-footer")}`;
     }
   }
@@ -333,7 +342,7 @@ function addClickHandlers(): void {
 function initTOC(): void {
   const headings = Array.from(document.querySelectorAll("h3"));
   if (!tocElement) return;
-  
+
   if (headings.length >= MIN_HEADINGS_FOR_TOC) {
     for (let i = 0; i < headings.length; i++) {
       tocElement.appendChild(createElementTocLink(headings[i], `${i + 1}`));
@@ -370,7 +379,7 @@ function setCurrent(entries: IntersectionObserverEntry[]): void {
     if (entry.isIntersecting === true) {
       const firstChild = entry.target.firstElementChild;
       if (!firstChild) return;
-      
+
       const current = tocElement.querySelector(
         `a[href="#${firstChild.getAttribute("name")}"]`,
       );
@@ -378,11 +387,14 @@ function setCurrent(entries: IntersectionObserverEntry[]): void {
 
       const row = current.getAttribute("data-row");
       if (!row) return;
-      
+
       bar.setAttribute("data-row", Number(row).toString());
 
       if (Number(row) !== 1) {
-        bar.style.setProperty("top", `calc(${Number(row) - 1} * ${TOC_ROW_HEIGHT_PX}px)`);
+        bar.style.setProperty(
+          "top",
+          `calc(${Number(row) - 1} * ${TOC_ROW_HEIGHT_PX}px)`,
+        );
       } else {
         bar.style.setProperty("top", `0px`);
       }
