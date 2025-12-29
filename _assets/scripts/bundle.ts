@@ -210,10 +210,12 @@ function setProperty(
 }
 
 function setMode(mode: string): void {
+  if (!htmlElement) return;
+
   if (mode === "dark") {
     localStorage.setItem(modeLocalStorageKey, mode);
-    htmlElement?.classList.remove("light");
-    htmlElement?.classList.add(mode);
+    htmlElement.classList.remove("light");
+    htmlElement.classList.add(mode);
 
     if (darkModeIcon && darkModeIcon.parentElement) {
       darkModeIcon.parentElement.ariaLabel = "Switch to light mode";
@@ -239,8 +241,8 @@ function setMode(mode: string): void {
     }
   } else {
     localStorage.setItem(modeLocalStorageKey, mode);
-    htmlElement?.classList.remove("dark");
-    htmlElement?.classList.add(mode);
+    htmlElement.classList.remove("dark");
+    htmlElement.classList.add(mode);
 
     if (darkModeIcon && darkModeIcon.parentElement) {
       darkModeIcon.parentElement.ariaLabel = "Switch to dark mode";
@@ -266,7 +268,8 @@ function setMode(mode: string): void {
 function addKeyHandlers(): void {
   window.addEventListener("keyup", (event) => {
     if (event.key === "Escape") {
-      bigMenuElement?.removeAttribute("open");
+      if (!bigMenuElement) return;
+      bigMenuElement.removeAttribute("open");
       hamburgerClickHandler();
     }
   });
@@ -279,7 +282,9 @@ function addClickHandlers(): void {
       return;
     }
 
-    bigMenuElement?.removeAttribute("open");
+    if (bigMenuElement) {
+      bigMenuElement.removeAttribute("open");
+    }
     if (document.querySelector("#mobile-menu")?.classList.contains("active")) {
       hamburgerClickHandler();
     }
@@ -327,14 +332,18 @@ function addClickHandlers(): void {
 
 function initTOC(): void {
   const headings = Array.from(document.querySelectorAll("h3"));
-  if (headings.length >= MIN_HEADINGS_FOR_TOC && tocElement) {
+  if (!tocElement) return;
+  
+  if (headings.length >= MIN_HEADINGS_FOR_TOC) {
     for (let i = 0; i < headings.length; i++) {
       tocElement.appendChild(createElementTocLink(headings[i], `${i + 1}`));
     }
     tocElement.classList.remove("opacity-0");
-    bodyElement?.classList.add("has-toc");
+    if (bodyElement) {
+      bodyElement.classList.add("has-toc");
+    }
   } else {
-    tocElement?.remove();
+    tocElement.remove();
     return;
   }
 
@@ -368,6 +377,8 @@ function setCurrent(entries: IntersectionObserverEntry[]): void {
       if (!current) return;
 
       const row = current.getAttribute("data-row");
+      if (!row) return;
+      
       bar.setAttribute("data-row", Number(row).toString());
 
       if (Number(row) !== 1) {
