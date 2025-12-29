@@ -298,7 +298,7 @@ function addClickHandlers(): void {
         return;
       }
 
-      const onAnimationEnd = (cb: any) =>
+      const onAnimationEnd = (cb: EventListener) =>
         contentElement.addEventListener("animationend", cb, { once: true });
 
       // request an animation frame to force Safari 16 to actually perform the animation
@@ -346,17 +346,18 @@ function initTOC(): void {
 }
 
 // intersectiobserver callback
-function setCurrent(entries: any[]): void {
+function setCurrent(entries: IntersectionObserverEntry[]): void {
   if (!tocElement) return;
   const bar = tocElement.querySelector(".bar") as HTMLElement;
   if (!bar) return;
 
   for (const entry of entries) {
     if (entry.isIntersecting === true) {
+      const firstChild = entry.target.firstElementChild;
+      if (!firstChild) return;
+      
       const current = tocElement.querySelector(
-        `a[href="#${entry.target.firstElementChild.getAttribute(
-          "name",
-        )}"]`,
+        `a[href="#${firstChild.getAttribute("name")}"]`,
       );
       if (!current) return;
 
