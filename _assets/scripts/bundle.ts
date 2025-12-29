@@ -10,12 +10,33 @@ import {
 } from "./common.ts";
 const modeLocalStorageKey = "blog.knuthaugen.no.mode";
 
+// Cached DOM element references
+let htmlElement: HTMLElement | null = null;
+let bodyElement: HTMLElement | null = null;
+let darkModeIcon: HTMLElement | null = null;
+let darkModeMobileIcon: HTMLElement | null = null;
+let darkModeFooterIcon: HTMLElement | null = null;
+let bigMenuElement: HTMLElement | null = null;
+let tocElement: HTMLElement | null = null;
+
+// Initialize cached elements
+function initCachedElements(): void {
+  htmlElement = document.querySelector("html");
+  bodyElement = document.querySelector("body");
+  darkModeIcon = document.querySelector("#dark-mode");
+  darkModeMobileIcon = document.querySelector("#dark-mode-mobile");
+  darkModeFooterIcon = document.querySelector("#dark-mode-footer");
+  bigMenuElement = document.getElementById("big-menu");
+  tocElement = document.querySelector("#toc");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   load();
   hit();
 });
 
 function load(): void {
+  initCachedElements();
   addWebVitals();
   darkMode();
   addClickHandlers();
@@ -132,13 +153,9 @@ function darkMode(): void {
       setMode(event.matches ? "dark" : "light");
     });
 
-  const icon = document.querySelector("#dark-mode");
-  const mobileIcon = document.querySelector("#dark-mode-mobile");
-  const footerIcon = document.querySelector("#dark-mode-footer");
-
-  icon?.parentElement?.addEventListener("click", darkModeClickHandler);
-  mobileIcon?.addEventListener("click", darkModeClickHandler);
-  footerIcon?.addEventListener("click", darkModeClickHandler);
+  darkModeIcon?.parentElement?.addEventListener("click", darkModeClickHandler);
+  darkModeMobileIcon?.addEventListener("click", darkModeClickHandler);
+  darkModeFooterIcon?.addEventListener("click", darkModeClickHandler);
 }
 
 async function darkModeClickHandler(_event: Event): Promise<void> {
@@ -151,29 +168,29 @@ async function darkModeClickHandler(_event: Event): Promise<void> {
   const pageTransitionDurationShow = "250ms";
   const currentMode = localStorage.getItem(modeLocalStorageKey);
 
-  const body = document.querySelector("body")!;
+  if (!bodyElement) return;
 
   if (currentMode === "dark") {
     if (!document.startViewTransition) {
       setMode("light");
     } else {
-      setProperty(body, hideProp, modetransitionDurationHide);
-      setProperty(body, showProp, modeTransitionDurationShow);
+      setProperty(bodyElement, hideProp, modetransitionDurationHide);
+      setProperty(bodyElement, showProp, modeTransitionDurationShow);
       const trans = document.startViewTransition(() => setMode("light"));
       await trans.finished;
-      setProperty(body, hideProp, pageTransitionDurationHide);
-      setProperty(body, showProp, pageTransitionDurationShow);
+      setProperty(bodyElement, hideProp, pageTransitionDurationHide);
+      setProperty(bodyElement, showProp, pageTransitionDurationShow);
     }
   } else {
     if (!document.startViewTransition) {
       setMode("dark");
     } else {
-      setProperty(body, hideProp, modetransitionDurationHide);
-      setProperty(body, showProp, modeTransitionDurationShow);
+      setProperty(bodyElement, hideProp, modetransitionDurationHide);
+      setProperty(bodyElement, showProp, modeTransitionDurationShow);
       const trans = document.startViewTransition(() => setMode("dark"));
       await trans.finished;
-      setProperty(body, hideProp, pageTransitionDurationHide);
-      setProperty(body, showProp, pageTransitionDurationShow);
+      setProperty(bodyElement, hideProp, pageTransitionDurationHide);
+      setProperty(bodyElement, showProp, pageTransitionDurationShow);
     }
   }
 }
@@ -187,57 +204,55 @@ function setProperty(
 }
 
 function setMode(mode: string): void {
-  const icon = document.querySelector("#dark-mode") as HTMLElement;
-  const mobileIcon = document.querySelector("#dark-mode-mobile") as HTMLElement;
-  const footerIcon = document.querySelector("#dark-mode-footer") as HTMLElement;
-
   if (mode === "dark") {
     localStorage.setItem(modeLocalStorageKey, mode);
-    document.querySelector("html")?.classList.remove("light");
-    document.querySelector("html")?.classList.add(mode);
+    htmlElement?.classList.remove("light");
+    htmlElement?.classList.add(mode);
 
-    if (icon && icon.parentElement) {
-      icon.parentElement.ariaLabel = "Switch to light mode";
-      icon.parentElement.title =
+    if (darkModeIcon && darkModeIcon.parentElement) {
+      darkModeIcon.parentElement.ariaLabel = "Switch to light mode";
+      darkModeIcon.parentElement.title =
         "May the light be with you and illuminate your path";
-      icon.parentElement.innerHTML = getIcon("sun-moon", "dark-mode");
+      darkModeIcon.parentElement.innerHTML = getIcon("sun-moon", "dark-mode");
     }
 
-    if (mobileIcon) {
-      mobileIcon.ariaLabel = "Switch to light mode";
-      mobileIcon.title = "May the light be with you and illuminate your path";
-      mobileIcon.innerHTML = `${getIcon(
+    if (darkModeMobileIcon) {
+      darkModeMobileIcon.ariaLabel = "Switch to light mode";
+      darkModeMobileIcon.title = "May the light be with you and illuminate your path";
+      darkModeMobileIcon.innerHTML = `${getIcon(
         "sun-moon",
         "dark-mode-mobile",
       )} Light Mode`;
     }
 
-    if (footerIcon && footerIcon.parentElement) {
-      footerIcon.parentElement.ariaLabel = "Switch to light mode";
-      footerIcon.parentElement.title =
+    if (darkModeFooterIcon && darkModeFooterIcon.parentElement) {
+      darkModeFooterIcon.parentElement.ariaLabel = "Switch to light mode";
+      darkModeFooterIcon.parentElement.title =
         "May the light be with you and illuminate your path";
-      footerIcon.innerHTML = `${getIcon("sun-moon", "dark-mode-footer")}`;
+      darkModeFooterIcon.innerHTML = `${getIcon("sun-moon", "dark-mode-footer")}`;
     }
   } else {
     localStorage.setItem(modeLocalStorageKey, mode);
-    document.querySelector("html")?.classList.remove("dark");
-    document.querySelector("html")?.classList.add(mode);
+    htmlElement?.classList.remove("dark");
+    htmlElement?.classList.add(mode);
 
-    if (icon && icon.parentElement) {
-      icon.parentElement.ariaLabel = "Switch to dark mode";
-      icon.parentElement.title = "Enter the dark realm my lovelies";
-      icon.parentElement.innerHTML = getIcon("moon", "dark-mode");
-      icon.id = "dark-mode";
+    if (darkModeIcon && darkModeIcon.parentElement) {
+      darkModeIcon.parentElement.ariaLabel = "Switch to dark mode";
+      darkModeIcon.parentElement.title = "Enter the dark realm my lovelies";
+      darkModeIcon.parentElement.innerHTML = getIcon("moon", "dark-mode");
+      darkModeIcon.id = "dark-mode";
     }
 
-    mobileIcon.ariaLabel = "Switch to dark mode";
-    mobileIcon.title = "Enter the dark realm my lovelies";
-    mobileIcon.innerHTML = `${getIcon("moon", "dark-mode-mobile")} Dark mode`;
+    if (darkModeMobileIcon) {
+      darkModeMobileIcon.ariaLabel = "Switch to dark mode";
+      darkModeMobileIcon.title = "Enter the dark realm my lovelies";
+      darkModeMobileIcon.innerHTML = `${getIcon("moon", "dark-mode-mobile")} Dark mode`;
+    }
 
-    if (footerIcon && footerIcon.parentElement) {
-      footerIcon.parentElement.ariaLabel = "Switch to dark mode";
-      footerIcon.parentElement.title = "Enter the dark realm my lovelies";
-      footerIcon.innerHTML = `${getIcon("moon", "dark-mode-footer")}`;
+    if (darkModeFooterIcon && darkModeFooterIcon.parentElement) {
+      darkModeFooterIcon.parentElement.ariaLabel = "Switch to dark mode";
+      darkModeFooterIcon.parentElement.title = "Enter the dark realm my lovelies";
+      darkModeFooterIcon.innerHTML = `${getIcon("moon", "dark-mode-footer")}`;
     }
   }
 }
@@ -245,7 +260,7 @@ function setMode(mode: string): void {
 function addKeyHandlers(): void {
   window.addEventListener("keyup", (event) => {
     if (event.key === "Escape") {
-      document.getElementById("big-menu")?.removeAttribute("open");
+      bigMenuElement?.removeAttribute("open");
       hamburgerClickHandler();
     }
   });
@@ -258,7 +273,7 @@ function addClickHandlers(): void {
       return;
     }
 
-    document.getElementById("big-menu")?.removeAttribute("open");
+    bigMenuElement?.removeAttribute("open");
     if (document.querySelector("#mobile-menu")?.classList.contains("active")) {
       hamburgerClickHandler();
     }
@@ -306,19 +321,14 @@ function addClickHandlers(): void {
 
 function initTOC(): void {
   const headings = Array.from(document.querySelectorAll("h3"));
-  const tocContainer = document.querySelector("#toc");
-  if (headings.length >= 6 && tocContainer) {
-    for (let i = 0; i <= headings.length; i++) {
-      if (headings[i] === undefined) {
-        continue;
-      }
-
-      tocContainer.appendChild(createElementTocLink(headings[i], `${i + 1}`));
+  if (headings.length >= 6 && tocElement) {
+    for (let i = 0; i < headings.length; i++) {
+      tocElement.appendChild(createElementTocLink(headings[i], `${i + 1}`));
     }
-    document.querySelector("#toc")?.classList.remove("opacity-0");
-    document.querySelector("body")?.classList.add("has-toc");
+    tocElement.classList.remove("opacity-0");
+    bodyElement?.classList.add("has-toc");
   } else {
-    document.querySelector("#toc")?.remove();
+    tocElement?.remove();
     return;
   }
 
@@ -337,13 +347,14 @@ function initTOC(): void {
 
 // intersectiobserver callback
 function setCurrent(entries: any[]): void {
-  const bar = document.querySelector("#toc .bar") as HTMLElement;
+  if (!tocElement) return;
+  const bar = tocElement.querySelector(".bar") as HTMLElement;
   if (!bar) return;
 
   for (const entry of entries) {
     if (entry.isIntersecting === true) {
-      const current = document.querySelector(
-        `#toc a[href="#${entry.target.firstElementChild.getAttribute(
+      const current = tocElement.querySelector(
+        `a[href="#${entry.target.firstElementChild.getAttribute(
           "name",
         )}"]`,
       );
