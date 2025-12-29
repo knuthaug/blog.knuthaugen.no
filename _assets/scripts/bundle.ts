@@ -8,7 +8,18 @@ import {
   hamburgerClickHandler,
   hamburgerMenu,
 } from "./common.ts";
+
+// Configuration constants
 const modeLocalStorageKey = "blog.knuthaugen.no.mode";
+const WEB_VITALS_REPORT_DELAY_MS = 2500;
+const MODE_TRANSITION_DURATION_HIDE = "350ms";
+const MODE_TRANSITION_DURATION_SHOW = "350ms";
+const PAGE_TRANSITION_DURATION_HIDE = "250ms";
+const PAGE_TRANSITION_DURATION_SHOW = "250ms";
+const MIN_HEADINGS_FOR_TOC = 6;
+const TOC_OBSERVER_ROOT_MARGIN = "10px";
+const TOC_OBSERVER_THRESHOLD = 1.0;
+const TOC_ROW_HEIGHT_PX = 26;
 
 // Cached DOM element references
 let htmlElement: HTMLElement | null = null;
