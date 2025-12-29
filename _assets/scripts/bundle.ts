@@ -139,7 +139,7 @@ function addWebVitals(): void {
   setTimeout(() => {
     console.log("Web Vitals", values);
     writeVitals(values);
-  }, 2500);
+  }, WEB_VITALS_REPORT_DELAY_MS);
 }
 
 function darkMode(): void {
@@ -172,11 +172,6 @@ function darkMode(): void {
 async function darkModeClickHandler(_event: Event): Promise<void> {
   const hideProp = "--mode-animation-duration-hide";
   const showProp = "--mode-animation-duration-show";
-  const modetransitionDurationHide = "350ms";
-  const modeTransitionDurationShow = "350ms";
-
-  const pageTransitionDurationHide = "250ms";
-  const pageTransitionDurationShow = "250ms";
   const currentMode = localStorage.getItem(modeLocalStorageKey);
 
   if (!bodyElement) return;
@@ -185,23 +180,23 @@ async function darkModeClickHandler(_event: Event): Promise<void> {
     if (!document.startViewTransition) {
       setMode("light");
     } else {
-      setProperty(bodyElement, hideProp, modetransitionDurationHide);
-      setProperty(bodyElement, showProp, modeTransitionDurationShow);
+      setProperty(bodyElement, hideProp, MODE_TRANSITION_DURATION_HIDE);
+      setProperty(bodyElement, showProp, MODE_TRANSITION_DURATION_SHOW);
       const trans = document.startViewTransition(() => setMode("light"));
       await trans.finished;
-      setProperty(bodyElement, hideProp, pageTransitionDurationHide);
-      setProperty(bodyElement, showProp, pageTransitionDurationShow);
+      setProperty(bodyElement, hideProp, PAGE_TRANSITION_DURATION_HIDE);
+      setProperty(bodyElement, showProp, PAGE_TRANSITION_DURATION_SHOW);
     }
   } else {
     if (!document.startViewTransition) {
       setMode("dark");
     } else {
-      setProperty(bodyElement, hideProp, modetransitionDurationHide);
-      setProperty(bodyElement, showProp, modeTransitionDurationShow);
+      setProperty(bodyElement, hideProp, MODE_TRANSITION_DURATION_HIDE);
+      setProperty(bodyElement, showProp, MODE_TRANSITION_DURATION_SHOW);
       const trans = document.startViewTransition(() => setMode("dark"));
       await trans.finished;
-      setProperty(bodyElement, hideProp, pageTransitionDurationHide);
-      setProperty(bodyElement, showProp, pageTransitionDurationShow);
+      setProperty(bodyElement, hideProp, PAGE_TRANSITION_DURATION_HIDE);
+      setProperty(bodyElement, showProp, PAGE_TRANSITION_DURATION_SHOW);
     }
   }
 }
@@ -332,7 +327,7 @@ function addClickHandlers(): void {
 
 function initTOC(): void {
   const headings = Array.from(document.querySelectorAll("h3"));
-  if (headings.length >= 6 && tocElement) {
+  if (headings.length >= MIN_HEADINGS_FOR_TOC && tocElement) {
     for (let i = 0; i < headings.length; i++) {
       tocElement.appendChild(createElementTocLink(headings[i], `${i + 1}`));
     }
@@ -346,8 +341,8 @@ function initTOC(): void {
   // Intersection Observer Options
   var options = {
     root: null,
-    rootMargin: "10px",
-    threshold: 1.0,
+    rootMargin: TOC_OBSERVER_ROOT_MARGIN,
+    threshold: TOC_OBSERVER_THRESHOLD,
   };
   var observeHtags = new IntersectionObserver(setCurrent, options);
 
@@ -376,7 +371,7 @@ function setCurrent(entries: IntersectionObserverEntry[]): void {
       bar.setAttribute("data-row", Number(row).toString());
 
       if (Number(row) !== 1) {
-        bar.style.setProperty("top", `calc(${Number(row) - 1} * 26px)`);
+        bar.style.setProperty("top", `calc(${Number(row) - 1} * ${TOC_ROW_HEIGHT_PX}px)`);
       } else {
         bar.style.setProperty("top", `0px`);
       }
