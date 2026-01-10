@@ -377,6 +377,17 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 
+  a {
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    text-decoration-skip-ink: none;
+    text-decoration-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 450;
+    transition: var(--link-transition);
+    padding: 0px 1px;
+  }
+
   #footer-left {
     padding-top: 10px;
     display: grid;
