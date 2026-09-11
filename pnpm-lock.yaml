@@ -21,8 +21,8 @@ importers:
         specifier: 0.28.2
         version: 0.28.2
       preact:
-        specifier: 10.25.4
-        version: 10.25.4
+        specifier: 10.29.8
+        version: 10.29.8
       rollup:
         specifier: 4.63.1
         version: 4.63.1
@@ -359,8 +359,13 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  preact@10.25.4:
-    resolution: {integrity: sha512-jLdZDb+Q+odkHJ+MpW/9U5cODzqnB+fy2EiHSZES7ldV5LK7yjlVzTp7R8Xy6W6y75kfK8iWYtFVH7lvjwrCMA==}
+  preact@10.29.8:
+    resolution: {integrity: sha512-ej2aVZ+vZ8WO7tvlQWRM9N63A0KzF9q4mWJfDUHgYaIofWY9hu74QdnQrjoPMmZi2/nZ5gN0bJCQF49xQqx09Q==}
+    peerDependencies:
+      preact-render-to-string: '>=5'
+    peerDependenciesMeta:
+      preact-render-to-string:
+        optional: true
 
   rollup@4.63.1:
     resolution: {integrity: sha512-3Df9jsstwhccuEfmAMi9l8XUh/GOkVObmFTU7CCVBysEbcOZLl84jCtaAZMcPiMz2EGKsATzQcU+Xr3n/wU6cg==}
@@ -572,7 +577,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  preact@10.25.4: {}
+  preact@10.29.8: {}
 
   rollup@4.63.1:
     dependencies:
