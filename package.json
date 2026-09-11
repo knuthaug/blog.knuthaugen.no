@@ -17,9 +17,9 @@
   "homepage": "https://github.com/knuthaug/blog.knuthaugen.no#readme",
   "description": "https://blog.knuthaugen.no",
   "devDependencies": {
-    "rollup": "4.59.0",
-    "esbuild": "0.25.0",
-    "preact": "10.25.4",
+    "rollup": "4.63.1",
+    "esbuild": "0.28.2",
+    "preact": "10.29.8",
     "web-vitals": "6.2.1",
     "detect-browser": "5.3.0",
     "@influxdata/influxdb-client-browser": "1.35.0",
