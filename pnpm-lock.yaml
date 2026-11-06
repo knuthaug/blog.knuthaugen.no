@@ -26,6 +26,9 @@ importers:
       rollup:
         specifier: 4.63.1
         version: 4.63.1
+      wavesurfer.js:
+        specifier: 8.0.5
+        version: 8.0.5
       web-vitals:
         specifier: 6.2.1
         version: 6.2.1
@@ -372,6 +375,9 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
+  wavesurfer.js@8.0.5:
+    resolution: {integrity: sha512-VRYjNG8vKhpMN9hKGgo6VzqQdnZ+AsDg4yIQppmntUagB+/vKbvirWZYSM+PYT03Z7Ry10f5Uqxadbutx47l/g==}
+
   web-vitals@6.2.1:
     resolution: {integrity: sha512-rLcLXA2sx6+9dE88NHFubwTtGxpK4yYBLj6qHPdFoCaLr0cXGb4efOqtKLlm4loGA4OEKHIQKMKzZkKyOh5ctw==}
 
@@ -610,5 +616,7 @@ snapshots:
       '@rollup/rollup-win32-x64-gnu': 4.63.1
       '@rollup/rollup-win32-x64-msvc': 4.63.1
       fsevents: 2.3.3
+
+  wavesurfer.js@8.0.5: {}
 
   web-vitals@6.2.1: {}

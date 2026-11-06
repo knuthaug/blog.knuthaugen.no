@@ -31,3 +31,11 @@ await esbuild.build({
   bundle: true,
   minify: false,
 });
+
+console.log("Build audio-api.ts -> audio-api.js");
+await esbuild.build({
+  entryPoints: ["_assets/scripts/audio-api.ts"],
+  outdir: "_assets/scripts/",
+  bundle: true,
+  minify: false,
+});
